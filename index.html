@@ -67,8 +67,6 @@
         -webkit-user-select: none;
         overflow-x: hidden;
       }
-
-      /* NOISE TEXTURE */
       body::before {
         content: "";
         position: fixed;
@@ -78,7 +76,6 @@
         z-index: 0;
         opacity: 0.6;
       }
-
       ::-webkit-scrollbar {
         width: 2px;
         height: 2px;
@@ -88,7 +85,6 @@
         border-radius: 10px;
       }
 
-      /* ── APP SHELL ── */
       .app {
         width: 100%;
         max-width: 560px;
@@ -100,7 +96,7 @@
         z-index: 1;
       }
 
-      /* ── HEADER ── */
+      /* HEADER */
       .header {
         display: flex;
         align-items: center;
@@ -180,7 +176,6 @@
           opacity: 0.15;
         }
       }
-
       .counter-badge {
         font-family: var(--mono);
         font-size: 0.58rem;
@@ -191,7 +186,7 @@
         border-radius: 20px;
       }
 
-      /* ── PREVIEW ── */
+      /* PREVIEW */
       .preview-wrap {
         padding: 16px 16px 0;
       }
@@ -298,7 +293,6 @@
         border-color: var(--accent);
         color: var(--accent);
       }
-
       .canvas-wrap {
         position: relative;
         width: 100%;
@@ -316,8 +310,6 @@
         display: block;
         border-radius: var(--r);
       }
-
-      /* Film grain overlay on canvas */
       .film-grain-overlay {
         position: absolute;
         inset: 0;
@@ -327,7 +319,6 @@
         background-size: 128px 128px;
         mix-blend-mode: overlay;
       }
-
       .frame-info {
         position: absolute;
         top: 12px;
@@ -355,7 +346,7 @@
         letter-spacing: 0.08em;
       }
 
-      /* ── COMPARE OVERLAY ── */
+      /* COMPARE */
       .cmp-overlay {
         position: absolute;
         inset: 0;
@@ -422,7 +413,7 @@
         right: 12px;
       }
 
-      /* ── SECTIONS ── */
+      /* SECTIONS */
       .section {
         padding: 18px 16px 0;
       }
@@ -457,7 +448,7 @@
         letter-spacing: 0.06em;
       }
 
-      /* ── FILTER SCROLL ── */
+      /* FILTER */
       .filter-scroll {
         display: flex;
         gap: 7px;
@@ -465,7 +456,6 @@
         padding-bottom: 4px;
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
-        /* subtle fade edges */
         mask-image: linear-gradient(
           to right,
           transparent 0,
@@ -479,8 +469,6 @@
       .filter-scroll::-webkit-scrollbar {
         display: none;
       }
-
-      /* CATEGORY TABS */
       .cat-tabs {
         display: flex;
         gap: 5px;
@@ -515,7 +503,6 @@
         border-color: var(--accent);
         color: var(--accent);
       }
-
       .filter-card {
         flex: 0 0 90px;
         background: var(--surface);
@@ -596,7 +583,7 @@
         display: block;
       }
 
-      /* ── INTENSITY SECTION ── */
+      /* INTENSITY */
       .intensity-section {
         padding: 18px 16px 0;
       }
@@ -639,7 +626,6 @@
         color: var(--accent);
         letter-spacing: 0.02em;
       }
-      /* Segmented intensity buttons */
       .intensity-segments {
         display: flex;
         gap: 3px;
@@ -663,8 +649,6 @@
       .int-seg:hover {
         transform: scaleY(1.5);
       }
-
-      /* Custom range */
       .range-wrap {
         position: relative;
       }
@@ -708,8 +692,6 @@
         color: var(--text3);
         letter-spacing: 0.04em;
       }
-
-      /* ── QUICK PRESETS ── */
       .quick-presets {
         display: flex;
         gap: 5px;
@@ -739,7 +721,7 @@
         color: var(--accent);
       }
 
-      /* ── FX GRID ── */
+      /* FX */
       .fx-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -800,7 +782,7 @@
         color: var(--accent);
       }
 
-      /* ── ACTIONS ── */
+      /* ACTIONS */
       .actions-section {
         padding: 18px 16px 0;
         display: flex;
@@ -886,7 +868,7 @@
         opacity: 0.25;
       }
 
-      /* ── INFO STRIP ── */
+      /* INFO STRIP */
       .info-strip {
         padding: 16px 16px 0;
         display: flex;
@@ -915,7 +897,81 @@
         color: var(--text);
       }
 
-      /* ── TOAST ── */
+      /* SAVE MODAL — iOS fallback */
+      .save-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .save-modal.open {
+        display: flex;
+      }
+      .save-modal-box {
+        background: #111;
+        border: 1px solid var(--border2);
+        border-radius: var(--r);
+        padding: 24px;
+        max-width: 340px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+      .save-modal-title {
+        font-weight: 800;
+        font-size: 1rem;
+        letter-spacing: -0.01em;
+      }
+      .save-modal-sub {
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        color: var(--text2);
+        letter-spacing: 0.06em;
+        line-height: 1.6;
+      }
+      .save-modal-img {
+        width: 100%;
+        border-radius: var(--r-sm);
+        overflow: hidden;
+        line-height: 0;
+      }
+      .save-modal-img img {
+        width: 100%;
+        height: auto;
+        border-radius: var(--r-sm);
+      }
+      .save-modal-hint {
+        background: rgba(201, 169, 110, 0.08);
+        border: 1px solid rgba(201, 169, 110, 0.2);
+        border-radius: var(--r-sm);
+        padding: 12px;
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--accent);
+        letter-spacing: 0.06em;
+        line-height: 1.7;
+      }
+      .save-modal-close {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: var(--r-sm);
+        padding: 12px;
+        color: var(--text2);
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
+        cursor: pointer;
+      }
+
+      /* TOAST */
       .toast {
         position: fixed;
         bottom: 36px;
@@ -940,7 +996,7 @@
         transform: translateX(-50%) translateY(0);
       }
 
-      /* ── LOADING OVERLAY ── */
+      /* LOADING */
       .loading-overlay {
         position: absolute;
         inset: 0;
@@ -1001,7 +1057,6 @@
   </head>
   <body>
     <div class="app">
-      <!-- HEADER -->
       <header class="header">
         <div class="logo-area">
           <div class="logo-mark">🌸</div>
@@ -1011,12 +1066,11 @@
           </div>
         </div>
         <div class="header-right">
-          <div class="counter-badge" id="filterCountBadge">12 / 92</div>
+          <div class="counter-badge" id="filterCountBadge">1 / 92</div>
           <div class="badge"><span class="badge-dot"></span>CCD SIM</div>
         </div>
       </header>
 
-      <!-- PREVIEW -->
       <div class="preview-wrap">
         <section class="preview-section" id="previewSection">
           <div class="upload-ph" id="uploadPh">
@@ -1050,7 +1104,6 @@
         </section>
       </div>
 
-      <!-- INFO CHIPS -->
       <div class="info-strip" id="infoStrip" style="display: none">
         <div class="info-chip">
           <div class="info-chip-label">FILTRO ATIVO</div>
@@ -1066,7 +1119,6 @@
         </div>
       </div>
 
-      <!-- FILTERS -->
       <div class="section">
         <div class="sec-header">
           <div class="sec-title">Filtros Analógicos</div>
@@ -1076,7 +1128,6 @@
         <div class="filter-scroll" id="filterScroll"></div>
       </div>
 
-      <!-- INTENSITY -->
       <div class="intensity-section">
         <div class="intensity-card">
           <div class="intensity-header">
@@ -1086,9 +1137,7 @@
             </div>
             <div class="intensity-value" id="intVal">85%</div>
           </div>
-          <!-- Segmented bar -->
           <div class="intensity-segments" id="intSegs"></div>
-          <!-- Classic slider below -->
           <div class="range-wrap">
             <input
               type="range"
@@ -1106,7 +1155,6 @@
               <span class="range-tick">100%</span>
             </div>
           </div>
-          <!-- Quick presets -->
           <div class="quick-presets">
             <button class="preset-pill" data-v="25">SUTIL</button>
             <button class="preset-pill" data-v="50">MÉDIO</button>
@@ -1116,7 +1164,6 @@
         </div>
       </div>
 
-      <!-- EFFECTS -->
       <div class="section">
         <div class="sec-header">
           <div class="sec-title">Efeitos Extras</div>
@@ -1152,7 +1199,6 @@
         </div>
       </div>
 
-      <!-- ACTIONS -->
       <div class="actions-section">
         <div class="actions-row">
           <button class="btn btn-compare" id="btnCmp" disabled>
@@ -1174,15 +1220,29 @@
         </div>
       </div>
     </div>
+
+    <!-- iOS SAVE MODAL -->
+    <div class="save-modal" id="saveModal">
+      <div class="save-modal-box">
+        <div class="save-modal-title">🌸 Foto pronta!</div>
+        <div class="save-modal-img" id="saveModalImg"></div>
+        <div class="save-modal-hint">
+          📱 <strong>iOS:</strong> Pressione a imagem acima e toque em<br />
+          <strong>"Salvar na Fototeca"</strong><br /><br />
+          🤖 <strong>Android:</strong> Pressione e segure → Salvar imagem
+        </div>
+        <div class="save-modal-sub">
+          A imagem com o filtro <span id="saveModalFilter">—</span> está pronta.
+        </div>
+        <button class="save-modal-close" id="saveModalClose">FECHAR</button>
+      </div>
+    </div>
+
     <div class="toast" id="toast"></div>
 
     <script>
       (function () {
         "use strict";
-
-        // ════════════════════════════════════════════════════════════
-        //  CASSIA CAM v4 — 92 FILTROS ANALÓGICOS
-        // ════════════════════════════════════════════════════════════
 
         const $ = (id) => document.getElementById(id);
         const previewSection = $("previewSection");
@@ -1212,8 +1272,11 @@
         const loadingOverlay = $("loadingOverlay");
         const loadingText = $("loadingText");
         const filterCountBadge = $("filterCountBadge");
+        const saveModal = $("saveModal");
+        const saveModalImg = $("saveModalImg");
+        const saveModalFilter = $("saveModalFilter");
+        const saveModalClose = $("saveModalClose");
 
-        // ── STATE ─────────────────────────────────────────────────
         let origImg = null,
           origData = null,
           procData = null;
@@ -1238,7 +1301,15 @@
           bloom: false,
         };
         const MAX_PX = 1400,
-          JPEG_Q = 0.88;
+          JPEG_Q = 0.92;
+
+        // ── DETECT iOS ────────────────────────────────────────────
+        const isIOS =
+          /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isSafari = /^((?!chrome|android).)*safari/i.test(
+          navigator.userAgent,
+        );
+        const needsFallback = isIOS || isSafari;
 
         // ── UTILS ─────────────────────────────────────────────────
         const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -1264,7 +1335,6 @@
           };
         }
 
-        // ── LUT ───────────────────────────────────────────────────
         function lut(fn) {
           const a = new Uint8Array(256);
           for (let i = 0; i < 256; i++)
@@ -1279,8 +1349,6 @@
             ? Math.pow(2 * x, 1 + k) / 2
             : 1 - Math.pow(2 * (1 - x), 1 + k) / 2;
         }
-
-        // ── HSL ───────────────────────────────────────────────────
         function rgb2hsl(r, g, b) {
           r /= 255;
           g /= 255;
@@ -1330,36 +1398,12 @@
             b: Math.round(hf(p, q, h - 1 / 3) * 255),
           };
         }
-
-        // ── MK LUTS HELPER ────────────────────────────────────────
         function mkL(rf, gf, bf) {
           return { r: lut(rf), g: lut(gf), b: lut(bf) };
         }
 
-        // ════════════════════════════════════════════════════════════
-        //  92 FILTER DEFINITIONS
-        //  Categories: warm | cool | bw | vivid | vintage | cinema |
-        //              expired | cross | dream | japan | shadow | fade
-        // ════════════════════════════════════════════════════════════
-
-        // Helper factory for common patterns
-        function warmFilter(rBoost, gDip, bDip, satAdj, exp) {
-          return mkL(
-            (x) => clamp(sCurve(x, 0.42) * rBoost + 0.025, 0, 1),
-            (x) => clamp(sCurve(x, 0.38) * gDip, 0, 1),
-            (x) => clamp(sCurve(x, 0.3) * bDip - 0.02, 0, 1),
-          );
-        }
-        function coolFilter(rDip, gBoost, bBoost, satAdj) {
-          return mkL(
-            (x) => clamp(sCurve(x, 0.5) * rDip, 0, 1),
-            (x) => clamp(sCurve(x, 0.48) * gBoost + 0.01, 0, 1),
-            (x) => clamp(sCurve(x, 0.45) * bBoost + 0.04, 0, 1),
-          );
-        }
-
+        // ── 92 FILTERS ────────────────────────────────────────────
         const FILTERS_DEF = [
-          // ════ WARM ════════════════════════════════════════════════
           {
             id: "cpm35",
             label: "CPM35",
@@ -1397,7 +1441,6 @@
             ),
             preview: "linear-gradient(135deg,#4a2000,#9a5200,#c4890a,#e8c870)",
           },
-
           {
             id: "gold200",
             label: "GOLD200",
@@ -1432,7 +1475,6 @@
             ),
             preview: "linear-gradient(135deg,#3c2400,#8a5800,#c89020,#f0c850)",
           },
-
           {
             id: "portra",
             label: "PORTRA",
@@ -1468,7 +1510,6 @@
             ),
             preview: "linear-gradient(135deg,#c8a090,#e0c0a8,#f0d8c0,#e8c8b0)",
           },
-
           {
             id: "ultra",
             label: "ULTRA",
@@ -1503,7 +1544,6 @@
             ),
             preview: "linear-gradient(135deg,#5c1800,#c04010,#f07828,#f8c060)",
           },
-
           {
             id: "honey",
             label: "HONEY",
@@ -1526,7 +1566,6 @@
             ),
             preview: "linear-gradient(135deg,#2a1500,#7a4500,#d08020,#f5c840)",
           },
-
           {
             id: "campfire",
             label: "CAMPFIRE",
@@ -1553,7 +1592,6 @@
             ),
             preview: "linear-gradient(135deg,#1a0800,#4a1400,#c83000,#f06010)",
           },
-
           {
             id: "dusk",
             label: "DUSK",
@@ -1573,7 +1611,6 @@
             preview:
               "linear-gradient(135deg,#1a0a00,#802010,#c85020,#f09030,#e0c060)",
           },
-
           {
             id: "sahara",
             label: "SAHARA",
@@ -1592,7 +1629,6 @@
             ),
             preview: "linear-gradient(135deg,#3a2800,#8a6828,#c8a860,#e8d098)",
           },
-
           {
             id: "caramel",
             label: "CARAMEL",
@@ -1614,7 +1650,6 @@
             ),
             preview: "linear-gradient(135deg,#2a1800,#704000,#b07030,#d8a060)",
           },
-
           {
             id: "terracotta",
             label: "TERRA",
@@ -1633,7 +1668,6 @@
             ),
             preview: "linear-gradient(135deg,#2a1000,#702010,#c04828,#d87050)",
           },
-
           {
             id: "sunrise",
             label: "SUNRISE",
@@ -1653,7 +1687,6 @@
             preview:
               "linear-gradient(135deg,#0a0000,#400808,#c02020,#f06030,#f8c870)",
           },
-
           {
             id: "bourbon",
             label: "BOURBON",
@@ -1675,8 +1708,6 @@
             ),
             preview: "linear-gradient(135deg,#1a0800,#4a2000,#904010,#c07020)",
           },
-
-          // ════ COOL ════════════════════════════════════════════════
           {
             id: "grdr",
             label: "GRD R",
@@ -1710,7 +1741,6 @@
             ),
             preview: "linear-gradient(135deg,#080e14,#152538,#1a3f52,#286070)",
           },
-
           {
             id: "arctic",
             label: "ARCTIC",
@@ -1729,7 +1759,6 @@
             ),
             preview: "linear-gradient(135deg,#c8d8e8,#d8e8f8,#e8f0ff,#f0f8ff)",
           },
-
           {
             id: "steel",
             label: "STEEL",
@@ -1748,7 +1777,6 @@
             ),
             preview: "linear-gradient(135deg,#0a0c10,#1a2030,#2a3045,#3a4055)",
           },
-
           {
             id: "slate",
             label: "SLATE",
@@ -1767,7 +1795,6 @@
             ),
             preview: "linear-gradient(135deg,#0a0e14,#182030,#263045,#384058)",
           },
-
           {
             id: "nordic",
             label: "NORDIC",
@@ -1786,7 +1813,6 @@
             ),
             preview: "linear-gradient(135deg,#060a10,#102030,#1a3858,#286888)",
           },
-
           {
             id: "moonlight",
             label: "MOON",
@@ -1805,7 +1831,6 @@
             ),
             preview: "linear-gradient(135deg,#050810,#101828,#182840,#204060)",
           },
-
           {
             id: "glacier",
             label: "GLACIER",
@@ -1824,7 +1849,6 @@
             ),
             preview: "linear-gradient(135deg,#a0c8e0,#c0d8f0,#d8ecff,#e8f4ff)",
           },
-
           {
             id: "midnight",
             label: "MIDNIGHT",
@@ -1843,8 +1867,6 @@
             ),
             preview: "linear-gradient(135deg,#020408,#06101a,#0a182a,#10203a)",
           },
-
-          // ════ B&W ═════════════════════════════════════════════════
           {
             id: "hp5",
             label: "HP5",
@@ -1865,7 +1887,6 @@
             preview:
               "linear-gradient(135deg,#000,#1a1a1a,#505050,#b0b0b0,#f0f0f0)",
           },
-
           {
             id: "tri_x",
             label: "TRI-X",
@@ -1895,7 +1916,6 @@
             preview:
               "linear-gradient(135deg,#000,#111,#404040,#a0a0a0,#f8f8f8)",
           },
-
           {
             id: "ortho",
             label: "ORTHO",
@@ -1917,7 +1937,6 @@
             preview:
               "linear-gradient(135deg,#000,#0d0d0d,#383838,#909090,#e8e8e8)",
           },
-
           {
             id: "delta",
             label: "DELTA",
@@ -1938,7 +1957,6 @@
             preview:
               "linear-gradient(135deg,#050505,#202020,#606060,#c0c0c0,#f5f5f5)",
           },
-
           {
             id: "infrared",
             label: "IR",
@@ -1972,7 +1990,6 @@
             preview:
               "linear-gradient(135deg,#060606,#181818,#606060,#d8d8d8,#ffffff)",
           },
-
           {
             id: "selenium",
             label: "SELÊNIO",
@@ -1994,7 +2011,6 @@
             preview:
               "linear-gradient(135deg,#0a0800,#282015,#605848,#b0a890,#e8e0d0)",
           },
-
           {
             id: "cyanotype",
             label: "CIANO",
@@ -2016,8 +2032,6 @@
             preview:
               "linear-gradient(135deg,#020810,#081828,#103050,#2050a0,#a0c8e8)",
           },
-
-          // ════ VIVID ═══════════════════════════════════════════════
           {
             id: "velvia",
             label: "VELVIA",
@@ -2052,7 +2066,6 @@
             ),
             preview: "linear-gradient(135deg,#001840,#003a80,#0070c0,#00a060)",
           },
-
           {
             id: "lca",
             label: "LC-A",
@@ -2087,7 +2100,6 @@
             ),
             preview: "linear-gradient(135deg,#1a0a2e,#6a1050,#c82828,#e89000)",
           },
-
           {
             id: "superia",
             label: "SUPERIA",
@@ -2121,7 +2133,6 @@
             ),
             preview: "linear-gradient(135deg,#0e1a14,#1a3020,#2a5030,#4a7850)",
           },
-
           {
             id: "tropical",
             label: "TROPICAL",
@@ -2141,7 +2152,6 @@
             preview:
               "linear-gradient(135deg,#0a1800,#204000,#48b020,#a8e040,#f8e820)",
           },
-
           {
             id: "neon",
             label: "NEON",
@@ -2161,7 +2171,6 @@
             preview:
               "linear-gradient(135deg,#0a001a,#200038,#4000a0,#8020e0,#c040ff)",
           },
-
           {
             id: "hypercolor",
             label: "HYPER",
@@ -2181,7 +2190,6 @@
             preview:
               "linear-gradient(135deg,#ff0040,#ff8000,#00ff80,#0040ff,#8000ff)",
           },
-
           {
             id: "vaporwave",
             label: "VAPOR",
@@ -2201,8 +2209,6 @@
             preview:
               "linear-gradient(135deg,#0a0020,#200060,#a000c0,#ff40a0,#40c0ff)",
           },
-
-          // ════ VINTAGE ═════════════════════════════════════════════
           {
             id: "polar",
             label: "POLAR",
@@ -2221,7 +2227,6 @@
             ),
             preview: "linear-gradient(135deg,#c0c8d8,#d8e0f0,#e8eef8,#d0d8e8)",
           },
-
           {
             id: "agfa",
             label: "AGFA",
@@ -2255,7 +2260,6 @@
             ),
             preview: "linear-gradient(135deg,#200838,#601060,#c020a0,#20c060)",
           },
-
           {
             id: "faded70s",
             label: "70s",
@@ -2275,7 +2279,6 @@
             preview:
               "linear-gradient(135deg,#2a1800,#604020,#a07838,#c8a868,#d8c898)",
           },
-
           {
             id: "disco",
             label: "DISCO",
@@ -2295,7 +2298,6 @@
             preview:
               "linear-gradient(135deg,#3a1500,#884020,#d08040,#e8b870,#f0d8a0)",
           },
-
           {
             id: "retro90",
             label: "90s",
@@ -2315,7 +2317,6 @@
             preview:
               "linear-gradient(135deg,#100020,#381060,#7030a0,#a060c0,#c090d8)",
           },
-
           {
             id: "expired",
             label: "EXPIRED",
@@ -2328,15 +2329,13 @@
             satAdj: -0.15,
             expFactor: 1.02,
             luts: mkL(
-              (x) =>
-                clamp(x * 0.75 + 0.16 + (Math.random() * 0.02 - 0.01), 0, 1),
+              (x) => clamp(x * 0.75 + 0.16, 0, 1),
               (x) => clamp(x * 0.68 + 0.14, 0, 1),
               (x) => clamp(x * 0.58 + 0.13, 0, 1),
             ),
             preview:
               "linear-gradient(135deg,#282010,#584830,#887858,#b8a888,#d0c8a8)",
           },
-
           {
             id: "daguerro",
             label: "DAGUERRO",
@@ -2370,7 +2369,6 @@
             preview:
               "linear-gradient(135deg,#050300,#181208,#403828,#807060,#c0b8a8)",
           },
-
           {
             id: "ambrotype",
             label: "ÂMBRO",
@@ -2404,7 +2402,6 @@
             preview:
               "linear-gradient(135deg,#0a0500,#201508,#503820,#907050,#b89878)",
           },
-
           {
             id: "sepia_deep",
             label: "SÉPIA",
@@ -2426,8 +2423,6 @@
             preview:
               "linear-gradient(135deg,#0a0500,#2a1800,#705030,#b08050,#d0b888)",
           },
-
-          // ════ CINEMA ══════════════════════════════════════════════
           {
             id: "cine800",
             label: "CINE800",
@@ -2463,7 +2458,6 @@
             ),
             preview: "linear-gradient(135deg,#060c14,#0a1c28,#102838,#1a3848)",
           },
-
           {
             id: "bleach",
             label: "BLEACH",
@@ -2495,7 +2489,6 @@
             preview:
               "linear-gradient(135deg,#080808,#1a1a1a,#383838,#808080,#d0d0d0)",
           },
-
           {
             id: "teal_orange",
             label: "TEAL&ORG",
@@ -2515,7 +2508,6 @@
             preview:
               "linear-gradient(135deg,#002020,#004040,#007060,#c06020,#e89030)",
           },
-
           {
             id: "noire",
             label: "NOIRE",
@@ -2551,7 +2543,6 @@
             preview:
               "linear-gradient(135deg,#000,#080808,#181818,#404040,#d0d0d0)",
           },
-
           {
             id: "kodachrome",
             label: "KODA",
@@ -2571,7 +2562,6 @@
             preview:
               "linear-gradient(135deg,#200800,#601800,#c03800,#e87828,#f0c060)",
           },
-
           {
             id: "redscale",
             label: "REDSCALE",
@@ -2591,7 +2581,6 @@
             preview:
               "linear-gradient(135deg,#100000,#3a0000,#900800,#e02010,#f86040)",
           },
-
           {
             id: "scope",
             label: "SCOPE",
@@ -2623,7 +2612,6 @@
             preview:
               "linear-gradient(135deg,#060810,#0e1828,#182840,#204060,#285880)",
           },
-
           {
             id: "westernfilm",
             label: "WESTERN",
@@ -2643,8 +2631,6 @@
             preview:
               "linear-gradient(135deg,#180a00,#503010,#907040,#c0a060,#d8c080)",
           },
-
-          // ════ EXPIRED ═════════════════════════════════════════════
           {
             id: "crossprocess",
             label: "CROSS",
@@ -2664,7 +2650,6 @@
             preview:
               "linear-gradient(135deg,#0a002a,#300880,#a010c0,#20d080,#80ff20)",
           },
-
           {
             id: "shift",
             label: "SHIFT",
@@ -2684,7 +2669,6 @@
             preview:
               "linear-gradient(135deg,#080a00,#182a08,#305020,#488040,#70b060)",
           },
-
           {
             id: "washed",
             label: "WASHED",
@@ -2704,7 +2688,6 @@
             preview:
               "linear-gradient(135deg,#c0bab0,#d0cac0,#e0dad0,#ece6de,#f0ece8)",
           },
-
           {
             id: "leaking",
             label: "LEAKING",
@@ -2724,7 +2707,6 @@
             preview:
               "linear-gradient(135deg,#1a0800,#6a2800,#e06020,#f09040,#e8d0a0)",
           },
-
           {
             id: "halftone",
             label: "HALF",
@@ -2744,7 +2726,6 @@
             preview:
               "linear-gradient(135deg,#181414,#3a3030,#6a5858,#a09090,#d0c8c0)",
           },
-
           {
             id: "mold",
             label: "MOFO",
@@ -2764,8 +2745,6 @@
             preview:
               "linear-gradient(135deg,#081000,#182808,#304818,#508030,#80b050)",
           },
-
-          // ════ CROSS / LOMO ════════════════════════════════════════
           {
             id: "lomochrome",
             label: "LOMOCHR",
@@ -2785,7 +2764,6 @@
             preview:
               "linear-gradient(135deg,#100028,#380068,#7010a0,#a030d0,#c860e8)",
           },
-
           {
             id: "lomored",
             label: "LOMORED",
@@ -2805,7 +2783,6 @@
             preview:
               "linear-gradient(135deg,#140000,#400000,#a00808,#e02020,#f86060)",
           },
-
           {
             id: "lomogreen",
             label: "LOMOGR",
@@ -2825,7 +2802,6 @@
             preview:
               "linear-gradient(135deg,#001810,#003828,#007060,#00a890,#40d8b8)",
           },
-
           {
             id: "xpro",
             label: "X-PRO",
@@ -2845,8 +2821,6 @@
             preview:
               "linear-gradient(135deg,#080020,#200860,#6010a0,#10a060,#60e020)",
           },
-
-          // ════ DREAM ═══════════════════════════════════════════════
           {
             id: "dreamlike",
             label: "DREAM",
@@ -2866,7 +2840,6 @@
             preview:
               "linear-gradient(135deg,#c0c8e0,#d0d8f0,#e0e8ff,#ece8f8,#f8f0ff)",
           },
-
           {
             id: "cotton",
             label: "COTTON",
@@ -2886,7 +2859,6 @@
             preview:
               "linear-gradient(135deg,#e8d8d0,#f0e4e0,#f8f0ee,#f8eef8,#eee8f8)",
           },
-
           {
             id: "blush",
             label: "BLUSH",
@@ -2906,7 +2878,6 @@
             preview:
               "linear-gradient(135deg,#e8d0d0,#f0d8d8,#f8e0e0,#fce8e8,#fff0f0)",
           },
-
           {
             id: "milk",
             label: "MILK",
@@ -2926,7 +2897,6 @@
             preview:
               "linear-gradient(135deg,#d8d8dc,#e4e4e8,#eeeeef,#f6f6f7,#ffffff)",
           },
-
           {
             id: "iris",
             label: "IRIS",
@@ -2946,7 +2916,6 @@
             preview:
               "linear-gradient(135deg,#200838,#401860,#7840a0,#b080d0,#d8b8f0)",
           },
-
           {
             id: "aurora",
             label: "AURORA",
@@ -2966,7 +2935,6 @@
             preview:
               "linear-gradient(135deg,#020810,#083020,#106040,#20a060,#40e0a0,#80c0ff)",
           },
-
           {
             id: "sakura",
             label: "SAKURA",
@@ -2986,7 +2954,6 @@
             preview:
               "linear-gradient(135deg,#e0b8c0,#ecc8d0,#f4d8e0,#f8e4ea,#fceef4)",
           },
-
           {
             id: "mist",
             label: "MIST",
@@ -3006,8 +2973,6 @@
             preview:
               "linear-gradient(135deg,#c8ced8,#d4dae4,#dce4ee,#e4eef8,#eef4ff)",
           },
-
-          // ════ JAPAN ═══════════════════════════════════════════════
           {
             id: "haiku",
             label: "HAIKU",
@@ -3027,7 +2992,6 @@
             preview:
               "linear-gradient(135deg,#d0d4da,#dce0e6,#e4e8ee,#eaeef4,#f0f4f8)",
           },
-
           {
             id: "shibuya",
             label: "SHIBUYA",
@@ -3047,7 +3011,6 @@
             preview:
               "linear-gradient(135deg,#04001a,#100038,#280090,#5020e0,#9060ff)",
           },
-
           {
             id: "wabisabi",
             label: "WABI",
@@ -3067,7 +3030,6 @@
             preview:
               "linear-gradient(135deg,#141008,#282018,#504030,#807060,#a89880)",
           },
-
           {
             id: "kyoto",
             label: "KYOTO",
@@ -3087,7 +3049,6 @@
             preview:
               "linear-gradient(135deg,#140800,#482010,#a04020,#c87030,#d8a050)",
           },
-
           {
             id: "zen",
             label: "ZEN",
@@ -3108,8 +3069,6 @@
             preview:
               "linear-gradient(135deg,#040404,#141414,#404040,#909090,#e8e8e8)",
           },
-
-          // ════ SHADOW ══════════════════════════════════════════════
           {
             id: "obsidian",
             label: "OBSIDIAN",
@@ -3141,7 +3100,6 @@
             preview:
               "linear-gradient(135deg,#000,#030303,#0a0a0a,#181818,#404040)",
           },
-
           {
             id: "abyss",
             label: "ABYSS",
@@ -3173,7 +3131,6 @@
             preview:
               "linear-gradient(135deg,#000,#020202,#060606,#101010,#303030)",
           },
-
           {
             id: "underworld",
             label: "UNDER",
@@ -3193,7 +3150,6 @@
             preview:
               "linear-gradient(135deg,#050000,#150000,#380808,#600000,#902010)",
           },
-
           {
             id: "ember",
             label: "EMBER",
@@ -3213,7 +3169,6 @@
             preview:
               "linear-gradient(135deg,#080200,#1a0600,#4a1000,#881a00,#c04010)",
           },
-
           {
             id: "dungeon",
             label: "DUNGEON",
@@ -3233,8 +3188,6 @@
             preview:
               "linear-gradient(135deg,#000204,#040810,#0a1020,#121820,#202838)",
           },
-
-          // ════ FADE ════════════════════════════════════════════════
           {
             id: "matte",
             label: "MATTE",
@@ -3254,7 +3207,6 @@
             preview:
               "linear-gradient(135deg,#a0a0a0,#b0b0b0,#c0c0c0,#d0d0d0,#e0e0e0)",
           },
-
           {
             id: "faded_pastel",
             label: "PASTEL",
@@ -3274,7 +3226,6 @@
             preview:
               "linear-gradient(135deg,#d8d0c8,#e4dcd4,#eee8e0,#f4f0ea,#faf8f4)",
           },
-
           {
             id: "mineral",
             label: "MINERAL",
@@ -3294,7 +3245,6 @@
             preview:
               "linear-gradient(135deg,#8090a0,#a0b0c0,#b8c8d8,#ccd8e4,#dce8f0)",
           },
-
           {
             id: "parchment",
             label: "PERGA",
@@ -3314,7 +3264,6 @@
             preview:
               "linear-gradient(135deg,#c8b898,#d8c8a8,#e4d8b8,#eee4c8,#f4ecd8)",
           },
-
           {
             id: "linen",
             label: "LINEN",
@@ -3334,7 +3283,6 @@
             preview:
               "linear-gradient(135deg,#c8c0b0,#d4ccbc,#ddd6c8,#e6e0d4,#f0ece4)",
           },
-
           {
             id: "ghost",
             label: "GHOST",
@@ -3356,13 +3304,11 @@
           },
         ];
 
-        // Build registry
         const FILTERS = {};
         FILTERS_DEF.forEach((f) => (FILTERS[f.id] = f));
 
-        // Categories config
         const CATEGORIES = [
-          { id: "all", label: "Todos", count: FILTERS_DEF.length },
+          { id: "all", label: "Todos" },
           { id: "warm", label: "Quentes" },
           { id: "cool", label: "Frios" },
           { id: "bw", label: "P&B" },
@@ -3377,10 +3323,8 @@
           { id: "fade", label: "Fade" },
         ];
 
-        // Update badge count
         filterCountBadge.textContent = `1 / ${FILTERS_DEF.length}`;
 
-        // ── BUILD CAT TABS ────────────────────────────────────────
         CATEGORIES.forEach((c) => {
           const t = document.createElement("button");
           t.className = "cat-tab" + (c.id === "all" ? " active" : "");
@@ -3405,13 +3349,11 @@
             cid === "all"
               ? FILTERS_DEF
               : FILTERS_DEF.filter((f) => f.cat === cid);
-          const catMeta = document.getElementById("catMeta");
-          catMeta.textContent =
+          document.getElementById("catMeta").textContent =
             (cid === "all" ? "TODOS" : "CAT") + "·" + filtered.length;
           renderFilterCards(filtered);
         }
 
-        // ── BUILD FILTER CARDS ────────────────────────────────────
         function renderFilterCards(list) {
           filterScroll.innerHTML = "";
           list.forEach((f) => {
@@ -3423,7 +3365,6 @@
             card.addEventListener("click", () => selectFilter(f.id));
             filterScroll.appendChild(card);
           });
-          // Scroll to active
           const active = filterScroll.querySelector(".active");
           if (active)
             active.scrollIntoView({
@@ -3432,7 +3373,6 @@
               inline: "center",
             });
         }
-
         renderFilterCards(FILTERS_DEF);
 
         function selectFilter(id) {
@@ -3445,13 +3385,12 @@
             FILTERS[id].label + " · " + FILTERS[id].desc;
           chipFilter.textContent = FILTERS[id].label;
           needLeaks = true;
-          // Update count badge
           const idx = FILTERS_DEF.findIndex((f) => f.id === id) + 1;
           filterCountBadge.textContent = `${idx} / ${FILTERS_DEF.length}`;
           debouncedUpdate();
         }
 
-        // ── INTENSITY SEGMENTS ────────────────────────────────────
+        // Intensity segments
         const SEG_COUNT = 20;
         const intSegs = $("intSegs");
         for (let i = 0; i < SEG_COUNT; i++) {
@@ -3478,18 +3417,16 @@
           intVal.textContent = v + "%";
           chipInt.textContent = v + "%";
           updateSegs(v);
-          // Update preset active
-          document.querySelectorAll(".preset-pill").forEach((p) => {
-            p.classList.toggle("active", parseInt(p.dataset.v) === v);
-          });
+          document
+            .querySelectorAll(".preset-pill")
+            .forEach((p) =>
+              p.classList.toggle("active", parseInt(p.dataset.v) === v),
+            );
           debouncedUpdate();
         }
-
         intSlider.addEventListener("input", () =>
           updateIntensity(parseInt(intSlider.value)),
         );
-
-        // Quick presets
         document.querySelectorAll(".preset-pill").forEach((p) => {
           p.addEventListener("click", () => {
             const v = parseInt(p.dataset.v);
@@ -3498,10 +3435,7 @@
           });
         });
 
-        // ════════════════════════════════════════════════════════════
-        //  IMAGE EFFECTS ENGINE
-        // ════════════════════════════════════════════════════════════
-
+        // ── IMAGE ENGINE ──────────────────────────────────────────
         function boxBlur(imageData, r) {
           const w = imageData.width,
             h = imageData.height,
@@ -3550,7 +3484,6 @@
             }
           return new ImageData(d, w, h);
         }
-
         function applyGrain(d, str, seed) {
           const p = prng(seed),
             len = d.data.length;
@@ -3564,7 +3497,6 @@
           }
           return d;
         }
-
         function applyVignette(d, str) {
           const w = d.width,
             h = d.height,
@@ -3584,7 +3516,6 @@
             }
           return d;
         }
-
         function applyChromaticAberration(d, shift) {
           const w = d.width,
             h = d.height,
@@ -3602,7 +3533,6 @@
             }
           return new ImageData(out, w, h);
         }
-
         function applyHalation(d, str, warm) {
           const w = d.width,
             h = d.height,
@@ -3647,7 +3577,6 @@
           }
           return d;
         }
-
         function applyBloom(d, str) {
           const w = d.width,
             h = d.height,
@@ -3686,7 +3615,6 @@
           }
           return d;
         }
-
         function genDust(w, h) {
           const c = document.createElement("canvas");
           c.width = w;
@@ -3708,7 +3636,6 @@
           }
           return c;
         }
-
         function genLeaks(w, h, warm) {
           const c = document.createElement("canvas");
           c.width = w;
@@ -3755,7 +3682,6 @@
           });
           return c;
         }
-
         function drawTimestamp(cv, c) {
           const now = new Date(),
             pad = (n) => String(n).padStart(2, "0");
@@ -3781,21 +3707,18 @@
           c.restore();
         }
 
-        // ── CORE FILTER ───────────────────────────────────────────
         function applyFilter(imageData, fid, inten) {
           const f = FILTERS[fid];
           const d = imageData.data;
           const orig = new Uint8ClampedArray(d);
-          // LUTs
           for (let i = 0; i < d.length; i += 4) {
             d[i] = f.luts.r[d[i]];
             d[i + 1] = f.luts.g[d[i + 1]];
             d[i + 2] = f.luts.b[d[i + 2]];
           }
-          // B&W
           if (f.bw) {
-            const mx = f.bwMix || [0.299, 0.587, 0.114];
-            const tn = f.bwTone || { r: 1, g: 1, b: 1 };
+            const mx = f.bwMix || [0.299, 0.587, 0.114],
+              tn = f.bwTone || { r: 1, g: 1, b: 1 };
             for (let i = 0; i < d.length; i += 4) {
               const lum = Math.round(
                 clamp(
@@ -3820,7 +3743,6 @@
             const sa = f.satAdj;
             for (let i = 0; i < d.length; i += 4) {
               const h = rgb2hsl(d[i], d[i + 1], d[i + 2]);
-              if (f.hueShift) f.hueShift(h);
               h.s = clamp(h.s + sa, 0, 1);
               const rgb = hsl2rgb(h.h, h.s, h.l);
               d[i] = rgb.r;
@@ -3828,7 +3750,6 @@
               d[i + 2] = rgb.b;
             }
           }
-          // Exposure
           const exp = f.expFactor;
           if (exp !== 1)
             for (let i = 0; i < d.length; i += 4) {
@@ -3836,7 +3757,6 @@
               d[i + 1] = clamp(Math.round(d[i + 1] * exp), 0, 255);
               d[i + 2] = clamp(Math.round(d[i + 2] * exp), 0, 255);
             }
-          // Blend
           if (inten < 1)
             for (let i = 0; i < d.length; i += 4) {
               d[i] = clamp(Math.round(lerp(orig[i], d[i], inten)), 0, 255);
@@ -3855,8 +3775,8 @@
         }
 
         function processImage(imageData, fid, inten, fx) {
-          const f = FILTERS[fid];
-          const w = imageData.width,
+          const f = FILTERS[fid],
+            w = imageData.width,
             h = imageData.height;
           let work = new ImageData(new Uint8ClampedArray(imageData.data), w, h);
           work = applyFilter(work, fid, inten);
@@ -3898,7 +3818,6 @@
           if (fx.timestamp) drawTimestamp(cv, c);
         }
 
-        // ── UPDATE ────────────────────────────────────────────────
         let isProcessing = false;
         function updatePreview() {
           if (!origData || isProcessing) return;
@@ -3929,7 +3848,6 @@
         }
         const debouncedUpdate = debounce(updatePreview, 60);
 
-        // ── COMPARISON ────────────────────────────────────────────
         function drawComparison() {
           if (!origData || !procData) return;
           const w = origData.width,
@@ -3995,7 +3913,6 @@
           cmpHandle.style.top = "50%";
         }
 
-        // ── LOAD IMAGE ────────────────────────────────────────────
         function loadImage(file) {
           if (
             !file ||
@@ -4021,9 +3938,7 @@
               chipFilter.textContent = FILTERS[currentFilter].label;
               prepareData(img);
               needDust = needLeaks = true;
-              const w = origData.width,
-                h = origData.height;
-              chipRes.textContent = `${w}×${h}`;
+              chipRes.textContent = `${origData.width}×${origData.height}`;
               updatePreview();
               enableBtns();
               previewSection.classList.add("has-image");
@@ -4060,54 +3975,76 @@
           btnDl.disabled = btnCmp.disabled = btnCam.disabled = false;
         }
 
-        // ── DOWNLOAD ──────────────────────────────────────────────
+        // ── DOWNLOAD — funciona em iOS, Android e Desktop ─────────
+        function buildExportCanvas() {
+          let ec;
+          if (origImg && origImg.naturalWidth <= 4000) {
+            const w = origImg.naturalWidth,
+              h = origImg.naturalHeight;
+            const tc = document.createElement("canvas");
+            tc.width = w;
+            tc.height = h;
+            tc.getContext("2d").drawImage(origImg, 0, 0, w, h);
+            const hd = tc.getContext("2d").getImageData(0, 0, w, h);
+            const hp = processImage(hd, currentFilter, intensity, FX);
+            ec = document.createElement("canvas");
+            ec.width = w;
+            ec.height = h;
+            renderToCanvas(ec, ec.getContext("2d"), hp, FX, currentFilter);
+          } else {
+            ec = document.createElement("canvas");
+            ec.width = procData.width;
+            ec.height = procData.height;
+            renderToCanvas(
+              ec,
+              ec.getContext("2d"),
+              procData,
+              FX,
+              currentFilter,
+            );
+          }
+          return ec;
+        }
+
         function downloadImage() {
           if (!procData) return showToast("Carregue uma foto primeiro");
-          showToast("📥 Processando HD...");
+          showToast("⏳ Gerando imagem...");
           setTimeout(() => {
-            let ec;
-            if (origImg && origImg.naturalWidth <= 4000) {
-              const w = origImg.naturalWidth,
-                h = origImg.naturalHeight;
-              const tc = document.createElement("canvas");
-              tc.width = w;
-              tc.height = h;
-              tc.getContext("2d").drawImage(origImg, 0, 0, w, h);
-              const hd = tc.getContext("2d").getImageData(0, 0, w, h);
-              const hp = processImage(hd, currentFilter, intensity, FX);
-              ec = document.createElement("canvas");
-              ec.width = w;
-              ec.height = h;
-              renderToCanvas(ec, ec.getContext("2d"), hp, FX, currentFilter);
-            } else {
-              ec = document.createElement("canvas");
-              ec.width = procData.width;
-              ec.height = procData.height;
-              renderToCanvas(
-                ec,
-                ec.getContext("2d"),
-                procData,
-                FX,
-                currentFilter,
-              );
-            }
-            ec.toBlob(
-              (blob) => {
-                const url = URL.createObjectURL(blob),
-                  a = document.createElement("a");
-                a.href = url;
-                a.download = `cassiacam_${FILTERS[currentFilter].label}_${Date.now()}.jpg`;
+            try {
+              const ec = buildExportCanvas();
+              const dataUrl = ec.toDataURL("image/jpeg", JPEG_Q);
+              const filename = `cassiacam_${FILTERS[currentFilter].label}_${Date.now()}.jpg`;
+
+              if (needsFallback) {
+                // iOS/Safari: mostrar modal com a imagem para salvar manualmente
+                saveModalImg.innerHTML = `<img src="${dataUrl}" alt="Foto com filtro" style="width:100%;border-radius:10px;display:block"/>`;
+                saveModalFilter.textContent = FILTERS[currentFilter].label;
+                saveModal.classList.add("open");
+              } else {
+                // Desktop / Android Chrome: download direto
+                const a = document.createElement("a");
+                a.href = dataUrl;
+                a.download = filename;
+                a.style.display = "none";
                 document.body.appendChild(a);
                 a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
+                setTimeout(() => document.body.removeChild(a), 300);
                 showToast("🌸 Salvo com amor!");
-              },
-              "image/jpeg",
-              JPEG_Q,
-            );
+              }
+            } catch (e) {
+              console.error(e);
+              showToast("Erro ao salvar. Tente novamente.");
+            }
           }, 50);
         }
+
+        // Fechar modal
+        saveModalClose.addEventListener("click", () =>
+          saveModal.classList.remove("open"),
+        );
+        saveModal.addEventListener("click", (e) => {
+          if (e.target === saveModal) saveModal.classList.remove("open");
+        });
 
         // ── EVENTS ────────────────────────────────────────────────
         previewSection.addEventListener("click", (e) => {
@@ -4128,7 +4065,6 @@
           };
           ci.click();
         });
-
         previewSection.addEventListener("dragover", (e) => {
           e.preventDefault();
           previewSection.classList.add("drag-over");
@@ -4141,7 +4077,6 @@
           previewSection.classList.remove("drag-over");
           if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
         });
-
         document.querySelectorAll(".fx-btn").forEach((btn) => {
           btn.addEventListener("click", () => {
             const fx = btn.dataset.fx;
@@ -4152,7 +4087,6 @@
             updatePreview();
           });
         });
-
         btnDl.addEventListener("click", downloadImage);
         btnUpload.addEventListener("click", () => fileInput.click());
         btnCam.addEventListener("click", () => {
@@ -4165,7 +4099,6 @@
           };
           ci.click();
         });
-
         btnCmp.addEventListener("click", () => {
           if (!origData) return;
           isComparing = !isComparing;
@@ -4183,7 +4116,6 @@
             updatePreview();
           }
         });
-
         function getCP(e) {
           const cr = mainCanvas.getBoundingClientRect();
           return clamp(
@@ -4230,7 +4162,6 @@
         window.addEventListener("resize", () => {
           if (isComparing) updateCmpLine();
         });
-
         document.addEventListener("keydown", (e) => {
           if (e.key === "d" && (e.ctrlKey || e.metaKey) && origData) {
             e.preventDefault();
@@ -4239,12 +4170,10 @@
           if (e.key === "c" && !e.ctrlKey && !e.metaKey && origData)
             btnCmp.click();
         });
-
-        // Init
         document
           .querySelectorAll(".fx-btn")
           .forEach((btn) => btn.classList.toggle("on", FX[btn.dataset.fx]));
-        console.log("🌸 Cassia Cam v4 — 92 Filtros Analógicos");
+        console.log("🌸 Cassia Cam v4.1 — Download corrigido para iOS/Safari");
       })();
     </script>
   </body>
