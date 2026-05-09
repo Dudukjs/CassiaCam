@@ -1,771 +1,2036 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#0a0a0a">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Cassia Cam 🌸</title>
-<style>
-:root {
-    --bg: #0a0a0a; --surface: #141414; --surface2: #1a1a1a;
-    --text: #e0e0e0; --text2: #888;
-    --accent: #c9a96e; --accent2: #b8924f;
-    --radius: 16px; --radius-sm: 10px;
-    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
-    --font-mono: 'SF Mono','Courier New','IBM Plex Mono',monospace;
-    --safe-bottom: env(safe-area-inset-bottom, 16px);
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-    background:var(--bg); color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
-    min-height:100dvh; display:flex; justify-content:center; align-items:flex-start;
-    -webkit-tap-highlight-color:transparent; -webkit-font-smoothing:antialiased;
-    user-select:none; -webkit-user-select:none; overflow-x:hidden;
-}
-::-webkit-scrollbar{width:3px;height:3px;}
-::-webkit-scrollbar-thumb{background:#333;border-radius:10px;}
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <title>Cassia Cam 🌸</title>
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --surface: #141414;
+        --surface2: #1a1a1a;
+        --text: #e0e0e0;
+        --text2: #888;
+        --accent: #c9a96e;
+        --accent2: #b8924f;
+        --radius: 16px;
+        --radius-sm: 10px;
+        --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --font-mono: "SF Mono", "Courier New", "IBM Plex Mono", monospace;
+        --safe-bottom: env(safe-area-inset-bottom, 16px);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+        min-height: 100dvh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-font-smoothing: antialiased;
+        user-select: none;
+        -webkit-user-select: none;
+        overflow-x: hidden;
+      }
+      ::-webkit-scrollbar {
+        width: 3px;
+        height: 3px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 10px;
+      }
 
-.app{width:100%;max-width:520px;padding:12px 16px calc(var(--safe-bottom)+20px);display:flex;flex-direction:column;gap:14px;}
+      .app {
+        width: 100%;
+        max-width: 520px;
+        padding: 12px 16px calc(var(--safe-bottom)+20px);
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
 
-/* ── HEADER ── */
-.header{display:flex;align-items:center;justify-content:space-between;padding:4px 0;}
-.logo-area{display:flex;align-items:center;gap:10px;}
-.logo-icon{
-    width:40px;height:40px;border-radius:12px;
-    background:linear-gradient(135deg,#1c1410,#2a1f14);
-    border:1.5px solid #3a2a1a;
-    display:flex;align-items:center;justify-content:center;font-size:22px;
-    position:relative;overflow:hidden;
-}
-.logo-icon::after{
-    content:'';position:absolute;width:16px;height:16px;border-radius:50%;
-    background:var(--accent);opacity:0.4;top:4px;right:4px;filter:blur(4px);
-}
-.logo-text{font-weight:800;font-size:1.15rem;letter-spacing:-0.03em;color:#fff;}
-.logo-sub{font-size:0.65rem;color:var(--text2);letter-spacing:0.08em;font-weight:500;margin-top:1px;}
-.badge{
-    background:#161210;border:1px solid #3a2a1a;padding:6px 12px;border-radius:20px;
-    font-size:0.68rem;letter-spacing:0.05em;color:var(--accent);font-weight:600;
-    display:flex;align-items:center;gap:5px;
-}
-.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse-dot 2s infinite;}
-@keyframes pulse-dot{0%,100%{opacity:1;}50%{opacity:0.2;}}
+      /* ── HEADER ── */
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 4px 0;
+      }
+      .logo-area {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        position: relative;
+        overflow: visible;
+      }
+      .logo-text {
+        font-weight: 800;
+        font-size: 1.15rem;
+        letter-spacing: -0.03em;
+        color: #fff;
+      }
+      .logo-sub {
+        font-size: 0.65rem;
+        color: var(--text2);
+        letter-spacing: 0.08em;
+        font-weight: 500;
+        margin-top: 1px;
+      }
+      .badge {
+        background: #161210;
+        border: 1px solid #3a2a1a;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.68rem;
+        letter-spacing: 0.05em;
+        color: var(--accent);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        animation: pulse-dot 2s infinite;
+      }
+      @keyframes pulse-dot {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.2;
+        }
+      }
 
-/* ── PREVIEW ── */
-.preview-section{
-    position:relative;width:100%;aspect-ratio:4/3;
-    background:var(--surface);border-radius:var(--radius);
-    overflow:hidden;border:2px dashed #2a2a2a;
-    transition:all var(--transition);cursor:pointer;
-    display:flex;align-items:center;justify-content:center;min-height:260px;
-}
-.preview-section.has-image{border:2px solid #2a2a2a;cursor:default;aspect-ratio:auto;min-height:auto;}
-.preview-section.drag-over{border-color:var(--accent);background:#17120a;box-shadow:inset 0 0 60px rgba(201,169,110,0.07);}
-.upload-ph{display:flex;flex-direction:column;align-items:center;gap:10px;padding:30px;text-align:center;}
-.has-image .upload-ph{display:none;}
-.upload-icon{font-size:44px;opacity:0.5;transition:transform 0.3s;}
-.preview-section:hover .upload-icon{transform:translateY(-4px);}
-.upload-text{color:var(--text2);font-size:0.88rem;font-weight:500;}
-.upload-sub{color:#444;font-size:0.73rem;}
-.canvas-wrap{position:relative;width:100%;display:none;border-radius:var(--radius);overflow:hidden;line-height:0;}
-.has-image .canvas-wrap{display:block;}
-.canvas-wrap canvas{width:100%;height:auto;display:block;border-radius:var(--radius);}
-.frame-cnt{
-    position:absolute;top:11px;right:13px;font-family:var(--font-mono);
-    font-size:0.62rem;color:rgba(255,255,255,0.65);letter-spacing:0.07em;
-    z-index:4;pointer-events:none;text-shadow:0 1px 3px rgba(0,0,0,0.8);display:none;
-}
-.has-image .frame-cnt{display:block;}
+      /* ── PREVIEW ── */
+      .preview-section {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4/3;
+        background: var(--surface);
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 2px dashed #2a2a2a;
+        transition: all var(--transition);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 260px;
+      }
+      .preview-section.has-image {
+        border: 2px solid #2a2a2a;
+        cursor: default;
+        aspect-ratio: auto;
+        min-height: auto;
+      }
+      .preview-section.drag-over {
+        border-color: var(--accent);
+        background: #17120a;
+        box-shadow: inset 0 0 60px rgba(201, 169, 110, 0.07);
+      }
+      .upload-ph {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 30px;
+        text-align: center;
+      }
+      .has-image .upload-ph {
+        display: none;
+      }
+      .upload-icon {
+        font-size: 44px;
+        opacity: 0.5;
+        transition: transform 0.3s;
+      }
+      .preview-section:hover .upload-icon {
+        transform: translateY(-4px);
+      }
+      .upload-text {
+        color: var(--text2);
+        font-size: 0.88rem;
+        font-weight: 500;
+      }
+      .upload-sub {
+        color: #444;
+        font-size: 0.73rem;
+      }
+      .canvas-wrap {
+        position: relative;
+        width: 100%;
+        display: none;
+        border-radius: var(--radius);
+        overflow: hidden;
+        line-height: 0;
+      }
+      .has-image .canvas-wrap {
+        display: block;
+      }
+      .canvas-wrap canvas {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: var(--radius);
+      }
+      .frame-cnt {
+        position: absolute;
+        top: 11px;
+        right: 13px;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: rgba(255, 255, 255, 0.65);
+        letter-spacing: 0.07em;
+        z-index: 4;
+        pointer-events: none;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        display: none;
+      }
+      .has-image .frame-cnt {
+        display: block;
+      }
 
-/* ── COMPARE OVERLAY ── */
-.cmp-overlay{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;display:none;z-index:5;}
-.cmp-overlay.active{display:block;}
-.cmp-line{position:absolute;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 14px rgba(0,0,0,0.7);pointer-events:auto;cursor:ew-resize;z-index:6;}
-.cmp-handle{
-    position:absolute;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;
-    border-radius:50%;background:#fff;border:3px solid #111;
-    pointer-events:auto;cursor:ew-resize;z-index:7;
-    box-shadow:0 4px 18px rgba(0,0,0,0.6);
-    display:flex;align-items:center;justify-content:center;font-size:11px;color:#222;
-}
-.cmp-lbl{
-    position:absolute;bottom:12px;font-size:0.68rem;font-weight:700;
-    letter-spacing:0.06em;padding:4px 9px;border-radius:6px;
-    pointer-events:none;z-index:6;color:#fff;background:rgba(0,0,0,0.55);
-}
-.cmp-lbl.left{left:12px;} .cmp-lbl.right{right:12px;}
+      /* ── COMPARE OVERLAY ── */
+      .cmp-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        display: none;
+        z-index: 5;
+      }
+      .cmp-overlay.active {
+        display: block;
+      }
+      .cmp-line {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #fff;
+        box-shadow: 0 0 14px rgba(0, 0, 0, 0.7);
+        pointer-events: auto;
+        cursor: ew-resize;
+        z-index: 6;
+      }
+      .cmp-handle {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #fff;
+        border: 3px solid #111;
+        pointer-events: auto;
+        cursor: ew-resize;
+        z-index: 7;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        color: #222;
+      }
+      .cmp-lbl {
+        position: absolute;
+        bottom: 12px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 4px 9px;
+        border-radius: 6px;
+        pointer-events: none;
+        z-index: 6;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.55);
+      }
+      .cmp-lbl.left {
+        left: 12px;
+      }
+      .cmp-lbl.right {
+        right: 12px;
+      }
 
-/* ── SECTION TITLE ── */
-.sec-title{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.09em;color:var(--text2);font-weight:600;margin-bottom:6px;}
+      /* ── SECTION TITLE ── */
+      .sec-title {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        color: var(--text2);
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
 
-/* ── FILTER SCROLL ── */
-.filter-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
-.filter-scroll::-webkit-scrollbar{display:none;}
-.filter-card{
-    flex:0 0 100px;background:var(--surface);border:2px solid transparent;
-    border-radius:var(--radius-sm);padding:9px 8px 8px;cursor:pointer;
-    transition:all var(--transition);text-align:center;position:relative;
-}
-.filter-card:hover{border-color:#383838;background:#1a1a1a;}
-.filter-card.active{border-color:var(--accent);background:#17120a;box-shadow:0 0 18px rgba(201,169,110,0.12);}
-.fc-preview{width:100%;height:44px;border-radius:6px;margin-bottom:7px;}
-.fc-name{font-weight:700;font-size:0.82rem;letter-spacing:0.02em;}
-.fc-desc{font-size:0.60rem;color:var(--text2);margin-top:2px;letter-spacing:0.02em;}
-.fc-dot{display:none;width:6px;height:6px;border-radius:50%;background:var(--accent);margin:5px auto 0;animation:pulse-dot 2s infinite;}
-.filter-card.active .fc-dot{display:block;}
+      /* ── FILTER SCROLL ── */
+      .filter-scroll {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      .filter-scroll::-webkit-scrollbar {
+        display: none;
+      }
+      .filter-card {
+        flex: 0 0 100px;
+        background: var(--surface);
+        border: 2px solid transparent;
+        border-radius: var(--radius-sm);
+        padding: 9px 8px 8px;
+        cursor: pointer;
+        transition: all var(--transition);
+        text-align: center;
+        position: relative;
+      }
+      .filter-card:hover {
+        border-color: #383838;
+        background: #1a1a1a;
+      }
+      .filter-card.active {
+        border-color: var(--accent);
+        background: #17120a;
+        box-shadow: 0 0 18px rgba(201, 169, 110, 0.12);
+      }
+      .fc-preview {
+        width: 100%;
+        height: 44px;
+        border-radius: 6px;
+        margin-bottom: 7px;
+      }
+      .fc-name {
+        font-weight: 700;
+        font-size: 0.82rem;
+        letter-spacing: 0.02em;
+      }
+      .fc-desc {
+        font-size: 0.6rem;
+        color: var(--text2);
+        margin-top: 2px;
+        letter-spacing: 0.02em;
+      }
+      .fc-dot {
+        display: none;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        margin: 5px auto 0;
+        animation: pulse-dot 2s infinite;
+      }
+      .filter-card.active .fc-dot {
+        display: block;
+      }
 
-/* ── SLIDER ── */
-.slider-group{display:flex;flex-direction:column;gap:6px;}
-.slider-hd{display:flex;justify-content:space-between;align-items:center;}
-.slider-lbl{font-size:0.73rem;color:var(--text2);font-weight:500;letter-spacing:0.03em;}
-.slider-val{font-size:0.73rem;color:var(--accent);font-weight:700;font-family:var(--font-mono);}
-input[type=range]{-webkit-appearance:none;width:100%;height:5px;border-radius:3px;background:#252525;outline:none;cursor:pointer;}
-input[type=range]::-webkit-slider-thumb{
-    -webkit-appearance:none;width:26px;height:26px;border-radius:50%;
-    background:#fff;border:2px solid #444;cursor:pointer;
-    box-shadow:0 3px 10px rgba(0,0,0,0.5);transition:all 0.2s;
-}
-input[type=range]::-webkit-slider-thumb:active{transform:scale(1.1);border-color:var(--accent);}
+      /* ── SLIDER ── */
+      .slider-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .slider-hd {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .slider-lbl {
+        font-size: 0.73rem;
+        color: var(--text2);
+        font-weight: 500;
+        letter-spacing: 0.03em;
+      }
+      .slider-val {
+        font-size: 0.73rem;
+        color: var(--accent);
+        font-weight: 700;
+        font-family: var(--font-mono);
+      }
+      input[type="range"] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 5px;
+        border-radius: 3px;
+        background: #252525;
+        outline: none;
+        cursor: pointer;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid #444;
+        cursor: pointer;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+        transition: all 0.2s;
+      }
+      input[type="range"]::-webkit-slider-thumb:active {
+        transform: scale(1.1);
+        border-color: var(--accent);
+      }
 
-/* ── EFFECTS GRID ── */
-.fx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
-@media(min-width:400px){.fx-grid{grid-template-columns:repeat(4,1fr);}}
-.fx-btn{
-    background:var(--surface);border:1.5px solid #252525;border-radius:var(--radius-sm);
-    padding:9px 5px;cursor:pointer;transition:all var(--transition);
-    text-align:center;font-size:0.67rem;color:var(--text2);
-    display:flex;flex-direction:column;align-items:center;gap:4px;letter-spacing:0.02em;
-}
-.fx-btn:hover{border-color:#404040;background:#1a1a1a;}
-.fx-btn.on{border-color:var(--accent);background:#17120a;color:var(--accent);}
-.fx-icon{font-size:1.25rem;transition:transform 0.3s;}
-.fx-btn.on .fx-icon{transform:scale(1.08);}
+      /* ── EFFECTS GRID ── */
+      .fx-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+      }
+      @media (min-width: 400px) {
+        .fx-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .fx-btn {
+        background: var(--surface);
+        border: 1.5px solid #252525;
+        border-radius: var(--radius-sm);
+        padding: 9px 5px;
+        cursor: pointer;
+        transition: all var(--transition);
+        text-align: center;
+        font-size: 0.67rem;
+        color: var(--text2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        letter-spacing: 0.02em;
+      }
+      .fx-btn:hover {
+        border-color: #404040;
+        background: #1a1a1a;
+      }
+      .fx-btn.on {
+        border-color: var(--accent);
+        background: #17120a;
+        color: var(--accent);
+      }
+      .fx-icon {
+        font-size: 1.25rem;
+        transition: transform 0.3s;
+      }
+      .fx-btn.on .fx-icon {
+        transform: scale(1.08);
+      }
 
-/* ── ACTIONS ── */
-.actions{display:flex;gap:9px;flex-wrap:wrap;}
-.btn{
-    flex:1;min-width:80px;padding:12px 14px;border-radius:var(--radius-sm);
-    font-weight:700;font-size:0.82rem;letter-spacing:0.04em;cursor:pointer;
-    transition:all var(--transition);border:none;
-    display:flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;
-}
-.btn-primary{background:var(--accent);color:#0a0a0a;box-shadow:0 4px 16px rgba(201,169,110,0.25);}
-.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);}
-.btn-primary:active{transform:scale(0.97);}
-.btn-outline{background:transparent;color:var(--text);border:1.5px solid #383838;}
-.btn-outline:hover{border-color:#666;background:#111;}
-.btn-compare{background:#131313;color:#aaa;border:1.5px solid #383838;font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.07em;}
-.btn-compare.on{border-color:#fff;color:#fff;background:#1e1e1e;animation:glow 2s infinite;}
-@keyframes glow{0%,100%{box-shadow:0 0 6px rgba(255,255,255,0.04);}50%{box-shadow:0 0 16px rgba(255,255,255,0.12);}}
-.btn:disabled{opacity:0.3;pointer-events:none;}
+      /* ── ACTIONS ── */
+      .actions {
+        display: flex;
+        gap: 9px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        flex: 1;
+        min-width: 80px;
+        padding: 12px 14px;
+        border-radius: var(--radius-sm);
+        font-weight: 700;
+        font-size: 0.82rem;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition: all var(--transition);
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        white-space: nowrap;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #0a0a0a;
+        box-shadow: 0 4px 16px rgba(201, 169, 110, 0.25);
+      }
+      .btn-primary:hover {
+        background: var(--accent2);
+        transform: translateY(-1px);
+      }
+      .btn-primary:active {
+        transform: scale(0.97);
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--text);
+        border: 1.5px solid #383838;
+      }
+      .btn-outline:hover {
+        border-color: #666;
+        background: #111;
+      }
+      .btn-compare {
+        background: #131313;
+        color: #aaa;
+        border: 1.5px solid #383838;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.07em;
+      }
+      .btn-compare.on {
+        border-color: #fff;
+        color: #fff;
+        background: #1e1e1e;
+        animation: glow 2s infinite;
+      }
+      @keyframes glow {
+        0%,
+        100% {
+          box-shadow: 0 0 6px rgba(255, 255, 255, 0.04);
+        }
+        50% {
+          box-shadow: 0 0 16px rgba(255, 255, 255, 0.12);
+        }
+      }
+      .btn:disabled {
+        opacity: 0.3;
+        pointer-events: none;
+      }
 
-#fileInput{display:none;}
+      #fileInput {
+        display: none;
+      }
 
-/* ── TOAST ── */
-.toast{
-    position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(120px);
-    background:#1a1612;color:#e0d8cc;padding:10px 20px;border-radius:20px;
-    font-size:0.78rem;font-weight:500;letter-spacing:0.03em;
-    z-index:100;border:1px solid #3a2a1a;
-    transition:transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
-    pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,0.7);
-}
-.toast.show{transform:translateX(-50%) translateY(0);}
+      /* ── TOAST ── */
+      .toast {
+        position: fixed;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%) translateY(120px);
+        background: #1a1612;
+        color: #e0d8cc;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        z-index: 100;
+        border: 1px solid #3a2a1a;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        pointer-events: none;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+      }
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+      }
 
-@media(max-width:360px){
-    .app{padding:8px 10px calc(var(--safe-bottom)+12px);gap:10px;}
-    .filter-card{flex:0 0 88px;}
-    .btn{padding:10px 10px;font-size:0.76rem;}
-}
-</style>
-</head>
-<body>
-<div class="app">
+      @media (max-width: 360px) {
+        .app {
+          padding: 8px 10px calc(var(--safe-bottom)+12px);
+          gap: 10px;
+        }
+        .filter-card {
+          flex: 0 0 88px;
+        }
+        .btn {
+          padding: 10px 10px;
+          font-size: 0.76rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <!-- HEADER -->
+      <header class="header">
+        <div class="logo-area">
+          <div class="logo-icon">
+            <img
+              src="cassia_cam_logo.svg"
+              alt="Cassia Cam"
+              style="width: 50px; height: 50px; object-fit: contain"
+            />
+          </div>
+          <div>
+            <div class="logo-text">Cassia Cam</div>
+            <div class="logo-sub">ANALOG FILM LAB</div>
+          </div>
+        </div>
+        <div class="badge"><span class="badge-dot"></span>CCD SIM</div>
+      </header>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo-area">
-      <div class="logo-icon">🌸</div>
+      <!-- PREVIEW -->
+      <section class="preview-section" id="previewSection">
+        <div class="upload-ph" id="uploadPh">
+          <span class="upload-icon">📷</span>
+          <span class="upload-text">Arraste uma foto ou toque aqui</span>
+          <span class="upload-sub">JPG • PNG • HEIC • até 30MB</span>
+        </div>
+        <div class="canvas-wrap" id="canvasWrap">
+          <canvas id="mainCanvas"></canvas>
+          <div class="frame-cnt" id="frameCnt">0001</div>
+        </div>
+        <div class="cmp-overlay" id="cmpOverlay">
+          <div class="cmp-line" id="cmpLine"></div>
+          <div class="cmp-handle" id="cmpHandle">⟷</div>
+          <span class="cmp-lbl left">ORIGINAL</span>
+          <span class="cmp-lbl right" id="cmpLblR">CPM35</span>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" />
+      </section>
+
+      <!-- FILTERS -->
       <div>
-        <div class="logo-text">Cassia Cam</div>
-        <div class="logo-sub">ANALOG FILM LAB</div>
+        <div class="sec-title">🎞️ Filtro</div>
+        <div class="filter-scroll" id="filterScroll"></div>
+      </div>
+
+      <!-- INTENSITY -->
+      <div class="slider-group">
+        <div class="slider-hd">
+          <span class="slider-lbl">⚡ Intensidade</span>
+          <span class="slider-val" id="intVal">85%</span>
+        </div>
+        <input
+          type="range"
+          id="intSlider"
+          min="0"
+          max="100"
+          value="85"
+          step="1"
+        />
+      </div>
+
+      <!-- EFFECTS -->
+      <div>
+        <div class="sec-title">✨ Efeitos Extras</div>
+        <div class="fx-grid">
+          <button class="fx-btn on" data-fx="grain">
+            <span class="fx-icon">🔘</span>Grão
+          </button>
+          <button class="fx-btn on" data-fx="vignette">
+            <span class="fx-icon">🌑</span>Vinheta
+          </button>
+          <button class="fx-btn" data-fx="chromatic">
+            <span class="fx-icon">🌈</span>RGB Split
+          </button>
+          <button class="fx-btn on" data-fx="halation">
+            <span class="fx-icon">💫</span>Halation
+          </button>
+          <button class="fx-btn" data-fx="lightleaks">
+            <span class="fx-icon">💡</span>Light Leaks
+          </button>
+          <button class="fx-btn" data-fx="dust">
+            <span class="fx-icon">💨</span>Dust
+          </button>
+          <button class="fx-btn on" data-fx="timestamp">
+            <span class="fx-icon">🕐</span>Timestamp
+          </button>
+          <button class="fx-btn" data-fx="bloom">
+            <span class="fx-icon">✨</span>Bloom
+          </button>
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="actions">
+        <button class="btn btn-compare" id="btnCmp" disabled>⇆ COMPARAR</button>
+        <button class="btn btn-outline" id="btnCam" disabled>📸 Câmera</button>
+        <button class="btn btn-primary" id="btnDl" disabled>⬇︎ BAIXAR</button>
       </div>
     </div>
-    <div class="badge"><span class="badge-dot"></span>CCD SIM</div>
-  </header>
+    <div class="toast" id="toast"></div>
 
-  <!-- PREVIEW -->
-  <section class="preview-section" id="previewSection">
-    <div class="upload-ph" id="uploadPh">
-      <span class="upload-icon">📷</span>
-      <span class="upload-text">Arraste uma foto ou toque aqui</span>
-      <span class="upload-sub">JPG • PNG • HEIC • até 30MB</span>
-    </div>
-    <div class="canvas-wrap" id="canvasWrap">
-      <canvas id="mainCanvas"></canvas>
-      <div class="frame-cnt" id="frameCnt">0001</div>
-    </div>
-    <div class="cmp-overlay" id="cmpOverlay">
-      <div class="cmp-line" id="cmpLine"></div>
-      <div class="cmp-handle" id="cmpHandle">⟷</div>
-      <span class="cmp-lbl left">ORIGINAL</span>
-      <span class="cmp-lbl right" id="cmpLblR">CPM35</span>
-    </div>
-    <input type="file" id="fileInput" accept="image/*">
-  </section>
+    <script>
+      (function () {
+        "use strict";
 
-  <!-- FILTERS -->
-  <div>
-    <div class="sec-title">🎞️ Filtro</div>
-    <div class="filter-scroll" id="filterScroll"></div>
-  </div>
+        // ════════════════════════════════════════════════════════════════
+        //  CASSIA CAM — ANALOG ENGINE v3
+        //  12 filtros reais baseados em câmeras e filmes analógicos
+        // ════════════════════════════════════════════════════════════════
 
-  <!-- INTENSITY -->
-  <div class="slider-group">
-    <div class="slider-hd">
-      <span class="slider-lbl">⚡ Intensidade</span>
-      <span class="slider-val" id="intVal">85%</span>
-    </div>
-    <input type="range" id="intSlider" min="0" max="100" value="85" step="1">
-  </div>
+        // ── DOM ──────────────────────────────────────────────────────────
+        const $ = (id) => document.getElementById(id);
+        const previewSection = $("previewSection");
+        const canvasWrap = $("canvasWrap");
+        const mainCanvas = $("mainCanvas");
+        const ctx = mainCanvas.getContext("2d", { willReadFrequently: true });
+        const fileInput = $("fileInput");
+        const intSlider = $("intSlider");
+        const intVal = $("intVal");
+        const btnDl = $("btnDl");
+        const btnCmp = $("btnCmp");
+        const btnCam = $("btnCam");
+        const cmpOverlay = $("cmpOverlay");
+        const cmpLine = $("cmpLine");
+        const cmpHandle = $("cmpHandle");
+        const cmpLblR = $("cmpLblR");
+        const frameCnt = $("frameCnt");
+        const toast = $("toast");
+        const filterScroll = $("filterScroll");
 
-  <!-- EFFECTS -->
-  <div>
-    <div class="sec-title">✨ Efeitos Extras</div>
-    <div class="fx-grid">
-      <button class="fx-btn on"  data-fx="grain">     <span class="fx-icon">🔘</span>Grão</button>
-      <button class="fx-btn on"  data-fx="vignette">  <span class="fx-icon">🌑</span>Vinheta</button>
-      <button class="fx-btn"     data-fx="chromatic"> <span class="fx-icon">🌈</span>RGB Split</button>
-      <button class="fx-btn on"  data-fx="halation">  <span class="fx-icon">💫</span>Halation</button>
-      <button class="fx-btn"     data-fx="lightleaks"><span class="fx-icon">💡</span>Light Leaks</button>
-      <button class="fx-btn"     data-fx="dust">      <span class="fx-icon">💨</span>Dust</button>
-      <button class="fx-btn on"  data-fx="timestamp"> <span class="fx-icon">🕐</span>Timestamp</button>
-      <button class="fx-btn"     data-fx="bloom">     <span class="fx-icon">✨</span>Bloom</button>
-    </div>
-  </div>
+        // ── STATE ─────────────────────────────────────────────────────────
+        let origImg = null,
+          origData = null,
+          procData = null;
+        let currentFilter = "cpm35";
+        let intensity = 0.85;
+        let isComparing = false,
+          cmpPos = 0.5;
+        let dustCvs = null,
+          leaksCvs = null;
+        let needDust = true,
+          needLeaks = true;
 
-  <!-- ACTIONS -->
-  <div class="actions">
-    <button class="btn btn-compare" id="btnCmp" disabled>⇆ COMPARAR</button>
-    <button class="btn btn-outline"  id="btnCam" disabled>📸 Câmera</button>
-    <button class="btn btn-primary"  id="btnDl"  disabled>⬇︎ BAIXAR</button>
-  </div>
+        const FX = {
+          grain: true,
+          vignette: true,
+          chromatic: false,
+          halation: true,
+          lightleaks: false,
+          dust: false,
+          timestamp: true,
+          bloom: false,
+        };
+        const MAX_PX = 1400,
+          JPEG_Q = 0.85;
 
-</div>
-<div class="toast" id="toast"></div>
+        // ── UTILS ─────────────────────────────────────────────────────────
+        const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+        const lerp = (a, b, t) => a + (b - a) * t;
+        function debounce(fn, ms) {
+          let t;
+          return (...a) => {
+            clearTimeout(t);
+            t = setTimeout(() => fn(...a), ms);
+          };
+        }
+        function showToast(m) {
+          toast.textContent = m;
+          toast.classList.add("show");
+          clearTimeout(toast._t);
+          toast._t = setTimeout(() => toast.classList.remove("show"), 2200);
+        }
+        function prng(seed) {
+          let s = seed || 42;
+          return () => {
+            s = (s * 16807) % 2147483647;
+            return (s - 1) / 2147483646;
+          };
+        }
 
-<script>
-(function(){
-'use strict';
+        // ── LUT ───────────────────────────────────────────────────────────
+        function lut(fn) {
+          const a = new Uint8Array(256);
+          for (let i = 0; i < 256; i++)
+            a[i] = clamp(Math.round(fn(i / 255) * 255), 0, 255);
+          return a;
+        }
+        function sCurve(x, s = 0.5) {
+          if (x <= 0) return 0;
+          if (x >= 1) return 1;
+          const k = s * 0.8 + 0.1;
+          return x < 0.5
+            ? Math.pow(2 * x, 1 + k) / 2
+            : 1 - Math.pow(2 * (1 - x), 1 + k) / 2;
+        }
 
-// ════════════════════════════════════════════════════════════════
-//  CASSIA CAM — ANALOG ENGINE v3
-//  12 filtros reais baseados em câmeras e filmes analógicos
-// ════════════════════════════════════════════════════════════════
+        // ── COLOR CONVERSIONS ─────────────────────────────────────────────
+        function rgb2hsl(r, g, b) {
+          r /= 255;
+          g /= 255;
+          b /= 255;
+          const mx = Math.max(r, g, b),
+            mn = Math.min(r, g, b);
+          let h,
+            s,
+            l = (mx + mn) / 2;
+          if (mx === mn) {
+            h = s = 0;
+          } else {
+            const d = mx - mn;
+            s = l > 0.5 ? d / (2 - mx - mn) : d / (mx + mn);
+            switch (mx) {
+              case r:
+                h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+                break;
+              case g:
+                h = ((b - r) / d + 2) / 6;
+                break;
+              case b:
+                h = ((r - g) / d + 4) / 6;
+                break;
+            }
+          }
+          return { h, s, l };
+        }
+        function hsl2rgb(h, s, l) {
+          if (s === 0)
+            return {
+              r: Math.round(l * 255),
+              g: Math.round(l * 255),
+              b: Math.round(l * 255),
+            };
+          const q = l < 0.5 ? l * (1 + s) : l + s - l * s,
+            p = 2 * l - q;
+          const hf = (p, q, t) => {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1 / 6) return p + (q - p) * 6 * t;
+            if (t < 0.5) return q;
+            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+            return p;
+          };
+          return {
+            r: Math.round(hf(p, q, h + 1 / 3) * 255),
+            g: Math.round(hf(p, q, h) * 255),
+            b: Math.round(hf(p, q, h - 1 / 3) * 255),
+          };
+        }
 
-// ── DOM ──────────────────────────────────────────────────────────
-const $  = id => document.getElementById(id);
-const previewSection = $('previewSection');
-const canvasWrap   = $('canvasWrap');
-const mainCanvas   = $('mainCanvas');
-const ctx          = mainCanvas.getContext('2d',{willReadFrequently:true});
-const fileInput    = $('fileInput');
-const intSlider    = $('intSlider');
-const intVal       = $('intVal');
-const btnDl        = $('btnDl');
-const btnCmp       = $('btnCmp');
-const btnCam       = $('btnCam');
-const cmpOverlay   = $('cmpOverlay');
-const cmpLine      = $('cmpLine');
-const cmpHandle    = $('cmpHandle');
-const cmpLblR      = $('cmpLblR');
-const frameCnt     = $('frameCnt');
-const toast        = $('toast');
-const filterScroll = $('filterScroll');
+        // ════════════════════════════════════════════════════════════════
+        //  FILTER DEFINITIONS — 12 filtros
+        // ════════════════════════════════════════════════════════════════
 
-// ── STATE ─────────────────────────────────────────────────────────
-let origImg = null, origData = null, procData = null;
-let currentFilter = 'cpm35';
-let intensity = 0.85;
-let isComparing = false, cmpPos = 0.5;
-let dustCvs = null, leaksCvs = null;
-let needDust = true, needLeaks = true;
+        function mkLUTs(rf, gf, bf) {
+          return { r: lut(rf), g: lut(gf), b: lut(bf) };
+        }
 
-const FX = {grain:true,vignette:true,chromatic:false,halation:true,lightleaks:false,dust:false,timestamp:true,bloom:false};
-const MAX_PX = 1400, JPEG_Q = 0.85;
+        // 1. CPM35 — Sépia âmbar quente (CCD antigo)
+        const cpm35 = {
+          label: "CPM35",
+          desc: "Warm • Sépia CCD",
+          preview:
+            "linear-gradient(135deg,#4a2000,#9a5200,#c4890a,#e8c870,#6a3200)",
+          satAdj: -0.08,
+          expFactor: 0.83,
+          hueShift: (h) => {
+            if (h.h > 0.08 && h.h < 0.2) h.h -= 0.018;
+          },
+          halWarm: true,
+          halStr: 0.32,
+          vigStr: 0.55,
+          grainStr: 0.075,
+          luts: mkLUTs(
+            (x) => {
+              let y = sCurve(x, 0.42);
+              y = y * 1.14 + 0.03;
+              if (y > 0.7) y = lerp(y, Math.min(y * 1.05, 1), (y - 0.7) / 0.3);
+              if (y < 0.12) y = y * 0.85 + 0.015;
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.38);
+              y = y * 0.9 - 0.01;
+              if (y < 0.2) y = lerp(y, y * 1.08, (0.2 - y) / 0.2);
+              if (y > 0.65) y = lerp(y, y * 0.94, (y - 0.65) / 0.35);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.3);
+              y = y * 0.58 - 0.03;
+              if (y < 0.18) y = y * 0.72;
+              if (y > 0.7) y = lerp(y, y * 1.08, (y - 0.7) / 0.3);
+              return clamp(y, 0, 1);
+            },
+          ),
+        };
 
-// ── UTILS ─────────────────────────────────────────────────────────
-const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
-const lerp  = (a,b,t) => a+(b-a)*t;
-function debounce(fn,ms){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms);};}
-function showToast(m){toast.textContent=m;toast.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>toast.classList.remove('show'),2200);}
-function prng(seed){let s=seed||42;return()=>{s=(s*16807)%2147483647;return(s-1)/2147483646;};}
+        // 2. GRD R — Ricoh GR Digital • Cinemático frio
+        const grdr = {
+          label: "GRD R",
+          desc: "Cool • Cinematic",
+          preview:
+            "linear-gradient(135deg,#080e14,#152538,#1a3f52,#286070,#0a1620)",
+          satAdj: -0.22,
+          expFactor: 0.85,
+          hueShift: null,
+          halWarm: false,
+          halStr: 0.3,
+          vigStr: 0.52,
+          grainStr: 0.06,
+          luts: mkLUTs(
+            (x) => {
+              let y = sCurve(x, 0.55);
+              y = y * 0.8 + 0.02;
+              if (y < 0.18) y = y * 0.68;
+              if (y > 0.78)
+                y = lerp(y, Math.min(y * 1.06, 1), (y - 0.78) / 0.22);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.5);
+              y = y * 0.88 + 0.02;
+              if (y < 0.28) y = lerp(y, y * 1.18, (0.28 - y) / 0.28);
+              if (y > 0.75) y = lerp(y, y * 1.03, (y - 0.75) / 0.25);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.45);
+              y = y * 1.2 + 0.06;
+              if (y < 0.32) y = lerp(y, y * 1.28, (0.32 - y) / 0.32);
+              if (y > 0.8) y = lerp(y, y * 0.88, (y - 0.8) / 0.2);
+              return clamp(y, 0, 1);
+            },
+          ),
+        };
 
-// ── LUT ───────────────────────────────────────────────────────────
-function lut(fn){const a=new Uint8Array(256);for(let i=0;i<256;i++)a[i]=clamp(Math.round(fn(i/255)*255),0,255);return a;}
-function sCurve(x,s=0.5){if(x<=0)return 0;if(x>=1)return 1;const k=s*.8+.1;return x<.5?Math.pow(2*x,1+k)/2:1-Math.pow(2*(1-x),1+k)/2;}
+        // 3. LC-A — Lomografia LC-A+ (cross-process vibrante)
+        const lca = {
+          label: "LC-A",
+          desc: "Lomo • Cross-Process",
+          preview:
+            "linear-gradient(135deg,#1a0a2e,#6a1050,#c82828,#e89000,#082060)",
+          satAdj: +0.18,
+          expFactor: 0.86,
+          hueShift: null,
+          halWarm: true,
+          halStr: 0.25,
+          vigStr: 0.68,
+          grainStr: 0.08,
+          luts: mkLUTs(
+            (x) => {
+              let y = sCurve(x, 0.65);
+              y = y * 1.18 + 0.02;
+              if (y < 0.15) y = y * 0.8;
+              if (y > 0.8) y = lerp(y, Math.min(y * 1.08, 1), (y - 0.8) / 0.2);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.6);
+              y = y * 0.88 + 0.02;
+              if (y < 0.25) y = lerp(y, y * 1.15, (0.25 - y) / 0.25);
+              if (y > 0.7) y = lerp(y, y * 1.06, (y - 0.7) / 0.3);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.55);
+              y = y * 1.14 + 0.03;
+              if (y > 0.65)
+                y = lerp(y, Math.min(y * 1.1, 1), (y - 0.65) / 0.35);
+              return clamp(y, 0, 1);
+            },
+          ),
+        };
 
-// ── COLOR CONVERSIONS ─────────────────────────────────────────────
-function rgb2hsl(r,g,b){
-    r/=255;g/=255;b/=255;
-    const mx=Math.max(r,g,b),mn=Math.min(r,g,b);
-    let h,s,l=(mx+mn)/2;
-    if(mx===mn){h=s=0;}else{
-        const d=mx-mn;s=l>.5?d/(2-mx-mn):d/(mx+mn);
-        switch(mx){case r:h=((g-b)/d+(g<b?6:0))/6;break;case g:h=((b-r)/d+2)/6;break;case b:h=((r-g)/d+4)/6;break;}
-    }
-    return{h,s,l};
-}
-function hsl2rgb(h,s,l){
-    if(s===0)return{r:Math.round(l*255),g:Math.round(l*255),b:Math.round(l*255)};
-    const q=l<.5?l*(1+s):l+s-l*s,p=2*l-q;
-    const hf=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<.5)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;};
-    return{r:Math.round(hf(p,q,h+1/3)*255),g:Math.round(hf(p,q,h)*255),b:Math.round(hf(p,q,h-1/3)*255)};
-}
+        // 4. PORTRA — Kodak Portra 400 (pele quente, pastéis suaves)
+        const portra = {
+          label: "PORTRA",
+          desc: "Kodak • Skin Warm",
+          preview:
+            "linear-gradient(135deg,#c8a090,#e0c0a8,#f0d8c0,#e8c8b0,#c0907a)",
+          satAdj: -0.06,
+          expFactor: 0.96,
+          hueShift: (h) => {
+            if (h.h > 0.02 && h.h < 0.12) h.h += 0.008;
+          }, // skin tones levemente mais quentes
+          halWarm: true,
+          halStr: 0.18,
+          vigStr: 0.38,
+          grainStr: 0.045,
+          luts: mkLUTs(
+            (x) => {
+              let y = x;
+              y = y * 1.05 + 0.04;
+              if (y > 0.82) y = lerp(y, y * 0.96, (y - 0.82) / 0.18);
+              if (y < 0.1) y = y * 0.9 + 0.02;
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = x;
+              y = y * 1.0 + 0.03;
+              if (y > 0.8) y = lerp(y, y * 0.97, (y - 0.8) / 0.2);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = x;
+              y = y * 0.86 + 0.05;
+              if (y < 0.15) y = y * 0.85 + 0.04;
+              if (y > 0.78) y = lerp(y, y * 1.04, (y - 0.78) / 0.22);
+              return clamp(y, 0, 1);
+            },
+          ),
+        };
 
-// ════════════════════════════════════════════════════════════════
-//  FILTER DEFINITIONS — 12 filtros
-// ════════════════════════════════════════════════════════════════
+        // 5. ULTRA — Kodak Ultramax 400 (cores vibrantes, punchy)
+        const ultra = {
+          label: "ULTRA",
+          desc: "Kodak • Punchy",
+          preview:
+            "linear-gradient(135deg,#5c1800,#c04010,#f07828,#f8c060,#8a2800)",
+          satAdj: +0.1,
+          expFactor: 0.91,
+          hueShift: null,
+          halWarm: true,
+          halStr: 0.28,
+          vigStr: 0.42,
+          grainStr: 0.055,
+          luts: mkLUTs(
+            (x) => {
+              let y = sCurve(x, 0.4);
+              y = y * 1.16 + 0.03;
+              if (y > 0.68)
+                y = lerp(y, Math.min(y * 1.07, 1), (y - 0.68) / 0.32);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.35);
+              y = y * 0.96 + 0.01;
+              if (y < 0.18) y = lerp(y, y * 1.12, (0.18 - y) / 0.18);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.3);
+              y = y * 0.7 - 0.02;
+              if (y < 0.14) y = y * 0.75;
+              return clamp(y, 0, 1);
+            },
+          ),
+        };
 
-function mkLUTs(rf,gf,bf){return{r:lut(rf),g:lut(gf),b:lut(bf)};}
+        // 6. SUPERIA — Fuji Superia 400 (verde frio, japonês)
+        const superia = {
+          label: "SUPERIA",
+          desc: "Fuji • Cool Green",
+          preview:
+            "linear-gradient(135deg,#0e1a14,#1a3020,#2a5030,#4a7850,#0c1810)",
+          satAdj: -0.12,
+          expFactor: 0.9,
+          hueShift: null,
+          halWarm: false,
+          halStr: 0.22,
+          vigStr: 0.44,
+          grainStr: 0.055,
+          luts: mkLUTs(
+            (x) => {
+              let y = sCurve(x, 0.4);
+              y = y * 0.88 + 0.02;
+              if (y < 0.2) y = y * 0.82 + 0.02;
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.38);
+              y = y * 1.02 + 0.01;
+              if (y < 0.3) y = lerp(y, y * 1.1, (0.3 - y) / 0.3);
+              if (y > 0.72) y = lerp(y, y * 0.96, (y - 0.72) / 0.28);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.35);
+              y = y * 1.06 + 0.02;
+              if (y < 0.25) y = lerp(y, y * 1.12, (0.25 - y) / 0.25);
+              return clamp(y, 0, 1);
+            },
+          ),
+        };
 
-// 1. CPM35 — Sépia âmbar quente (CCD antigo)
-const cpm35={
-    label:'CPM35',desc:'Warm • Sépia CCD',
-    preview:'linear-gradient(135deg,#4a2000,#9a5200,#c4890a,#e8c870,#6a3200)',
-    satAdj:-0.08, expFactor:0.83,
-    hueShift:(h)=>{if(h.h>.08&&h.h<.20)h.h-=.018;},
-    halWarm:true, halStr:0.32, vigStr:0.55, grainStr:0.075,
-    luts: mkLUTs(
-        x=>{let y=sCurve(x,.42);y=y*1.14+.03;if(y>.70)y=lerp(y,Math.min(y*1.05,1),(y-.70)/.30);if(y<.12)y=y*.85+.015;return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.38);y=y*.90-.01;if(y<.20)y=lerp(y,y*1.08,(.20-y)/.20);if(y>.65)y=lerp(y,y*.94,(y-.65)/.35);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.30);y=y*.58-.03;if(y<.18)y=y*.72;if(y>.70)y=lerp(y,y*1.08,(y-.70)/.30);return clamp(y,0,1);}
-    )
-};
+        // 7. HP5 — Ilford HP5 Plus (preto e branco contrastado)
+        const hp5 = {
+          label: "HP5",
+          desc: "Ilford • B&W",
+          preview:
+            "linear-gradient(135deg,#000,#1a1a1a,#505050,#b0b0b0,#f0f0f0)",
+          satAdj: -1.0,
+          expFactor: 0.88, // satAdj -1 = full desaturate handled specially
+          hueShift: null,
+          halWarm: false,
+          halStr: 0.0,
+          vigStr: 0.5,
+          grainStr: 0.09,
+          bw: true, // flag especial
+          luts: mkLUTs(
+            (x) => {
+              let y = sCurve(x, 0.6);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.6);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.6);
+              return clamp(y, 0, 1);
+            },
+          ),
+        };
 
-// 2. GRD R — Ricoh GR Digital • Cinemático frio
-const grdr={
-    label:'GRD R',desc:'Cool • Cinematic',
-    preview:'linear-gradient(135deg,#080e14,#152538,#1a3f52,#286070,#0a1620)',
-    satAdj:-0.22, expFactor:0.85,
-    hueShift:null, halWarm:false, halStr:0.30, vigStr:0.52, grainStr:0.060,
-    luts: mkLUTs(
-        x=>{let y=sCurve(x,.55);y=y*.80+.02;if(y<.18)y=y*.68;if(y>.78)y=lerp(y,Math.min(y*1.06,1),(y-.78)/.22);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.50);y=y*.88+.02;if(y<.28)y=lerp(y,y*1.18,(.28-y)/.28);if(y>.75)y=lerp(y,y*1.03,(y-.75)/.25);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.45);y=y*1.20+.06;if(y<.32)y=lerp(y,y*1.28,(.32-y)/.32);if(y>.80)y=lerp(y,y*.88,(y-.80)/.20);return clamp(y,0,1);}
-    )
-};
+        // 8. VELVIA — Fuji Velvia 50 (hiper saturado, azuis e verdes profundos)
+        const velvia = {
+          label: "VELVIA",
+          desc: "Fuji • Hyper Vivid",
+          preview:
+            "linear-gradient(135deg,#001840,#003a80,#0070c0,#00a060,#004820)",
+          satAdj: +0.28,
+          expFactor: 0.87,
+          hueShift: (h) => {
+            if (h.h > 0.55 && h.h < 0.75) h.h += 0.015;
+          }, // blues puxados para mais profundo
+          halWarm: false,
+          halStr: 0.2,
+          vigStr: 0.4,
+          grainStr: 0.03,
+          luts: mkLUTs(
+            (x) => {
+              let y = sCurve(x, 0.5);
+              y = y * 0.94 + 0.01;
+              if (y < 0.15) y = y * 0.8;
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.48);
+              y = y * 1.04 + 0.01;
+              if (y > 0.7) y = lerp(y, Math.min(y * 1.06, 1), (y - 0.7) / 0.3);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.45);
+              y = y * 1.16 + 0.03;
+              if (y < 0.3) y = lerp(y, y * 1.2, (0.3 - y) / 0.3);
+              return clamp(y, 0, 1);
+            },
+          ),
+        };
 
-// 3. LC-A — Lomografia LC-A+ (cross-process vibrante)
-const lca={
-    label:'LC-A',desc:'Lomo • Cross-Process',
-    preview:'linear-gradient(135deg,#1a0a2e,#6a1050,#c82828,#e89000,#082060)',
-    satAdj:+0.18, expFactor:0.86,
-    hueShift:null, halWarm:true, halStr:0.25, vigStr:0.68, grainStr:0.080,
-    luts: mkLUTs(
-        x=>{let y=sCurve(x,.65);y=y*1.18+.02;if(y<.15)y=y*.80;if(y>.80)y=lerp(y,Math.min(y*1.08,1),(y-.80)/.20);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.60);y=y*.88+.02;if(y<.25)y=lerp(y,y*1.15,(.25-y)/.25);if(y>.70)y=lerp(y,y*1.06,(y-.70)/.30);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.55);y=y*1.14+.03;if(y>.65)y=lerp(y,Math.min(y*1.10,1),(y-.65)/.35);return clamp(y,0,1);}
-    )
-};
+        // 9. CINE800 — Cinestill 800T (tungstênio, halation vermelha, grão pesado)
+        const cine800 = {
+          label: "CINE800",
+          desc: "Tungsten • Film",
+          preview:
+            "linear-gradient(135deg,#060c14,#0a1c28,#102838,#1a3848,#060e18)",
+          satAdj: -0.1,
+          expFactor: 0.82,
+          hueShift: null,
+          halWarm: true,
+          halStr: 0.6,
+          vigStr: 0.58,
+          grainStr: 0.1,
+          luts: mkLUTs(
+            (x) => {
+              let y = sCurve(x, 0.48);
+              y = y * 0.82 + 0.02;
+              if (y < 0.14) y = y * 0.72;
+              if (y > 0.75)
+                y = lerp(y, Math.min(y * 1.12, 1), (y - 0.75) / 0.25);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.45);
+              y = y * 0.86 + 0.02;
+              if (y < 0.22) y = lerp(y, y * 1.08, (0.22 - y) / 0.22);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.42);
+              y = y * 1.22 + 0.06;
+              if (y < 0.35) y = lerp(y, y * 1.25, (0.35 - y) / 0.35);
+              if (y > 0.82) y = lerp(y, y * 0.85, (y - 0.82) / 0.18);
+              return clamp(y, 0, 1);
+            },
+          ),
+        };
 
-// 4. PORTRA — Kodak Portra 400 (pele quente, pastéis suaves)
-const portra={
-    label:'PORTRA',desc:'Kodak • Skin Warm',
-    preview:'linear-gradient(135deg,#c8a090,#e0c0a8,#f0d8c0,#e8c8b0,#c0907a)',
-    satAdj:-0.06, expFactor:0.96,
-    hueShift:(h)=>{if(h.h>.02&&h.h<.12)h.h+=.008;}, // skin tones levemente mais quentes
-    halWarm:true, halStr:0.18, vigStr:0.38, grainStr:0.045,
-    luts: mkLUTs(
-        x=>{let y=x;y=y*1.05+.04;if(y>.82)y=lerp(y,y*.96,(y-.82)/.18);if(y<.10)y=y*.90+.02;return clamp(y,0,1);},
-        x=>{let y=x;y=y*1.00+.03;if(y>.80)y=lerp(y,y*.97,(y-.80)/.20);return clamp(y,0,1);},
-        x=>{let y=x;y=y*.86+.05;if(y<.15)y=y*.85+.04;if(y>.78)y=lerp(y,y*1.04,(y-.78)/.22);return clamp(y,0,1);}
-    )
-};
+        // 10. GOLD200 — Kodak Gold 200 (dourado nostálgico, clássico)
+        const gold200 = {
+          label: "GOLD200",
+          desc: "Kodak • Golden",
+          preview:
+            "linear-gradient(135deg,#3c2400,#8a5800,#c89020,#f0c850,#6a4000)",
+          satAdj: +0.05,
+          expFactor: 0.93,
+          hueShift: (h) => {
+            if (h.h > 0.05 && h.h < 0.18) h.h -= 0.01;
+          },
+          halWarm: true,
+          halStr: 0.22,
+          vigStr: 0.36,
+          grainStr: 0.05,
+          luts: mkLUTs(
+            (x) => {
+              let y = sCurve(x, 0.35);
+              y = y * 1.1 + 0.03;
+              if (y > 0.65)
+                y = lerp(y, Math.min(y * 1.06, 1), (y - 0.65) / 0.35);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.32);
+              y = y * 0.96 + 0.02;
+              if (y < 0.15) y = lerp(y, y * 1.05, (0.15 - y) / 0.15);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.28);
+              y = y * 0.72 - 0.01;
+              if (y < 0.12) y = y * 0.8;
+              if (y > 0.75) y = lerp(y, y * 1.05, (y - 0.75) / 0.25);
+              return clamp(y, 0, 1);
+            },
+          ),
+        };
 
-// 5. ULTRA — Kodak Ultramax 400 (cores vibrantes, punchy)
-const ultra={
-    label:'ULTRA',desc:'Kodak • Punchy',
-    preview:'linear-gradient(135deg,#5c1800,#c04010,#f07828,#f8c060,#8a2800)',
-    satAdj:+0.10, expFactor:0.91,
-    hueShift:null, halWarm:true, halStr:0.28, vigStr:0.42, grainStr:0.055,
-    luts: mkLUTs(
-        x=>{let y=sCurve(x,.40);y=y*1.16+.03;if(y>.68)y=lerp(y,Math.min(y*1.07,1),(y-.68)/.32);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.35);y=y*.96+.01;if(y<.18)y=lerp(y,y*1.12,(.18-y)/.18);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.30);y=y*.70-.02;if(y<.14)y=y*.75;return clamp(y,0,1);}
-    )
-};
+        // 11. POLAR — Polaroid 600 (desbotado, frio, lifted)
+        const polar = {
+          label: "POLAR",
+          desc: "Polaroid • Faded",
+          preview:
+            "linear-gradient(135deg,#c0c8d8,#d8e0f0,#e8eef8,#d0d8e8,#b8c0d0)",
+          satAdj: -0.22,
+          expFactor: 1.0,
+          hueShift: null,
+          halWarm: false,
+          halStr: 0.12,
+          vigStr: 0.25,
+          grainStr: 0.04,
+          luts: mkLUTs(
+            (x) => {
+              let y = x;
+              y = y * 0.68 + 0.14;
+              if (y > 0.78) y = lerp(y, y * 0.95, (y - 0.78) / 0.22);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = x;
+              y = y * 0.7 + 0.14;
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = x;
+              y = y * 0.8 + 0.17;
+              if (y > 0.82)
+                y = lerp(y, Math.min(y * 1.04, 1), (y - 0.82) / 0.18);
+              return clamp(y, 0, 1);
+            },
+          ),
+        };
 
-// 6. SUPERIA — Fuji Superia 400 (verde frio, japonês)
-const superia={
-    label:'SUPERIA',desc:'Fuji • Cool Green',
-    preview:'linear-gradient(135deg,#0e1a14,#1a3020,#2a5030,#4a7850,#0c1810)',
-    satAdj:-0.12, expFactor:0.90,
-    hueShift:null, halWarm:false, halStr:0.22, vigStr:0.44, grainStr:0.055,
-    luts: mkLUTs(
-        x=>{let y=sCurve(x,.40);y=y*.88+.02;if(y<.20)y=y*.82+.02;return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.38);y=y*1.02+.01;if(y<.30)y=lerp(y,y*1.10,(.30-y)/.30);if(y>.72)y=lerp(y,y*.96,(y-.72)/.28);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.35);y=y*1.06+.02;if(y<.25)y=lerp(y,y*1.12,(.25-y)/.25);return clamp(y,0,1);}
-    )
-};
+        // 12. AGFA — Agfa Vista 200 (cross-process, magenta/verde vibrante)
+        const agfa = {
+          label: "AGFA",
+          desc: "Agfa • Cross Pro",
+          preview:
+            "linear-gradient(135deg,#200838,#601060,#c020a0,#20c060,#103020)",
+          satAdj: +0.2,
+          expFactor: 0.88,
+          hueShift: (h) => {
+            if (h.h > 0.8 || h.h < 0.05) h.h += 0.025;
+          }, // reds → magenta
+          halWarm: false,
+          halStr: 0.2,
+          vigStr: 0.45,
+          grainStr: 0.065,
+          luts: mkLUTs(
+            (x) => {
+              let y = sCurve(x, 0.55);
+              y = y * 1.08 + 0.03;
+              if (y > 0.72)
+                y = lerp(y, Math.min(y * 1.1, 1), (y - 0.72) / 0.28);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.5);
+              y = y * 1.06 + 0.01;
+              if (y < 0.25) y = lerp(y, y * 1.15, (0.25 - y) / 0.25);
+              return clamp(y, 0, 1);
+            },
+            (x) => {
+              let y = sCurve(x, 0.48);
+              y = y * 1.1 + 0.04;
+              if (y < 0.2) y = lerp(y, y * 1.1, (0.2 - y) / 0.2);
+              return clamp(y, 0, 1);
+            },
+          ),
+        };
 
-// 7. HP5 — Ilford HP5 Plus (preto e branco contrastado)
-const hp5={
-    label:'HP5',desc:'Ilford • B&W',
-    preview:'linear-gradient(135deg,#000,#1a1a1a,#505050,#b0b0b0,#f0f0f0)',
-    satAdj:-1.0, expFactor:0.88, // satAdj -1 = full desaturate handled specially
-    hueShift:null, halWarm:false, halStr:0.0, vigStr:0.50, grainStr:0.090,
-    bw:true, // flag especial
-    luts: mkLUTs(
-        x=>{let y=sCurve(x,.60);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.60);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.60);return clamp(y,0,1);}
-    )
-};
+        // ── FILTER REGISTRY ───────────────────────────────────────────────
+        const FILTERS = {
+          cpm35,
+          grdr,
+          lca,
+          portra,
+          ultra,
+          superia,
+          hp5,
+          velvia,
+          cine800,
+          gold200,
+          polar,
+          agfa,
+        };
 
-// 8. VELVIA — Fuji Velvia 50 (hiper saturado, azuis e verdes profundos)
-const velvia={
-    label:'VELVIA',desc:'Fuji • Hyper Vivid',
-    preview:'linear-gradient(135deg,#001840,#003a80,#0070c0,#00a060,#004820)',
-    satAdj:+0.28, expFactor:0.87,
-    hueShift:(h)=>{if(h.h>.55&&h.h<.75)h.h+=.015;}, // blues puxados para mais profundo
-    halWarm:false, halStr:0.20, vigStr:0.40, grainStr:0.030,
-    luts: mkLUTs(
-        x=>{let y=sCurve(x,.50);y=y*.94+.01;if(y<.15)y=y*.80;return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.48);y=y*1.04+.01;if(y>.70)y=lerp(y,Math.min(y*1.06,1),(y-.70)/.30);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.45);y=y*1.16+.03;if(y<.30)y=lerp(y,y*1.20,(.30-y)/.30);return clamp(y,0,1);}
-    )
-};
-
-// 9. CINE800 — Cinestill 800T (tungstênio, halation vermelha, grão pesado)
-const cine800={
-    label:'CINE800',desc:'Tungsten • Film',
-    preview:'linear-gradient(135deg,#060c14,#0a1c28,#102838,#1a3848,#060e18)',
-    satAdj:-0.10, expFactor:0.82,
-    hueShift:null, halWarm:true, halStr:0.60, vigStr:0.58, grainStr:0.100,
-    luts: mkLUTs(
-        x=>{let y=sCurve(x,.48);y=y*.82+.02;if(y<.14)y=y*.72;if(y>.75)y=lerp(y,Math.min(y*1.12,1),(y-.75)/.25);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.45);y=y*.86+.02;if(y<.22)y=lerp(y,y*1.08,(.22-y)/.22);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.42);y=y*1.22+.06;if(y<.35)y=lerp(y,y*1.25,(.35-y)/.35);if(y>.82)y=lerp(y,y*.85,(y-.82)/.18);return clamp(y,0,1);}
-    )
-};
-
-// 10. GOLD200 — Kodak Gold 200 (dourado nostálgico, clássico)
-const gold200={
-    label:'GOLD200',desc:'Kodak • Golden',
-    preview:'linear-gradient(135deg,#3c2400,#8a5800,#c89020,#f0c850,#6a4000)',
-    satAdj:+0.05, expFactor:0.93,
-    hueShift:(h)=>{if(h.h>.05&&h.h<.18)h.h-=.010;},
-    halWarm:true, halStr:0.22, vigStr:0.36, grainStr:0.050,
-    luts: mkLUTs(
-        x=>{let y=sCurve(x,.35);y=y*1.10+.03;if(y>.65)y=lerp(y,Math.min(y*1.06,1),(y-.65)/.35);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.32);y=y*.96+.02;if(y<.15)y=lerp(y,y*1.05,(.15-y)/.15);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.28);y=y*.72-.01;if(y<.12)y=y*.80;if(y>.75)y=lerp(y,y*1.05,(y-.75)/.25);return clamp(y,0,1);}
-    )
-};
-
-// 11. POLAR — Polaroid 600 (desbotado, frio, lifted)
-const polar={
-    label:'POLAR',desc:'Polaroid • Faded',
-    preview:'linear-gradient(135deg,#c0c8d8,#d8e0f0,#e8eef8,#d0d8e8,#b8c0d0)',
-    satAdj:-0.22, expFactor:1.00,
-    hueShift:null, halWarm:false, halStr:0.12, vigStr:0.25, grainStr:0.040,
-    luts: mkLUTs(
-        x=>{let y=x;y=y*.68+.14;if(y>.78)y=lerp(y,y*.95,(y-.78)/.22);return clamp(y,0,1);},
-        x=>{let y=x;y=y*.70+.14;return clamp(y,0,1);},
-        x=>{let y=x;y=y*.80+.17;if(y>.82)y=lerp(y,Math.min(y*1.04,1),(y-.82)/.18);return clamp(y,0,1);}
-    )
-};
-
-// 12. AGFA — Agfa Vista 200 (cross-process, magenta/verde vibrante)
-const agfa={
-    label:'AGFA',desc:'Agfa • Cross Pro',
-    preview:'linear-gradient(135deg,#200838,#601060,#c020a0,#20c060,#103020)',
-    satAdj:+0.20, expFactor:0.88,
-    hueShift:(h)=>{if(h.h>.80||h.h<.05)h.h+=.025;}, // reds → magenta
-    halWarm:false, halStr:0.20, vigStr:0.45, grainStr:0.065,
-    luts: mkLUTs(
-        x=>{let y=sCurve(x,.55);y=y*1.08+.03;if(y>.72)y=lerp(y,Math.min(y*1.10,1),(y-.72)/.28);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.50);y=y*1.06+.01;if(y<.25)y=lerp(y,y*1.15,(.25-y)/.25);return clamp(y,0,1);},
-        x=>{let y=sCurve(x,.48);y=y*1.10+.04;if(y<.20)y=lerp(y,y*1.10,(.20-y)/.20);return clamp(y,0,1);}
-    )
-};
-
-// ── FILTER REGISTRY ───────────────────────────────────────────────
-const FILTERS = {cpm35,grdr,lca,portra,ultra,superia,hp5,velvia,cine800,gold200,polar,agfa};
-
-// ── BUILD FILTER CARDS ────────────────────────────────────────────
-Object.entries(FILTERS).forEach(([id, f]) => {
-    const card = document.createElement('div');
-    card.className = 'filter-card' + (id==='cpm35'?' active':'');
-    card.dataset.id = id;
-    card.innerHTML = `
+        // ── BUILD FILTER CARDS ────────────────────────────────────────────
+        Object.entries(FILTERS).forEach(([id, f]) => {
+          const card = document.createElement("div");
+          card.className = "filter-card" + (id === "cpm35" ? " active" : "");
+          card.dataset.id = id;
+          card.innerHTML = `
         <div class="fc-preview" style="background:${f.preview}"></div>
         <div class="fc-name">${f.label}</div>
         <div class="fc-desc">${f.desc}</div>
         <div class="fc-dot"></div>`;
-    card.addEventListener('click', () => selectFilter(id));
-    filterScroll.appendChild(card);
-});
+          card.addEventListener("click", () => selectFilter(id));
+          filterScroll.appendChild(card);
+        });
 
-function selectFilter(id) {
-    currentFilter = id;
-    document.querySelectorAll('.filter-card').forEach(c => c.classList.toggle('active', c.dataset.id===id));
-    cmpLblR.textContent = FILTERS[id].label;
-    needLeaks = true;
-    updatePreview();
-}
-
-// ════════════════════════════════════════════════════════════════
-//  IMAGE PROCESSING EFFECTS
-// ════════════════════════════════════════════════════════════════
-
-function boxBlur(imageData, r) {
-    const w=imageData.width,h=imageData.height,s=new Uint8ClampedArray(imageData.data),d=new Uint8ClampedArray(s.length);
-    for(let y=0;y<h;y++)for(let x=0;x<w;x++){let R=0,G=0,B=0,n=0;for(let dx=-r;dx<=r;dx++){const sx=clamp(x+dx,0,w-1),i=(y*w+sx)*4;R+=s[i];G+=s[i+1];B+=s[i+2];n++;}const i=(y*w+x)*4;d[i]=R/n;d[i+1]=G/n;d[i+2]=B/n;d[i+3]=s[i+3];}
-    const s2=new Uint8ClampedArray(d);
-    for(let y=0;y<h;y++)for(let x=0;x<w;x++){let R=0,G=0,B=0,n=0;for(let dy=-r;dy<=r;dy++){const sy=clamp(y+dy,0,h-1),i=(sy*w+x)*4;R+=s2[i];G+=s2[i+1];B+=s2[i+2];n++;}const i=(y*w+x)*4;d[i]=R/n;d[i+1]=G/n;d[i+2]=B/n;d[i+3]=s2[i+3];}
-    return new ImageData(d,w,h);
-}
-
-function applyGrain(d, str, seed) {
-    const p=prng(seed),len=d.data.length;
-    for(let i=0;i<len;i+=4){const n=(p()-.5)*str*255;d.data[i]=clamp(d.data[i]+n,0,255);d.data[i+1]=clamp(d.data[i+1]+n*.88,0,255);d.data[i+2]=clamp(d.data[i+2]+n*.82,0,255);const cn=(p()-.5)*str*85;d.data[i+1]=clamp(d.data[i+1]+cn,0,255);}
-    return d;
-}
-
-function applyVignette(d, str) {
-    const w=d.width,h=d.height,cx=w/2,cy=h/2,md=Math.sqrt(cx*cx+cy*cy);
-    for(let y=0;y<h;y++)for(let x=0;x<w;x++){const dx=(x-cx)/md,dy=(y-cy)/md,dist=Math.sqrt(dx*dx+dy*dy),v=1-str*Math.pow(clamp((dist-.28)/.72,0,1),1.7),i=(y*w+x)*4;d.data[i]=clamp(Math.round(d.data[i]*v),0,255);d.data[i+1]=clamp(Math.round(d.data[i+1]*v),0,255);d.data[i+2]=clamp(Math.round(d.data[i+2]*v),0,255);}
-    return d;
-}
-
-function applyChromaticAberration(d, shift) {
-    const w=d.width,h=d.height,s=new Uint8ClampedArray(d.data),out=new Uint8ClampedArray(s.length);
-    for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=(y*w+x)*4,ri=(y*w+clamp(x-Math.round(shift),0,w-1))*4,bi=(y*w+clamp(x+Math.round(shift),0,w-1))*4;out[i]=s[ri];out[i+1]=s[i+1];out[i+2]=s[bi+2];out[i+3]=s[i+3];}
-    return new ImageData(out,w,h);
-}
-
-function applyHalation(d, str, warm) {
-    const w=d.width,h=d.height,hl=new Uint8ClampedArray(d.data.length);
-    for(let i=0;i<d.data.length;i+=4){const lum=d.data[i]*.299+d.data[i+1]*.587+d.data[i+2]*.114;if(lum>168){const f=(lum-168)/87;hl[i]=d.data[i]*f*(warm?1.0:.35);hl[i+1]=d.data[i+1]*f*(warm?.50:.65);hl[i+2]=d.data[i+2]*f*(warm?.18:1.0);hl[i+3]=255;}}
-    const bl=boxBlur(new ImageData(hl,w,h),10);
-    for(let i=0;i<d.data.length;i+=4){const ba=bl.data[i+3]/255*str;if(ba>.001){d.data[i]=clamp(Math.round(d.data[i]+bl.data[i]*ba*(1-d.data[i]/255)),0,255);d.data[i+1]=clamp(Math.round(d.data[i+1]+bl.data[i+1]*ba*(1-d.data[i+1]/255)),0,255);d.data[i+2]=clamp(Math.round(d.data[i+2]+bl.data[i+2]*ba*(1-d.data[i+2]/255)),0,255);}}
-    return d;
-}
-
-function applyBloom(d, str) {
-    const w=d.width,h=d.height,hl=new Uint8ClampedArray(d.data.length);
-    for(let i=0;i<d.data.length;i+=4){const lum=d.data[i]*.299+d.data[i+1]*.587+d.data[i+2]*.114;if(lum>155){const f=(lum-155)/100;hl[i]=d.data[i]*f;hl[i+1]=d.data[i+1]*f;hl[i+2]=d.data[i+2]*f;hl[i+3]=255;}}
-    const bl=boxBlur(new ImageData(hl,w,h),14);
-    for(let i=0;i<d.data.length;i+=4){const ba=bl.data[i+3]/255*str;if(ba>.001){d.data[i]=clamp(Math.round(d.data[i]+bl.data[i]*ba),0,255);d.data[i+1]=clamp(Math.round(d.data[i+1]+bl.data[i+1]*ba),0,255);d.data[i+2]=clamp(Math.round(d.data[i+2]+bl.data[i+2]*ba),0,255);}}
-    return d;
-}
-
-function genDust(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;const dc=c.getContext('2d'),p=prng(137),n=Math.floor(w*h/7000);for(let i=0;i<n;i++){const x=p()*w,y=p()*h,s=p()*2.5+.3,a=p()*.07;dc.fillStyle=`rgba(180,160,140,${a})`;dc.beginPath();p()<.5?dc.arc(x,y,s,0,Math.PI*2):dc.ellipse(x,y,s,s*.4,p()*Math.PI,0,Math.PI*2);dc.fill();}return c;}
-
-function genLeaks(w,h,warm){
-    const c=document.createElement('canvas');c.width=w;c.height=h;const lc=c.getContext('2d'),p=prng(warm?271:314);
-    const leaks=[
-        {x:p()*.25*w,y:-h*.05,r:w*.6,col:warm?'rgba(255,130,30,0.20)':'rgba(80,170,230,0.16)'},
-        {x:w*.85,y:p()*.4*h,r:w*.45,col:warm?'rgba(255,190,50,0.14)':'rgba(120,190,240,0.12)'},
-        {x:w*.1,y:h*.9,r:w*.5,col:warm?'rgba(255,90,20,0.12)':'rgba(60,150,220,0.10)'},
-    ];
-    leaks.forEach(lk=>{const a=parseFloat(lk.col.match(/[\d.]+\)$/)[0]),g=lc.createRadialGradient(lk.x,lk.y,lk.r*.1,lk.x,lk.y,lk.r);g.addColorStop(0,lk.col);g.addColorStop(.5,lk.col.replace(/[\d.]+\)$/,(a*.4).toFixed(2)+')'));g.addColorStop(1,'rgba(0,0,0,0)');lc.fillStyle=g;lc.fillRect(0,0,w,h);});
-    return c;
-}
-
-function drawTimestamp(cv,c){
-    const now=new Date(),pad=n=>String(n).padStart(2,'0');
-    const s=`${now.getFullYear()}.${pad(now.getMonth()+1)}.${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
-    const fs=Math.max(13,Math.round(cv.width*.030));
-    c.save();c.font=`700 ${fs}px "SF Mono","Courier New",monospace`;c.textAlign='right';c.textBaseline='bottom';
-    const x=cv.width-Math.round(cv.width*.04),y=cv.height-Math.round(cv.height*.032);
-    c.shadowColor='rgba(0,0,0,0.80)';c.shadowBlur=5;c.shadowOffsetX=1;c.shadowOffsetY=1;
-    c.fillStyle='#f5c842';c.fillText(s,x,y);c.shadowColor='transparent';c.shadowBlur=0;
-    c.strokeStyle='rgba(0,0,0,0.35)';c.lineWidth=1.5;c.strokeText(s,x,y);c.restore();
-}
-
-// ── CORE FILTER ───────────────────────────────────────────────────
-function applyFilter(imageData, fid, inten) {
-    const f = FILTERS[fid];
-    const d = imageData.data;
-    const orig = new Uint8ClampedArray(d);
-
-    // 1. LUTs por canal
-    for(let i=0;i<d.length;i+=4){d[i]=f.luts.r[d[i]];d[i+1]=f.luts.g[d[i+1]];d[i+2]=f.luts.b[d[i+2]];}
-
-    // 2. B&W especial (HP5)
-    if(f.bw){
-        for(let i=0;i<d.length;i+=4){
-            const lum=Math.round(d[i]*.299+d[i+1]*.587+d[i+2]*.114);
-            // Slight warm-sepia toning nas sombras (característica do HP5)
-            d[i]  =clamp(lum+(lum<100?4:lum<160?1:0),0,255);
-            d[i+1]=clamp(lum,0,255);
-            d[i+2]=clamp(lum-(lum<140?6:3),0,255);
+        function selectFilter(id) {
+          currentFilter = id;
+          document
+            .querySelectorAll(".filter-card")
+            .forEach((c) => c.classList.toggle("active", c.dataset.id === id));
+          cmpLblR.textContent = FILTERS[id].label;
+          needLeaks = true;
+          updatePreview();
         }
-    } else {
-        // 3. Saturação + hue shift
-        const sa = f.satAdj;
-        for(let i=0;i<d.length;i+=4){
-            const h=rgb2hsl(d[i],d[i+1],d[i+2]);
-            if(f.hueShift)f.hueShift(h);
-            h.s=clamp(h.s+sa,0,1);
-            const rgb=hsl2rgb(h.h,h.s,h.l);
-            d[i]=rgb.r;d[i+1]=rgb.g;d[i+2]=rgb.b;
+
+        // ════════════════════════════════════════════════════════════════
+        //  IMAGE PROCESSING EFFECTS
+        // ════════════════════════════════════════════════════════════════
+
+        function boxBlur(imageData, r) {
+          const w = imageData.width,
+            h = imageData.height,
+            s = new Uint8ClampedArray(imageData.data),
+            d = new Uint8ClampedArray(s.length);
+          for (let y = 0; y < h; y++)
+            for (let x = 0; x < w; x++) {
+              let R = 0,
+                G = 0,
+                B = 0,
+                n = 0;
+              for (let dx = -r; dx <= r; dx++) {
+                const sx = clamp(x + dx, 0, w - 1),
+                  i = (y * w + sx) * 4;
+                R += s[i];
+                G += s[i + 1];
+                B += s[i + 2];
+                n++;
+              }
+              const i = (y * w + x) * 4;
+              d[i] = R / n;
+              d[i + 1] = G / n;
+              d[i + 2] = B / n;
+              d[i + 3] = s[i + 3];
+            }
+          const s2 = new Uint8ClampedArray(d);
+          for (let y = 0; y < h; y++)
+            for (let x = 0; x < w; x++) {
+              let R = 0,
+                G = 0,
+                B = 0,
+                n = 0;
+              for (let dy = -r; dy <= r; dy++) {
+                const sy = clamp(y + dy, 0, h - 1),
+                  i = (sy * w + x) * 4;
+                R += s2[i];
+                G += s2[i + 1];
+                B += s2[i + 2];
+                n++;
+              }
+              const i = (y * w + x) * 4;
+              d[i] = R / n;
+              d[i + 1] = G / n;
+              d[i + 2] = B / n;
+              d[i + 3] = s2[i + 3];
+            }
+          return new ImageData(d, w, h);
         }
-    }
 
-    // 4. Exposição
-    const exp = f.expFactor;
-    if(exp!==1){for(let i=0;i<d.length;i+=4){d[i]=clamp(Math.round(d[i]*exp),0,255);d[i+1]=clamp(Math.round(d[i+1]*exp),0,255);d[i+2]=clamp(Math.round(d[i+2]*exp),0,255);}}
+        function applyGrain(d, str, seed) {
+          const p = prng(seed),
+            len = d.data.length;
+          for (let i = 0; i < len; i += 4) {
+            const n = (p() - 0.5) * str * 255;
+            d.data[i] = clamp(d.data[i] + n, 0, 255);
+            d.data[i + 1] = clamp(d.data[i + 1] + n * 0.88, 0, 255);
+            d.data[i + 2] = clamp(d.data[i + 2] + n * 0.82, 0, 255);
+            const cn = (p() - 0.5) * str * 85;
+            d.data[i + 1] = clamp(d.data[i + 1] + cn, 0, 255);
+          }
+          return d;
+        }
 
-    // 5. Blend com original
-    if(inten<1)for(let i=0;i<d.length;i+=4){d[i]=clamp(Math.round(lerp(orig[i],d[i],inten)),0,255);d[i+1]=clamp(Math.round(lerp(orig[i+1],d[i+1],inten)),0,255);d[i+2]=clamp(Math.round(lerp(orig[i+2],d[i+2],inten)),0,255);}
+        function applyVignette(d, str) {
+          const w = d.width,
+            h = d.height,
+            cx = w / 2,
+            cy = h / 2,
+            md = Math.sqrt(cx * cx + cy * cy);
+          for (let y = 0; y < h; y++)
+            for (let x = 0; x < w; x++) {
+              const dx = (x - cx) / md,
+                dy = (y - cy) / md,
+                dist = Math.sqrt(dx * dx + dy * dy),
+                v = 1 - str * Math.pow(clamp((dist - 0.28) / 0.72, 0, 1), 1.7),
+                i = (y * w + x) * 4;
+              d.data[i] = clamp(Math.round(d.data[i] * v), 0, 255);
+              d.data[i + 1] = clamp(Math.round(d.data[i + 1] * v), 0, 255);
+              d.data[i + 2] = clamp(Math.round(d.data[i + 2] * v), 0, 255);
+            }
+          return d;
+        }
 
-    return imageData;
-}
+        function applyChromaticAberration(d, shift) {
+          const w = d.width,
+            h = d.height,
+            s = new Uint8ClampedArray(d.data),
+            out = new Uint8ClampedArray(s.length);
+          for (let y = 0; y < h; y++)
+            for (let x = 0; x < w; x++) {
+              const i = (y * w + x) * 4,
+                ri = (y * w + clamp(x - Math.round(shift), 0, w - 1)) * 4,
+                bi = (y * w + clamp(x + Math.round(shift), 0, w - 1)) * 4;
+              out[i] = s[ri];
+              out[i + 1] = s[i + 1];
+              out[i + 2] = s[bi + 2];
+              out[i + 3] = s[i + 3];
+            }
+          return new ImageData(out, w, h);
+        }
 
-// ── FULL PIPELINE ─────────────────────────────────────────────────
-function processImage(imageData, fid, inten, fx) {
-    const f=FILTERS[fid];
-    const w=imageData.width,h=imageData.height;
-    let work=new ImageData(new Uint8ClampedArray(imageData.data),w,h);
-    work=applyFilter(work,fid,inten);
-    if(fx.chromatic)work=applyChromaticAberration(work,1.8);
-    if(fx.halation&&f.halStr>0)work=applyHalation(work,f.halStr,f.halWarm);
-    if(fx.bloom)work=applyBloom(work,.22);
-    if(fx.grain)work=applyGrain(work,f.grainStr,Date.now()%10000);
-    if(fx.vignette)work=applyVignette(work,f.vigStr);
-    return work;
-}
+        function applyHalation(d, str, warm) {
+          const w = d.width,
+            h = d.height,
+            hl = new Uint8ClampedArray(d.data.length);
+          for (let i = 0; i < d.data.length; i += 4) {
+            const lum =
+              d.data[i] * 0.299 + d.data[i + 1] * 0.587 + d.data[i + 2] * 0.114;
+            if (lum > 168) {
+              const f = (lum - 168) / 87;
+              hl[i] = d.data[i] * f * (warm ? 1.0 : 0.35);
+              hl[i + 1] = d.data[i + 1] * f * (warm ? 0.5 : 0.65);
+              hl[i + 2] = d.data[i + 2] * f * (warm ? 0.18 : 1.0);
+              hl[i + 3] = 255;
+            }
+          }
+          const bl = boxBlur(new ImageData(hl, w, h), 10);
+          for (let i = 0; i < d.data.length; i += 4) {
+            const ba = (bl.data[i + 3] / 255) * str;
+            if (ba > 0.001) {
+              d.data[i] = clamp(
+                Math.round(d.data[i] + bl.data[i] * ba * (1 - d.data[i] / 255)),
+                0,
+                255,
+              );
+              d.data[i + 1] = clamp(
+                Math.round(
+                  d.data[i + 1] +
+                    bl.data[i + 1] * ba * (1 - d.data[i + 1] / 255),
+                ),
+                0,
+                255,
+              );
+              d.data[i + 2] = clamp(
+                Math.round(
+                  d.data[i + 2] +
+                    bl.data[i + 2] * ba * (1 - d.data[i + 2] / 255),
+                ),
+                0,
+                255,
+              );
+            }
+          }
+          return d;
+        }
 
-// ── RENDER ────────────────────────────────────────────────────────
-function renderToCanvas(cv,c,proc,fx,fid) {
-    const w=proc.width,h=proc.height;
-    cv.width=w;cv.height=h;c.putImageData(proc,0,0);
-    if(fx.dust){if(needDust||!dustCvs||dustCvs.width!==w){dustCvs=genDust(w,h);needDust=false;}c.globalAlpha=.65;c.drawImage(dustCvs,0,0,w,h);c.globalAlpha=1;}
-    if(fx.lightleaks){if(needLeaks||!leaksCvs||leaksCvs.width!==w){leaksCvs=genLeaks(w,h,FILTERS[fid].halWarm);needLeaks=false;}c.globalCompositeOperation='screen';c.globalAlpha=.70;c.drawImage(leaksCvs,0,0,w,h);c.globalCompositeOperation='source-over';c.globalAlpha=1;}
-    if(fx.timestamp)drawTimestamp(cv,c);
-}
+        function applyBloom(d, str) {
+          const w = d.width,
+            h = d.height,
+            hl = new Uint8ClampedArray(d.data.length);
+          for (let i = 0; i < d.data.length; i += 4) {
+            const lum =
+              d.data[i] * 0.299 + d.data[i + 1] * 0.587 + d.data[i + 2] * 0.114;
+            if (lum > 155) {
+              const f = (lum - 155) / 100;
+              hl[i] = d.data[i] * f;
+              hl[i + 1] = d.data[i + 1] * f;
+              hl[i + 2] = d.data[i + 2] * f;
+              hl[i + 3] = 255;
+            }
+          }
+          const bl = boxBlur(new ImageData(hl, w, h), 14);
+          for (let i = 0; i < d.data.length; i += 4) {
+            const ba = (bl.data[i + 3] / 255) * str;
+            if (ba > 0.001) {
+              d.data[i] = clamp(
+                Math.round(d.data[i] + bl.data[i] * ba),
+                0,
+                255,
+              );
+              d.data[i + 1] = clamp(
+                Math.round(d.data[i + 1] + bl.data[i + 1] * ba),
+                0,
+                255,
+              );
+              d.data[i + 2] = clamp(
+                Math.round(d.data[i + 2] + bl.data[i + 2] * ba),
+                0,
+                255,
+              );
+            }
+          }
+          return d;
+        }
 
-// ── UPDATE ────────────────────────────────────────────────────────
-function updatePreview(){
-    if(!origData)return;
-    const w=origData.width,h=origData.height;
-    procData=processImage(new ImageData(new Uint8ClampedArray(origData.data),w,h),currentFilter,intensity,FX);
-    if(!isComparing)renderToCanvas(mainCanvas,ctx,procData,FX,currentFilter);
-    else drawComparison();
-    cmpLblR.textContent=FILTERS[currentFilter].label;
-}
-const debouncedUpdate=debounce(updatePreview,30);
+        function genDust(w, h) {
+          const c = document.createElement("canvas");
+          c.width = w;
+          c.height = h;
+          const dc = c.getContext("2d"),
+            p = prng(137),
+            n = Math.floor((w * h) / 7000);
+          for (let i = 0; i < n; i++) {
+            const x = p() * w,
+              y = p() * h,
+              s = p() * 2.5 + 0.3,
+              a = p() * 0.07;
+            dc.fillStyle = `rgba(180,160,140,${a})`;
+            dc.beginPath();
+            p() < 0.5
+              ? dc.arc(x, y, s, 0, Math.PI * 2)
+              : dc.ellipse(x, y, s, s * 0.4, p() * Math.PI, 0, Math.PI * 2);
+            dc.fill();
+          }
+          return c;
+        }
 
-// ── COMPARISON ────────────────────────────────────────────────────
-function drawComparison(){
-    if(!origData||!procData)return;
-    const w=origData.width,h=origData.height;
-    mainCanvas.width=w;mainCanvas.height=h;
-    const sx=Math.round(w*cmpPos),combined=new ImageData(w,h);
-    for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=(y*w+x)*4,src=x<sx?origData.data:procData.data;combined.data[i]=src[i];combined.data[i+1]=src[i+1];combined.data[i+2]=src[i+2];combined.data[i+3]=src[i+3];}
-    ctx.putImageData(combined,0,0);
-    if(FX.dust&&dustCvs){ctx.save();ctx.globalAlpha=.65;ctx.drawImage(dustCvs,sx,0,w-sx,h,sx,0,w-sx,h);ctx.restore();}
-    if(FX.lightleaks&&leaksCvs){ctx.save();ctx.globalCompositeOperation='screen';ctx.globalAlpha=.70;ctx.drawImage(leaksCvs,sx,0,w-sx,h,sx,0,w-sx,h);ctx.globalCompositeOperation='source-over';ctx.restore();}
-    if(FX.timestamp){const tc=document.createElement('canvas');tc.width=w;tc.height=h;const tcc=tc.getContext('2d');tcc.putImageData(procData,0,0);drawTimestamp(tc,tcc);ctx.drawImage(tc,sx,0,w-sx,h,sx,0,w-sx,h);}
-    ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.shadowColor='rgba(0,0,0,0.65)';ctx.shadowBlur=10;ctx.beginPath();ctx.moveTo(sx,0);ctx.lineTo(sx,h);ctx.stroke();ctx.shadowColor='transparent';ctx.shadowBlur=0;
-}
+        function genLeaks(w, h, warm) {
+          const c = document.createElement("canvas");
+          c.width = w;
+          c.height = h;
+          const lc = c.getContext("2d"),
+            p = prng(warm ? 271 : 314);
+          const leaks = [
+            {
+              x: p() * 0.25 * w,
+              y: -h * 0.05,
+              r: w * 0.6,
+              col: warm ? "rgba(255,130,30,0.20)" : "rgba(80,170,230,0.16)",
+            },
+            {
+              x: w * 0.85,
+              y: p() * 0.4 * h,
+              r: w * 0.45,
+              col: warm ? "rgba(255,190,50,0.14)" : "rgba(120,190,240,0.12)",
+            },
+            {
+              x: w * 0.1,
+              y: h * 0.9,
+              r: w * 0.5,
+              col: warm ? "rgba(255,90,20,0.12)" : "rgba(60,150,220,0.10)",
+            },
+          ];
+          leaks.forEach((lk) => {
+            const a = parseFloat(lk.col.match(/[\d.]+\)$/)[0]),
+              g = lc.createRadialGradient(
+                lk.x,
+                lk.y,
+                lk.r * 0.1,
+                lk.x,
+                lk.y,
+                lk.r,
+              );
+            g.addColorStop(0, lk.col);
+            g.addColorStop(
+              0.5,
+              lk.col.replace(/[\d.]+\)$/, (a * 0.4).toFixed(2) + ")"),
+            );
+            g.addColorStop(1, "rgba(0,0,0,0)");
+            lc.fillStyle = g;
+            lc.fillRect(0, 0, w, h);
+          });
+          return c;
+        }
 
-function updateCmpLine(){
-    if(!isComparing||!origData)return;
-    const cr=mainCanvas.getBoundingClientRect(),wr=canvasWrap.getBoundingClientRect();
-    const sx=(cr.left-wr.left)+cr.width*cmpPos;
-    cmpLine.style.left=sx+'px';cmpLine.style.top='0';cmpLine.style.bottom='0';
-    cmpHandle.style.left=sx+'px';cmpHandle.style.top='50%';
-}
+        function drawTimestamp(cv, c) {
+          const now = new Date(),
+            pad = (n) => String(n).padStart(2, "0");
+          const s = `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+          const fs = Math.max(13, Math.round(cv.width * 0.03));
+          c.save();
+          c.font = `700 ${fs}px "SF Mono","Courier New",monospace`;
+          c.textAlign = "right";
+          c.textBaseline = "bottom";
+          const x = cv.width - Math.round(cv.width * 0.04),
+            y = cv.height - Math.round(cv.height * 0.032);
+          c.shadowColor = "rgba(0,0,0,0.80)";
+          c.shadowBlur = 5;
+          c.shadowOffsetX = 1;
+          c.shadowOffsetY = 1;
+          c.fillStyle = "#f5c842";
+          c.fillText(s, x, y);
+          c.shadowColor = "transparent";
+          c.shadowBlur = 0;
+          c.strokeStyle = "rgba(0,0,0,0.35)";
+          c.lineWidth = 1.5;
+          c.strokeText(s, x, y);
+          c.restore();
+        }
 
-// ── LOAD IMAGE ────────────────────────────────────────────────────
-function loadImage(file){
-    if(!file||!file.type.match(/image\/(jpeg|png|webp|heic|heif|bmp)/i))return showToast('Formato não suportado 😕');
-    if(file.size>30*1024*1024)return showToast('Imagem muito grande (máx 30MB)');
-    const r=new FileReader();
-    r.onload=e=>{const img=new Image();img.onload=()=>{origImg=img;frameCnt.textContent=String(Math.floor(Math.random()*9000)+1000).padStart(4,'0');prepareData(img);needDust=needLeaks=true;updatePreview();enableBtns();previewSection.classList.add('has-image');showToast('✨ Foto carregada!');};img.onerror=()=>showToast('Erro ao carregar');img.src=e.target.result;};
-    r.readAsDataURL(file);
-}
-function prepareData(img){
-    let w=img.naturalWidth,h=img.naturalHeight;
-    if(w>MAX_PX||h>MAX_PX){const ratio=Math.min(MAX_PX/w,MAX_PX/h);w=Math.round(w*ratio);h=Math.round(h*ratio);}
-    const tc=document.createElement('canvas');tc.width=w;tc.height=h;tc.getContext('2d').drawImage(img,0,0,w,h);
-    origData=tc.getContext('2d').getImageData(0,0,w,h);mainCanvas.width=w;mainCanvas.height=h;
-}
-function enableBtns(){btnDl.disabled=btnCmp.disabled=btnCam.disabled=false;}
+        // ── CORE FILTER ───────────────────────────────────────────────────
+        function applyFilter(imageData, fid, inten) {
+          const f = FILTERS[fid];
+          const d = imageData.data;
+          const orig = new Uint8ClampedArray(d);
 
-// ── DOWNLOAD ──────────────────────────────────────────────────────
-function downloadImage(){
-    if(!procData)return showToast('Carregue uma foto primeiro');
-    let ec;
-    if(origImg&&origImg.naturalWidth<=4000){
-        const w=origImg.naturalWidth,h=origImg.naturalHeight;
-        const tc=document.createElement('canvas');tc.width=w;tc.height=h;tc.getContext('2d').drawImage(origImg,0,0,w,h);
-        const hd=tc.getContext('2d').getImageData(0,0,w,h);
-        const hp=processImage(hd,currentFilter,intensity,FX);
-        ec=document.createElement('canvas');ec.width=w;ec.height=h;
-        renderToCanvas(ec,ec.getContext('2d'),hp,FX,currentFilter);
-    }else{
-        ec=document.createElement('canvas');ec.width=procData.width;ec.height=procData.height;
-        renderToCanvas(ec,ec.getContext('2d'),procData,FX,currentFilter);
-    }
-    ec.toBlob(blob=>{const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`cassiacam_${FILTERS[currentFilter].label}_${Date.now()}.jpg`;document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);showToast('📥 Salvo com amor 🌸');},  'image/jpeg',JPEG_Q);
-}
+          // 1. LUTs por canal
+          for (let i = 0; i < d.length; i += 4) {
+            d[i] = f.luts.r[d[i]];
+            d[i + 1] = f.luts.g[d[i + 1]];
+            d[i + 2] = f.luts.b[d[i + 2]];
+          }
 
-// ── EVENTS ────────────────────────────────────────────────────────
-previewSection.addEventListener('click',e=>{if(e.target===cmpHandle||e.target===cmpLine)return;if(!origData)fileInput.click();});
-fileInput.addEventListener('change',e=>{if(e.target.files[0])loadImage(e.target.files[0]);});
-previewSection.addEventListener('dragover',e=>{e.preventDefault();previewSection.classList.add('drag-over');});
-previewSection.addEventListener('dragleave',()=>previewSection.classList.remove('drag-over'));
-previewSection.addEventListener('drop',e=>{e.preventDefault();previewSection.classList.remove('drag-over');if(e.dataTransfer.files[0])loadImage(e.dataTransfer.files[0]);});
+          // 2. B&W especial (HP5)
+          if (f.bw) {
+            for (let i = 0; i < d.length; i += 4) {
+              const lum = Math.round(
+                d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114,
+              );
+              // Slight warm-sepia toning nas sombras (característica do HP5)
+              d[i] = clamp(lum + (lum < 100 ? 4 : lum < 160 ? 1 : 0), 0, 255);
+              d[i + 1] = clamp(lum, 0, 255);
+              d[i + 2] = clamp(lum - (lum < 140 ? 6 : 3), 0, 255);
+            }
+          } else {
+            // 3. Saturação + hue shift
+            const sa = f.satAdj;
+            for (let i = 0; i < d.length; i += 4) {
+              const h = rgb2hsl(d[i], d[i + 1], d[i + 2]);
+              if (f.hueShift) f.hueShift(h);
+              h.s = clamp(h.s + sa, 0, 1);
+              const rgb = hsl2rgb(h.h, h.s, h.l);
+              d[i] = rgb.r;
+              d[i + 1] = rgb.g;
+              d[i + 2] = rgb.b;
+            }
+          }
 
-intSlider.addEventListener('input',()=>{intensity=parseInt(intSlider.value)/100;intVal.textContent=Math.round(intensity*100)+'%';debouncedUpdate();});
+          // 4. Exposição
+          const exp = f.expFactor;
+          if (exp !== 1) {
+            for (let i = 0; i < d.length; i += 4) {
+              d[i] = clamp(Math.round(d[i] * exp), 0, 255);
+              d[i + 1] = clamp(Math.round(d[i + 1] * exp), 0, 255);
+              d[i + 2] = clamp(Math.round(d[i + 2] * exp), 0, 255);
+            }
+          }
 
-document.querySelectorAll('.fx-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-        const fx=btn.dataset.fx;FX[fx]=!FX[fx];btn.classList.toggle('on',FX[fx]);
-        if(fx==='dust')needDust=true;if(fx==='lightleaks')needLeaks=true;updatePreview();
-    });
-});
+          // 5. Blend com original
+          if (inten < 1)
+            for (let i = 0; i < d.length; i += 4) {
+              d[i] = clamp(Math.round(lerp(orig[i], d[i], inten)), 0, 255);
+              d[i + 1] = clamp(
+                Math.round(lerp(orig[i + 1], d[i + 1], inten)),
+                0,
+                255,
+              );
+              d[i + 2] = clamp(
+                Math.round(lerp(orig[i + 2], d[i + 2], inten)),
+                0,
+                255,
+              );
+            }
 
-btnDl.addEventListener('click',downloadImage);
-btnCam.addEventListener('click',()=>{const ci=document.createElement('input');ci.type='file';ci.accept='image/*';ci.capture='environment';ci.onchange=e=>{if(e.target.files[0])loadImage(e.target.files[0]);};ci.click();});
+          return imageData;
+        }
 
-btnCmp.addEventListener('click',()=>{
-    if(!origData)return;isComparing=!isComparing;
-    if(isComparing){btnCmp.classList.add('on');btnCmp.textContent='⇆ COMPARANDO';cmpOverlay.classList.add('active');cmpPos=.5;drawComparison();updateCmpLine();}
-    else{btnCmp.classList.remove('on');btnCmp.textContent='⇆ COMPARAR';cmpOverlay.classList.remove('active');updatePreview();}
-});
+        // ── FULL PIPELINE ─────────────────────────────────────────────────
+        function processImage(imageData, fid, inten, fx) {
+          const f = FILTERS[fid];
+          const w = imageData.width,
+            h = imageData.height;
+          let work = new ImageData(new Uint8ClampedArray(imageData.data), w, h);
+          work = applyFilter(work, fid, inten);
+          if (fx.chromatic) work = applyChromaticAberration(work, 1.8);
+          if (fx.halation && f.halStr > 0)
+            work = applyHalation(work, f.halStr, f.halWarm);
+          if (fx.bloom) work = applyBloom(work, 0.22);
+          if (fx.grain) work = applyGrain(work, f.grainStr, Date.now() % 10000);
+          if (fx.vignette) work = applyVignette(work, f.vigStr);
+          return work;
+        }
 
-function getCP(e){const cr=mainCanvas.getBoundingClientRect();return clamp(((e.touches?e.touches[0].clientX:e.clientX)-cr.left)/cr.width,.04,.96);}
-function addDrag(el){
-    el.addEventListener('mousedown',e=>{if(!isComparing)return;e.preventDefault();const mv=ev=>{cmpPos=getCP(ev);drawComparison();updateCmpLine();};const up=()=>{document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);};document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up);});
-    el.addEventListener('touchstart',e=>{if(!isComparing)return;e.preventDefault();const mv=ev=>{cmpPos=getCP(ev);drawComparison();updateCmpLine();};const up=()=>{document.removeEventListener('touchmove',mv);document.removeEventListener('touchend',up);};document.addEventListener('touchmove',mv,{passive:false});document.addEventListener('touchend',up);});
-}
-addDrag(cmpHandle);addDrag(cmpLine);
-window.addEventListener('resize',()=>{if(isComparing)updateCmpLine();});
+        // ── RENDER ────────────────────────────────────────────────────────
+        function renderToCanvas(cv, c, proc, fx, fid) {
+          const w = proc.width,
+            h = proc.height;
+          cv.width = w;
+          cv.height = h;
+          c.putImageData(proc, 0, 0);
+          if (fx.dust) {
+            if (needDust || !dustCvs || dustCvs.width !== w) {
+              dustCvs = genDust(w, h);
+              needDust = false;
+            }
+            c.globalAlpha = 0.65;
+            c.drawImage(dustCvs, 0, 0, w, h);
+            c.globalAlpha = 1;
+          }
+          if (fx.lightleaks) {
+            if (needLeaks || !leaksCvs || leaksCvs.width !== w) {
+              leaksCvs = genLeaks(w, h, FILTERS[fid].halWarm);
+              needLeaks = false;
+            }
+            c.globalCompositeOperation = "screen";
+            c.globalAlpha = 0.7;
+            c.drawImage(leaksCvs, 0, 0, w, h);
+            c.globalCompositeOperation = "source-over";
+            c.globalAlpha = 1;
+          }
+          if (fx.timestamp) drawTimestamp(cv, c);
+        }
 
-document.addEventListener('keydown',e=>{
-    if(e.key==='d'&&(e.ctrlKey||e.metaKey)&&origData){e.preventDefault();downloadImage();}
-    if(e.key==='c'&&!e.ctrlKey&&!e.metaKey&&origData)btnCmp.click();
-    const keys={'1':'cpm35','2':'grdr','3':'lca','4':'portra','5':'ultra','6':'superia','7':'hp5','8':'velvia','9':'cine800'};
-    if(keys[e.key]&&origData)selectFilter(keys[e.key]);
-});
+        // ── UPDATE ────────────────────────────────────────────────────────
+        function updatePreview() {
+          if (!origData) return;
+          const w = origData.width,
+            h = origData.height;
+          procData = processImage(
+            new ImageData(new Uint8ClampedArray(origData.data), w, h),
+            currentFilter,
+            intensity,
+            FX,
+          );
+          if (!isComparing)
+            renderToCanvas(mainCanvas, ctx, procData, FX, currentFilter);
+          else drawComparison();
+          cmpLblR.textContent = FILTERS[currentFilter].label;
+        }
+        const debouncedUpdate = debounce(updatePreview, 30);
 
-// ── INIT ──────────────────────────────────────────────────────────
-document.querySelectorAll('.fx-btn').forEach(btn=>btn.classList.toggle('on',FX[btn.dataset.fx]));
-intSlider.value=85;intVal.textContent='85%';
-console.log('🌸 Cassia Cam — Analog Film Lab');
-console.log('   12 filtros: CPM35, GRD R, LC-A, PORTRA, ULTRA, SUPERIA, HP5, VELVIA, CINE800, GOLD200, POLAR, AGFA');
+        // ── COMPARISON ────────────────────────────────────────────────────
+        function drawComparison() {
+          if (!origData || !procData) return;
+          const w = origData.width,
+            h = origData.height;
+          mainCanvas.width = w;
+          mainCanvas.height = h;
+          const sx = Math.round(w * cmpPos),
+            combined = new ImageData(w, h);
+          for (let y = 0; y < h; y++)
+            for (let x = 0; x < w; x++) {
+              const i = (y * w + x) * 4,
+                src = x < sx ? origData.data : procData.data;
+              combined.data[i] = src[i];
+              combined.data[i + 1] = src[i + 1];
+              combined.data[i + 2] = src[i + 2];
+              combined.data[i + 3] = src[i + 3];
+            }
+          ctx.putImageData(combined, 0, 0);
+          if (FX.dust && dustCvs) {
+            ctx.save();
+            ctx.globalAlpha = 0.65;
+            ctx.drawImage(dustCvs, sx, 0, w - sx, h, sx, 0, w - sx, h);
+            ctx.restore();
+          }
+          if (FX.lightleaks && leaksCvs) {
+            ctx.save();
+            ctx.globalCompositeOperation = "screen";
+            ctx.globalAlpha = 0.7;
+            ctx.drawImage(leaksCvs, sx, 0, w - sx, h, sx, 0, w - sx, h);
+            ctx.globalCompositeOperation = "source-over";
+            ctx.restore();
+          }
+          if (FX.timestamp) {
+            const tc = document.createElement("canvas");
+            tc.width = w;
+            tc.height = h;
+            const tcc = tc.getContext("2d");
+            tcc.putImageData(procData, 0, 0);
+            drawTimestamp(tc, tcc);
+            ctx.drawImage(tc, sx, 0, w - sx, h, sx, 0, w - sx, h);
+          }
+          ctx.strokeStyle = "#fff";
+          ctx.lineWidth = 2;
+          ctx.shadowColor = "rgba(0,0,0,0.65)";
+          ctx.shadowBlur = 10;
+          ctx.beginPath();
+          ctx.moveTo(sx, 0);
+          ctx.lineTo(sx, h);
+          ctx.stroke();
+          ctx.shadowColor = "transparent";
+          ctx.shadowBlur = 0;
+        }
 
-})();
-</script>
-</body>
+        function updateCmpLine() {
+          if (!isComparing || !origData) return;
+          const cr = mainCanvas.getBoundingClientRect(),
+            wr = canvasWrap.getBoundingClientRect();
+          const sx = cr.left - wr.left + cr.width * cmpPos;
+          cmpLine.style.left = sx + "px";
+          cmpLine.style.top = "0";
+          cmpLine.style.bottom = "0";
+          cmpHandle.style.left = sx + "px";
+          cmpHandle.style.top = "50%";
+        }
+
+        // ── LOAD IMAGE ────────────────────────────────────────────────────
+        function loadImage(file) {
+          if (
+            !file ||
+            !file.type.match(/image\/(jpeg|png|webp|heic|heif|bmp)/i)
+          )
+            return showToast("Formato não suportado 😕");
+          if (file.size > 30 * 1024 * 1024)
+            return showToast("Imagem muito grande (máx 30MB)");
+          const r = new FileReader();
+          r.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+              origImg = img;
+              frameCnt.textContent = String(
+                Math.floor(Math.random() * 9000) + 1000,
+              ).padStart(4, "0");
+              prepareData(img);
+              needDust = needLeaks = true;
+              updatePreview();
+              enableBtns();
+              previewSection.classList.add("has-image");
+              showToast("✨ Foto carregada!");
+            };
+            img.onerror = () => showToast("Erro ao carregar");
+            img.src = e.target.result;
+          };
+          r.readAsDataURL(file);
+        }
+        function prepareData(img) {
+          let w = img.naturalWidth,
+            h = img.naturalHeight;
+          if (w > MAX_PX || h > MAX_PX) {
+            const ratio = Math.min(MAX_PX / w, MAX_PX / h);
+            w = Math.round(w * ratio);
+            h = Math.round(h * ratio);
+          }
+          const tc = document.createElement("canvas");
+          tc.width = w;
+          tc.height = h;
+          tc.getContext("2d").drawImage(img, 0, 0, w, h);
+          origData = tc.getContext("2d").getImageData(0, 0, w, h);
+          mainCanvas.width = w;
+          mainCanvas.height = h;
+        }
+        function enableBtns() {
+          btnDl.disabled = btnCmp.disabled = btnCam.disabled = false;
+        }
+
+        // ── DOWNLOAD ──────────────────────────────────────────────────────
+        function downloadImage() {
+          if (!procData) return showToast("Carregue uma foto primeiro");
+          let ec;
+          if (origImg && origImg.naturalWidth <= 4000) {
+            const w = origImg.naturalWidth,
+              h = origImg.naturalHeight;
+            const tc = document.createElement("canvas");
+            tc.width = w;
+            tc.height = h;
+            tc.getContext("2d").drawImage(origImg, 0, 0, w, h);
+            const hd = tc.getContext("2d").getImageData(0, 0, w, h);
+            const hp = processImage(hd, currentFilter, intensity, FX);
+            ec = document.createElement("canvas");
+            ec.width = w;
+            ec.height = h;
+            renderToCanvas(ec, ec.getContext("2d"), hp, FX, currentFilter);
+          } else {
+            ec = document.createElement("canvas");
+            ec.width = procData.width;
+            ec.height = procData.height;
+            renderToCanvas(
+              ec,
+              ec.getContext("2d"),
+              procData,
+              FX,
+              currentFilter,
+            );
+          }
+          ec.toBlob(
+            (blob) => {
+              const url = URL.createObjectURL(blob),
+                a = document.createElement("a");
+              a.href = url;
+              a.download = `cassiacam_${FILTERS[currentFilter].label}_${Date.now()}.jpg`;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+              showToast("📥 Salvo com amor 🌸");
+            },
+            "image/jpeg",
+            JPEG_Q,
+          );
+        }
+
+        // ── EVENTS ────────────────────────────────────────────────────────
+        previewSection.addEventListener("click", (e) => {
+          if (e.target === cmpHandle || e.target === cmpLine) return;
+          if (!origData) fileInput.click();
+        });
+        fileInput.addEventListener("change", (e) => {
+          if (e.target.files[0]) loadImage(e.target.files[0]);
+        });
+        previewSection.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          previewSection.classList.add("drag-over");
+        });
+        previewSection.addEventListener("dragleave", () =>
+          previewSection.classList.remove("drag-over"),
+        );
+        previewSection.addEventListener("drop", (e) => {
+          e.preventDefault();
+          previewSection.classList.remove("drag-over");
+          if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
+        });
+
+        intSlider.addEventListener("input", () => {
+          intensity = parseInt(intSlider.value) / 100;
+          intVal.textContent = Math.round(intensity * 100) + "%";
+          debouncedUpdate();
+        });
+
+        document.querySelectorAll(".fx-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const fx = btn.dataset.fx;
+            FX[fx] = !FX[fx];
+            btn.classList.toggle("on", FX[fx]);
+            if (fx === "dust") needDust = true;
+            if (fx === "lightleaks") needLeaks = true;
+            updatePreview();
+          });
+        });
+
+        btnDl.addEventListener("click", downloadImage);
+        btnCam.addEventListener("click", () => {
+          const ci = document.createElement("input");
+          ci.type = "file";
+          ci.accept = "image/*";
+          ci.capture = "environment";
+          ci.onchange = (e) => {
+            if (e.target.files[0]) loadImage(e.target.files[0]);
+          };
+          ci.click();
+        });
+
+        btnCmp.addEventListener("click", () => {
+          if (!origData) return;
+          isComparing = !isComparing;
+          if (isComparing) {
+            btnCmp.classList.add("on");
+            btnCmp.textContent = "⇆ COMPARANDO";
+            cmpOverlay.classList.add("active");
+            cmpPos = 0.5;
+            drawComparison();
+            updateCmpLine();
+          } else {
+            btnCmp.classList.remove("on");
+            btnCmp.textContent = "⇆ COMPARAR";
+            cmpOverlay.classList.remove("active");
+            updatePreview();
+          }
+        });
+
+        function getCP(e) {
+          const cr = mainCanvas.getBoundingClientRect();
+          return clamp(
+            ((e.touches ? e.touches[0].clientX : e.clientX) - cr.left) /
+              cr.width,
+            0.04,
+            0.96,
+          );
+        }
+        function addDrag(el) {
+          el.addEventListener("mousedown", (e) => {
+            if (!isComparing) return;
+            e.preventDefault();
+            const mv = (ev) => {
+              cmpPos = getCP(ev);
+              drawComparison();
+              updateCmpLine();
+            };
+            const up = () => {
+              document.removeEventListener("mousemove", mv);
+              document.removeEventListener("mouseup", up);
+            };
+            document.addEventListener("mousemove", mv);
+            document.addEventListener("mouseup", up);
+          });
+          el.addEventListener("touchstart", (e) => {
+            if (!isComparing) return;
+            e.preventDefault();
+            const mv = (ev) => {
+              cmpPos = getCP(ev);
+              drawComparison();
+              updateCmpLine();
+            };
+            const up = () => {
+              document.removeEventListener("touchmove", mv);
+              document.removeEventListener("touchend", up);
+            };
+            document.addEventListener("touchmove", mv, { passive: false });
+            document.addEventListener("touchend", up);
+          });
+        }
+        addDrag(cmpHandle);
+        addDrag(cmpLine);
+        window.addEventListener("resize", () => {
+          if (isComparing) updateCmpLine();
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "d" && (e.ctrlKey || e.metaKey) && origData) {
+            e.preventDefault();
+            downloadImage();
+          }
+          if (e.key === "c" && !e.ctrlKey && !e.metaKey && origData)
+            btnCmp.click();
+          const keys = {
+            1: "cpm35",
+            2: "grdr",
+            3: "lca",
+            4: "portra",
+            5: "ultra",
+            6: "superia",
+            7: "hp5",
+            8: "velvia",
+            9: "cine800",
+          };
+          if (keys[e.key] && origData) selectFilter(keys[e.key]);
+        });
+
+        // ── INIT ──────────────────────────────────────────────────────────
+        document
+          .querySelectorAll(".fx-btn")
+          .forEach((btn) => btn.classList.toggle("on", FX[btn.dataset.fx]));
+        intSlider.value = 85;
+        intVal.textContent = "85%";
+        console.log("🌸 Cassia Cam — Analog Film Lab");
+        console.log(
+          "   12 filtros: CPM35, GRD R, LC-A, PORTRA, ULTRA, SUPERIA, HP5, VELVIA, CINE800, GOLD200, POLAR, AGFA",
+        );
+      })();
+    </script>
+  </body>
 </html>
