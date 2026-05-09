@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Dazz复古 • CPM35 & GRD R</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --surface2: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #e0e0e0;
+            --text2: #999;
+            --accent: #d4a853;
+            --accent2: #c49b3f;
+            --warm: #e8b84b;
+            --cool: #7eb8c9;
+            --danger: #c44;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-mono: 'SF Mono', 'Courier New', 'IBM Plex Mono', monospace;
+            --safe-bottom: env(safe-area-inset-bottom, 16px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            user-select: none;
+            -webkit-user-select: none;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar elegante */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 520px;
+            padding: 12px 16px calc(var(--safe-bottom) + 20px);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 0;
+            gap: 12px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #1a1a1a, #222);
+            border: 1.5px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.5;
+            top: 5px;
+            right: 5px;
+            filter: blur(3px);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+            color: #fff;
+        }
+
+        .logo-sub {
+            font-size: 0.7rem;
+            color: var(--text2);
+            letter-spacing: 0.05em;
+            font-weight: 400;
+        }
+
+        .badge {
+            background: var(--surface2);
+            border: 1px solid #333;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            letter-spacing: 0.04em;
+            color: var(--accent);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        /* Upload / Preview area */
+        .preview-section {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--surface);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 2px dashed #2a2a2a;
+            transition: all var(--transition);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 280px;
+        }
+
+        .preview-section.has-image {
+            border: 2px solid #333;
+            cursor: default;
+            aspect-ratio: auto;
+            min-height: auto;
+        }
+
+        .preview-section.drag-over {
+            border-color: var(--accent);
+            background: #1a1a12;
+            box-shadow: inset 0 0 60px rgba(212, 168, 83, 0.08);
+        }
+
+        .upload-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: opacity 0.3s;
+        }
+
+        .has-image .upload-placeholder {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            opacity: 0.6;
+            transition: transform 0.3s;
+        }
+
+        .preview-section:hover .upload-icon {
+            transform: translateY(-4px);
+        }
+
+        .upload-text {
+            color: var(--text2);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .upload-subtext {
+            color: #555;
+            font-size: 0.75rem;
+        }
+
+        /* Canvas container */
+        .canvas-wrapper {
+            position: relative;
+            width: 100%;
+            display: none;
+            border-radius: var(--radius);
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .has-image .canvas-wrapper {
+            display: block;
+        }
+
+        .canvas-wrapper canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius);
+        }
+
+        /* Comparison slider */
+        .compare-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: none;
+            z-index: 5;
+        }
+
+        .compare-overlay.active {
+            display: block;
+        }
+
+        .compare-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #fff;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+            pointer-events: auto;
+            cursor: ew-resize;
+            z-index: 6;
+            transition: opacity 0.2s;
+        }
+
+        .compare-handle {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #fff;
+            border: 3px solid #222;
+            pointer-events: auto;
+            cursor: ew-resize;
+            z-index: 7;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #222;
+            transition: transform 0.15s;
+        }
+
+        .compare-handle:active {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .compare-label-left,
+        .compare-label-right {
+            position: absolute;
+            bottom: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 5px 10px;
+            border-radius: 6px;
+            pointer-events: none;
+            z-index: 6;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        .compare-label-left {
+            left: 12px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .compare-label-right {
+            right: 12px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Filter cards */
+        .section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text2);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .filter-cards {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-card {
+            flex: 1;
+            min-width: 100px;
+            background: var(--surface);
+            border: 2px solid transparent;
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            cursor: pointer;
+            transition: all var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-card:hover {
+            border-color: #444;
+            background: #1a1a1a;
+        }
+
+        .filter-card.active {
+            border-color: var(--accent);
+            background: #1a1812;
+            box-shadow: 0 0 20px rgba(212, 168, 83, 0.1);
+        }
+
+        .filter-card-preview {
+            width: 100%;
+            height: 50px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-card-preview.cpm35 {
+            background: linear-gradient(135deg, #3d2b1a, #8b6914, #c4a44a, #e8d5a3, #5c3d1e);
+            position: relative;
+        }
+
+        .filter-card-preview.cpm35::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.03) 2px, rgba(0, 0, 0, 0.03) 3px);
+        }
+
+        .filter-card-preview.grdr {
+            background: linear-gradient(135deg, #1a2a33, #2c5060, #5a8a9a, #a8c8d4, #1e3845);
+            position: relative;
+        }
+
+        .filter-card-preview.grdr::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.03) 2px, rgba(0, 0, 0, 0.03) 3px);
+        }
+
+        .filter-card-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+
+        .filter-card-desc {
+            font-size: 0.65rem;
+            color: var(--text2);
+            margin-top: 2px;
+            letter-spacing: 0.03em;
+        }
+
+        .filter-card .active-dot {
+            display: none;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin: 6px auto 0;
+        }
+
+        .filter-card.active .active-dot {
+            display: block;
+            animation: pulse-dot 2s infinite;
+        }
+
+        /* Intensity slider */
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slider-label {
+            font-size: 0.75rem;
+            color: var(--text2);
+            font-weight: 500;
+            letter-spacing: 0.03em;
+        }
+
+        .slider-value {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            font-family: var(--font-mono);
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #2a2a2a;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #444;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:active {
+            transform: scale(1.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(212, 168, 83, 0.4);
+        }
+
+        /* Effects toggles */
+        .effects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        @media (min-width: 420px) {
+            .effects-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .effect-toggle {
+            background: var(--surface);
+            border: 1.5px solid #2a2a2a;
+            border-radius: var(--radius-sm);
+            padding: 10px 6px;
+            cursor: pointer;
+            transition: all var(--transition);
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--text2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            letter-spacing: 0.02em;
+        }
+
+        .effect-toggle:hover {
+            border-color: #444;
+            background: #1a1a1a;
+        }
+
+        .effect-toggle.on {
+            border-color: var(--accent);
+            background: #1a1812;
+            color: var(--accent);
+        }
+
+        .effect-icon {
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+        }
+
+        .effect-toggle.on .effect-icon {
+            transform: scale(1.1);
+        }
+
+        /* Action buttons */
+        .actions-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 80px;
+            padding: 13px 16px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            transition: all var(--transition);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #0a0a0a;
+            box-shadow: 0 4px 16px rgba(212, 168, 83, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent2);
+            box-shadow: 0 6px 24px rgba(212, 168, 83, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .btn-secondary {
+            background: var(--surface2);
+            color: #ccc;
+            border: 1.5px solid #333;
+        }
+
+        .btn-secondary:hover {
+            background: #222;
+            border-color: #555;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1.5px solid #444;
+        }
+
+        .btn-outline:hover {
+            border-color: #888;
+            background: #111;
+        }
+
+        .btn-compare {
+            background: #1a1a1a;
+            color: #ccc;
+            border: 1.5px solid #444;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.06em;
+        }
+
+        .btn-compare.active-compare {
+            border-color: #fff;
+            color: #fff;
+            background: #222;
+            animation: subtle-glow 2s infinite;
+        }
+
+        @keyframes subtle-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+            }
+
+            50% {
+                box-shadow: 0 0 18px rgba(255, 255, 255, 0.15);
+            }
+        }
+
+        .btn:disabled {
+            opacity: 0.35;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
+        /* Hidden file input */
+        #fileInput {
+            display: none;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1a1a1a;
+            color: #e0e0e0;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            z-index: 100;
+            border: 1px solid #333;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Frame counter style */
+        .frame-counter {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.06em;
+            z-index: 4;
+            pointer-events: none;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+            display: none;
+        }
+
+        .has-image .frame-counter {
+            display: block;
+        }
+
+        @media (max-width: 360px) {
+            .app-container {
+                padding: 8px 10px calc(var(--safe-bottom) + 12px);
+                gap: 10px;
+            }
+
+            .filter-card {
+                padding: 8px;
+            }
+
+            .btn {
+                padding: 10px 12px;
+                font-size: 0.78rem;
+            }
+
+            .effects-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+
+            .effect-toggle {
+                padding: 8px 4px;
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-area">
+                <div class="logo-icon">📸</div>
+                <div>
+                    <div class="logo-text">Dazz复古</div>
+                    <div class="logo-sub">ANALOG LAB</div>
+                </div>
+            </div>
+            <div class="badge">
+                <span class="badge-dot"></span> CCD SIM
+            </div>
+        </header>
+
+        <!-- Preview Section -->
+        <section class="preview-section" id="previewSection">
+            <div class="upload-placeholder" id="uploadPlaceholder">
+                <span class="upload-icon">📷</span>
+                <span class="upload-text">Arraste uma foto ou toque aqui</span>
+                <span class="upload-subtext">JPG • PNG • HEIC • até 20MB</span>
+            </div>
+            <div class="canvas-wrapper" id="canvasWrapper">
+                <canvas id="mainCanvas"></canvas>
+                <div class="frame-counter" id="frameCounter">0001</div>
+            </div>
+            <!-- Comparison overlay elements -->
+            <div class="compare-overlay" id="compareOverlay">
+                <div class="compare-line" id="compareLine"></div>
+                <div class="compare-handle" id="compareHandle">⟷</div>
+                <span class="compare-label-left">ORIGINAL</span>
+                <span class="compare-label-right" id="compareLabelRight">CPM35</span>
+            </div>
+            <input type="file" id="fileInput" accept="image/*">
+        </section>
+
+        <!-- Filter Selection -->
+        <div>
+            <div class="section-title">🎞️ Filtro</div>
+            <div class="filter-cards">
+                <div class="filter-card active" data-filter="cpm35" id="cardCPM35">
+                    <div class="filter-card-preview cpm35"></div>
+                    <div class="filter-card-name">CPM35</div>
+                    <div class="filter-card-desc">Warm • CCD Flash</div>
+                    <div class="active-dot"></div>
+                </div>
+                <div class="filter-card" data-filter="grdr" id="cardGRDR">
+                    <div class="filter-card-preview grdr"></div>
+                    <div class="filter-card-name">GRD R</div>
+                    <div class="filter-card-desc">Cool • Cinematic</div>
+                    <div class="active-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Intensity -->
+        <div class="slider-group">
+            <div class="slider-header">
+                <span class="slider-label">⚡ Intensidade</span>
+                <span class="slider-value" id="intensityValue">85%</span>
+            </div>
+            <input type="range" id="intensitySlider" min="0" max="100" value="85" step="1">
+        </div>
+
+        <!-- Effects Toggles -->
+        <div>
+            <div class="section-title">✨ Efeitos Extras</div>
+            <div class="effects-grid">
+                <button class="effect-toggle on" data-effect="grain" id="toggleGrain">
+                    <span class="effect-icon">🔘</span> Grão
+                </button>
+                <button class="effect-toggle on" data-effect="vignette" id="toggleVignette">
+                    <span class="effect-icon">🌑</span> Vinheta
+                </button>
+                <button class="effect-toggle" data-effect="chromatic" id="toggleChromatic">
+                    <span class="effect-icon">🌈</span> RGB Split
+                </button>
+                <button class="effect-toggle" data-effect="halation" id="toggleHalation">
+                    <span class="effect-icon">💫</span> Halation
+                </button>
+                <button class="effect-toggle" data-effect="lightleaks" id="toggleLightleaks">
+                    <span class="effect-icon">💡</span> Light Leaks
+                </button>
+                <button class="effect-toggle" data-effect="dust" id="toggleDust">
+                    <span class="effect-icon">💨</span> Dust
+                </button>
+                <button class="effect-toggle on" data-effect="timestamp" id="toggleTimestamp">
+                    <span class="effect-icon">🕐</span> Timestamp
+                </button>
+                <button class="effect-toggle" data-effect="bloom" id="toggleBloom">
+                    <span class="effect-icon">✨</span> Bloom
+                </button>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions-row">
+            <button class="btn btn-compare" id="btnCompare" disabled>
+                ⇆ COMPARAR
+            </button>
+            <button class="btn btn-outline" id="btnCamera" disabled>
+                📸 Câmera
+            </button>
+            <button class="btn btn-primary" id="btnDownload" disabled>
+                ⬇︎ BAIXAR
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        (function () {
+            // ============================================================
+            // DAZZ复古 • ANALOG FILTER ENGINE
+            // Processamento real de pixels via Canvas API
+            // Filtros CPM35 (CCD Warm) e GRD R (Cinematic Cool)
+            // ============================================================
+
+            // --- DOM ELEMENTS ---
+            const previewSection = document.getElementById('previewSection');
+            const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+            const canvasWrapper = document.getElementById('canvasWrapper');
+            const mainCanvas = document.getElementById('mainCanvas');
+            const ctx = mainCanvas.getContext('2d', { willReadFrequently: true });
+            const fileInput = document.getElementById('fileInput');
+            const intensitySlider = document.getElementById('intensitySlider');
+            const intensityValue = document.getElementById('intensityValue');
+            const btnDownload = document.getElementById('btnDownload');
+            const btnCompare = document.getElementById('btnCompare');
+            const btnCamera = document.getElementById('btnCamera');
+            const compareOverlay = document.getElementById('compareOverlay');
+            const compareLine = document.getElementById('compareLine');
+            const compareHandle = document.getElementById('compareHandle');
+            const compareLabelRight = document.getElementById('compareLabelRight');
+            const frameCounter = document.getElementById('frameCounter');
+            const toast = document.getElementById('toast');
+            const cardCPM35 = document.getElementById('cardCPM35');
+            const cardGRDR = document.getElementById('cardGRDR');
+
+            // --- STATE ---
+            let originalImage = null; // Image element original
+            let originalImageData = null; // ImageData original (resized for preview)
+            let processedImageData = null; // ImageData after filter
+            let currentFilter = 'cpm35';
+            let intensity = 0.85;
+            let isComparing = false;
+            let comparePosition = 0.5; // 0-1, posição da linha divisória
+            let frameCount = 1;
+            let dustCanvas = null; // Cache do dust pattern
+            let lightLeaksCanvas = null; // Cache dos light leaks
+            let needsDustRegen = true;
+            let needsLeaksRegen = true;
+
+            // Effect toggles state
+            const effectStates = {
+                grain: true,
+                vignette: true,
+                chromatic: false,
+                halation: false,
+                lightleaks: false,
+                dust: false,
+                timestamp: true,
+                bloom: false,
+            };
+
+            // --- CONSTANTS ---
+            const MAX_PREVIEW_WIDTH = 1200;
+            const MAX_PREVIEW_HEIGHT = 1200;
+            const JPEG_QUALITY = 0.82; // Simula compressão de câmera antiga
+
+            // ============================================================
+            // UTILITY FUNCTIONS
+            // ============================================================
+
+            /** Debounce helper */
+            function debounce(fn, ms) {
+                let timer;
+                return (...args) => {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => fn(...args), ms);
+                };
+            }
+
+            /** Mostra toast */
+            function showToast(msg) {
+                toast.textContent = msg;
+                toast.classList.add('show');
+                clearTimeout(toast._timeout);
+                toast._timeout = setTimeout(() => toast.classList.remove('show'), 2000);
+            }
+
+            /** Clamp */
+            function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+            /** Lerp */
+            function lerp(a, b, t) { return a + (b - a) * t; }
+
+            /** Gera seed pseudo-aleatória baseada em string */
+            function seedFromString(str) {
+                let h = 0;
+                for (let i = 0; i < str.length; i++) {
+                    h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+                }
+                return Math.abs(h);
+            }
+
+            /** PRNG simples */
+            function createPRNG(seed) {
+                let s = seed || 42;
+                return function () {
+                    s = (s * 16807 + 0) % 2147483647;
+                    return (s - 1) / 2147483646;
+                };
+            }
+
+            // ============================================================
+            // COLOR & CURVE UTILITIES
+            // ============================================================
+
+            /** Cria uma LUT (lookup table) de 256 valores a partir de uma função de curva */
+            function createLUT(curveFn) {
+                const lut = new Uint8Array(256);
+                for (let i = 0; i < 256; i++) {
+                    lut[i] = clamp(Math.round(curveFn(i / 255) * 255), 0, 255);
+                }
+                return lut;
+            }
+
+            /** Curva S (contraste) */
+            function sCurve(x, strength = 0.5) {
+                if (x <= 0) return 0;
+                if (x >= 1) return 1;
+                const s = strength * 0.8 + 0.1;
+                if (x < 0.5) {
+                    return Math.pow(2 * x, 1 + s) / 2;
+                } else {
+                    return 1 - Math.pow(2 * (1 - x), 1 + s) / 2;
+                }
+            }
+
+            /** Lift shadows (aumenta o valor mínimo) */
+            function liftCurve(x, lift = 0.08) {
+                return x * (1 - lift) + lift;
+            }
+
+            /** Matte curve: comprime pretos e suaviza */
+            function matteCurve(x, matteStrength = 0.12) {
+                if (x < 0.05) return x * 0.5 + 0.025;
+                if (x < 0.15) return lerp(0.05, x, 0.6) + matteStrength * 0.3;
+                return x * (1 - matteStrength * 0.4) + matteStrength * 0.25;
+            }
+
+            /** RGB para HSL */
+            function rgbToHsl(r, g, b) {
+                r /= 255;
+                g /= 255;
+                b /= 255;
+                const max = Math.max(r, g, b);
+                const min = Math.min(r, g, b);
+                let h, s, l = (max + min) / 2;
+                if (max === min) {
+                    h = s = 0;
+                } else {
+                    const d = max - min;
+                    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                    switch (max) {
+                        case r:
+                            h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+                            break;
+                        case g:
+                            h = ((b - r) / d + 2) / 6;
+                            break;
+                        case b:
+                            h = ((r - g) / d + 4) / 6;
+                            break;
+                    }
+                }
+                return { h, s, l };
+            }
+
+            /** HSL para RGB */
+            function hslToRgb(h, s, l) {
+                let r, g, b;
+                if (s === 0) {
+                    r = g = b = l;
+                } else {
+                    const hue2rgb = (p, q, t) => {
+                        if (t < 0) t += 1;
+                        if (t > 1) t -= 1;
+                        if (t < 1 / 6) return p + (q - p) * 6 * t;
+                        if (t < 1 / 2) return q;
+                        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+                        return p;
+                    };
+                    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                    const p = 2 * l - q;
+                    r = hue2rgb(p, q, h + 1 / 3);
+                    g = hue2rgb(p, q, h);
+                    b = hue2rgb(p, q, h - 1 / 3);
+                }
+                return {
+                    r: Math.round(r * 255),
+                    g: Math.round(g * 255),
+                    b: Math.round(b * 255)
+                };
+            }
+
+            // ============================================================
+            // PRE-BUILT LUTs PARA CADA FILTRO
+            // ============================================================
+
+            function buildCPM35LUTs() {
+                // CPM35: tons quentes, sombras verde-oliva, highlights dourados
+                const redLUT = createLUT((x) => {
+                    // Boost geral nos vermelhos, mais forte nos mids
+                    let y = x;
+                    y = sCurve(y, 0.35); // leve S curve
+                    y = y * 1.08 + 0.02; // boost quente
+                    if (y > 0.6) y = lerp(y, y * 1.06, (y - 0.6) / 0.4); // highlights mais dourados
+                    return clamp(y, 0, 1);
+                });
+                const greenLUT = createLUT((x) => {
+                    let y = x;
+                    y = sCurve(y, 0.3);
+                    // Sombras: boost verde sutil (oliva)
+                    if (y < 0.3) y = lerp(y, y * 1.07, (0.3 - y) / 0.3);
+                    // Highlights: leve boost para dourado
+                    if (y > 0.7) y = lerp(y, y * 1.03, (y - 0.7) / 0.3);
+                    y = y * 0.98 + 0.01;
+                    return clamp(y, 0, 1);
+                });
+                const blueLUT = createLUT((x) => {
+                    let y = x;
+                    y = sCurve(y, 0.25);
+                    y = y * 0.85 - 0.02; // redução de azuis
+                    if (y < 0.25) y = y * 0.85; // sombras com menos azul (mais verde/marrom)
+                    return clamp(y, 0, 1);
+                });
+                return { red: redLUT, green: greenLUT, blue: blueLUT };
+            }
+
+            function buildGRDRLUTs() {
+                // GRD R: tons frios, preto desbotado, azul/ciano nas sombras
+                const redLUT = createLUT((x) => {
+                    let y = x;
+                    y = matteCurve(y, 0.1);
+                    y = y * 0.9 + 0.03; // redução de vermelhos
+                    if (y < 0.3) y = y * 0.8 + 0.04; // sombras mais desbotadas
+                    return clamp(y, 0, 1);
+                });
+                const greenLUT = createLUT((x) => {
+                    let y = x;
+                    y = matteCurve(y, 0.08);
+                    y = y * 0.95 + 0.02;
+                    if (y < 0.25) y = lerp(y, y * 1.1, (0.25 - y) / 0.25); // sombras ciano
+                    return clamp(y, 0, 1);
+                });
+                const blueLUT = createLUT((x) => {
+                    let y = x;
+                    y = matteCurve(y, 0.12);
+                    y = y * 1.12 + 0.04; // boost azul
+                    if (y < 0.3) y = lerp(y, y * 1.2, (0.3 - y) / 0.3); // sombras azuladas fortes
+                    if (y > 0.75) y = lerp(y, y * 0.95, (y - 0.75) / 0.25); // highlights menos azuis
+                    return clamp(y, 0, 1);
+                });
+                return { red: redLUT, green: greenLUT, blue: blueLUT };
+            }
+
+            // Cache das LUTs
+            let cpm35LUTs = buildCPM35LUTs();
+            let grdrLUTs = buildGRDRLUTs();
+
+            // ============================================================
+            // BOX BLUR (para halation, bloom)
+            // ============================================================
+            function boxBlur(imageData, radius = 3) {
+                const w = imageData.width;
+                const h = imageData.height;
+                const src = new Uint8ClampedArray(imageData.data);
+                const dst = new Uint8ClampedArray(src.length);
+
+                // Horizontal pass
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        let r = 0,
+                            g = 0,
+                            b = 0,
+                            count = 0;
+                        for (let dx = -radius; dx <= radius; dx++) {
+                            const sx = clamp(x + dx, 0, w - 1);
+                            const i = (y * w + sx) * 4;
+                            r += src[i];
+                            g += src[i + 1];
+                            b += src[i + 2];
+                            count++;
+                        }
+                        const i = (y * w + x) * 4;
+                        dst[i] = r / count;
+                        dst[i + 1] = g / count;
+                        dst[i + 2] = b / count;
+                        dst[i + 3] = src[i + 3];
+                    }
+                }
+                // Vertical pass
+                const src2 = new Uint8ClampedArray(dst);
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        let r = 0,
+                            g = 0,
+                            b = 0,
+                            count = 0;
+                        for (let dy = -radius; dy <= radius; dy++) {
+                            const sy = clamp(y + dy, 0, h - 1);
+                            const i = (sy * w + x) * 4;
+                            r += src2[i];
+                            g += src2[i + 1];
+                            b += src2[i + 2];
+                            count++;
+                        }
+                        const i = (y * w + x) * 4;
+                        dst[i] = r / count;
+                        dst[i + 1] = g / count;
+                        dst[i + 2] = b / count;
+                        dst[i + 3] = src2[i + 3];
+                    }
+                }
+                return new ImageData(dst, w, h);
+            }
+
+            // ============================================================
+            // GRAIN PROCEDURAL
+            // ============================================================
+            function applyGrain(imageData, strength = 0.06, seed = 42) {
+                const data = imageData.data;
+                const prng = createPRNG(seed);
+                const len = data.length;
+                for (let i = 0; i < len; i += 4) {
+                    const noise = (prng() - 0.5) * strength * 255;
+                    data[i] = clamp(data[i] + noise, 0, 255);
+                    data[i + 1] = clamp(data[i + 1] + noise * 0.9, 0, 255);
+                    data[i + 2] = clamp(data[i + 2] + noise * 0.85, 0, 255);
+                    // Pequeno ruído cromático independente
+                    const chromaNoise = (prng() - 0.5) * strength * 80;
+                    data[i + 1] = clamp(data[i + 1] + chromaNoise, 0, 255);
+                }
+                return imageData;
+            }
+
+            // ============================================================
+            // VINHETA
+            // ============================================================
+            function applyVignette(imageData, strength = 0.35) {
+                const w = imageData.width;
+                const h = imageData.height;
+                const data = imageData.data;
+                const cx = w / 2;
+                const cy = h / 2;
+                const maxDist = Math.sqrt(cx * cx + cy * cy);
+
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        const dx = (x - cx) / maxDist;
+                        const dy = (y - cy) / maxDist;
+                        let dist = Math.sqrt(dx * dx + dy * dy);
+                        // Curva suave: começa a escurecer a ~40% da distância
+                        const vignette = 1 - strength * Math.pow(clamp((dist - 0.35) / 0.65, 0, 1), 1.8);
+                        const i = (y * w + x) * 4;
+                        data[i] = clamp(Math.round(data[i] * vignette), 0, 255);
+                        data[i + 1] = clamp(Math.round(data[i + 1] * vignette), 0, 255);
+                        data[i + 2] = clamp(Math.round(data[i + 2] * vignette), 0, 255);
+                    }
+                }
+                return imageData;
+            }
+
+            // ============================================================
+            // ABERRAÇÃO CROMÁTICA (RGB Split)
+            // ============================================================
+            function applyChromaticAberration(imageData, shift = 1.5) {
+                const w = imageData.width;
+                const h = imageData.height;
+                const src = new Uint8ClampedArray(imageData.data);
+                const dst = new Uint8ClampedArray(src.length);
+
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        const i = (y * w + x) * 4;
+                        // Canal vermelho shiftado para esquerda
+                        const rx = clamp(x - Math.round(shift), 0, w - 1);
+                        const ri = (y * w + rx) * 4;
+                        // Canal azul shiftado para direita
+                        const bx = clamp(x + Math.round(shift), 0, w - 1);
+                        const bi = (y * w + bx) * 4;
+                        // Verde no centro
+                        dst[i] = src[ri]; // R do pixel deslocado
+                        dst[i + 1] = src[i + 1]; // G original
+                        dst[i + 2] = src[bi + 2]; // B do pixel deslocado
+                        dst[i + 3] = src[i + 3];
+                    }
+                }
+                return new ImageData(dst, w, h);
+            }
+
+            // ============================================================
+            // HALATION (glow avermelhado nos highlights)
+            // ============================================================
+            function applyHalation(imageData, strength = 0.3) {
+                const w = imageData.width;
+                const h = imageData.height;
+                const data = imageData.data;
+                // Extrai highlights
+                const highlights = new Uint8ClampedArray(data.length);
+                for (let i = 0; i < data.length; i += 4) {
+                    const lum = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
+                    if (lum > 180) {
+                        const factor = (lum - 180) / 75;
+                        highlights[i] = data[i] * factor;
+                        highlights[i + 1] = data[i + 1] * factor * 0.6;
+                        highlights[i + 2] = data[i + 2] * factor * 0.35;
+                        highlights[i + 3] = 255;
+                    }
+                }
+                const hlImageData = new ImageData(highlights, w, h);
+                const blurred = boxBlur(hlImageData, 8);
+
+                // Screen blend do blurred avermelhado sobre original
+                for (let i = 0; i < data.length; i += 4) {
+                    const ba = blurred.data[i + 3] / 255 * strength;
+                    if (ba > 0.001) {
+                        data[i] = clamp(Math.round(data[i] + blurred.data[i] * ba * (1 - data[i] / 255)), 0, 255);
+                        data[i + 1] = clamp(Math.round(data[i + 1] + blurred.data[i + 1] * ba * (1 - data[i + 1] / 255)),
+                            0, 255);
+                        data[i + 2] = clamp(Math.round(data[i + 2] + blurred.data[i + 2] * ba * (1 - data[i + 2] / 255)),
+                            0, 255);
+                    }
+                }
+                return imageData;
+            }
+
+            // ============================================================
+            // BLOOM (glow suave geral)
+            // ============================================================
+            function applyBloom(imageData, strength = 0.25) {
+                const w = imageData.width;
+                const h = imageData.height;
+                const data = imageData.data;
+                const highlights = new Uint8ClampedArray(data.length);
+                for (let i = 0; i < data.length; i += 4) {
+                    const lum = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
+                    if (lum > 160) {
+                        const factor = (lum - 160) / 95;
+                        highlights[i] = data[i] * factor;
+                        highlights[i + 1] = data[i + 1] * factor;
+                        highlights[i + 2] = data[i + 2] * factor;
+                        highlights[i + 3] = 255;
+                    }
+                }
+                const hlImageData = new ImageData(highlights, w, h);
+                const blurred = boxBlur(hlImageData, 12);
+
+                for (let i = 0; i < data.length; i += 4) {
+                    const ba = blurred.data[i + 3] / 255 * strength;
+                    if (ba > 0.001) {
+                        data[i] = clamp(Math.round(data[i] + blurred.data[i] * ba), 0, 255);
+                        data[i + 1] = clamp(Math.round(data[i + 1] + blurred.data[i + 1] * ba), 0, 255);
+                        data[i + 2] = clamp(Math.round(data[i + 2] + blurred.data[i + 2] * ba), 0, 255);
+                    }
+                }
+                return imageData;
+            }
+
+            // ============================================================
+            // DUST TEXTURE (cacheada)
+            // ============================================================
+            function generateDustCanvas(w, h) {
+                const canvas = document.createElement('canvas');
+                canvas.width = w;
+                canvas.height = h;
+                const dctx = canvas.getContext('2d');
+                const prng = createPRNG(137);
+                const numDust = Math.floor((w * h) / 8000);
+
+                for (let i = 0; i < numDust; i++) {
+                    const x = prng() * w;
+                    const y = prng() * h;
+                    const size = prng() * 2.5 + 0.3;
+                    const alpha = prng() * 0.06;
+                    dctx.fillStyle = `rgba(180,160,140,${alpha})`;
+                    dctx.beginPath();
+                    // Pequenas formas irregulares
+                    if (prng() < 0.5) {
+                        dctx.arc(x, y, size, 0, Math.PI * 2);
+                    } else {
+                        dctx.ellipse(x, y, size, size * 0.4, prng() * Math.PI, 0, Math.PI * 2);
+                    }
+                    dctx.fill();
+                }
+                return canvas;
+            }
+
+            // ============================================================
+            // LIGHT LEAKS (cacheado por seed)
+            // ============================================================
+            function generateLightLeaksCanvas(w, h, warm = true) {
+                const canvas = document.createElement('canvas');
+                canvas.width = w;
+                canvas.height = h;
+                const lctx = canvas.getContext('2d');
+                const prng = createPRNG(warm ? 271 : 314);
+
+                const leaks = [
+                    {
+                        x: prng() * 0.25 * w, y: -h * 0.05, r: w * 0.6, color: warm ?
+                            'rgba(255,140,40,0.18)' : 'rgba(100,180,220,0.14)'
+                    },
+                    {
+                        x: w * 0.85, y: prng() * 0.4 * h, r: w * 0.45, color: warm ? 'rgba(255,200,60,0.12)' :
+                            'rgba(140,200,230,0.10)'
+                    },
+                    {
+                        x: w * 0.1, y: h * 0.9, r: w * 0.5, color: warm ? 'rgba(255,100,30,0.10)' :
+                            'rgba(80,160,210,0.09)'
+                    },
+                ];
+
+                leaks.forEach(leak => {
+                    const gradient = lctx.createRadialGradient(leak.x, leak.y, leak.r * 0.1, leak.x, leak.y, leak.r);
+                    gradient.addColorStop(0, leak.color);
+                    gradient.addColorStop(0.5, leak.color.replace(/[\d.]+\)$/, (parseFloat(leak.color.match(
+                        /[\d.]+\)$/)[0]) * 0.4).toFixed(2) + ')'));
+                    gradient.addColorStop(1, 'rgba(0,0,0,0)');
+                    lctx.fillStyle = gradient;
+                    lctx.fillRect(0, 0, w, h);
+                });
+
+                return canvas;
+            }
+
+            // ============================================================
+            // TIMESTAMP DRAWING
+            // ============================================================
+            function drawTimestamp(canvas, ctx) {
+                const now = new Date();
+                const dateStr = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}`;
+                const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+                const fullStr = `${dateStr} ${timeStr}`;
+
+                const fontSize = Math.max(14, Math.round(canvas.width * 0.032));
+                ctx.save();
+                ctx.font = `600 ${fontSize}px "SF Mono", "Courier New", "IBM Plex Mono", monospace`;
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'bottom';
+                const x = canvas.width - Math.round(canvas.width * 0.04);
+                const y = canvas.height - Math.round(canvas.height * 0.035);
+
+                // Sombra para legibilidade
+                ctx.shadowColor = 'rgba(0,0,0,0.7)';
+                ctx.shadowBlur = 4;
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
+                ctx.fillStyle = '#f5c842';
+                ctx.fillText(fullStr, x, y);
+                ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+                // Leve outline
+                ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+                ctx.lineWidth = 1.5;
+                ctx.strokeText(fullStr, x, y);
+                ctx.restore();
+            }
+
+            // ============================================================
+            // CORE: Apply filter to ImageData
+            // ============================================================
+            function applyFilter(imageData, filterType, intensity) {
+                const w = imageData.width;
+                const h = imageData.height;
+                const data = imageData.data;
+                const luts = filterType === 'cpm35' ? cpm35LUTs : grdrLUTs;
+
+                // Cria cópia para blend com original
+                const originalCopy = new Uint8ClampedArray(data);
+
+                // Aplica LUTs de cor
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
+
+                    data[i] = luts.red[r];
+                    data[i + 1] = luts.green[g];
+                    data[i + 2] = luts.blue[b];
+                }
+
+                // Ajuste de saturação (CPM35: reduz ~15%, GRD R: reduz ~10%)
+                const satAdjust = filterType === 'cpm35' ? -0.15 : -0.10;
+                for (let i = 0; i < data.length; i += 4) {
+                    const hsl = rgbToHsl(data[i], data[i + 1], data[i + 2]);
+                    hsl.s = clamp(hsl.s + satAdjust, 0, 1);
+                    const rgb = hslToRgb(hsl.h, hsl.s, hsl.l);
+                    data[i] = rgb.r;
+                    data[i + 1] = rgb.g;
+                    data[i + 2] = rgb.b;
+                }
+
+                // Blend com original baseado na intensidade
+                if (intensity < 1) {
+                    for (let i = 0; i < data.length; i += 4) {
+                        data[i] = clamp(Math.round(lerp(originalCopy[i], data[i], intensity)), 0, 255);
+                        data[i + 1] = clamp(Math.round(lerp(originalCopy[i + 1], data[i + 1], intensity)), 0, 255);
+                        data[i + 2] = clamp(Math.round(lerp(originalCopy[i + 2], data[i + 2], intensity)), 0, 255);
+                    }
+                }
+
+                return imageData;
+            }
+
+            // ============================================================
+            // FULL PROCESSING PIPELINE
+            // ============================================================
+            function processImage(imageData, filterType, inten, effects) {
+                // Começa com cópia limpa do original
+                const w = imageData.width;
+                const h = imageData.height;
+                let working = new ImageData(new Uint8ClampedArray(imageData.data), w, h);
+
+                // 1. Aplica o filtro base (curvas de cor + saturação)
+                working = applyFilter(working, filterType, inten);
+
+                // 2. Aberração cromática (antes de blur effects)
+                if (effects.chromatic) {
+                    working = applyChromaticAberration(working, 1.5);
+                }
+
+                // 3. Halation
+                if (effects.halation) {
+                    working = applyHalation(working, 0.28);
+                }
+
+                // 4. Bloom
+                if (effects.bloom) {
+                    working = applyBloom(working, 0.22);
+                }
+
+                // 5. Grain
+                if (effects.grain) {
+                    const grainStrength = filterType === 'cpm35' ? 0.07 : 0.04;
+                    working = applyGrain(working, grainStrength, Date.now() % 10000);
+                }
+
+                // 6. Vinheta
+                if (effects.vignette) {
+                    working = applyVignette(working, 0.3);
+                }
+
+                // 7. Dust, Light leaks e Timestamp são aplicados no canvas final
+                return working;
+            }
+
+            // ============================================================
+            // RENDER TO CANVAS (aplica efeitos de overlay)
+            // ============================================================
+            function renderToCanvas(canvas, ctx, processedData, effects, filterType) {
+                const w = processedData.width;
+                const h = processedData.height;
+                canvas.width = w;
+                canvas.height = h;
+                ctx.putImageData(processedData, 0, 0);
+
+                // Dust overlay
+                if (effects.dust) {
+                    if (needsDustRegen || !dustCanvas || dustCanvas.width !== w || dustCanvas.height !== h) {
+                        dustCanvas = generateDustCanvas(w, h);
+                        needsDustRegen = false;
+                    }
+                    ctx.globalAlpha = 0.7;
+                    ctx.drawImage(dustCanvas, 0, 0, w, h);
+                    ctx.globalAlpha = 1;
+                }
+
+                // Light leaks overlay
+                if (effects.lightleaks) {
+                    if (needsLeaksRegen || !lightLeaksCanvas || lightLeaksCanvas.width !== w || lightLeaksCanvas.height !==
+                        h) {
+                        lightLeaksCanvas = generateLightLeaksCanvas(w, h, filterType === 'cpm35');
+                        needsLeaksRegen = false;
+                    }
+                    ctx.globalCompositeOperation = 'screen';
+                    ctx.globalAlpha = 0.7;
+                    ctx.drawImage(lightLeaksCanvas, 0, 0, w, h);
+                    ctx.globalCompositeOperation = 'source-over';
+                    ctx.globalAlpha = 1;
+                }
+
+                // Timestamp
+                if (effects.timestamp) {
+                    drawTimestamp(canvas, ctx);
+                }
+            }
+
+            // ============================================================
+            // MAIN: Update preview
+            // ============================================================
+            function updatePreview() {
+                if (!originalImageData) return;
+
+                const w = originalImageData.width;
+                const h = originalImageData.height;
+
+                // Processa
+                processedImageData = processImage(
+                    new ImageData(new Uint8ClampedArray(originalImageData.data), w, h),
+                    currentFilter,
+                    intensity,
+                    effectStates
+                );
+
+                // Renderiza no canvas
+                if (!isComparing) {
+                    renderToCanvas(mainCanvas, ctx, processedImageData, effectStates, currentFilter);
+                } else {
+                    drawComparison();
+                }
+
+                // Atualiza label de comparação
+                compareLabelRight.textContent = currentFilter.toUpperCase();
+            }
+
+            const debouncedUpdate = debounce(updatePreview, 30);
+
+            // ============================================================
+            // COMPARISON MODE
+            // ============================================================
+            function drawComparison() {
+                if (!originalImageData || !processedImageData) return;
+                const w = originalImageData.width;
+                const h = originalImageData.height;
+                mainCanvas.width = w;
+                mainCanvas.height = h;
+
+                const splitX = Math.round(w * comparePosition);
+
+                // Lado esquerdo: original
+                const leftData = new ImageData(new Uint8ClampedArray(originalImageData.data), w, h);
+                // Lado direito: processado
+                const rightData = processedImageData;
+
+                // Cria imagem combinada
+                const combined = new ImageData(w, h);
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        const i = (y * w + x) * 4;
+                        if (x < splitX) {
+                            combined.data[i] = leftData.data[i];
+                            combined.data[i + 1] = leftData.data[i + 1];
+                            combined.data[i + 2] = leftData.data[i + 2];
+                            combined.data[i + 3] = leftData.data[i + 3];
+                        } else {
+                            combined.data[i] = rightData.data[i];
+                            combined.data[i + 1] = rightData.data[i + 1];
+                            combined.data[i + 2] = rightData.data[i + 2];
+                            combined.data[i + 3] = rightData.data[i + 3];
+                        }
+                    }
+                }
+
+                ctx.putImageData(combined, 0, 0);
+
+                // Aplica overlays apenas no lado direito? Ou full?
+                // Vamos aplicar dust/leaks/timestamp apenas no lado processado para comparação justa
+                if (effectStates.dust && dustCanvas) {
+                    ctx.save();
+                    ctx.globalAlpha = 0.7;
+                    ctx.drawImage(dustCanvas, splitX, 0, w - splitX, h, splitX, 0, w - splitX, h);
+                    ctx.restore();
+                }
+                if (effectStates.lightleaks && lightLeaksCanvas) {
+                    ctx.save();
+                    ctx.globalCompositeOperation = 'screen';
+                    ctx.globalAlpha = 0.7;
+                    ctx.drawImage(lightLeaksCanvas, splitX, 0, w - splitX, h, splitX, 0, w - splitX, h);
+                    ctx.globalCompositeOperation = 'source-over';
+                    ctx.restore();
+                }
+                if (effectStates.timestamp) {
+                    // Timestamp só no lado direito
+                    const tempCanvas = document.createElement('canvas');
+                    tempCanvas.width = w;
+                    tempCanvas.height = h;
+                    const tempCtx = tempCanvas.getContext('2d');
+                    tempCtx.putImageData(processedImageData, 0, 0);
+                    drawTimestamp(tempCanvas, tempCtx);
+                    ctx.drawImage(tempCanvas, splitX, 0, w - splitX, h, splitX, 0, w - splitX, h);
+                }
+
+                // Desenha linha divisória
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.shadowColor = 'rgba(0,0,0,0.6)';
+                ctx.shadowBlur = 8;
+                ctx.beginPath();
+                ctx.moveTo(splitX, 0);
+                ctx.lineTo(splitX, h);
+                ctx.stroke();
+                ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
+            }
+
+            function updateCompareLineUI() {
+                if (!isComparing || !originalImageData) return;
+                const canvasRect = mainCanvas.getBoundingClientRect();
+                const containerRect = canvasWrapper.getBoundingClientRect();
+                const relativeLeft = canvasRect.left - containerRect.left;
+                const splitX = relativeLeft + (canvasRect.width * comparePosition);
+                compareLine.style.left = splitX + 'px';
+                compareHandle.style.left = splitX + 'px';
+                compareLine.style.top = '0';
+                compareLine.style.bottom = '0';
+                compareHandle.style.top = '50%';
+            }
+
+            // ============================================================
+            // IMAGE LOADING
+            // ============================================================
+            function loadImage(file) {
+                if (!file || !file.type.match(/image\/(jpeg|png|webp|heic|heif|bmp|tiff)/i)) {
+                    showToast('Formato não suportado 😕');
+                    return;
+                }
+                if (file.size > 30 * 1024 * 1024) {
+                    showToast('Imagem muito grande (máx 30MB)');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        originalImage = img;
+                        frameCount = Math.floor(Math.random() * 9000) + 1000;
+                        frameCounter.textContent = String(frameCount).padStart(4, '0');
+                        prepareImageData(img);
+                        needsDustRegen = true;
+                        needsLeaksRegen = true;
+                        updatePreview();
+                        enableButtons();
+                        previewSection.classList.add('has-image');
+                        showToast('✨ Foto carregada!');
+                    };
+                    img.onerror = () => showToast('Erro ao carregar imagem');
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function prepareImageData(img) {
+                let w = img.naturalWidth;
+                let h = img.naturalHeight;
+                // Redimensiona para preview se necessário
+                if (w > MAX_PREVIEW_WIDTH || h > MAX_PREVIEW_HEIGHT) {
+                    const ratio = Math.min(MAX_PREVIEW_WIDTH / w, MAX_PREVIEW_HEIGHT / h);
+                    w = Math.round(w * ratio);
+                    h = Math.round(h * ratio);
+                }
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = w;
+                tempCanvas.height = h;
+                const tempCtx = tempCanvas.getContext('2d');
+                tempCtx.drawImage(img, 0, 0, w, h);
+                originalImageData = tempCtx.getImageData(0, 0, w, h);
+                mainCanvas.width = w;
+                mainCanvas.height = h;
+            }
+
+            function enableButtons() {
+                btnDownload.disabled = false;
+                btnCompare.disabled = false;
+                btnCamera.disabled = false;
+            }
+
+            // ============================================================
+            // DOWNLOAD
+            // ============================================================
+            function downloadImage() {
+                if (!processedImageData) {
+                    showToast('Carregue uma foto primeiro');
+                    return;
+                }
+                // Usa a imagem original em alta resolução se disponível
+                let exportCanvas;
+                if (originalImage && originalImage.naturalWidth <= 3000 && originalImage.naturalHeight <= 3000) {
+                    // Processa em alta resolução
+                    const w = originalImage.naturalWidth;
+                    const h = originalImage.naturalHeight;
+                    const tempCanvas = document.createElement('canvas');
+                    tempCanvas.width = w;
+                    tempCanvas.height = h;
+                    const tempCtx = tempCanvas.getContext('2d');
+                    tempCtx.drawImage(originalImage, 0, 0, w, h);
+                    const hdImageData = tempCtx.getImageData(0, 0, w, h);
+                    const hdProcessed = processImage(hdImageData, currentFilter, intensity, effectStates);
+                    exportCanvas = document.createElement('canvas');
+                    exportCanvas.width = w;
+                    exportCanvas.height = h;
+                    const exportCtx = exportCanvas.getContext('2d');
+                    renderToCanvas(exportCanvas, exportCtx, hdProcessed, effectStates, currentFilter);
+                } else {
+                    // Usa preview processado
+                    exportCanvas = document.createElement('canvas');
+                    exportCanvas.width = processedImageData.width;
+                    exportCanvas.height = processedImageData.height;
+                    const exportCtx = exportCanvas.getContext('2d');
+                    renderToCanvas(exportCanvas, exportCtx, processedImageData, effectStates, currentFilter);
+                }
+
+                exportCanvas.toBlob((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    const filterName = currentFilter.toUpperCase();
+                    a.download = `dazz_${filterName}_${Date.now()}.jpg`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    showToast('📥 Download concluído!');
+                }, 'image/jpeg', JPEG_QUALITY);
+            }
+
+            // ============================================================
+            // CAMERA CAPTURE
+            // ============================================================
+            function openCamera() {
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    showToast('Câmera não disponível neste navegador');
+                    return;
+                }
+                // Cria input capture
+                const captureInput = document.createElement('input');
+                captureInput.type = 'file';
+                captureInput.accept = 'image/*';
+                captureInput.capture = 'environment';
+                captureInput.onchange = (e) => {
+                    if (e.target.files[0]) {
+                        loadImage(e.target.files[0]);
+                    }
+                };
+                captureInput.click();
+            }
+
+            // ============================================================
+            // EVENT LISTENERS
+            // ============================================================
+
+            // Upload via clique
+            previewSection.addEventListener('click', (e) => {
+                if (e.target === compareHandle || e.target === compareLine) return;
+                if (!originalImageData) {
+                    fileInput.click();
+                }
+            });
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files[0]) loadImage(e.target.files[0]);
+            });
+
+            // Drag & Drop
+            previewSection.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                previewSection.classList.add('drag-over');
+            });
+            previewSection.addEventListener('dragleave', () => {
+                previewSection.classList.remove('drag-over');
+            });
+            previewSection.addEventListener('drop', (e) => {
+                e.preventDefault();
+                previewSection.classList.remove('drag-over');
+                const file = e.dataTransfer.files[0];
+                if (file) loadImage(file);
+            });
+
+            // Filter cards
+            cardCPM35.addEventListener('click', () => {
+                currentFilter = 'cpm35';
+                cardCPM35.classList.add('active');
+                cardGRDR.classList.remove('active');
+                needsLeaksRegen = true;
+                updatePreview();
+            });
+            cardGRDR.addEventListener('click', () => {
+                currentFilter = 'grdr';
+                cardGRDR.classList.add('active');
+                cardCPM35.classList.remove('active');
+                needsLeaksRegen = true;
+                updatePreview();
+            });
+
+            // Intensity slider
+            intensitySlider.addEventListener('input', () => {
+                intensity = parseInt(intensitySlider.value) / 100;
+                intensityValue.textContent = Math.round(intensity * 100) + '%';
+                debouncedUpdate();
+            });
+
+            // Effect toggles
+            document.querySelectorAll('.effect-toggle').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const effect = btn.dataset.effect;
+                    effectStates[effect] = !effectStates[effect];
+                    if (effectStates[effect]) {
+                        btn.classList.add('on');
+                    } else {
+                        btn.classList.remove('on');
+                    }
+                    if (effect === 'dust') needsDustRegen = true;
+                    if (effect === 'lightleaks') needsLeaksRegen = true;
+                    updatePreview();
+                });
+            });
+
+            // Download
+            btnDownload.addEventListener('click', downloadImage);
+
+            // Camera
+            btnCamera.addEventListener('click', openCamera);
+
+            // Compare mode
+            btnCompare.addEventListener('click', () => {
+                if (!originalImageData) return;
+                isComparing = !isComparing;
+                if (isComparing) {
+                    btnCompare.classList.add('active-compare');
+                    btnCompare.textContent = '⇆ COMPARANDO';
+                    compareOverlay.classList.add('active');
+                    comparePosition = 0.5;
+                    drawComparison();
+                    updateCompareLineUI();
+                } else {
+                    btnCompare.classList.remove('active-compare');
+                    btnCompare.textContent = '⇆ COMPARAR';
+                    compareOverlay.classList.remove('active');
+                    updatePreview();
+                }
+            });
+
+            // Comparison slider interaction
+            function getComparePositionFromEvent(e) {
+                const containerRect = canvasWrapper.getBoundingClientRect();
+                const canvasRect = mainCanvas.getBoundingClientRect();
+                const relativeX = (e.touches ? e.touches[0].clientX : e.clientX) - canvasRect.left;
+                return clamp(relativeX / canvasRect.width, 0.05, 0.95);
+            }
+
+            compareHandle.addEventListener('mousedown', (e) => {
+                if (!isComparing) return;
+                e.preventDefault();
+                const onMove = (ev) => {
+                    comparePosition = getComparePositionFromEvent(ev);
+                    drawComparison();
+                    updateCompareLineUI();
+                };
+                const onUp = () => {
+                    document.removeEventListener('mousemove', onMove);
+                    document.removeEventListener('mouseup', onUp);
+                };
+                document.addEventListener('mousemove', onMove);
+                document.addEventListener('mouseup', onUp);
+            });
+            compareHandle.addEventListener('touchstart', (e) => {
+                if (!isComparing) return;
+                e.preventDefault();
+                const onMove = (ev) => {
+                    comparePosition = getComparePositionFromEvent(ev);
+                    drawComparison();
+                    updateCompareLineUI();
+                };
+                const onUp = () => {
+                    document.removeEventListener('touchmove', onMove);
+                    document.removeEventListener('touchend', onUp);
+                };
+                document.addEventListener('touchmove', onMove, { passive: false });
+                document.addEventListener('touchend', onUp);
+            });
+            compareLine.addEventListener('mousedown', (e) => {
+                if (!isComparing) return;
+                e.preventDefault();
+                comparePosition = getComparePositionFromEvent(e);
+                drawComparison();
+                updateCompareLineUI();
+            });
+
+            // Atualiza UI da linha de comparação em resize
+            window.addEventListener('resize', () => {
+                if (isComparing) updateCompareLineUI();
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'd' && (e.ctrlKey || e.metaKey) && originalImageData) {
+                    e.preventDefault();
+                    downloadImage();
+                }
+                if (e.key === 'c' && !e.ctrlKey && !e.metaKey && originalImageData) {
+                    btnCompare.click();
+                }
+                if (e.key === '1' && originalImageData) {
+                    cardCPM35.click();
+                }
+                if (e.key === '2' && originalImageData) {
+                    cardGRDR.click();
+                }
+            });
+
+            // ============================================================
+            // INITIALIZATION
+            // ============================================================
+            function init() {
+                // Garante que os toggles visuais reflitam o estado inicial
+                document.querySelectorAll('.effect-toggle').forEach(btn => {
+                    const effect = btn.dataset.effect;
+                    if (effectStates[effect]) {
+                        btn.classList.add('on');
+                    } else {
+                        btn.classList.remove('on');
+                    }
+                });
+                intensitySlider.value = Math.round(intensity * 100);
+                intensityValue.textContent = Math.round(intensity * 100) + '%';
+
+                // Tenta carregar uma imagem demo? Não - deixa o usuário fazer upload
+                console.log('📸 Dazz复古 • Analog Filter Engine pronto');
+                console.log('   Filtros: CPM35 (CCD Warm) | GRD R (Cinematic Cool)');
+                console.log('   Atalhos: [1] CPM35  [2] GRD R  [C] Comparar  [Ctrl+D] Download');
+                console.log('   Carregue uma foto para começar ✨');
+            }
+
+            init();
+
+            // Expõe API para debug
+            window.DazzEngine = {
+                getState: () => ({
+                    currentFilter,
+                    intensity,
+                    effectStates,
+                    isComparing,
+                    hasImage: !!originalImageData,
+                }),
+                updatePreview,
+                loadImage,
+                downloadImage,
+            };
+        })();
+    </script>
+</body>
+
+</html>
