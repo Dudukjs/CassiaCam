@@ -22,7 +22,7 @@
       :root {
         --bg: #080808;
         --bg2: #0d0d0d;
-        --surface: #111111;
+        --surface: #111;
         --surface2: #181818;
         --surface3: #202020;
         --border: #252525;
@@ -33,10 +33,6 @@
         --accent: #c9a96e;
         --accent2: #b8924f;
         --accent3: #e8c994;
-        --accent-dim: rgba(201, 169, 110, 0.12);
-        --red: #e05555;
-        --blue: #5588cc;
-        --green: #55aa77;
         --r: 14px;
         --r-sm: 9px;
         --r-xs: 6px;
@@ -67,15 +63,6 @@
         -webkit-user-select: none;
         overflow-x: hidden;
       }
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-        pointer-events: none;
-        z-index: 0;
-        opacity: 0.6;
-      }
       ::-webkit-scrollbar {
         width: 2px;
         height: 2px;
@@ -84,19 +71,15 @@
         background: #2a2a2a;
         border-radius: 10px;
       }
-
       .app {
         width: 100%;
         max-width: 560px;
         padding: 0 0 calc(var(--safe-b)+24px);
         display: flex;
         flex-direction: column;
-        gap: 0;
         position: relative;
         z-index: 1;
       }
-
-      /* HEADER */
       .header {
         display: flex;
         align-items: center;
@@ -105,7 +88,7 @@
         border-bottom: 1px solid var(--border);
         position: sticky;
         top: 0;
-        background: rgba(8, 8, 8, 0.92);
+        background: rgba(8, 8, 8, 0.94);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         z-index: 50;
@@ -185,8 +168,6 @@
         padding: 5px 9px;
         border-radius: 20px;
       }
-
-      /* PREVIEW */
       .preview-wrap {
         padding: 16px 16px 0;
       }
@@ -214,9 +195,6 @@
       .preview-section.drag-over {
         border-color: var(--accent);
         background: #12100a;
-        box-shadow:
-          inset 0 0 60px rgba(201, 169, 110, 0.06),
-          0 0 0 1px rgba(201, 169, 110, 0.15);
       }
       .upload-ph {
         display: flex;
@@ -310,15 +288,6 @@
         display: block;
         border-radius: var(--r);
       }
-      .film-grain-overlay {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.035;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-        background-size: 128px 128px;
-        mix-blend-mode: overlay;
-      }
       .frame-info {
         position: absolute;
         top: 12px;
@@ -345,8 +314,6 @@
         color: rgba(255, 255, 255, 0.3);
         letter-spacing: 0.08em;
       }
-
-      /* COMPARE */
       .cmp-overlay {
         position: absolute;
         inset: 0;
@@ -386,10 +353,6 @@
         justify-content: center;
         font-size: 13px;
         color: #222;
-        transition: transform 0.15s;
-      }
-      .cmp-handle:active {
-        transform: translate(-50%, -50%) scale(1.1);
       }
       .cmp-lbl {
         position: absolute;
@@ -412,8 +375,6 @@
       .cmp-lbl.right {
         right: 12px;
       }
-
-      /* SECTIONS */
       .section {
         padding: 18px 16px 0;
       }
@@ -447,8 +408,6 @@
         color: var(--text3);
         letter-spacing: 0.06em;
       }
-
-      /* FILTER */
       .filter-scroll {
         display: flex;
         gap: 7px;
@@ -515,24 +474,9 @@
         position: relative;
         overflow: hidden;
       }
-      .filter-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(201, 169, 110, 0.04),
-          transparent
-        );
-        opacity: 0;
-        transition: opacity 0.25s;
-      }
       .filter-card:hover {
         border-color: var(--border2);
         transform: translateY(-2px);
-      }
-      .filter-card:hover::before {
-        opacity: 1;
       }
       .filter-card.active {
         border-color: var(--accent);
@@ -540,22 +484,11 @@
         transform: translateY(-2px);
         box-shadow: 0 6px 24px rgba(201, 169, 110, 0.1);
       }
-      .filter-card.active::before {
-        opacity: 1;
-      }
       .fc-preview {
         width: 100%;
         height: 42px;
         border-radius: var(--r-xs);
         margin-bottom: 6px;
-        position: relative;
-        overflow: hidden;
-      }
-      .fc-preview::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), transparent);
       }
       .fc-name {
         font-weight: 700;
@@ -582,8 +515,6 @@
       .filter-card.active .fc-active-dot {
         display: block;
       }
-
-      /* INTENSITY */
       .intensity-section {
         padding: 18px 16px 0;
       }
@@ -670,15 +601,10 @@
         border: 2px solid rgba(0, 0, 0, 0.15);
         cursor: pointer;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-        transition:
-          transform 0.15s var(--ease-bounce),
-          box-shadow 0.15s;
+        transition: transform 0.15s var(--ease-bounce);
       }
       input[type="range"]::-webkit-slider-thumb:active {
         transform: scale(1.15);
-        box-shadow:
-          0 4px 16px rgba(201, 169, 110, 0.3),
-          0 0 0 4px rgba(201, 169, 110, 0.1);
       }
       .range-ticks {
         display: flex;
@@ -720,8 +646,6 @@
         border-color: var(--accent);
         color: var(--accent);
       }
-
-      /* FX */
       .fx-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -781,8 +705,6 @@
       .fx-btn.on .fx-name {
         color: var(--accent);
       }
-
-      /* ACTIONS */
       .actions-section {
         padding: 18px 16px 0;
         display: flex;
@@ -809,18 +731,6 @@
         justify-content: center;
         gap: 7px;
         white-space: nowrap;
-        position: relative;
-        overflow: hidden;
-      }
-      .btn::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(255, 255, 255, 0);
-        transition: background 0.15s;
-      }
-      .btn:active::after {
-        background: rgba(255, 255, 255, 0.05);
       }
       .btn-primary {
         background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -867,8 +777,6 @@
       .btn-compare:disabled {
         opacity: 0.25;
       }
-
-      /* INFO STRIP */
       .info-strip {
         padding: 16px 16px 0;
         display: flex;
@@ -897,18 +805,18 @@
         color: var(--text);
       }
 
-      /* SAVE MODAL — iOS fallback */
+      /* ── SAVE MODAL ── funciona em iOS, Android e WebView ── */
       .save-modal {
         position: fixed;
         inset: 0;
         z-index: 200;
-        background: rgba(0, 0, 0, 0.85);
+        background: rgba(0, 0, 0, 0.9);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         display: none;
         align-items: center;
         justify-content: center;
-        padding: 24px;
+        padding: 20px;
       }
       .save-modal.open {
         display: flex;
@@ -917,36 +825,42 @@
         background: #111;
         border: 1px solid var(--border2);
         border-radius: var(--r);
-        padding: 24px;
-        max-width: 340px;
+        padding: 20px;
+        max-width: 360px;
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 14px;
         text-align: center;
+        max-height: 90vh;
+        overflow-y: auto;
       }
       .save-modal-title {
         font-weight: 800;
         font-size: 1rem;
         letter-spacing: -0.01em;
       }
-      .save-modal-sub {
-        font-family: var(--mono);
-        font-size: 0.62rem;
-        color: var(--text2);
-        letter-spacing: 0.06em;
-        line-height: 1.6;
-      }
+      /* CRÍTICO: -webkit-touch-callout permite menu de salvar ao pressionar a imagem */
       .save-modal-img {
         width: 100%;
         border-radius: var(--r-sm);
-        overflow: hidden;
+        overflow: visible;
         line-height: 0;
+        -webkit-touch-callout: default;
+        touch-action: auto;
+        user-select: auto;
+        -webkit-user-select: auto;
       }
       .save-modal-img img {
         width: 100%;
         height: auto;
         border-radius: var(--r-sm);
+        display: block;
+        -webkit-touch-callout: default;
+        touch-action: auto;
+        pointer-events: auto;
+        user-select: auto;
+        -webkit-user-select: auto;
       }
       .save-modal-hint {
         background: rgba(201, 169, 110, 0.08);
@@ -956,8 +870,11 @@
         font-family: var(--mono);
         font-size: 0.6rem;
         color: var(--accent);
-        letter-spacing: 0.06em;
-        line-height: 1.7;
+        letter-spacing: 0.05em;
+        line-height: 1.8;
+      }
+      .save-modal-hint strong {
+        color: #fff;
       }
       .save-modal-close {
         background: var(--surface2);
@@ -969,15 +886,15 @@
         font-size: 0.65rem;
         letter-spacing: 0.08em;
         cursor: pointer;
+        width: 100%;
       }
 
-      /* TOAST */
       .toast {
         position: fixed;
         bottom: 36px;
         left: 50%;
         transform: translateX(-50%) translateY(100px);
-        background: rgba(20, 16, 10, 0.95);
+        background: rgba(20, 16, 10, 0.96);
         color: #e0d8cc;
         padding: 10px 20px;
         border-radius: 24px;
@@ -995,12 +912,10 @@
       .toast.show {
         transform: translateX(-50%) translateY(0);
       }
-
-      /* LOADING */
       .loading-overlay {
         position: absolute;
         inset: 0;
-        background: rgba(8, 8, 8, 0.8);
+        background: rgba(8, 8, 8, 0.82);
         display: none;
         align-items: center;
         justify-content: center;
@@ -1032,11 +947,9 @@
         letter-spacing: 0.1em;
         color: var(--text2);
       }
-
       #fileInput {
         display: none;
       }
-
       @media (max-width: 380px) {
         .fx-grid {
           grid-template-columns: repeat(4, 1fr);
@@ -1084,7 +997,6 @@
           </div>
           <div class="canvas-wrap" id="canvasWrap">
             <canvas id="mainCanvas"></canvas>
-            <div class="film-grain-overlay"></div>
             <div class="frame-info">
               <div class="frame-num" id="frameNum">—</div>
               <div class="frame-filter" id="frameFilter">—</div>
@@ -1148,11 +1060,11 @@
               step="1"
             />
             <div class="range-ticks">
-              <span class="range-tick">0%</span>
-              <span class="range-tick">25%</span>
-              <span class="range-tick">50%</span>
-              <span class="range-tick">75%</span>
-              <span class="range-tick">100%</span>
+              <span class="range-tick">0%</span
+              ><span class="range-tick">25%</span
+              ><span class="range-tick">50%</span
+              ><span class="range-tick">75%</span
+              ><span class="range-tick">100%</span>
             </div>
           </div>
           <div class="quick-presets">
@@ -1215,24 +1127,34 @@
             📂
           </button>
           <button class="btn btn-primary" id="btnDl" disabled>
-            ⬇︎ BAIXAR FOTO
+            ⬇︎ SALVAR FOTO
           </button>
         </div>
       </div>
     </div>
 
-    <!-- iOS SAVE MODAL -->
+    <!-- MODAL DE SALVAR — funciona no WebView, iOS e Android -->
     <div class="save-modal" id="saveModal">
       <div class="save-modal-box">
         <div class="save-modal-title">🌸 Foto pronta!</div>
+        <!-- A imagem abaixo pode ser pressionada e segurada para salvar -->
         <div class="save-modal-img" id="saveModalImg"></div>
         <div class="save-modal-hint">
-          📱 <strong>iOS:</strong> Pressione a imagem acima e toque em<br />
-          <strong>"Salvar na Fototeca"</strong><br /><br />
-          🤖 <strong>Android:</strong> Pressione e segure → Salvar imagem
+          🤖 <strong>Android / APK:</strong><br />
+          Pressione a foto acima e <strong>segure</strong> por 2 segundos<br />
+          → toque em <strong>"Salvar imagem"</strong><br /><br />
+          📱 <strong>iPhone:</strong><br />
+          Pressione a foto e toque em <strong>"Salvar na Fototeca"</strong>
         </div>
-        <div class="save-modal-sub">
-          A imagem com o filtro <span id="saveModalFilter">—</span> está pronta.
+        <div
+          style="
+            font-family: var(--mono);
+            font-size: 0.55rem;
+            color: var(--text3);
+            letter-spacing: 0.05em;
+          "
+        >
+          Filtro: <span id="saveModalFilter">—</span>
         </div>
         <button class="save-modal-close" id="saveModalClose">FECHAR</button>
       </div>
@@ -1245,50 +1167,72 @@
         "use strict";
 
         const $ = (id) => document.getElementById(id);
-        const previewSection = $("previewSection");
-        const canvasWrap = $("canvasWrap");
-        const mainCanvas = $("mainCanvas");
+        const previewSection = $("previewSection"),
+          canvasWrap = $("canvasWrap"),
+          mainCanvas = $("mainCanvas");
         const ctx = mainCanvas.getContext("2d", { willReadFrequently: true });
-        const fileInput = $("fileInput");
-        const intSlider = $("intSlider");
-        const intVal = $("intVal");
-        const btnDl = $("btnDl");
-        const btnCmp = $("btnCmp");
-        const btnCam = $("btnCam");
-        const btnUpload = $("btnUpload");
-        const cmpOverlay = $("cmpOverlay");
-        const cmpLine = $("cmpLine");
-        const cmpHandle = $("cmpHandle");
-        const cmpLblR = $("cmpLblR");
-        const frameNum = $("frameNum");
-        const frameFilter = $("frameFilter");
-        const toast = $("toast");
-        const filterScroll = $("filterScroll");
-        const catTabs = $("catTabs");
-        const infoStrip = $("infoStrip");
-        const chipFilter = $("chipFilter");
-        const chipRes = $("chipRes");
-        const chipInt = $("chipInt");
-        const loadingOverlay = $("loadingOverlay");
-        const loadingText = $("loadingText");
+        const fileInput = $("fileInput"),
+          intSlider = $("intSlider"),
+          intVal = $("intVal");
+        const btnDl = $("btnDl"),
+          btnCmp = $("btnCmp"),
+          btnCam = $("btnCam"),
+          btnUpload = $("btnUpload");
+        const cmpOverlay = $("cmpOverlay"),
+          cmpLine = $("cmpLine"),
+          cmpHandle = $("cmpHandle"),
+          cmpLblR = $("cmpLblR");
+        const frameNum = $("frameNum"),
+          frameFilter = $("frameFilter"),
+          toast = $("toast");
+        const filterScroll = $("filterScroll"),
+          catTabs = $("catTabs"),
+          infoStrip = $("infoStrip");
+        const chipFilter = $("chipFilter"),
+          chipRes = $("chipRes"),
+          chipInt = $("chipInt");
+        const loadingOverlay = $("loadingOverlay"),
+          loadingText = $("loadingText");
         const filterCountBadge = $("filterCountBadge");
-        const saveModal = $("saveModal");
-        const saveModalImg = $("saveModalImg");
-        const saveModalFilter = $("saveModalFilter");
+        const saveModal = $("saveModal"),
+          saveModalImg = $("saveModalImg"),
+          saveModalFilter = $("saveModalFilter");
         const saveModalClose = $("saveModalClose");
+
+        // ── DETECÇÃO DE AMBIENTE ──────────────────────────────────────────
+        // CRÍTICO: WebView do web2apk não suporta download via <a>.
+        // Detectamos mobile/WebView e usamos sempre o modal com long-press.
+        const isIOS =
+          /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isAndroid = /android/i.test(navigator.userAgent);
+        const isWebView =
+          /wv\)/.test(navigator.userAgent) || // flag WebView Android
+          (isAndroid && !/chrome\//i.test(navigator.userAgent)) || // Android sem Chrome real
+          typeof Android !== "undefined"; // interface nativa injetada
+        const isSafari = /^((?!chrome|android).)*safari/i.test(
+          navigator.userAgent,
+        );
+        const isMobile = isIOS || isAndroid || navigator.maxTouchPoints > 1;
+        // Todos os dispositivos móveis e WebView usam modal (sem download direto)
+        const needsFallback = isMobile || isWebView || isSafari;
+
+        // Tamanho máximo adaptativo — mobile menor para não crashar WebView
+        const MAX_PX = isMobile || isWebView ? 750 : 1200;
+        const JPEG_Q = isMobile || isWebView ? 0.76 : 0.88;
 
         let origImg = null,
           origData = null,
           procData = null;
-        let currentFilter = "cpm35";
-        let intensity = 0.85;
+        let currentFilter = "cpm35",
+          intensity = 0.85;
         let isComparing = false,
           cmpPos = 0.5;
         let dustCvs = null,
-          leaksCvs = null;
-        let needDust = true,
+          leaksCvs = null,
+          needDust = true,
           needLeaks = true;
-        let currentCat = "all";
+        let currentCat = "all",
+          isProcessing = false;
 
         const FX = {
           grain: true,
@@ -1300,18 +1244,8 @@
           timestamp: true,
           bloom: false,
         };
-        const MAX_PX = 1400,
-          JPEG_Q = 0.92;
 
-        // ── DETECT iOS ────────────────────────────────────────────
-        const isIOS =
-          /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        const isSafari = /^((?!chrome|android).)*safari/i.test(
-          navigator.userAgent,
-        );
-        const needsFallback = isIOS || isSafari;
-
-        // ── UTILS ─────────────────────────────────────────────────
+        // ── UTILS ─────────────────────────────────────────────────────────
         const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
         const lerp = (a, b, t) => a + (b - a) * t;
         function debounce(fn, ms) {
@@ -1325,7 +1259,7 @@
           toast.textContent = m;
           toast.classList.add("show");
           clearTimeout(toast._t);
-          toast._t = setTimeout(() => toast.classList.remove("show"), 2400);
+          toast._t = setTimeout(() => toast.classList.remove("show"), 2600);
         }
         function prng(seed) {
           let s = seed || 42;
@@ -1334,7 +1268,6 @@
             return (s - 1) / 2147483646;
           };
         }
-
         function lut(fn) {
           const a = new Uint8Array(256);
           for (let i = 0; i < 256; i++)
@@ -1402,7 +1335,7 @@
           return { r: lut(rf), g: lut(gf), b: lut(bf) };
         }
 
-        // ── 92 FILTERS ────────────────────────────────────────────
+        // ── 92 FILTROS ────────────────────────────────────────────────────
         const FILTERS_DEF = [
           {
             id: "cpm35",
@@ -1653,7 +1586,7 @@
           {
             id: "terracotta",
             label: "TERRA",
-            desc: "Terracota quente",
+            desc: "Terracota",
             cat: "warm",
             halWarm: true,
             halStr: 0.25,
@@ -1690,7 +1623,7 @@
           {
             id: "bourbon",
             label: "BOURBON",
-            desc: "Whisky ambar",
+            desc: "Whisky âmbar",
             cat: "warm",
             halWarm: true,
             halStr: 0.28,
@@ -1900,18 +1833,9 @@
             satAdj: -1,
             expFactor: 0.85,
             luts: mkL(
-              (x) => {
-                let y = sCurve(x, 0.72);
-                return clamp(y, 0, 1);
-              },
-              (x) => {
-                let y = sCurve(x, 0.72);
-                return clamp(y, 0, 1);
-              },
-              (x) => {
-                let y = sCurve(x, 0.72);
-                return clamp(y, 0, 1);
-              },
+              (x) => clamp(sCurve(x, 0.72), 0, 1),
+              (x) => clamp(sCurve(x, 0.72), 0, 1),
+              (x) => clamp(sCurve(x, 0.72), 0, 1),
             ),
             preview:
               "linear-gradient(135deg,#000,#111,#404040,#a0a0a0,#f8f8f8)",
@@ -1963,7 +1887,6 @@
             desc: "Infravermelho",
             cat: "bw",
             bw: true,
-            bwMix: [-0.15, 0.55, 0.6],
             halWarm: false,
             halStr: 0,
             vigStr: 0.5,
@@ -2530,13 +2453,11 @@
               (x) => {
                 let y = sCurve(x, 0.75);
                 if (y < 0.3) y = y * 0.7;
-                if (y > 0.7) y = lerp(y, 1, (y - 0.7) / 0.3) * 0.9;
                 return clamp(y, 0, 1);
               },
               (x) => {
                 let y = sCurve(x, 0.75);
                 if (y < 0.3) y = y * 0.7;
-                if (y > 0.7) y = lerp(y, 1, (y - 0.7) / 0.3) * 0.9;
                 return clamp(y, 0, 1);
               },
             ),
@@ -2710,7 +2631,7 @@
           {
             id: "halftone",
             label: "HALF",
-            desc: "Meio-tom suave",
+            desc: "Meio-tom",
             cat: "expired",
             halWarm: false,
             halStr: 0.15,
@@ -3349,31 +3270,30 @@
             cid === "all"
               ? FILTERS_DEF
               : FILTERS_DEF.filter((f) => f.cat === cid);
-          document.getElementById("catMeta").textContent =
+          $("catMeta").textContent =
             (cid === "all" ? "TODOS" : "CAT") + "·" + filtered.length;
-          renderFilterCards(filtered);
+          renderCards(filtered);
         }
-
-        function renderFilterCards(list) {
+        function renderCards(list) {
           filterScroll.innerHTML = "";
           list.forEach((f) => {
-            const card = document.createElement("div");
-            card.className =
+            const c = document.createElement("div");
+            c.className =
               "filter-card" + (f.id === currentFilter ? " active" : "");
-            card.dataset.id = f.id;
-            card.innerHTML = `<div class="fc-preview" style="background:${f.preview}"></div><div class="fc-name">${f.label}</div><div class="fc-cat">${f.desc}</div><div class="fc-active-dot"></div>`;
-            card.addEventListener("click", () => selectFilter(f.id));
-            filterScroll.appendChild(card);
+            c.dataset.id = f.id;
+            c.innerHTML = `<div class="fc-preview" style="background:${f.preview}"></div><div class="fc-name">${f.label}</div><div class="fc-cat">${f.desc}</div><div class="fc-active-dot"></div>`;
+            c.addEventListener("click", () => selectFilter(f.id));
+            filterScroll.appendChild(c);
           });
-          const active = filterScroll.querySelector(".active");
-          if (active)
-            active.scrollIntoView({
+          const a = filterScroll.querySelector(".active");
+          if (a)
+            a.scrollIntoView({
               behavior: "smooth",
               block: "nearest",
               inline: "center",
             });
         }
-        renderFilterCards(FILTERS_DEF);
+        renderCards(FILTERS_DEF);
 
         function selectFilter(id) {
           currentFilter = id;
@@ -3392,7 +3312,6 @@
 
         // Intensity segments
         const SEG_COUNT = 20;
-        const intSegs = $("intSegs");
         for (let i = 0; i < SEG_COUNT; i++) {
           const b = document.createElement("button");
           b.className = "int-seg";
@@ -3400,19 +3319,18 @@
           b.addEventListener("click", () => {
             const v = Math.round(((i + 1) / SEG_COUNT) * 100);
             intSlider.value = v;
-            updateIntensity(v);
+            updateInt(v);
           });
-          intSegs.appendChild(b);
+          $("intSegs").appendChild(b);
         }
         function updateSegs(val) {
           const filled = Math.round((val / 100) * SEG_COUNT);
-          intSegs
+          $("intSegs")
             .querySelectorAll(".int-seg")
             .forEach((s, i) => s.classList.toggle("filled", i < filled));
         }
         updateSegs(85);
-
-        function updateIntensity(v) {
+        function updateInt(v) {
           intensity = v / 100;
           intVal.textContent = v + "%";
           chipInt.textContent = v + "%";
@@ -3425,17 +3343,17 @@
           debouncedUpdate();
         }
         intSlider.addEventListener("input", () =>
-          updateIntensity(parseInt(intSlider.value)),
+          updateInt(parseInt(intSlider.value)),
         );
-        document.querySelectorAll(".preset-pill").forEach((p) => {
+        document.querySelectorAll(".preset-pill").forEach((p) =>
           p.addEventListener("click", () => {
             const v = parseInt(p.dataset.v);
             intSlider.value = v;
-            updateIntensity(v);
-          });
-        });
+            updateInt(v);
+          }),
+        );
 
-        // ── IMAGE ENGINE ──────────────────────────────────────────
+        // ── IMAGE ENGINE ─────────────────────────────────────────────────
         function boxBlur(imageData, r) {
           const w = imageData.width,
             h = imageData.height,
@@ -3708,9 +3626,9 @@
         }
 
         function applyFilter(imageData, fid, inten) {
-          const f = FILTERS[fid];
-          const d = imageData.data;
-          const orig = new Uint8ClampedArray(d);
+          const f = FILTERS[fid],
+            d = imageData.data,
+            orig = new Uint8ClampedArray(d);
           for (let i = 0; i < d.length; i += 4) {
             d[i] = f.luts.r[d[i]];
             d[i + 1] = f.luts.g[d[i + 1]];
@@ -3773,7 +3691,6 @@
             }
           return imageData;
         }
-
         function processImage(imageData, fid, inten, fx) {
           const f = FILTERS[fid],
             w = imageData.width,
@@ -3788,7 +3705,6 @@
           if (fx.vignette) work = applyVignette(work, f.vigStr);
           return work;
         }
-
         function renderToCanvas(cv, c, proc, fx, fid) {
           const w = proc.width,
             h = proc.height;
@@ -3818,7 +3734,6 @@
           if (fx.timestamp) drawTimestamp(cv, c);
         }
 
-        let isProcessing = false;
         function updatePreview() {
           if (!origData || isProcessing) return;
           isProcessing = true;
@@ -3839,6 +3754,9 @@
                   renderToCanvas(mainCanvas, ctx, procData, FX, currentFilter);
                 else drawComparison();
                 cmpLblR.textContent = FILTERS[currentFilter].label;
+              } catch (e) {
+                console.error("Preview error:", e);
+                showToast("Erro ao processar. Tente uma foto menor.");
               } finally {
                 isProcessing = false;
                 loadingOverlay.classList.remove("active");
@@ -3866,20 +3784,6 @@
               combined.data[i + 3] = src[i + 3];
             }
           ctx.putImageData(combined, 0, 0);
-          if (FX.dust && dustCvs) {
-            ctx.save();
-            ctx.globalAlpha = 0.65;
-            ctx.drawImage(dustCvs, sx, 0, w - sx, h, sx, 0, w - sx, h);
-            ctx.restore();
-          }
-          if (FX.lightleaks && leaksCvs) {
-            ctx.save();
-            ctx.globalCompositeOperation = "screen";
-            ctx.globalAlpha = 0.7;
-            ctx.drawImage(leaksCvs, sx, 0, w - sx, h, sx, 0, w - sx, h);
-            ctx.globalCompositeOperation = "source-over";
-            ctx.restore();
-          }
           if (FX.timestamp) {
             const tc = document.createElement("canvas");
             tc.width = w;
@@ -3900,7 +3804,6 @@
           ctx.shadowColor = "transparent";
           ctx.shadowBlur = 0;
         }
-
         function updateCmpLine() {
           if (!isComparing || !origData) return;
           const cr = mainCanvas.getBoundingClientRect(),
@@ -3913,6 +3816,7 @@
           cmpHandle.style.top = "50%";
         }
 
+        // ── LOAD IMAGE ────────────────────────────────────────────────────
         function loadImage(file) {
           if (
             !file ||
@@ -3953,7 +3857,6 @@
           };
           r.readAsDataURL(file);
         }
-
         function prepareData(img) {
           let w = img.naturalWidth,
             h = img.naturalHeight;
@@ -3970,75 +3873,91 @@
           mainCanvas.width = w;
           mainCanvas.height = h;
         }
-
         function enableBtns() {
           btnDl.disabled = btnCmp.disabled = btnCam.disabled = false;
         }
 
-        // ── DOWNLOAD — funciona em iOS, Android e Desktop ─────────
+        // ── DOWNLOAD — CORRIGIDO PARA WEB2APK / WEBVIEW ─────────────────
+        // O WebView não suporta download via <a>. Mostramos a imagem num modal.
+        // O usuário pressiona e segura a foto para salvar na galeria.
         function buildExportCanvas() {
-          let ec;
-          if (origImg && origImg.naturalWidth <= 4000) {
-            const w = origImg.naturalWidth,
-              h = origImg.naturalHeight;
-            const tc = document.createElement("canvas");
-            tc.width = w;
-            tc.height = h;
-            tc.getContext("2d").drawImage(origImg, 0, 0, w, h);
-            const hd = tc.getContext("2d").getImageData(0, 0, w, h);
-            const hp = processImage(hd, currentFilter, intensity, FX);
-            ec = document.createElement("canvas");
-            ec.width = w;
-            ec.height = h;
-            renderToCanvas(ec, ec.getContext("2d"), hp, FX, currentFilter);
-          } else {
-            ec = document.createElement("canvas");
-            ec.width = procData.width;
-            ec.height = procData.height;
-            renderToCanvas(
-              ec,
-              ec.getContext("2d"),
-              procData,
-              FX,
-              currentFilter,
-            );
+          try {
+            // Limita tamanho do export no mobile para não crashar o WebView
+            const maxExport = isMobile || isWebView ? 900 : 3500;
+            if (
+              origImg &&
+              origImg.naturalWidth <= maxExport &&
+              origImg.naturalHeight <= maxExport
+            ) {
+              const w = origImg.naturalWidth,
+                h = origImg.naturalHeight;
+              const tc = document.createElement("canvas");
+              tc.width = w;
+              tc.height = h;
+              tc.getContext("2d").drawImage(origImg, 0, 0, w, h);
+              const hd = tc.getContext("2d").getImageData(0, 0, w, h);
+              const hp = processImage(hd, currentFilter, intensity, FX);
+              const ec = document.createElement("canvas");
+              ec.width = w;
+              ec.height = h;
+              renderToCanvas(ec, ec.getContext("2d"), hp, FX, currentFilter);
+              return ec;
+            }
+          } catch (e) {
+            console.warn("HD export failed, using preview:", e);
           }
+          // Fallback: usa a versão já processada (menor, mais segura)
+          const ec = document.createElement("canvas");
+          ec.width = procData.width;
+          ec.height = procData.height;
+          renderToCanvas(ec, ec.getContext("2d"), procData, FX, currentFilter);
           return ec;
         }
 
         function downloadImage() {
           if (!procData) return showToast("Carregue uma foto primeiro");
           showToast("⏳ Gerando imagem...");
+          // setTimeout evita bloquear a UI e travar o WebView
           setTimeout(() => {
             try {
               const ec = buildExportCanvas();
-              const dataUrl = ec.toDataURL("image/jpeg", JPEG_Q);
-              const filename = `cassiacam_${FILTERS[currentFilter].label}_${Date.now()}.jpg`;
+              // Qualidade menor no mobile = arquivo menor = sem crash de memória
+              const quality = isMobile || isWebView ? 0.74 : JPEG_Q;
+              const dataUrl = ec.toDataURL("image/jpeg", quality);
 
               if (needsFallback) {
-                // iOS/Safari: mostrar modal com a imagem para salvar manualmente
-                saveModalImg.innerHTML = `<img src="${dataUrl}" alt="Foto com filtro" style="width:100%;border-radius:10px;display:block"/>`;
+                // ── MODAL: funciona em iOS, Android e WebView ──────
+                // A imagem tem -webkit-touch-callout:default no CSS,
+                // o que ativa o menu "Salvar imagem" ao pressionar e segurar.
+                saveModalImg.innerHTML = `<img
+                    src="${dataUrl}"
+                    alt="Foto com filtro ${FILTERS[currentFilter].label}"
+                    style="width:100%;height:auto;border-radius:10px;display:block;
+                           -webkit-touch-callout:default;
+                           touch-action:auto;
+                           pointer-events:auto;
+                           user-select:auto;
+                           -webkit-user-select:auto;"
+                />`;
                 saveModalFilter.textContent = FILTERS[currentFilter].label;
                 saveModal.classList.add("open");
               } else {
-                // Desktop / Android Chrome: download direto
+                // Desktop: download direto
                 const a = document.createElement("a");
                 a.href = dataUrl;
-                a.download = filename;
-                a.style.display = "none";
+                a.download = `cassiacam_${FILTERS[currentFilter].label}_${Date.now()}.jpg`;
                 document.body.appendChild(a);
                 a.click();
                 setTimeout(() => document.body.removeChild(a), 300);
                 showToast("🌸 Salvo com amor!");
               }
-            } catch (e) {
-              console.error(e);
-              showToast("Erro ao salvar. Tente novamente.");
+            } catch (err) {
+              console.error("Download error:", err);
+              showToast("Erro ao salvar. Tente com uma foto menor.");
             }
-          }, 50);
+          }, 80);
         }
 
-        // Fechar modal
         saveModalClose.addEventListener("click", () =>
           saveModal.classList.remove("open"),
         );
@@ -4046,7 +3965,7 @@
           if (e.target === saveModal) saveModal.classList.remove("open");
         });
 
-        // ── EVENTS ────────────────────────────────────────────────
+        // ── EVENTS ────────────────────────────────────────────────────────
         previewSection.addEventListener("click", (e) => {
           if (e.target === cmpHandle || e.target === cmpLine) return;
           if (!origData) fileInput.click();
@@ -4173,7 +4092,16 @@
         document
           .querySelectorAll(".fx-btn")
           .forEach((btn) => btn.classList.toggle("on", FX[btn.dataset.fx]));
-        console.log("🌸 Cassia Cam v4.1 — Download corrigido para iOS/Safari");
+        console.log("🌸 Cassia Cam — WebView/APK fix aplicado");
+        console.log(
+          "   Mobile:",
+          isMobile,
+          "| WebView:",
+          isWebView,
+          "| Modal save:",
+          needsFallback,
+        );
+        console.log("   MAX_PX:", MAX_PX, "| JPEG_Q:", JPEG_Q);
       })();
     </script>
   </body>
