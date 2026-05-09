@@ -4,66 +4,100 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover"
+      content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover"
     />
-    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="theme-color" content="#080808" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
     />
     <title>Cassia Cam 🌸</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
-        --bg: #0a0a0a;
-        --surface: #141414;
-        --surface2: #1a1a1a;
-        --text: #e0e0e0;
-        --text2: #888;
+        --bg: #080808;
+        --bg2: #0d0d0d;
+        --surface: #111111;
+        --surface2: #181818;
+        --surface3: #202020;
+        --border: #252525;
+        --border2: #333;
+        --text: #f0f0f0;
+        --text2: #666;
+        --text3: #444;
         --accent: #c9a96e;
         --accent2: #b8924f;
-        --radius: 16px;
-        --radius-sm: 10px;
-        --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        --font-mono: "SF Mono", "Courier New", "IBM Plex Mono", monospace;
-        --safe-bottom: env(safe-area-inset-bottom, 16px);
+        --accent3: #e8c994;
+        --accent-dim: rgba(201, 169, 110, 0.12);
+        --red: #e05555;
+        --blue: #5588cc;
+        --green: #55aa77;
+        --r: 14px;
+        --r-sm: 9px;
+        --r-xs: 6px;
+        --ease: cubic-bezier(0.4, 0, 0.2, 1);
+        --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        --mono: "Space Mono", monospace;
+        --sans: "Syne", system-ui, sans-serif;
+        --safe-b: env(safe-area-inset-bottom, 16px);
       }
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         background: var(--bg);
         color: var(--text);
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+        font-family: var(--sans);
         min-height: 100dvh;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
         -webkit-tap-highlight-color: transparent;
         -webkit-font-smoothing: antialiased;
         user-select: none;
         -webkit-user-select: none;
         overflow-x: hidden;
       }
+
+      /* NOISE TEXTURE */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.6;
+      }
+
       ::-webkit-scrollbar {
-        width: 3px;
-        height: 3px;
+        width: 2px;
+        height: 2px;
       }
       ::-webkit-scrollbar-thumb {
-        background: #333;
+        background: #2a2a2a;
         border-radius: 10px;
       }
 
+      /* ── APP SHELL ── */
       .app {
         width: 100%;
-        max-width: 520px;
-        padding: 12px 16px calc(var(--safe-bottom)+20px);
+        max-width: 560px;
+        padding: 0 0 calc(var(--safe-b)+24px);
         display: flex;
         flex-direction: column;
-        gap: 14px;
+        gap: 0;
+        position: relative;
+        z-index: 1;
       }
 
       /* ── HEADER ── */
@@ -71,129 +105,205 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 4px 0;
+        padding: 16px 20px 14px;
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        background: rgba(8, 8, 8, 0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 50;
       }
       .logo-area {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 11px;
       }
-      .logo-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
-        background: transparent;
-        border: none;
+      .logo-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #1a1208, #2a1e0a);
+        border: 1px solid rgba(201, 169, 110, 0.25);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 22px;
-        position: relative;
-        overflow: visible;
+        font-size: 18px;
+        box-shadow: 0 2px 12px rgba(201, 169, 110, 0.08);
       }
       .logo-text {
+        font-family: var(--sans);
         font-weight: 800;
-        font-size: 1.15rem;
-        letter-spacing: -0.03em;
+        font-size: 1.1rem;
+        letter-spacing: -0.02em;
         color: #fff;
+        line-height: 1;
       }
       .logo-sub {
-        font-size: 0.65rem;
+        font-family: var(--mono);
+        font-size: 0.55rem;
         color: var(--text2);
-        letter-spacing: 0.08em;
-        font-weight: 500;
-        margin-top: 1px;
+        letter-spacing: 0.12em;
+        margin-top: 3px;
+      }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
       .badge {
-        background: #161210;
-        border: 1px solid #3a2a1a;
-        padding: 6px 12px;
+        background: rgba(201, 169, 110, 0.08);
+        border: 1px solid rgba(201, 169, 110, 0.2);
+        padding: 5px 11px;
         border-radius: 20px;
-        font-size: 0.68rem;
-        letter-spacing: 0.05em;
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.08em;
         color: var(--accent);
-        font-weight: 600;
         display: flex;
         align-items: center;
         gap: 5px;
       }
       .badge-dot {
-        width: 6px;
-        height: 6px;
+        width: 5px;
+        height: 5px;
         border-radius: 50%;
         background: var(--accent);
-        animation: pulse-dot 2s infinite;
+        animation: blink 2.4s infinite;
       }
-      @keyframes pulse-dot {
+      @keyframes blink {
         0%,
         100% {
           opacity: 1;
         }
         50% {
-          opacity: 0.2;
+          opacity: 0.15;
         }
       }
 
+      .counter-badge {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--text3);
+        letter-spacing: 0.06em;
+        border: 1px solid var(--border);
+        padding: 5px 9px;
+        border-radius: 20px;
+      }
+
       /* ── PREVIEW ── */
+      .preview-wrap {
+        padding: 16px 16px 0;
+      }
       .preview-section {
         position: relative;
         width: 100%;
         aspect-ratio: 4/3;
         background: var(--surface);
-        border-radius: var(--radius);
+        border-radius: var(--r);
         overflow: hidden;
-        border: 2px dashed #2a2a2a;
-        transition: all var(--transition);
+        border: 1.5px dashed var(--border2);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 260px;
+        transition: all 0.3s var(--ease);
+        min-height: 240px;
       }
       .preview-section.has-image {
-        border: 2px solid #2a2a2a;
+        border: 1.5px solid var(--border);
         cursor: default;
         aspect-ratio: auto;
         min-height: auto;
       }
       .preview-section.drag-over {
         border-color: var(--accent);
-        background: #17120a;
-        box-shadow: inset 0 0 60px rgba(201, 169, 110, 0.07);
+        background: #12100a;
+        box-shadow:
+          inset 0 0 60px rgba(201, 169, 110, 0.06),
+          0 0 0 1px rgba(201, 169, 110, 0.15);
       }
       .upload-ph {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 10px;
-        padding: 30px;
+        gap: 12px;
+        padding: 40px 30px;
         text-align: center;
       }
       .has-image .upload-ph {
         display: none;
       }
       .upload-icon {
-        font-size: 44px;
-        opacity: 0.5;
-        transition: transform 0.3s;
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        transition: transform 0.4s var(--ease-bounce);
       }
       .preview-section:hover .upload-icon {
-        transform: translateY(-4px);
+        transform: translateY(-5px) scale(1.05);
       }
-      .upload-text {
-        color: var(--text2);
-        font-size: 0.88rem;
-        font-weight: 500;
+      .upload-title {
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--text);
+        letter-spacing: -0.01em;
       }
       .upload-sub {
-        color: #444;
-        font-size: 0.73rem;
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        color: var(--text3);
+        letter-spacing: 0.06em;
       }
+      .upload-or {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        max-width: 180px;
+      }
+      .upload-or span {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .upload-or em {
+        font-style: normal;
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: var(--text3);
+      }
+      .upload-cam-btn {
+        background: transparent;
+        border: 1px solid var(--border2);
+        border-radius: var(--r-sm);
+        padding: 8px 16px;
+        color: var(--text2);
+        font-family: var(--sans);
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .upload-cam-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
       .canvas-wrap {
         position: relative;
         width: 100%;
         display: none;
-        border-radius: var(--radius);
+        border-radius: var(--r);
         overflow: hidden;
         line-height: 0;
       }
@@ -204,32 +314,51 @@
         width: 100%;
         height: auto;
         display: block;
-        border-radius: var(--radius);
+        border-radius: var(--r);
       }
-      .frame-cnt {
+
+      /* Film grain overlay on canvas */
+      .film-grain-overlay {
         position: absolute;
-        top: 11px;
-        right: 13px;
-        font-family: var(--font-mono);
-        font-size: 0.62rem;
-        color: rgba(255, 255, 255, 0.65);
-        letter-spacing: 0.07em;
-        z-index: 4;
+        inset: 0;
         pointer-events: none;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-        display: none;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+        background-size: 128px 128px;
+        mix-blend-mode: overlay;
       }
-      .has-image .frame-cnt {
-        display: block;
+
+      .frame-info {
+        position: absolute;
+        top: 12px;
+        left: 14px;
+        display: none;
+        flex-direction: column;
+        gap: 3px;
+        pointer-events: none;
+        z-index: 4;
+      }
+      .has-image .frame-info {
+        display: flex;
+      }
+      .frame-num {
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        color: rgba(255, 255, 255, 0.55);
+        letter-spacing: 0.1em;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+      }
+      .frame-filter {
+        font-family: var(--mono);
+        font-size: 0.5rem;
+        color: rgba(255, 255, 255, 0.3);
+        letter-spacing: 0.08em;
       }
 
       /* ── COMPARE OVERLAY ── */
       .cmp-overlay {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        inset: 0;
         pointer-events: none;
         display: none;
         z-index: 5;
@@ -242,8 +371,8 @@
         top: 0;
         bottom: 0;
         width: 2px;
-        background: #fff;
-        box-shadow: 0 0 14px rgba(0, 0, 0, 0.7);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         pointer-events: auto;
         cursor: ew-resize;
         z-index: 6;
@@ -252,33 +381,39 @@
         position: absolute;
         top: 50%;
         transform: translate(-50%, -50%);
-        width: 34px;
-        height: 34px;
+        width: 38px;
+        height: 38px;
         border-radius: 50%;
         background: #fff;
-        border: 3px solid #111;
+        border: 2.5px solid rgba(0, 0, 0, 0.15);
         pointer-events: auto;
         cursor: ew-resize;
         z-index: 7;
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 11px;
+        font-size: 13px;
         color: #222;
+        transition: transform 0.15s;
+      }
+      .cmp-handle:active {
+        transform: translate(-50%, -50%) scale(1.1);
       }
       .cmp-lbl {
         position: absolute;
-        bottom: 12px;
-        font-size: 0.68rem;
+        bottom: 14px;
+        font-family: var(--mono);
+        font-size: 0.58rem;
         font-weight: 700;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.1em;
         padding: 4px 9px;
-        border-radius: 6px;
+        border-radius: var(--r-xs);
         pointer-events: none;
         z-index: 6;
         color: #fff;
-        background: rgba(0, 0, 0, 0.55);
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(8px);
       }
       .cmp-lbl.left {
         left: 12px;
@@ -287,280 +422,579 @@
         right: 12px;
       }
 
-      /* ── SECTION TITLE ── */
+      /* ── SECTIONS ── */
+      .section {
+        padding: 18px 16px 0;
+      }
+      .sec-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
       .sec-title {
-        font-size: 0.72rem;
+        font-family: var(--mono);
+        font-size: 0.6rem;
         text-transform: uppercase;
-        letter-spacing: 0.09em;
+        letter-spacing: 0.12em;
         color: var(--text2);
-        font-weight: 600;
-        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .sec-title::before {
+        content: "";
+        width: 3px;
+        height: 14px;
+        background: var(--accent);
+        border-radius: 2px;
+        opacity: 0.6;
+      }
+      .sec-meta {
+        font-family: var(--mono);
+        font-size: 0.55rem;
+        color: var(--text3);
+        letter-spacing: 0.06em;
       }
 
       /* ── FILTER SCROLL ── */
       .filter-scroll {
         display: flex;
-        gap: 8px;
+        gap: 7px;
         overflow-x: auto;
-        padding-bottom: 6px;
+        padding-bottom: 4px;
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
+        /* subtle fade edges */
+        mask-image: linear-gradient(
+          to right,
+          transparent 0,
+          #000 20px,
+          #000 calc(100% - 20px),
+          transparent 100%
+        );
+        padding-left: 4px;
+        padding-right: 4px;
       }
       .filter-scroll::-webkit-scrollbar {
         display: none;
       }
-      .filter-card {
-        flex: 0 0 100px;
-        background: var(--surface);
-        border: 2px solid transparent;
-        border-radius: var(--radius-sm);
-        padding: 9px 8px 8px;
+
+      /* CATEGORY TABS */
+      .cat-tabs {
+        display: flex;
+        gap: 5px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+        margin-bottom: 10px;
+      }
+      .cat-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .cat-tab {
+        flex: 0 0 auto;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 5px 12px;
+        font-family: var(--mono);
+        font-size: 0.58rem;
+        letter-spacing: 0.07em;
+        color: var(--text2);
         cursor: pointer;
-        transition: all var(--transition);
+        transition: all 0.2s var(--ease);
+        white-space: nowrap;
+      }
+      .cat-tab:hover {
+        border-color: var(--border2);
+        color: var(--text);
+      }
+      .cat-tab.active {
+        background: rgba(201, 169, 110, 0.1);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .filter-card {
+        flex: 0 0 90px;
+        background: var(--surface);
+        border: 1.5px solid transparent;
+        border-radius: var(--r-sm);
+        padding: 8px 7px 7px;
+        cursor: pointer;
+        transition: all 0.25s var(--ease);
         text-align: center;
         position: relative;
+        overflow: hidden;
+      }
+      .filter-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(201, 169, 110, 0.04),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.25s;
       }
       .filter-card:hover {
-        border-color: #383838;
-        background: #1a1a1a;
+        border-color: var(--border2);
+        transform: translateY(-2px);
+      }
+      .filter-card:hover::before {
+        opacity: 1;
       }
       .filter-card.active {
         border-color: var(--accent);
-        background: #17120a;
-        box-shadow: 0 0 18px rgba(201, 169, 110, 0.12);
+        background: rgba(201, 169, 110, 0.06);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(201, 169, 110, 0.1);
+      }
+      .filter-card.active::before {
+        opacity: 1;
       }
       .fc-preview {
         width: 100%;
-        height: 44px;
-        border-radius: 6px;
-        margin-bottom: 7px;
+        height: 42px;
+        border-radius: var(--r-xs);
+        margin-bottom: 6px;
+        position: relative;
+        overflow: hidden;
+      }
+      .fc-preview::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), transparent);
       }
       .fc-name {
         font-weight: 700;
-        font-size: 0.82rem;
-        letter-spacing: 0.02em;
+        font-size: 0.72rem;
+        letter-spacing: 0.01em;
+        line-height: 1;
       }
-      .fc-desc {
-        font-size: 0.6rem;
-        color: var(--text2);
-        margin-top: 2px;
-        letter-spacing: 0.02em;
+      .fc-cat {
+        font-family: var(--mono);
+        font-size: 0.5rem;
+        color: var(--text3);
+        margin-top: 3px;
+        letter-spacing: 0.05em;
       }
-      .fc-dot {
+      .fc-active-dot {
         display: none;
-        width: 6px;
-        height: 6px;
+        width: 5px;
+        height: 5px;
         border-radius: 50%;
         background: var(--accent);
-        margin: 5px auto 0;
-        animation: pulse-dot 2s infinite;
+        margin: 4px auto 0;
+        animation: blink 2s infinite;
       }
-      .filter-card.active .fc-dot {
+      .filter-card.active .fc-active-dot {
         display: block;
       }
 
-      /* ── SLIDER ── */
-      .slider-group {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
+      /* ── INTENSITY SECTION ── */
+      .intensity-section {
+        padding: 18px 16px 0;
       }
-      .slider-hd {
+      .intensity-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 16px;
+      }
+      .intensity-header {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
       }
-      .slider-lbl {
-        font-size: 0.73rem;
+      .intensity-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
         color: var(--text2);
-        font-weight: 500;
-        letter-spacing: 0.03em;
       }
-      .slider-val {
-        font-size: 0.73rem;
-        color: var(--accent);
+      .intensity-label-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        background: rgba(201, 169, 110, 0.08);
+        border: 1px solid rgba(201, 169, 110, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+      }
+      .intensity-value {
+        font-family: var(--mono);
+        font-size: 0.88rem;
         font-weight: 700;
-        font-family: var(--font-mono);
+        color: var(--accent);
+        letter-spacing: 0.02em;
+      }
+      /* Segmented intensity buttons */
+      .intensity-segments {
+        display: flex;
+        gap: 3px;
+        margin-bottom: 12px;
+      }
+      .int-seg {
+        flex: 1;
+        height: 5px;
+        border-radius: 3px;
+        background: var(--surface3);
+        transition:
+          background 0.2s,
+          transform 0.15s;
+        cursor: pointer;
+        border: none;
+        padding: 0;
+      }
+      .int-seg.filled {
+        background: var(--accent);
+      }
+      .int-seg:hover {
+        transform: scaleY(1.5);
+      }
+
+      /* Custom range */
+      .range-wrap {
+        position: relative;
       }
       input[type="range"] {
         -webkit-appearance: none;
         width: 100%;
-        height: 5px;
-        border-radius: 3px;
-        background: #252525;
+        height: 3px;
+        border-radius: 2px;
+        background: var(--surface3);
         outline: none;
         cursor: pointer;
       }
       input[type="range"]::-webkit-slider-thumb {
         -webkit-appearance: none;
-        width: 26px;
-        height: 26px;
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
         background: #fff;
-        border: 2px solid #444;
+        border: 2px solid rgba(0, 0, 0, 0.15);
         cursor: pointer;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
-        transition: all 0.2s;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        transition:
+          transform 0.15s var(--ease-bounce),
+          box-shadow 0.15s;
       }
       input[type="range"]::-webkit-slider-thumb:active {
-        transform: scale(1.1);
-        border-color: var(--accent);
+        transform: scale(1.15);
+        box-shadow:
+          0 4px 16px rgba(201, 169, 110, 0.3),
+          0 0 0 4px rgba(201, 169, 110, 0.1);
+      }
+      .range-ticks {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6px;
+        padding: 0 2px;
+      }
+      .range-tick {
+        font-family: var(--mono);
+        font-size: 0.5rem;
+        color: var(--text3);
+        letter-spacing: 0.04em;
       }
 
-      /* ── EFFECTS GRID ── */
+      /* ── QUICK PRESETS ── */
+      .quick-presets {
+        display: flex;
+        gap: 5px;
+        margin-top: 10px;
+      }
+      .preset-pill {
+        flex: 1;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 6px 4px;
+        font-family: var(--mono);
+        font-size: 0.57rem;
+        letter-spacing: 0.06em;
+        color: var(--text2);
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
+      }
+      .preset-pill:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .preset-pill.active {
+        background: rgba(201, 169, 110, 0.1);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* ── FX GRID ── */
       .fx-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 7px;
-      }
-      @media (min-width: 400px) {
-        .fx-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
       }
       .fx-btn {
         background: var(--surface);
-        border: 1.5px solid #252525;
-        border-radius: var(--radius-sm);
-        padding: 9px 5px;
+        border: 1.5px solid var(--border);
+        border-radius: var(--r-sm);
+        padding: 10px 5px 8px;
         cursor: pointer;
-        transition: all var(--transition);
+        transition: all 0.2s var(--ease);
         text-align: center;
-        font-size: 0.67rem;
-        color: var(--text2);
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 4px;
-        letter-spacing: 0.02em;
+        position: relative;
+        overflow: hidden;
+      }
+      .fx-btn::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transition: transform 0.2s;
+      }
+      .fx-btn.on::before {
+        transform: scaleX(1);
       }
       .fx-btn:hover {
-        border-color: #404040;
-        background: #1a1a1a;
+        border-color: var(--border2);
+        transform: translateY(-1px);
       }
       .fx-btn.on {
-        border-color: var(--accent);
-        background: #17120a;
-        color: var(--accent);
+        border-color: rgba(201, 169, 110, 0.35);
+        background: rgba(201, 169, 110, 0.05);
       }
       .fx-icon {
-        font-size: 1.25rem;
-        transition: transform 0.3s;
+        font-size: 1.15rem;
+        transition: transform 0.3s var(--ease-bounce);
       }
       .fx-btn.on .fx-icon {
-        transform: scale(1.08);
+        transform: scale(1.1);
+      }
+      .fx-name {
+        font-family: var(--mono);
+        font-size: 0.56rem;
+        letter-spacing: 0.05em;
+        color: var(--text2);
+        transition: color 0.2s;
+      }
+      .fx-btn.on .fx-name {
+        color: var(--accent);
       }
 
       /* ── ACTIONS ── */
-      .actions {
+      .actions-section {
+        padding: 18px 16px 0;
         display: flex;
-        gap: 9px;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .actions-row {
+        display: flex;
+        gap: 7px;
       }
       .btn {
         flex: 1;
-        min-width: 80px;
-        padding: 12px 14px;
-        border-radius: var(--radius-sm);
+        padding: 13px 16px;
+        border-radius: var(--r-sm);
+        font-family: var(--sans);
         font-weight: 700;
-        font-size: 0.82rem;
+        font-size: 0.78rem;
         letter-spacing: 0.04em;
         cursor: pointer;
-        transition: all var(--transition);
+        transition: all 0.2s var(--ease);
         border: none;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
+        gap: 7px;
         white-space: nowrap;
+        position: relative;
+        overflow: hidden;
+      }
+      .btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0);
+        transition: background 0.15s;
+      }
+      .btn:active::after {
+        background: rgba(255, 255, 255, 0.05);
       }
       .btn-primary {
-        background: var(--accent);
-        color: #0a0a0a;
-        box-shadow: 0 4px 16px rgba(201, 169, 110, 0.25);
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        color: #060606;
+        box-shadow: 0 4px 20px rgba(201, 169, 110, 0.2);
       }
       .btn-primary:hover {
-        background: var(--accent2);
+        box-shadow: 0 6px 28px rgba(201, 169, 110, 0.3);
         transform: translateY(-1px);
       }
       .btn-primary:active {
         transform: scale(0.97);
       }
-      .btn-outline {
-        background: transparent;
-        color: var(--text);
-        border: 1.5px solid #383838;
+      .btn-primary:disabled {
+        opacity: 0.25;
+        box-shadow: none;
+        transform: none;
       }
-      .btn-outline:hover {
-        border-color: #666;
-        background: #111;
+      .btn-ghost {
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        color: var(--text);
+      }
+      .btn-ghost:hover {
+        border-color: var(--border2);
+        background: var(--surface2);
+      }
+      .btn-ghost:disabled {
+        opacity: 0.25;
       }
       .btn-compare {
-        background: #131313;
-        color: #aaa;
-        border: 1.5px solid #383838;
-        font-family: var(--font-mono);
-        font-size: 0.72rem;
-        letter-spacing: 0.07em;
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        color: var(--text2);
+        font-family: var(--mono);
+        font-size: 0.65rem;
+        letter-spacing: 0.08em;
       }
       .btn-compare.on {
-        border-color: #fff;
+        border-color: rgba(255, 255, 255, 0.25);
         color: #fff;
-        background: #1e1e1e;
-        animation: glow 2s infinite;
+        background: rgba(255, 255, 255, 0.04);
       }
-      @keyframes glow {
-        0%,
-        100% {
-          box-shadow: 0 0 6px rgba(255, 255, 255, 0.04);
-        }
-        50% {
-          box-shadow: 0 0 16px rgba(255, 255, 255, 0.12);
-        }
+      .btn-compare:disabled {
+        opacity: 0.25;
       }
-      .btn:disabled {
-        opacity: 0.3;
+
+      /* ── INFO STRIP ── */
+      .info-strip {
+        padding: 16px 16px 0;
+        display: flex;
+        gap: 6px;
+      }
+      .info-chip {
+        flex: 1;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--r-sm);
+        padding: 10px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .info-chip-label {
+        font-family: var(--mono);
+        font-size: 0.5rem;
+        color: var(--text3);
+        letter-spacing: 0.1em;
+      }
+      .info-chip-value {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      /* ── TOAST ── */
+      .toast {
+        position: fixed;
+        bottom: 36px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: rgba(20, 16, 10, 0.95);
+        color: #e0d8cc;
+        padding: 10px 20px;
+        border-radius: 24px;
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.04em;
+        z-index: 999;
+        border: 1px solid rgba(201, 169, 110, 0.2);
+        transition: transform 0.4s var(--ease-bounce);
         pointer-events: none;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(12px);
+        white-space: nowrap;
+      }
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* ── LOADING OVERLAY ── */
+      .loading-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(8, 8, 8, 0.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 20;
+        border-radius: var(--r);
+        backdrop-filter: blur(4px);
+      }
+      .loading-overlay.active {
+        display: flex;
+      }
+      .spinner {
+        width: 36px;
+        height: 36px;
+        border: 2px solid rgba(201, 169, 110, 0.15);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .loading-text {
+        font-family: var(--mono);
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        color: var(--text2);
       }
 
       #fileInput {
         display: none;
       }
 
-      /* ── TOAST ── */
-      .toast {
-        position: fixed;
-        bottom: 28px;
-        left: 50%;
-        transform: translateX(-50%) translateY(120px);
-        background: #1a1612;
-        color: #e0d8cc;
-        padding: 10px 20px;
-        border-radius: 20px;
-        font-size: 0.78rem;
-        font-weight: 500;
-        letter-spacing: 0.03em;
-        z-index: 100;
-        border: 1px solid #3a2a1a;
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        pointer-events: none;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
-      }
-      .toast.show {
-        transform: translateX(-50%) translateY(0);
-      }
-
-      @media (max-width: 360px) {
-        .app {
-          padding: 8px 10px calc(var(--safe-bottom)+12px);
-          gap: 10px;
+      @media (max-width: 380px) {
+        .fx-grid {
+          grid-template-columns: repeat(4, 1fr);
         }
         .filter-card {
-          flex: 0 0 88px;
+          flex: 0 0 80px;
         }
-        .btn {
-          padding: 10px 10px;
-          font-size: 0.76rem;
+        .section,
+        .intensity-section,
+        .actions-section,
+        .preview-wrap,
+        .info-strip {
+          padding-left: 12px;
+          padding-right: 12px;
         }
       }
     </style>
@@ -570,99 +1004,174 @@
       <!-- HEADER -->
       <header class="header">
         <div class="logo-area">
-          <div class="logo-icon">
-            <img
-              src="cassia_cam_logo.svg"
-              alt="Cassia Cam"
-              style="width: 50px; height: 50px; object-fit: contain"
-            />
-          </div>
+          <div class="logo-mark">🌸</div>
           <div>
             <div class="logo-text">Cassia Cam</div>
             <div class="logo-sub">ANALOG FILM LAB</div>
           </div>
         </div>
-        <div class="badge"><span class="badge-dot"></span>CCD SIM</div>
+        <div class="header-right">
+          <div class="counter-badge" id="filterCountBadge">12 / 92</div>
+          <div class="badge"><span class="badge-dot"></span>CCD SIM</div>
+        </div>
       </header>
 
       <!-- PREVIEW -->
-      <section class="preview-section" id="previewSection">
-        <div class="upload-ph" id="uploadPh">
-          <span class="upload-icon">📷</span>
-          <span class="upload-text">Arraste uma foto ou toque aqui</span>
-          <span class="upload-sub">JPG • PNG • HEIC • até 30MB</span>
+      <div class="preview-wrap">
+        <section class="preview-section" id="previewSection">
+          <div class="upload-ph" id="uploadPh">
+            <div class="upload-icon">📷</div>
+            <div class="upload-title">Arraste uma foto aqui</div>
+            <div class="upload-or"><span></span><em>ou</em><span></span></div>
+            <button class="upload-cam-btn" id="uploadCamInline">
+              📸 Usar câmera
+            </button>
+            <div class="upload-sub">JPG · PNG · HEIC · até 30MB</div>
+          </div>
+          <div class="canvas-wrap" id="canvasWrap">
+            <canvas id="mainCanvas"></canvas>
+            <div class="film-grain-overlay"></div>
+            <div class="frame-info">
+              <div class="frame-num" id="frameNum">—</div>
+              <div class="frame-filter" id="frameFilter">—</div>
+            </div>
+          </div>
+          <div class="cmp-overlay" id="cmpOverlay">
+            <div class="cmp-line" id="cmpLine"></div>
+            <div class="cmp-handle" id="cmpHandle">⟷</div>
+            <span class="cmp-lbl left">ORIGINAL</span>
+            <span class="cmp-lbl right" id="cmpLblR">—</span>
+          </div>
+          <div class="loading-overlay" id="loadingOverlay">
+            <div class="spinner"></div>
+            <div class="loading-text" id="loadingText">PROCESSANDO</div>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" />
+        </section>
+      </div>
+
+      <!-- INFO CHIPS -->
+      <div class="info-strip" id="infoStrip" style="display: none">
+        <div class="info-chip">
+          <div class="info-chip-label">FILTRO ATIVO</div>
+          <div class="info-chip-value" id="chipFilter">—</div>
         </div>
-        <div class="canvas-wrap" id="canvasWrap">
-          <canvas id="mainCanvas"></canvas>
-          <div class="frame-cnt" id="frameCnt">0001</div>
+        <div class="info-chip">
+          <div class="info-chip-label">RESOLUÇÃO</div>
+          <div class="info-chip-value" id="chipRes">—</div>
         </div>
-        <div class="cmp-overlay" id="cmpOverlay">
-          <div class="cmp-line" id="cmpLine"></div>
-          <div class="cmp-handle" id="cmpHandle">⟷</div>
-          <span class="cmp-lbl left">ORIGINAL</span>
-          <span class="cmp-lbl right" id="cmpLblR">CPM35</span>
+        <div class="info-chip">
+          <div class="info-chip-label">INTENSIDADE</div>
+          <div class="info-chip-value" id="chipInt">85%</div>
         </div>
-        <input type="file" id="fileInput" accept="image/*" />
-      </section>
+      </div>
 
       <!-- FILTERS -->
-      <div>
-        <div class="sec-title">🎞️ Filtro</div>
+      <div class="section">
+        <div class="sec-header">
+          <div class="sec-title">Filtros Analógicos</div>
+          <div class="sec-meta" id="catMeta">TODOS · 92</div>
+        </div>
+        <div class="cat-tabs" id="catTabs"></div>
         <div class="filter-scroll" id="filterScroll"></div>
       </div>
 
       <!-- INTENSITY -->
-      <div class="slider-group">
-        <div class="slider-hd">
-          <span class="slider-lbl">⚡ Intensidade</span>
-          <span class="slider-val" id="intVal">85%</span>
+      <div class="intensity-section">
+        <div class="intensity-card">
+          <div class="intensity-header">
+            <div class="intensity-label">
+              <div class="intensity-label-icon">⚡</div>
+              INTENSIDADE DO FILTRO
+            </div>
+            <div class="intensity-value" id="intVal">85%</div>
+          </div>
+          <!-- Segmented bar -->
+          <div class="intensity-segments" id="intSegs"></div>
+          <!-- Classic slider below -->
+          <div class="range-wrap">
+            <input
+              type="range"
+              id="intSlider"
+              min="0"
+              max="100"
+              value="85"
+              step="1"
+            />
+            <div class="range-ticks">
+              <span class="range-tick">0%</span>
+              <span class="range-tick">25%</span>
+              <span class="range-tick">50%</span>
+              <span class="range-tick">75%</span>
+              <span class="range-tick">100%</span>
+            </div>
+          </div>
+          <!-- Quick presets -->
+          <div class="quick-presets">
+            <button class="preset-pill" data-v="25">SUTIL</button>
+            <button class="preset-pill" data-v="50">MÉDIO</button>
+            <button class="preset-pill active" data-v="85">FORTE</button>
+            <button class="preset-pill" data-v="100">MÁXIMO</button>
+          </div>
         </div>
-        <input
-          type="range"
-          id="intSlider"
-          min="0"
-          max="100"
-          value="85"
-          step="1"
-        />
       </div>
 
       <!-- EFFECTS -->
-      <div>
-        <div class="sec-title">✨ Efeitos Extras</div>
+      <div class="section">
+        <div class="sec-header">
+          <div class="sec-title">Efeitos Extras</div>
+        </div>
         <div class="fx-grid">
           <button class="fx-btn on" data-fx="grain">
-            <span class="fx-icon">🔘</span>Grão
+            <span class="fx-icon">🔘</span><span class="fx-name">GRÃO</span>
           </button>
           <button class="fx-btn on" data-fx="vignette">
-            <span class="fx-icon">🌑</span>Vinheta
+            <span class="fx-icon">🌑</span><span class="fx-name">VINHETA</span>
           </button>
           <button class="fx-btn" data-fx="chromatic">
-            <span class="fx-icon">🌈</span>RGB Split
+            <span class="fx-icon">🌈</span
+            ><span class="fx-name">RGB SPLIT</span>
           </button>
           <button class="fx-btn on" data-fx="halation">
-            <span class="fx-icon">💫</span>Halation
+            <span class="fx-icon">💫</span><span class="fx-name">HALATION</span>
           </button>
           <button class="fx-btn" data-fx="lightleaks">
-            <span class="fx-icon">💡</span>Light Leaks
+            <span class="fx-icon">💡</span
+            ><span class="fx-name">LIGHT LEAKS</span>
           </button>
           <button class="fx-btn" data-fx="dust">
-            <span class="fx-icon">💨</span>Dust
+            <span class="fx-icon">💨</span><span class="fx-name">DUST</span>
           </button>
           <button class="fx-btn on" data-fx="timestamp">
-            <span class="fx-icon">🕐</span>Timestamp
+            <span class="fx-icon">🕐</span
+            ><span class="fx-name">TIMESTAMP</span>
           </button>
           <button class="fx-btn" data-fx="bloom">
-            <span class="fx-icon">✨</span>Bloom
+            <span class="fx-icon">✨</span><span class="fx-name">BLOOM</span>
           </button>
         </div>
       </div>
 
       <!-- ACTIONS -->
-      <div class="actions">
-        <button class="btn btn-compare" id="btnCmp" disabled>⇆ COMPARAR</button>
-        <button class="btn btn-outline" id="btnCam" disabled>📸 Câmera</button>
-        <button class="btn btn-primary" id="btnDl" disabled>⬇︎ BAIXAR</button>
+      <div class="actions-section">
+        <div class="actions-row">
+          <button class="btn btn-compare" id="btnCmp" disabled>
+            ⇆ COMPARAR
+          </button>
+          <button class="btn btn-ghost" id="btnCam" disabled>📸 CÂMERA</button>
+        </div>
+        <div class="actions-row">
+          <button
+            class="btn btn-ghost"
+            id="btnUpload"
+            style="flex: 0 0 auto; width: 48px; padding: 13px"
+          >
+            📂
+          </button>
+          <button class="btn btn-primary" id="btnDl" disabled>
+            ⬇︎ BAIXAR FOTO
+          </button>
+        </div>
       </div>
     </div>
     <div class="toast" id="toast"></div>
@@ -671,12 +1180,10 @@
       (function () {
         "use strict";
 
-        // ════════════════════════════════════════════════════════════════
-        //  CASSIA CAM — ANALOG ENGINE v3
-        //  12 filtros reais baseados em câmeras e filmes analógicos
-        // ════════════════════════════════════════════════════════════════
+        // ════════════════════════════════════════════════════════════
+        //  CASSIA CAM v4 — 92 FILTROS ANALÓGICOS
+        // ════════════════════════════════════════════════════════════
 
-        // ── DOM ──────────────────────────────────────────────────────────
         const $ = (id) => document.getElementById(id);
         const previewSection = $("previewSection");
         const canvasWrap = $("canvasWrap");
@@ -688,15 +1195,25 @@
         const btnDl = $("btnDl");
         const btnCmp = $("btnCmp");
         const btnCam = $("btnCam");
+        const btnUpload = $("btnUpload");
         const cmpOverlay = $("cmpOverlay");
         const cmpLine = $("cmpLine");
         const cmpHandle = $("cmpHandle");
         const cmpLblR = $("cmpLblR");
-        const frameCnt = $("frameCnt");
+        const frameNum = $("frameNum");
+        const frameFilter = $("frameFilter");
         const toast = $("toast");
         const filterScroll = $("filterScroll");
+        const catTabs = $("catTabs");
+        const infoStrip = $("infoStrip");
+        const chipFilter = $("chipFilter");
+        const chipRes = $("chipRes");
+        const chipInt = $("chipInt");
+        const loadingOverlay = $("loadingOverlay");
+        const loadingText = $("loadingText");
+        const filterCountBadge = $("filterCountBadge");
 
-        // ── STATE ─────────────────────────────────────────────────────────
+        // ── STATE ─────────────────────────────────────────────────
         let origImg = null,
           origData = null,
           procData = null;
@@ -708,6 +1225,7 @@
           leaksCvs = null;
         let needDust = true,
           needLeaks = true;
+        let currentCat = "all";
 
         const FX = {
           grain: true,
@@ -720,9 +1238,9 @@
           bloom: false,
         };
         const MAX_PX = 1400,
-          JPEG_Q = 0.85;
+          JPEG_Q = 0.88;
 
-        // ── UTILS ─────────────────────────────────────────────────────────
+        // ── UTILS ─────────────────────────────────────────────────
         const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
         const lerp = (a, b, t) => a + (b - a) * t;
         function debounce(fn, ms) {
@@ -736,7 +1254,7 @@
           toast.textContent = m;
           toast.classList.add("show");
           clearTimeout(toast._t);
-          toast._t = setTimeout(() => toast.classList.remove("show"), 2200);
+          toast._t = setTimeout(() => toast.classList.remove("show"), 2400);
         }
         function prng(seed) {
           let s = seed || 42;
@@ -746,7 +1264,7 @@
           };
         }
 
-        // ── LUT ───────────────────────────────────────────────────────────
+        // ── LUT ───────────────────────────────────────────────────
         function lut(fn) {
           const a = new Uint8Array(256);
           for (let i = 0; i < 256; i++)
@@ -762,7 +1280,7 @@
             : 1 - Math.pow(2 * (1 - x), 1 + k) / 2;
         }
 
-        // ── COLOR CONVERSIONS ─────────────────────────────────────────────
+        // ── HSL ───────────────────────────────────────────────────
         function rgb2hsl(r, g, b) {
           r /= 255;
           g /= 255;
@@ -792,12 +1310,10 @@
           return { h, s, l };
         }
         function hsl2rgb(h, s, l) {
-          if (s === 0)
-            return {
-              r: Math.round(l * 255),
-              g: Math.round(l * 255),
-              b: Math.round(l * 255),
-            };
+          if (s === 0) {
+            const v = Math.round(l * 255);
+            return { r: v, g: v, b: v };
+          }
           const q = l < 0.5 ? l * (1 + s) : l + s - l * s,
             p = 2 * l - q;
           const hf = (p, q, t) => {
@@ -815,488 +1331,2109 @@
           };
         }
 
-        // ════════════════════════════════════════════════════════════════
-        //  FILTER DEFINITIONS — 12 filtros
-        // ════════════════════════════════════════════════════════════════
-
-        function mkLUTs(rf, gf, bf) {
+        // ── MK LUTS HELPER ────────────────────────────────────────
+        function mkL(rf, gf, bf) {
           return { r: lut(rf), g: lut(gf), b: lut(bf) };
         }
 
-        // 1. CPM35 — Sépia âmbar quente (CCD antigo)
-        const cpm35 = {
-          label: "CPM35",
-          desc: "Warm • Sépia CCD",
-          preview:
-            "linear-gradient(135deg,#4a2000,#9a5200,#c4890a,#e8c870,#6a3200)",
-          satAdj: -0.08,
-          expFactor: 0.83,
-          hueShift: (h) => {
-            if (h.h > 0.08 && h.h < 0.2) h.h -= 0.018;
+        // ════════════════════════════════════════════════════════════
+        //  92 FILTER DEFINITIONS
+        //  Categories: warm | cool | bw | vivid | vintage | cinema |
+        //              expired | cross | dream | japan | shadow | fade
+        // ════════════════════════════════════════════════════════════
+
+        // Helper factory for common patterns
+        function warmFilter(rBoost, gDip, bDip, satAdj, exp) {
+          return mkL(
+            (x) => clamp(sCurve(x, 0.42) * rBoost + 0.025, 0, 1),
+            (x) => clamp(sCurve(x, 0.38) * gDip, 0, 1),
+            (x) => clamp(sCurve(x, 0.3) * bDip - 0.02, 0, 1),
+          );
+        }
+        function coolFilter(rDip, gBoost, bBoost, satAdj) {
+          return mkL(
+            (x) => clamp(sCurve(x, 0.5) * rDip, 0, 1),
+            (x) => clamp(sCurve(x, 0.48) * gBoost + 0.01, 0, 1),
+            (x) => clamp(sCurve(x, 0.45) * bBoost + 0.04, 0, 1),
+          );
+        }
+
+        const FILTERS_DEF = [
+          // ════ WARM ════════════════════════════════════════════════
+          {
+            id: "cpm35",
+            label: "CPM35",
+            desc: "Sépia CCD",
+            cat: "warm",
+            halWarm: true,
+            halStr: 0.32,
+            vigStr: 0.55,
+            grainStr: 0.075,
+            satAdj: -0.08,
+            expFactor: 0.83,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.42);
+                y = y * 1.14 + 0.03;
+                if (y > 0.7)
+                  y = lerp(y, Math.min(y * 1.05, 1), (y - 0.7) / 0.3);
+                if (y < 0.12) y = y * 0.85 + 0.015;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.38);
+                y = y * 0.9 - 0.01;
+                if (y < 0.2) y = lerp(y, y * 1.08, (0.2 - y) / 0.2);
+                if (y > 0.65) y = lerp(y, y * 0.94, (y - 0.65) / 0.35);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.3);
+                y = y * 0.58 - 0.03;
+                if (y < 0.18) y = y * 0.72;
+                if (y > 0.7) y = lerp(y, y * 1.08, (y - 0.7) / 0.3);
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview: "linear-gradient(135deg,#4a2000,#9a5200,#c4890a,#e8c870)",
           },
-          halWarm: true,
-          halStr: 0.32,
-          vigStr: 0.55,
-          grainStr: 0.075,
-          luts: mkLUTs(
-            (x) => {
-              let y = sCurve(x, 0.42);
-              y = y * 1.14 + 0.03;
-              if (y > 0.7) y = lerp(y, Math.min(y * 1.05, 1), (y - 0.7) / 0.3);
-              if (y < 0.12) y = y * 0.85 + 0.015;
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.38);
-              y = y * 0.9 - 0.01;
-              if (y < 0.2) y = lerp(y, y * 1.08, (0.2 - y) / 0.2);
-              if (y > 0.65) y = lerp(y, y * 0.94, (y - 0.65) / 0.35);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.3);
-              y = y * 0.58 - 0.03;
-              if (y < 0.18) y = y * 0.72;
-              if (y > 0.7) y = lerp(y, y * 1.08, (y - 0.7) / 0.3);
-              return clamp(y, 0, 1);
-            },
-          ),
-        };
 
-        // 2. GRD R — Ricoh GR Digital • Cinemático frio
-        const grdr = {
-          label: "GRD R",
-          desc: "Cool • Cinematic",
-          preview:
-            "linear-gradient(135deg,#080e14,#152538,#1a3f52,#286070,#0a1620)",
-          satAdj: -0.22,
-          expFactor: 0.85,
-          hueShift: null,
-          halWarm: false,
-          halStr: 0.3,
-          vigStr: 0.52,
-          grainStr: 0.06,
-          luts: mkLUTs(
-            (x) => {
-              let y = sCurve(x, 0.55);
-              y = y * 0.8 + 0.02;
-              if (y < 0.18) y = y * 0.68;
-              if (y > 0.78)
-                y = lerp(y, Math.min(y * 1.06, 1), (y - 0.78) / 0.22);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.5);
-              y = y * 0.88 + 0.02;
-              if (y < 0.28) y = lerp(y, y * 1.18, (0.28 - y) / 0.28);
-              if (y > 0.75) y = lerp(y, y * 1.03, (y - 0.75) / 0.25);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.45);
-              y = y * 1.2 + 0.06;
-              if (y < 0.32) y = lerp(y, y * 1.28, (0.32 - y) / 0.32);
-              if (y > 0.8) y = lerp(y, y * 0.88, (y - 0.8) / 0.2);
-              return clamp(y, 0, 1);
-            },
-          ),
-        };
-
-        // 3. LC-A — Lomografia LC-A+ (cross-process vibrante)
-        const lca = {
-          label: "LC-A",
-          desc: "Lomo • Cross-Process",
-          preview:
-            "linear-gradient(135deg,#1a0a2e,#6a1050,#c82828,#e89000,#082060)",
-          satAdj: +0.18,
-          expFactor: 0.86,
-          hueShift: null,
-          halWarm: true,
-          halStr: 0.25,
-          vigStr: 0.68,
-          grainStr: 0.08,
-          luts: mkLUTs(
-            (x) => {
-              let y = sCurve(x, 0.65);
-              y = y * 1.18 + 0.02;
-              if (y < 0.15) y = y * 0.8;
-              if (y > 0.8) y = lerp(y, Math.min(y * 1.08, 1), (y - 0.8) / 0.2);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.6);
-              y = y * 0.88 + 0.02;
-              if (y < 0.25) y = lerp(y, y * 1.15, (0.25 - y) / 0.25);
-              if (y > 0.7) y = lerp(y, y * 1.06, (y - 0.7) / 0.3);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.55);
-              y = y * 1.14 + 0.03;
-              if (y > 0.65)
-                y = lerp(y, Math.min(y * 1.1, 1), (y - 0.65) / 0.35);
-              return clamp(y, 0, 1);
-            },
-          ),
-        };
-
-        // 4. PORTRA — Kodak Portra 400 (pele quente, pastéis suaves)
-        const portra = {
-          label: "PORTRA",
-          desc: "Kodak • Skin Warm",
-          preview:
-            "linear-gradient(135deg,#c8a090,#e0c0a8,#f0d8c0,#e8c8b0,#c0907a)",
-          satAdj: -0.06,
-          expFactor: 0.96,
-          hueShift: (h) => {
-            if (h.h > 0.02 && h.h < 0.12) h.h += 0.008;
-          }, // skin tones levemente mais quentes
-          halWarm: true,
-          halStr: 0.18,
-          vigStr: 0.38,
-          grainStr: 0.045,
-          luts: mkLUTs(
-            (x) => {
-              let y = x;
-              y = y * 1.05 + 0.04;
-              if (y > 0.82) y = lerp(y, y * 0.96, (y - 0.82) / 0.18);
-              if (y < 0.1) y = y * 0.9 + 0.02;
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = x;
-              y = y * 1.0 + 0.03;
-              if (y > 0.8) y = lerp(y, y * 0.97, (y - 0.8) / 0.2);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = x;
-              y = y * 0.86 + 0.05;
-              if (y < 0.15) y = y * 0.85 + 0.04;
-              if (y > 0.78) y = lerp(y, y * 1.04, (y - 0.78) / 0.22);
-              return clamp(y, 0, 1);
-            },
-          ),
-        };
-
-        // 5. ULTRA — Kodak Ultramax 400 (cores vibrantes, punchy)
-        const ultra = {
-          label: "ULTRA",
-          desc: "Kodak • Punchy",
-          preview:
-            "linear-gradient(135deg,#5c1800,#c04010,#f07828,#f8c060,#8a2800)",
-          satAdj: +0.1,
-          expFactor: 0.91,
-          hueShift: null,
-          halWarm: true,
-          halStr: 0.28,
-          vigStr: 0.42,
-          grainStr: 0.055,
-          luts: mkLUTs(
-            (x) => {
-              let y = sCurve(x, 0.4);
-              y = y * 1.16 + 0.03;
-              if (y > 0.68)
-                y = lerp(y, Math.min(y * 1.07, 1), (y - 0.68) / 0.32);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.35);
-              y = y * 0.96 + 0.01;
-              if (y < 0.18) y = lerp(y, y * 1.12, (0.18 - y) / 0.18);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.3);
-              y = y * 0.7 - 0.02;
-              if (y < 0.14) y = y * 0.75;
-              return clamp(y, 0, 1);
-            },
-          ),
-        };
-
-        // 6. SUPERIA — Fuji Superia 400 (verde frio, japonês)
-        const superia = {
-          label: "SUPERIA",
-          desc: "Fuji • Cool Green",
-          preview:
-            "linear-gradient(135deg,#0e1a14,#1a3020,#2a5030,#4a7850,#0c1810)",
-          satAdj: -0.12,
-          expFactor: 0.9,
-          hueShift: null,
-          halWarm: false,
-          halStr: 0.22,
-          vigStr: 0.44,
-          grainStr: 0.055,
-          luts: mkLUTs(
-            (x) => {
-              let y = sCurve(x, 0.4);
-              y = y * 0.88 + 0.02;
-              if (y < 0.2) y = y * 0.82 + 0.02;
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.38);
-              y = y * 1.02 + 0.01;
-              if (y < 0.3) y = lerp(y, y * 1.1, (0.3 - y) / 0.3);
-              if (y > 0.72) y = lerp(y, y * 0.96, (y - 0.72) / 0.28);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.35);
-              y = y * 1.06 + 0.02;
-              if (y < 0.25) y = lerp(y, y * 1.12, (0.25 - y) / 0.25);
-              return clamp(y, 0, 1);
-            },
-          ),
-        };
-
-        // 7. HP5 — Ilford HP5 Plus (preto e branco contrastado)
-        const hp5 = {
-          label: "HP5",
-          desc: "Ilford • B&W",
-          preview:
-            "linear-gradient(135deg,#000,#1a1a1a,#505050,#b0b0b0,#f0f0f0)",
-          satAdj: -1.0,
-          expFactor: 0.88, // satAdj -1 = full desaturate handled specially
-          hueShift: null,
-          halWarm: false,
-          halStr: 0.0,
-          vigStr: 0.5,
-          grainStr: 0.09,
-          bw: true, // flag especial
-          luts: mkLUTs(
-            (x) => {
-              let y = sCurve(x, 0.6);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.6);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.6);
-              return clamp(y, 0, 1);
-            },
-          ),
-        };
-
-        // 8. VELVIA — Fuji Velvia 50 (hiper saturado, azuis e verdes profundos)
-        const velvia = {
-          label: "VELVIA",
-          desc: "Fuji • Hyper Vivid",
-          preview:
-            "linear-gradient(135deg,#001840,#003a80,#0070c0,#00a060,#004820)",
-          satAdj: +0.28,
-          expFactor: 0.87,
-          hueShift: (h) => {
-            if (h.h > 0.55 && h.h < 0.75) h.h += 0.015;
-          }, // blues puxados para mais profundo
-          halWarm: false,
-          halStr: 0.2,
-          vigStr: 0.4,
-          grainStr: 0.03,
-          luts: mkLUTs(
-            (x) => {
-              let y = sCurve(x, 0.5);
-              y = y * 0.94 + 0.01;
-              if (y < 0.15) y = y * 0.8;
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.48);
-              y = y * 1.04 + 0.01;
-              if (y > 0.7) y = lerp(y, Math.min(y * 1.06, 1), (y - 0.7) / 0.3);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.45);
-              y = y * 1.16 + 0.03;
-              if (y < 0.3) y = lerp(y, y * 1.2, (0.3 - y) / 0.3);
-              return clamp(y, 0, 1);
-            },
-          ),
-        };
-
-        // 9. CINE800 — Cinestill 800T (tungstênio, halation vermelha, grão pesado)
-        const cine800 = {
-          label: "CINE800",
-          desc: "Tungsten • Film",
-          preview:
-            "linear-gradient(135deg,#060c14,#0a1c28,#102838,#1a3848,#060e18)",
-          satAdj: -0.1,
-          expFactor: 0.82,
-          hueShift: null,
-          halWarm: true,
-          halStr: 0.6,
-          vigStr: 0.58,
-          grainStr: 0.1,
-          luts: mkLUTs(
-            (x) => {
-              let y = sCurve(x, 0.48);
-              y = y * 0.82 + 0.02;
-              if (y < 0.14) y = y * 0.72;
-              if (y > 0.75)
-                y = lerp(y, Math.min(y * 1.12, 1), (y - 0.75) / 0.25);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.45);
-              y = y * 0.86 + 0.02;
-              if (y < 0.22) y = lerp(y, y * 1.08, (0.22 - y) / 0.22);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.42);
-              y = y * 1.22 + 0.06;
-              if (y < 0.35) y = lerp(y, y * 1.25, (0.35 - y) / 0.35);
-              if (y > 0.82) y = lerp(y, y * 0.85, (y - 0.82) / 0.18);
-              return clamp(y, 0, 1);
-            },
-          ),
-        };
-
-        // 10. GOLD200 — Kodak Gold 200 (dourado nostálgico, clássico)
-        const gold200 = {
-          label: "GOLD200",
-          desc: "Kodak • Golden",
-          preview:
-            "linear-gradient(135deg,#3c2400,#8a5800,#c89020,#f0c850,#6a4000)",
-          satAdj: +0.05,
-          expFactor: 0.93,
-          hueShift: (h) => {
-            if (h.h > 0.05 && h.h < 0.18) h.h -= 0.01;
+          {
+            id: "gold200",
+            label: "GOLD200",
+            desc: "Kodak Golden",
+            cat: "warm",
+            halWarm: true,
+            halStr: 0.22,
+            vigStr: 0.36,
+            grainStr: 0.05,
+            satAdj: +0.05,
+            expFactor: 0.93,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.35);
+                y = y * 1.1 + 0.03;
+                if (y > 0.65)
+                  y = lerp(y, Math.min(y * 1.06, 1), (y - 0.65) / 0.35);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.32);
+                y = y * 0.96 + 0.02;
+                if (y < 0.15) y = lerp(y, y * 1.05, (0.15 - y) / 0.15);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.28);
+                y = y * 0.72 - 0.01;
+                if (y < 0.12) y = y * 0.8;
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview: "linear-gradient(135deg,#3c2400,#8a5800,#c89020,#f0c850)",
           },
-          halWarm: true,
-          halStr: 0.22,
-          vigStr: 0.36,
-          grainStr: 0.05,
-          luts: mkLUTs(
-            (x) => {
-              let y = sCurve(x, 0.35);
-              y = y * 1.1 + 0.03;
-              if (y > 0.65)
-                y = lerp(y, Math.min(y * 1.06, 1), (y - 0.65) / 0.35);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.32);
-              y = y * 0.96 + 0.02;
-              if (y < 0.15) y = lerp(y, y * 1.05, (0.15 - y) / 0.15);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.28);
-              y = y * 0.72 - 0.01;
-              if (y < 0.12) y = y * 0.8;
-              if (y > 0.75) y = lerp(y, y * 1.05, (y - 0.75) / 0.25);
-              return clamp(y, 0, 1);
-            },
-          ),
-        };
 
-        // 11. POLAR — Polaroid 600 (desbotado, frio, lifted)
-        const polar = {
-          label: "POLAR",
-          desc: "Polaroid • Faded",
-          preview:
-            "linear-gradient(135deg,#c0c8d8,#d8e0f0,#e8eef8,#d0d8e8,#b8c0d0)",
-          satAdj: -0.22,
-          expFactor: 1.0,
-          hueShift: null,
-          halWarm: false,
-          halStr: 0.12,
-          vigStr: 0.25,
-          grainStr: 0.04,
-          luts: mkLUTs(
-            (x) => {
-              let y = x;
-              y = y * 0.68 + 0.14;
-              if (y > 0.78) y = lerp(y, y * 0.95, (y - 0.78) / 0.22);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = x;
-              y = y * 0.7 + 0.14;
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = x;
-              y = y * 0.8 + 0.17;
-              if (y > 0.82)
-                y = lerp(y, Math.min(y * 1.04, 1), (y - 0.82) / 0.18);
-              return clamp(y, 0, 1);
-            },
-          ),
-        };
+          {
+            id: "portra",
+            label: "PORTRA",
+            desc: "Kodak Skin",
+            cat: "warm",
+            halWarm: true,
+            halStr: 0.18,
+            vigStr: 0.38,
+            grainStr: 0.045,
+            satAdj: -0.06,
+            expFactor: 0.96,
+            luts: mkL(
+              (x) => {
+                let y = x;
+                y = y * 1.05 + 0.04;
+                if (y > 0.82) y = lerp(y, y * 0.96, (y - 0.82) / 0.18);
+                if (y < 0.1) y = y * 0.9 + 0.02;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = x;
+                y = y * 1.0 + 0.03;
+                if (y > 0.8) y = lerp(y, y * 0.97, (y - 0.8) / 0.2);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = x;
+                y = y * 0.86 + 0.05;
+                if (y < 0.15) y = y * 0.85 + 0.04;
+                if (y > 0.78) y = lerp(y, y * 1.04, (y - 0.78) / 0.22);
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview: "linear-gradient(135deg,#c8a090,#e0c0a8,#f0d8c0,#e8c8b0)",
+          },
 
-        // 12. AGFA — Agfa Vista 200 (cross-process, magenta/verde vibrante)
-        const agfa = {
-          label: "AGFA",
-          desc: "Agfa • Cross Pro",
-          preview:
-            "linear-gradient(135deg,#200838,#601060,#c020a0,#20c060,#103020)",
-          satAdj: +0.2,
-          expFactor: 0.88,
-          hueShift: (h) => {
-            if (h.h > 0.8 || h.h < 0.05) h.h += 0.025;
-          }, // reds → magenta
-          halWarm: false,
-          halStr: 0.2,
-          vigStr: 0.45,
-          grainStr: 0.065,
-          luts: mkLUTs(
-            (x) => {
-              let y = sCurve(x, 0.55);
-              y = y * 1.08 + 0.03;
-              if (y > 0.72)
-                y = lerp(y, Math.min(y * 1.1, 1), (y - 0.72) / 0.28);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.5);
-              y = y * 1.06 + 0.01;
-              if (y < 0.25) y = lerp(y, y * 1.15, (0.25 - y) / 0.25);
-              return clamp(y, 0, 1);
-            },
-            (x) => {
-              let y = sCurve(x, 0.48);
-              y = y * 1.1 + 0.04;
-              if (y < 0.2) y = lerp(y, y * 1.1, (0.2 - y) / 0.2);
-              return clamp(y, 0, 1);
-            },
-          ),
-        };
+          {
+            id: "ultra",
+            label: "ULTRA",
+            desc: "Kodak Punchy",
+            cat: "warm",
+            halWarm: true,
+            halStr: 0.28,
+            vigStr: 0.42,
+            grainStr: 0.055,
+            satAdj: +0.1,
+            expFactor: 0.91,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.4);
+                y = y * 1.16 + 0.03;
+                if (y > 0.68)
+                  y = lerp(y, Math.min(y * 1.07, 1), (y - 0.68) / 0.32);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.35);
+                y = y * 0.96 + 0.01;
+                if (y < 0.18) y = lerp(y, y * 1.12, (0.18 - y) / 0.18);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.3);
+                y = y * 0.7 - 0.02;
+                if (y < 0.14) y = y * 0.75;
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview: "linear-gradient(135deg,#5c1800,#c04010,#f07828,#f8c060)",
+          },
 
-        // ── FILTER REGISTRY ───────────────────────────────────────────────
-        const FILTERS = {
-          cpm35,
-          grdr,
-          lca,
-          portra,
-          ultra,
-          superia,
-          hp5,
-          velvia,
-          cine800,
-          gold200,
-          polar,
-          agfa,
-        };
+          {
+            id: "honey",
+            label: "HONEY",
+            desc: "Âmbar doce",
+            cat: "warm",
+            halWarm: true,
+            halStr: 0.2,
+            vigStr: 0.4,
+            grainStr: 0.04,
+            satAdj: +0.04,
+            expFactor: 0.95,
+            luts: mkL(
+              (x) => {
+                let y = x * 1.08 + 0.04;
+                y = sCurve(y, 0.3);
+                return clamp(y, 0, 1);
+              },
+              (x) => clamp(x * 0.92 + 0.03, 0, 1),
+              (x) => clamp(x * 0.55 + 0.02, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#2a1500,#7a4500,#d08020,#f5c840)",
+          },
 
-        // ── BUILD FILTER CARDS ────────────────────────────────────────────
-        Object.entries(FILTERS).forEach(([id, f]) => {
-          const card = document.createElement("div");
-          card.className = "filter-card" + (id === "cpm35" ? " active" : "");
-          card.dataset.id = id;
-          card.innerHTML = `
-        <div class="fc-preview" style="background:${f.preview}"></div>
-        <div class="fc-name">${f.label}</div>
-        <div class="fc-desc">${f.desc}</div>
-        <div class="fc-dot"></div>`;
-          card.addEventListener("click", () => selectFilter(id));
-          filterScroll.appendChild(card);
+          {
+            id: "campfire",
+            label: "CAMPFIRE",
+            desc: "Fogo vivo",
+            cat: "warm",
+            halWarm: true,
+            halStr: 0.45,
+            vigStr: 0.6,
+            grainStr: 0.07,
+            satAdj: +0.08,
+            expFactor: 0.84,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.5);
+                y = y * 1.22 + 0.04;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.4);
+                y = y * 0.7 - 0.01;
+                return clamp(y, 0, 1);
+              },
+              (x) => clamp(x * 0.38 - 0.02, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#1a0800,#4a1400,#c83000,#f06010)",
+          },
+
+          {
+            id: "dusk",
+            label: "DUSK",
+            desc: "Pôr do sol",
+            cat: "warm",
+            halWarm: true,
+            halStr: 0.35,
+            vigStr: 0.5,
+            grainStr: 0.055,
+            satAdj: +0.12,
+            expFactor: 0.88,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.45) * 1.18 + 0.03, 0, 1),
+              (x) => clamp(sCurve(x, 0.38) * 0.75 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.35) * 0.82 + 0.06, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#1a0a00,#802010,#c85020,#f09030,#e0c060)",
+          },
+
+          {
+            id: "sahara",
+            label: "SAHARA",
+            desc: "Areia & luz",
+            cat: "warm",
+            halWarm: true,
+            halStr: 0.18,
+            vigStr: 0.32,
+            grainStr: 0.06,
+            satAdj: -0.1,
+            expFactor: 0.98,
+            luts: mkL(
+              (x) => clamp(x * 1.04 + 0.06, 0, 1),
+              (x) => clamp(x * 0.94 + 0.05, 0, 1),
+              (x) => clamp(x * 0.68 + 0.06, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#3a2800,#8a6828,#c8a860,#e8d098)",
+          },
+
+          {
+            id: "caramel",
+            label: "CARAMEL",
+            desc: "Tom caramelo",
+            cat: "warm",
+            halWarm: true,
+            halStr: 0.2,
+            vigStr: 0.38,
+            grainStr: 0.048,
+            satAdj: -0.04,
+            expFactor: 0.92,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.35) * 1.1 + 0.02;
+                return clamp(y, 0, 1);
+              },
+              (x) => clamp(sCurve(x, 0.3) * 0.88 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.25) * 0.6 + 0.01, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#2a1800,#704000,#b07030,#d8a060)",
+          },
+
+          {
+            id: "terracotta",
+            label: "TERRA",
+            desc: "Terracota quente",
+            cat: "warm",
+            halWarm: true,
+            halStr: 0.25,
+            vigStr: 0.44,
+            grainStr: 0.06,
+            satAdj: +0.06,
+            expFactor: 0.9,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.42) * 1.12 + 0.03, 0, 1),
+              (x) => clamp(sCurve(x, 0.35) * 0.72 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.28) * 0.5 + 0.01, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#2a1000,#702010,#c04828,#d87050)",
+          },
+
+          {
+            id: "sunrise",
+            label: "SUNRISE",
+            desc: "Amanhecer",
+            cat: "warm",
+            halWarm: true,
+            halStr: 0.3,
+            vigStr: 0.42,
+            grainStr: 0.05,
+            satAdj: +0.1,
+            expFactor: 0.93,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.4) * 1.15 + 0.04, 0, 1),
+              (x) => clamp(sCurve(x, 0.35) * 0.82 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.3) * 0.9 + 0.08, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#0a0000,#400808,#c02020,#f06030,#f8c870)",
+          },
+
+          {
+            id: "bourbon",
+            label: "BOURBON",
+            desc: "Whisky ambar",
+            cat: "warm",
+            halWarm: true,
+            halStr: 0.28,
+            vigStr: 0.5,
+            grainStr: 0.065,
+            satAdj: -0.05,
+            expFactor: 0.87,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.45) * 1.08 + 0.03;
+                return clamp(y, 0, 1);
+              },
+              (x) => clamp(sCurve(x, 0.38) * 0.82 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.28) * 0.48 - 0.01, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#1a0800,#4a2000,#904010,#c07020)",
+          },
+
+          // ════ COOL ════════════════════════════════════════════════
+          {
+            id: "grdr",
+            label: "GRD R",
+            desc: "Ricoh Cinematic",
+            cat: "cool",
+            halWarm: false,
+            halStr: 0.3,
+            vigStr: 0.52,
+            grainStr: 0.06,
+            satAdj: -0.22,
+            expFactor: 0.85,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.55);
+                y = y * 0.8 + 0.02;
+                if (y < 0.18) y = y * 0.68;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.5);
+                y = y * 0.88 + 0.02;
+                if (y < 0.28) y = lerp(y, y * 1.18, (0.28 - y) / 0.28);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.45);
+                y = y * 1.2 + 0.06;
+                if (y < 0.32) y = lerp(y, y * 1.28, (0.32 - y) / 0.32);
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview: "linear-gradient(135deg,#080e14,#152538,#1a3f52,#286070)",
+          },
+
+          {
+            id: "arctic",
+            label: "ARCTIC",
+            desc: "Gelo polar",
+            cat: "cool",
+            halWarm: false,
+            halStr: 0.18,
+            vigStr: 0.4,
+            grainStr: 0.04,
+            satAdj: -0.3,
+            expFactor: 1.05,
+            luts: mkL(
+              (x) => clamp(x * 0.85 + 0.12, 0, 1),
+              (x) => clamp(x * 0.88 + 0.1, 0, 1),
+              (x) => clamp(x * 0.95 + 0.1, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#c8d8e8,#d8e8f8,#e8f0ff,#f0f8ff)",
+          },
+
+          {
+            id: "steel",
+            label: "STEEL",
+            desc: "Metal frio",
+            cat: "cool",
+            halWarm: false,
+            halStr: 0.15,
+            vigStr: 0.48,
+            grainStr: 0.055,
+            satAdj: -0.35,
+            expFactor: 0.88,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.5) * 0.82 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.48) * 0.85 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.45) * 1.05 + 0.04, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#0a0c10,#1a2030,#2a3045,#3a4055)",
+          },
+
+          {
+            id: "slate",
+            label: "SLATE",
+            desc: "Ardósia",
+            cat: "cool",
+            halWarm: false,
+            halStr: 0.12,
+            vigStr: 0.42,
+            grainStr: 0.05,
+            satAdj: -0.28,
+            expFactor: 0.9,
+            luts: mkL(
+              (x) => clamp(x * 0.8 + 0.03, 0, 1),
+              (x) => clamp(x * 0.82 + 0.03, 0, 1),
+              (x) => clamp(x * 0.9 + 0.05, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#0a0e14,#182030,#263045,#384058)",
+          },
+
+          {
+            id: "nordic",
+            label: "NORDIC",
+            desc: "Escandinávia",
+            cat: "cool",
+            halWarm: false,
+            halStr: 0.22,
+            vigStr: 0.45,
+            grainStr: 0.05,
+            satAdj: -0.18,
+            expFactor: 0.93,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.48) * 0.88 + 0.04, 0, 1),
+              (x) => clamp(sCurve(x, 0.46) * 0.92 + 0.04, 0, 1),
+              (x) => clamp(sCurve(x, 0.44) * 1.08 + 0.06, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#060a10,#102030,#1a3858,#286888)",
+          },
+
+          {
+            id: "moonlight",
+            label: "MOON",
+            desc: "Luz lunar",
+            cat: "cool",
+            halWarm: false,
+            halStr: 0.25,
+            vigStr: 0.55,
+            grainStr: 0.06,
+            satAdj: -0.4,
+            expFactor: 0.82,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.55) * 0.75 + 0.04, 0, 1),
+              (x) => clamp(sCurve(x, 0.53) * 0.8 + 0.05, 0, 1),
+              (x) => clamp(sCurve(x, 0.5) * 1.12 + 0.08, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#050810,#101828,#182840,#204060)",
+          },
+
+          {
+            id: "glacier",
+            label: "GLACIER",
+            desc: "Glaciar azul",
+            cat: "cool",
+            halWarm: false,
+            halStr: 0.2,
+            vigStr: 0.4,
+            grainStr: 0.042,
+            satAdj: -0.15,
+            expFactor: 1.02,
+            luts: mkL(
+              (x) => clamp(x * 0.9 + 0.08, 0, 1),
+              (x) => clamp(x * 0.92 + 0.07, 0, 1),
+              (x) => clamp(x * 1.05 + 0.1, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#a0c8e0,#c0d8f0,#d8ecff,#e8f4ff)",
+          },
+
+          {
+            id: "midnight",
+            label: "MIDNIGHT",
+            desc: "Noite profunda",
+            cat: "cool",
+            halWarm: false,
+            halStr: 0.1,
+            vigStr: 0.65,
+            grainStr: 0.07,
+            satAdj: -0.45,
+            expFactor: 0.78,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.6) * 0.7 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.58) * 0.74 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.55) * 0.92 + 0.03, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#020408,#06101a,#0a182a,#10203a)",
+          },
+
+          // ════ B&W ═════════════════════════════════════════════════
+          {
+            id: "hp5",
+            label: "HP5",
+            desc: "Ilford B&W",
+            cat: "bw",
+            bw: true,
+            halWarm: false,
+            halStr: 0,
+            vigStr: 0.5,
+            grainStr: 0.09,
+            satAdj: -1,
+            expFactor: 0.88,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.6), 0, 1),
+              (x) => clamp(sCurve(x, 0.6), 0, 1),
+              (x) => clamp(sCurve(x, 0.6), 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#000,#1a1a1a,#505050,#b0b0b0,#f0f0f0)",
+          },
+
+          {
+            id: "tri_x",
+            label: "TRI-X",
+            desc: "Kodak Contrasty",
+            cat: "bw",
+            bw: true,
+            halWarm: false,
+            halStr: 0,
+            vigStr: 0.55,
+            grainStr: 0.11,
+            satAdj: -1,
+            expFactor: 0.85,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.72);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.72);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.72);
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview:
+              "linear-gradient(135deg,#000,#111,#404040,#a0a0a0,#f8f8f8)",
+          },
+
+          {
+            id: "ortho",
+            label: "ORTHO",
+            desc: "Ortocromático",
+            cat: "bw",
+            bw: true,
+            bwMix: [0.5, 0.42, 0.08],
+            halWarm: false,
+            halStr: 0,
+            vigStr: 0.48,
+            grainStr: 0.085,
+            satAdj: -1,
+            expFactor: 0.9,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.55), 0, 1),
+              (x) => clamp(sCurve(x, 0.55), 0, 1),
+              (x) => clamp(sCurve(x, 0.55), 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#000,#0d0d0d,#383838,#909090,#e8e8e8)",
+          },
+
+          {
+            id: "delta",
+            label: "DELTA",
+            desc: "Ilford suave",
+            cat: "bw",
+            bw: true,
+            halWarm: false,
+            halStr: 0,
+            vigStr: 0.42,
+            grainStr: 0.07,
+            satAdj: -1,
+            expFactor: 0.92,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.45), 0, 1),
+              (x) => clamp(sCurve(x, 0.45), 0, 1),
+              (x) => clamp(sCurve(x, 0.45), 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#050505,#202020,#606060,#c0c0c0,#f5f5f5)",
+          },
+
+          {
+            id: "infrared",
+            label: "IR",
+            desc: "Infravermelho",
+            cat: "bw",
+            bw: true,
+            bwMix: [-0.15, 0.55, 0.6],
+            halWarm: false,
+            halStr: 0,
+            vigStr: 0.5,
+            grainStr: 0.065,
+            satAdj: -1,
+            expFactor: 1.02,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.65);
+                if (y > 0.6) y = lerp(y, 1, (y - 0.6) / 0.4) * 0.92;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.65);
+                if (y > 0.6) y = lerp(y, 1, (y - 0.6) / 0.4) * 0.92;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.65);
+                if (y > 0.6) y = lerp(y, 1, (y - 0.6) / 0.4) * 0.92;
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview:
+              "linear-gradient(135deg,#060606,#181818,#606060,#d8d8d8,#ffffff)",
+          },
+
+          {
+            id: "selenium",
+            label: "SELÊNIO",
+            desc: "Tom sépia suave",
+            cat: "bw",
+            bw: true,
+            bwTone: { r: 1.04, g: 1.0, b: 0.92 },
+            halWarm: true,
+            halStr: 0,
+            vigStr: 0.45,
+            grainStr: 0.055,
+            satAdj: -1,
+            expFactor: 0.9,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.5), 0, 1),
+              (x) => clamp(sCurve(x, 0.5), 0, 1),
+              (x) => clamp(sCurve(x, 0.5), 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#0a0800,#282015,#605848,#b0a890,#e8e0d0)",
+          },
+
+          {
+            id: "cyanotype",
+            label: "CIANO",
+            desc: "Tom azul ciano",
+            cat: "bw",
+            bw: true,
+            bwTone: { r: 0.9, g: 0.96, b: 1.1 },
+            halWarm: false,
+            halStr: 0,
+            vigStr: 0.4,
+            grainStr: 0.05,
+            satAdj: -1,
+            expFactor: 0.95,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.48), 0, 1),
+              (x) => clamp(sCurve(x, 0.48), 0, 1),
+              (x) => clamp(sCurve(x, 0.48), 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#020810,#081828,#103050,#2050a0,#a0c8e8)",
+          },
+
+          // ════ VIVID ═══════════════════════════════════════════════
+          {
+            id: "velvia",
+            label: "VELVIA",
+            desc: "Fuji Hyper Vivid",
+            cat: "vivid",
+            halWarm: false,
+            halStr: 0.2,
+            vigStr: 0.4,
+            grainStr: 0.03,
+            satAdj: +0.28,
+            expFactor: 0.87,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.5);
+                y = y * 0.94 + 0.01;
+                if (y < 0.15) y = y * 0.8;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.48);
+                y = y * 1.04 + 0.01;
+                if (y > 0.7)
+                  y = lerp(y, Math.min(y * 1.06, 1), (y - 0.7) / 0.3);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.45);
+                y = y * 1.16 + 0.03;
+                if (y < 0.3) y = lerp(y, y * 1.2, (0.3 - y) / 0.3);
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview: "linear-gradient(135deg,#001840,#003a80,#0070c0,#00a060)",
+          },
+
+          {
+            id: "lca",
+            label: "LC-A",
+            desc: "Lomo Cross-Process",
+            cat: "vivid",
+            halWarm: true,
+            halStr: 0.25,
+            vigStr: 0.68,
+            grainStr: 0.08,
+            satAdj: +0.18,
+            expFactor: 0.86,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.65);
+                y = y * 1.18 + 0.02;
+                if (y < 0.15) y = y * 0.8;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.6);
+                y = y * 0.88 + 0.02;
+                if (y < 0.25) y = lerp(y, y * 1.15, (0.25 - y) / 0.25);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.55);
+                y = y * 1.14 + 0.03;
+                if (y > 0.65)
+                  y = lerp(y, Math.min(y * 1.1, 1), (y - 0.65) / 0.35);
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview: "linear-gradient(135deg,#1a0a2e,#6a1050,#c82828,#e89000)",
+          },
+
+          {
+            id: "superia",
+            label: "SUPERIA",
+            desc: "Fuji Cool Green",
+            cat: "vivid",
+            halWarm: false,
+            halStr: 0.22,
+            vigStr: 0.44,
+            grainStr: 0.055,
+            satAdj: -0.12,
+            expFactor: 0.9,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.4);
+                y = y * 0.88 + 0.02;
+                if (y < 0.2) y = y * 0.82 + 0.02;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.38);
+                y = y * 1.02 + 0.01;
+                if (y < 0.3) y = lerp(y, y * 1.1, (0.3 - y) / 0.3);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.35);
+                y = y * 1.06 + 0.02;
+                if (y < 0.25) y = lerp(y, y * 1.12, (0.25 - y) / 0.25);
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview: "linear-gradient(135deg,#0e1a14,#1a3020,#2a5030,#4a7850)",
+          },
+
+          {
+            id: "tropical",
+            label: "TROPICAL",
+            desc: "Cores tropicais",
+            cat: "vivid",
+            halWarm: true,
+            halStr: 0.22,
+            vigStr: 0.38,
+            grainStr: 0.045,
+            satAdj: +0.25,
+            expFactor: 0.92,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.4) * 1.12 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.38) * 1.08 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.35) * 0.75 + 0.02, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#0a1800,#204000,#48b020,#a8e040,#f8e820)",
+          },
+
+          {
+            id: "neon",
+            label: "NEON",
+            desc: "Neon vibe",
+            cat: "vivid",
+            halWarm: false,
+            halStr: 0.3,
+            vigStr: 0.6,
+            grainStr: 0.05,
+            satAdj: +0.35,
+            expFactor: 0.85,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.6) * 1.1 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.55) * 0.7 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.5) * 1.25 + 0.05, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#0a001a,#200038,#4000a0,#8020e0,#c040ff)",
+          },
+
+          {
+            id: "hypercolor",
+            label: "HYPER",
+            desc: "Saturação máxima",
+            cat: "vivid",
+            halWarm: false,
+            halStr: 0.2,
+            vigStr: 0.35,
+            grainStr: 0.035,
+            satAdj: +0.4,
+            expFactor: 0.9,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.45) * 1.08 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.43) * 1.06 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.42) * 1.1 + 0.02, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#ff0040,#ff8000,#00ff80,#0040ff,#8000ff)",
+          },
+
+          {
+            id: "vaporwave",
+            label: "VAPOR",
+            desc: "Vaporwave",
+            cat: "vivid",
+            halWarm: false,
+            halStr: 0.35,
+            vigStr: 0.55,
+            grainStr: 0.06,
+            satAdj: +0.3,
+            expFactor: 0.88,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.5) * 1.15 + 0.04, 0, 1),
+              (x) => clamp(sCurve(x, 0.45) * 0.65 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.42) * 1.3 + 0.06, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#0a0020,#200060,#a000c0,#ff40a0,#40c0ff)",
+          },
+
+          // ════ VINTAGE ═════════════════════════════════════════════
+          {
+            id: "polar",
+            label: "POLAR",
+            desc: "Polaroid Faded",
+            cat: "vintage",
+            halWarm: false,
+            halStr: 0.12,
+            vigStr: 0.25,
+            grainStr: 0.04,
+            satAdj: -0.22,
+            expFactor: 1.0,
+            luts: mkL(
+              (x) => clamp(x * 0.68 + 0.14, 0, 1),
+              (x) => clamp(x * 0.7 + 0.14, 0, 1),
+              (x) => clamp(x * 0.8 + 0.17, 0, 1),
+            ),
+            preview: "linear-gradient(135deg,#c0c8d8,#d8e0f0,#e8eef8,#d0d8e8)",
+          },
+
+          {
+            id: "agfa",
+            label: "AGFA",
+            desc: "Agfa Cross Pro",
+            cat: "vintage",
+            halWarm: false,
+            halStr: 0.2,
+            vigStr: 0.45,
+            grainStr: 0.065,
+            satAdj: +0.2,
+            expFactor: 0.88,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.55);
+                y = y * 1.08 + 0.03;
+                if (y > 0.72)
+                  y = lerp(y, Math.min(y * 1.1, 1), (y - 0.72) / 0.28);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.5);
+                y = y * 1.06 + 0.01;
+                if (y < 0.25) y = lerp(y, y * 1.15, (0.25 - y) / 0.25);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.48);
+                y = y * 1.1 + 0.04;
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview: "linear-gradient(135deg,#200838,#601060,#c020a0,#20c060)",
+          },
+
+          {
+            id: "faded70s",
+            label: "70s",
+            desc: "Faded Anos 70",
+            cat: "vintage",
+            halWarm: true,
+            halStr: 0.15,
+            vigStr: 0.3,
+            grainStr: 0.07,
+            satAdj: -0.08,
+            expFactor: 0.98,
+            luts: mkL(
+              (x) => clamp(x * 0.78 + 0.13, 0, 1),
+              (x) => clamp(x * 0.72 + 0.12, 0, 1),
+              (x) => clamp(x * 0.55 + 0.12, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#2a1800,#604020,#a07838,#c8a868,#d8c898)",
+          },
+
+          {
+            id: "disco",
+            label: "DISCO",
+            desc: "Anos 70 vibrante",
+            cat: "vintage",
+            halWarm: true,
+            halStr: 0.25,
+            vigStr: 0.42,
+            grainStr: 0.065,
+            satAdj: +0.15,
+            expFactor: 0.9,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.4) * 1.08 + 0.05, 0, 1),
+              (x) => clamp(sCurve(x, 0.35) * 0.85 + 0.04, 0, 1),
+              (x) => clamp(sCurve(x, 0.32) * 0.7 + 0.08, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#3a1500,#884020,#d08040,#e8b870,#f0d8a0)",
+          },
+
+          {
+            id: "retro90",
+            label: "90s",
+            desc: "Retro Anos 90",
+            cat: "vintage",
+            halWarm: false,
+            halStr: 0.18,
+            vigStr: 0.35,
+            grainStr: 0.055,
+            satAdj: +0.1,
+            expFactor: 0.93,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.38) * 1.02 + 0.03, 0, 1),
+              (x) => clamp(sCurve(x, 0.36) * 0.96 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.35) * 1.12 + 0.04, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#100020,#381060,#7030a0,#a060c0,#c090d8)",
+          },
+
+          {
+            id: "expired",
+            label: "EXPIRED",
+            desc: "Filme expirado",
+            cat: "vintage",
+            halWarm: true,
+            halStr: 0.2,
+            vigStr: 0.35,
+            grainStr: 0.1,
+            satAdj: -0.15,
+            expFactor: 1.02,
+            luts: mkL(
+              (x) =>
+                clamp(x * 0.75 + 0.16 + (Math.random() * 0.02 - 0.01), 0, 1),
+              (x) => clamp(x * 0.68 + 0.14, 0, 1),
+              (x) => clamp(x * 0.58 + 0.13, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#282010,#584830,#887858,#b8a888,#d0c8a8)",
+          },
+
+          {
+            id: "daguerro",
+            label: "DAGUERRO",
+            desc: "Daguerreótipo",
+            cat: "vintage",
+            bw: true,
+            bwTone: { r: 1.05, g: 1.02, b: 0.88 },
+            halWarm: true,
+            halStr: 0,
+            vigStr: 0.55,
+            grainStr: 0.12,
+            satAdj: -1,
+            expFactor: 0.88,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.65);
+                if (y < 0.12) y = y * 0.7;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.65);
+                if (y < 0.12) y = y * 0.7;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.65);
+                if (y < 0.12) y = y * 0.7;
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview:
+              "linear-gradient(135deg,#050300,#181208,#403828,#807060,#c0b8a8)",
+          },
+
+          {
+            id: "ambrotype",
+            label: "ÂMBRO",
+            desc: "Ambrótipo escuro",
+            cat: "vintage",
+            bw: true,
+            bwTone: { r: 1.06, g: 0.98, b: 0.85 },
+            halWarm: true,
+            halStr: 0,
+            vigStr: 0.65,
+            grainStr: 0.1,
+            satAdj: -1,
+            expFactor: 0.82,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.7);
+                if (y < 0.2) y = y * 0.6;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.7);
+                if (y < 0.2) y = y * 0.6;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.7);
+                if (y < 0.2) y = y * 0.6;
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview:
+              "linear-gradient(135deg,#0a0500,#201508,#503820,#907050,#b89878)",
+          },
+
+          {
+            id: "sepia_deep",
+            label: "SÉPIA",
+            desc: "Sépia profundo",
+            cat: "vintage",
+            bw: true,
+            bwTone: { r: 1.08, g: 0.96, b: 0.78 },
+            halWarm: true,
+            halStr: 0,
+            vigStr: 0.48,
+            grainStr: 0.075,
+            satAdj: -1,
+            expFactor: 0.9,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.52), 0, 1),
+              (x) => clamp(sCurve(x, 0.52), 0, 1),
+              (x) => clamp(sCurve(x, 0.52), 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#0a0500,#2a1800,#705030,#b08050,#d0b888)",
+          },
+
+          // ════ CINEMA ══════════════════════════════════════════════
+          {
+            id: "cine800",
+            label: "CINE800",
+            desc: "Cinestill Tungsten",
+            cat: "cinema",
+            halWarm: true,
+            halStr: 0.6,
+            vigStr: 0.58,
+            grainStr: 0.1,
+            satAdj: -0.1,
+            expFactor: 0.82,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.48);
+                y = y * 0.82 + 0.02;
+                if (y < 0.14) y = y * 0.72;
+                if (y > 0.75)
+                  y = lerp(y, Math.min(y * 1.12, 1), (y - 0.75) / 0.25);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.45);
+                y = y * 0.86 + 0.02;
+                if (y < 0.22) y = lerp(y, y * 1.08, (0.22 - y) / 0.22);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.42);
+                y = y * 1.22 + 0.06;
+                if (y < 0.35) y = lerp(y, y * 1.25, (0.35 - y) / 0.35);
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview: "linear-gradient(135deg,#060c14,#0a1c28,#102838,#1a3848)",
+          },
+
+          {
+            id: "bleach",
+            label: "BLEACH",
+            desc: "Bypass de prata",
+            cat: "cinema",
+            halWarm: false,
+            halStr: 0.2,
+            vigStr: 0.5,
+            grainStr: 0.065,
+            satAdj: -0.35,
+            expFactor: 0.88,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.65);
+                y = lerp(x, y, 0.6);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.65);
+                y = lerp(x, y, 0.6);
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.65);
+                y = lerp(x, y, 0.6);
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview:
+              "linear-gradient(135deg,#080808,#1a1a1a,#383838,#808080,#d0d0d0)",
+          },
+
+          {
+            id: "teal_orange",
+            label: "TEAL&ORG",
+            desc: "Hollywood grade",
+            cat: "cinema",
+            halWarm: true,
+            halStr: 0.3,
+            vigStr: 0.48,
+            grainStr: 0.05,
+            satAdj: +0.08,
+            expFactor: 0.88,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.45) * 1.12 + 0.03, 0, 1),
+              (x) => clamp(sCurve(x, 0.4) * 0.82 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.42) * 0.65 + 0.02, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#002020,#004040,#007060,#c06020,#e89030)",
+          },
+
+          {
+            id: "noire",
+            label: "NOIRE",
+            desc: "Film noir",
+            cat: "cinema",
+            bw: true,
+            halWarm: false,
+            halStr: 0,
+            vigStr: 0.72,
+            grainStr: 0.1,
+            satAdj: -1,
+            expFactor: 0.8,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.75);
+                if (y < 0.3) y = y * 0.7;
+                if (y > 0.7) y = lerp(y, 1, (y - 0.7) / 0.3) * 0.9;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.75);
+                if (y < 0.3) y = y * 0.7;
+                if (y > 0.7) y = lerp(y, 1, (y - 0.7) / 0.3) * 0.9;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.75);
+                if (y < 0.3) y = y * 0.7;
+                if (y > 0.7) y = lerp(y, 1, (y - 0.7) / 0.3) * 0.9;
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview:
+              "linear-gradient(135deg,#000,#080808,#181818,#404040,#d0d0d0)",
+          },
+
+          {
+            id: "kodachrome",
+            label: "KODA",
+            desc: "Kodachrome 64",
+            cat: "cinema",
+            halWarm: true,
+            halStr: 0.25,
+            vigStr: 0.44,
+            grainStr: 0.048,
+            satAdj: +0.14,
+            expFactor: 0.89,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.42) * 1.12 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.38) * 0.9 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.35) * 0.72 + 0.01, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#200800,#601800,#c03800,#e87828,#f0c060)",
+          },
+
+          {
+            id: "redscale",
+            label: "REDSCALE",
+            desc: "Redscale film",
+            cat: "cinema",
+            halWarm: true,
+            halStr: 0.5,
+            vigStr: 0.55,
+            grainStr: 0.09,
+            satAdj: +0.12,
+            expFactor: 0.86,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.4) * 1.28 + 0.04, 0, 1),
+              (x) => clamp(sCurve(x, 0.35) * 0.55 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.28) * 0.28 + 0.01, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#100000,#3a0000,#900800,#e02010,#f86040)",
+          },
+
+          {
+            id: "scope",
+            label: "SCOPE",
+            desc: "Anamórfico",
+            cat: "cinema",
+            halWarm: false,
+            halStr: 0.35,
+            vigStr: 0.6,
+            grainStr: 0.055,
+            satAdj: -0.15,
+            expFactor: 0.86,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.52);
+                y = y * 0.85 + 0.02;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.5);
+                y = y * 0.9 + 0.02;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.48);
+                y = y * 1.1 + 0.05;
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview:
+              "linear-gradient(135deg,#060810,#0e1828,#182840,#204060,#285880)",
+          },
+
+          {
+            id: "westernfilm",
+            label: "WESTERN",
+            desc: "Faroeste",
+            cat: "cinema",
+            halWarm: true,
+            halStr: 0.3,
+            vigStr: 0.58,
+            grainStr: 0.085,
+            satAdj: -0.12,
+            expFactor: 0.87,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.4) * 1.05 + 0.04, 0, 1),
+              (x) => clamp(sCurve(x, 0.35) * 0.85 + 0.03, 0, 1),
+              (x) => clamp(sCurve(x, 0.3) * 0.58 + 0.02, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#180a00,#503010,#907040,#c0a060,#d8c080)",
+          },
+
+          // ════ EXPIRED ═════════════════════════════════════════════
+          {
+            id: "crossprocess",
+            label: "CROSS",
+            desc: "Cross process",
+            cat: "expired",
+            halWarm: false,
+            halStr: 0.28,
+            vigStr: 0.52,
+            grainStr: 0.08,
+            satAdj: +0.22,
+            expFactor: 0.87,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.6) * 1.2 + 0.04, 0, 1),
+              (x) => clamp(sCurve(x, 0.55) * 0.65 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.5) * 1.18 + 0.05, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#0a002a,#300880,#a010c0,#20d080,#80ff20)",
+          },
+
+          {
+            id: "shift",
+            label: "SHIFT",
+            desc: "Color shift",
+            cat: "expired",
+            halWarm: false,
+            halStr: 0.2,
+            vigStr: 0.42,
+            grainStr: 0.09,
+            satAdj: +0.15,
+            expFactor: 0.9,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.5) * 0.9 + 0.05, 0, 1),
+              (x) => clamp(sCurve(x, 0.48) * 1.12 + 0.04, 0, 1),
+              (x) => clamp(sCurve(x, 0.45) * 0.72 + 0.08, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#080a00,#182a08,#305020,#488040,#70b060)",
+          },
+
+          {
+            id: "washed",
+            label: "WASHED",
+            desc: "Lavado",
+            cat: "expired",
+            halWarm: true,
+            halStr: 0.1,
+            vigStr: 0.2,
+            grainStr: 0.06,
+            satAdj: -0.3,
+            expFactor: 1.08,
+            luts: mkL(
+              (x) => clamp(x * 0.6 + 0.2, 0, 1),
+              (x) => clamp(x * 0.62 + 0.2, 0, 1),
+              (x) => clamp(x * 0.65 + 0.2, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#c0bab0,#d0cac0,#e0dad0,#ece6de,#f0ece8)",
+          },
+
+          {
+            id: "leaking",
+            label: "LEAKING",
+            desc: "Vazando luz",
+            cat: "expired",
+            halWarm: true,
+            halStr: 0.4,
+            vigStr: 0.45,
+            grainStr: 0.1,
+            satAdj: -0.05,
+            expFactor: 0.92,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.42) * 1.08 + 0.05, 0, 1),
+              (x) => clamp(sCurve(x, 0.38) * 0.88 + 0.03, 0, 1),
+              (x) => clamp(sCurve(x, 0.32) * 0.65 + 0.02, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#1a0800,#6a2800,#e06020,#f09040,#e8d0a0)",
+          },
+
+          {
+            id: "halftone",
+            label: "HALF",
+            desc: "Meio-tom suave",
+            cat: "expired",
+            halWarm: false,
+            halStr: 0.15,
+            vigStr: 0.35,
+            grainStr: 0.07,
+            satAdj: -0.08,
+            expFactor: 0.95,
+            luts: mkL(
+              (x) => clamp(x * 0.82 + 0.08, 0, 1),
+              (x) => clamp(x * 0.8 + 0.08, 0, 1),
+              (x) => clamp(x * 0.78 + 0.09, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#181414,#3a3030,#6a5858,#a09090,#d0c8c0)",
+          },
+
+          {
+            id: "mold",
+            label: "MOFO",
+            desc: "Fungos no filme",
+            cat: "expired",
+            halWarm: true,
+            halStr: 0.15,
+            vigStr: 0.4,
+            grainStr: 0.12,
+            satAdj: -0.18,
+            expFactor: 0.96,
+            luts: mkL(
+              (x) => clamp(x * 0.78 + 0.12, 0, 1),
+              (x) => clamp(x * 0.8 + 0.1, 0, 1),
+              (x) => clamp(x * 0.6 + 0.08, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#081000,#182808,#304818,#508030,#80b050)",
+          },
+
+          // ════ CROSS / LOMO ════════════════════════════════════════
+          {
+            id: "lomochrome",
+            label: "LOMOCHR",
+            desc: "LomoChrome Purple",
+            cat: "cross",
+            halWarm: false,
+            halStr: 0.25,
+            vigStr: 0.55,
+            grainStr: 0.07,
+            satAdj: +0.2,
+            expFactor: 0.88,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.5) * 1.05 + 0.03, 0, 1),
+              (x) => clamp(sCurve(x, 0.45) * 0.6 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.48) * 1.2 + 0.06, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#100028,#380068,#7010a0,#a030d0,#c860e8)",
+          },
+
+          {
+            id: "lomored",
+            label: "LOMORED",
+            desc: "LomoChrome Red",
+            cat: "cross",
+            halWarm: true,
+            halStr: 0.4,
+            vigStr: 0.58,
+            grainStr: 0.08,
+            satAdj: +0.18,
+            expFactor: 0.86,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.48) * 1.3 + 0.03, 0, 1),
+              (x) => clamp(sCurve(x, 0.42) * 0.5 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.38) * 0.4 + 0.01, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#140000,#400000,#a00808,#e02020,#f86060)",
+          },
+
+          {
+            id: "lomogreen",
+            label: "LOMOGR",
+            desc: "LomoChrome Turq",
+            cat: "cross",
+            halWarm: false,
+            halStr: 0.2,
+            vigStr: 0.5,
+            grainStr: 0.075,
+            satAdj: +0.22,
+            expFactor: 0.88,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.45) * 0.7 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.48) * 1.2 + 0.04, 0, 1),
+              (x) => clamp(sCurve(x, 0.46) * 1.05 + 0.05, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#001810,#003828,#007060,#00a890,#40d8b8)",
+          },
+
+          {
+            id: "xpro",
+            label: "X-PRO",
+            desc: "E6 em C41",
+            cat: "cross",
+            halWarm: false,
+            halStr: 0.3,
+            vigStr: 0.6,
+            grainStr: 0.075,
+            satAdj: +0.25,
+            expFactor: 0.85,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.58) * 1.15 + 0.03, 0, 1),
+              (x) => clamp(sCurve(x, 0.52) * 0.75 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.5) * 1.22 + 0.06, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#080020,#200860,#6010a0,#10a060,#60e020)",
+          },
+
+          // ════ DREAM ═══════════════════════════════════════════════
+          {
+            id: "dreamlike",
+            label: "DREAM",
+            desc: "Sonhador",
+            cat: "dream",
+            halWarm: false,
+            halStr: 0.2,
+            vigStr: 0.3,
+            grainStr: 0.03,
+            satAdj: -0.12,
+            expFactor: 1.04,
+            luts: mkL(
+              (x) => clamp(x * 0.7 + 0.18, 0, 1),
+              (x) => clamp(x * 0.72 + 0.18, 0, 1),
+              (x) => clamp(x * 0.8 + 0.18, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#c0c8e0,#d0d8f0,#e0e8ff,#ece8f8,#f8f0ff)",
+          },
+
+          {
+            id: "cotton",
+            label: "COTTON",
+            desc: "Algodão pastel",
+            cat: "dream",
+            halWarm: true,
+            halStr: 0.12,
+            vigStr: 0.2,
+            grainStr: 0.025,
+            satAdj: -0.2,
+            expFactor: 1.06,
+            luts: mkL(
+              (x) => clamp(x * 0.62 + 0.22, 0, 1),
+              (x) => clamp(x * 0.64 + 0.22, 0, 1),
+              (x) => clamp(x * 0.68 + 0.22, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#e8d8d0,#f0e4e0,#f8f0ee,#f8eef8,#eee8f8)",
+          },
+
+          {
+            id: "blush",
+            label: "BLUSH",
+            desc: "Rosa suave",
+            cat: "dream",
+            halWarm: true,
+            halStr: 0.15,
+            vigStr: 0.25,
+            grainStr: 0.028,
+            satAdj: -0.08,
+            expFactor: 1.02,
+            luts: mkL(
+              (x) => clamp(x * 0.75 + 0.18, 0, 1),
+              (x) => clamp(x * 0.68 + 0.16, 0, 1),
+              (x) => clamp(x * 0.7 + 0.18, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#e8d0d0,#f0d8d8,#f8e0e0,#fce8e8,#fff0f0)",
+          },
+
+          {
+            id: "milk",
+            label: "MILK",
+            desc: "Leite luminoso",
+            cat: "dream",
+            halWarm: false,
+            halStr: 0.1,
+            vigStr: 0.18,
+            grainStr: 0.02,
+            satAdj: -0.35,
+            expFactor: 1.1,
+            luts: mkL(
+              (x) => clamp(x * 0.55 + 0.28, 0, 1),
+              (x) => clamp(x * 0.56 + 0.28, 0, 1),
+              (x) => clamp(x * 0.58 + 0.28, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#d8d8dc,#e4e4e8,#eeeeef,#f6f6f7,#ffffff)",
+          },
+
+          {
+            id: "iris",
+            label: "IRIS",
+            desc: "Roxo lavanda",
+            cat: "dream",
+            halWarm: false,
+            halStr: 0.18,
+            vigStr: 0.3,
+            grainStr: 0.03,
+            satAdj: -0.05,
+            expFactor: 0.98,
+            luts: mkL(
+              (x) => clamp(x * 0.78 + 0.12, 0, 1),
+              (x) => clamp(x * 0.7 + 0.1, 0, 1),
+              (x) => clamp(x * 0.88 + 0.15, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#200838,#401860,#7840a0,#b080d0,#d8b8f0)",
+          },
+
+          {
+            id: "aurora",
+            label: "AURORA",
+            desc: "Aurora boreal",
+            cat: "dream",
+            halWarm: false,
+            halStr: 0.3,
+            vigStr: 0.45,
+            grainStr: 0.04,
+            satAdj: +0.15,
+            expFactor: 0.9,
+            luts: mkL(
+              (x) => clamp(x * 0.7 + 0.08, 0, 1),
+              (x) => clamp(sCurve(x, 0.4) * 1.1 + 0.08, 0, 1),
+              (x) => clamp(sCurve(x, 0.42) * 1.2 + 0.1, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#020810,#083020,#106040,#20a060,#40e0a0,#80c0ff)",
+          },
+
+          {
+            id: "sakura",
+            label: "SAKURA",
+            desc: "Cerejeira rosa",
+            cat: "dream",
+            halWarm: true,
+            halStr: 0.15,
+            vigStr: 0.28,
+            grainStr: 0.03,
+            satAdj: -0.1,
+            expFactor: 1.0,
+            luts: mkL(
+              (x) => clamp(x * 0.78 + 0.16, 0, 1),
+              (x) => clamp(x * 0.68 + 0.14, 0, 1),
+              (x) => clamp(x * 0.72 + 0.16, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#e0b8c0,#ecc8d0,#f4d8e0,#f8e4ea,#fceef4)",
+          },
+
+          {
+            id: "mist",
+            label: "MIST",
+            desc: "Névoa matinal",
+            cat: "dream",
+            halWarm: false,
+            halStr: 0.1,
+            vigStr: 0.25,
+            grainStr: 0.035,
+            satAdj: -0.25,
+            expFactor: 1.08,
+            luts: mkL(
+              (x) => clamp(x * 0.65 + 0.22, 0, 1),
+              (x) => clamp(x * 0.66 + 0.22, 0, 1),
+              (x) => clamp(x * 0.7 + 0.24, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#c8ced8,#d4dae4,#dce4ee,#e4eef8,#eef4ff)",
+          },
+
+          // ════ JAPAN ═══════════════════════════════════════════════
+          {
+            id: "haiku",
+            label: "HAIKU",
+            desc: "Inverno japonês",
+            cat: "japan",
+            halWarm: false,
+            halStr: 0.15,
+            vigStr: 0.38,
+            grainStr: 0.04,
+            satAdj: -0.2,
+            expFactor: 0.96,
+            luts: mkL(
+              (x) => clamp(x * 0.82 + 0.06, 0, 1),
+              (x) => clamp(x * 0.84 + 0.06, 0, 1),
+              (x) => clamp(x * 0.9 + 0.07, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#d0d4da,#dce0e6,#e4e8ee,#eaeef4,#f0f4f8)",
+          },
+
+          {
+            id: "shibuya",
+            label: "SHIBUYA",
+            desc: "Neo Tokyo",
+            cat: "japan",
+            halWarm: false,
+            halStr: 0.4,
+            vigStr: 0.6,
+            grainStr: 0.055,
+            satAdj: +0.2,
+            expFactor: 0.85,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.55) * 0.85 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.5) * 0.7 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.48) * 1.3 + 0.06, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#04001a,#100038,#280090,#5020e0,#9060ff)",
+          },
+
+          {
+            id: "wabisabi",
+            label: "WABI",
+            desc: "Imperfeição bela",
+            cat: "japan",
+            halWarm: true,
+            halStr: 0.18,
+            vigStr: 0.42,
+            grainStr: 0.065,
+            satAdj: -0.25,
+            expFactor: 0.92,
+            luts: mkL(
+              (x) => clamp(x * 0.78 + 0.08, 0, 1),
+              (x) => clamp(x * 0.74 + 0.07, 0, 1),
+              (x) => clamp(x * 0.62 + 0.06, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#141008,#282018,#504030,#807060,#a89880)",
+          },
+
+          {
+            id: "kyoto",
+            label: "KYOTO",
+            desc: "Outono Kyoto",
+            cat: "japan",
+            halWarm: true,
+            halStr: 0.28,
+            vigStr: 0.44,
+            grainStr: 0.055,
+            satAdj: +0.08,
+            expFactor: 0.89,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.42) * 1.1 + 0.03, 0, 1),
+              (x) => clamp(sCurve(x, 0.36) * 0.78 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.3) * 0.55 + 0.01, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#140800,#482010,#a04020,#c87030,#d8a050)",
+          },
+
+          {
+            id: "zen",
+            label: "ZEN",
+            desc: "Monastic",
+            cat: "japan",
+            bw: true,
+            halWarm: false,
+            halStr: 0,
+            vigStr: 0.38,
+            grainStr: 0.045,
+            satAdj: -1,
+            expFactor: 0.94,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.42), 0, 1),
+              (x) => clamp(sCurve(x, 0.42), 0, 1),
+              (x) => clamp(sCurve(x, 0.42), 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#040404,#141414,#404040,#909090,#e8e8e8)",
+          },
+
+          // ════ SHADOW ══════════════════════════════════════════════
+          {
+            id: "obsidian",
+            label: "OBSIDIAN",
+            desc: "Vulcânico negro",
+            cat: "shadow",
+            halWarm: false,
+            halStr: 0.15,
+            vigStr: 0.7,
+            grainStr: 0.065,
+            satAdj: -0.4,
+            expFactor: 0.75,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.7);
+                if (y < 0.4) y = y * 0.65;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.7);
+                if (y < 0.4) y = y * 0.65;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.7);
+                if (y < 0.4) y = y * 0.65;
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview:
+              "linear-gradient(135deg,#000,#030303,#0a0a0a,#181818,#404040)",
+          },
+
+          {
+            id: "abyss",
+            label: "ABYSS",
+            desc: "Abismo profundo",
+            cat: "shadow",
+            halWarm: false,
+            halStr: 0.1,
+            vigStr: 0.75,
+            grainStr: 0.07,
+            satAdj: -0.5,
+            expFactor: 0.72,
+            luts: mkL(
+              (x) => {
+                let y = sCurve(x, 0.75);
+                if (y < 0.5) y = y * 0.55;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.75);
+                if (y < 0.5) y = y * 0.55;
+                return clamp(y, 0, 1);
+              },
+              (x) => {
+                let y = sCurve(x, 0.75);
+                if (y < 0.5) y = y * 0.55;
+                return clamp(y, 0, 1);
+              },
+            ),
+            preview:
+              "linear-gradient(135deg,#000,#020202,#060606,#101010,#303030)",
+          },
+
+          {
+            id: "underworld",
+            label: "UNDER",
+            desc: "Submundo",
+            cat: "shadow",
+            halWarm: true,
+            halStr: 0.5,
+            vigStr: 0.68,
+            grainStr: 0.08,
+            satAdj: -0.15,
+            expFactor: 0.8,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.6) * 0.88 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.58) * 0.65 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.55) * 0.4 + 0.01, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#050000,#150000,#380808,#600000,#902010)",
+          },
+
+          {
+            id: "ember",
+            label: "EMBER",
+            desc: "Brasa escura",
+            cat: "shadow",
+            halWarm: true,
+            halStr: 0.55,
+            vigStr: 0.65,
+            grainStr: 0.075,
+            satAdj: -0.08,
+            expFactor: 0.8,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.55) * 0.95 + 0.02, 0, 1),
+              (x) => clamp(sCurve(x, 0.5) * 0.55 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.45) * 0.28 + 0.01, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#080200,#1a0600,#4a1000,#881a00,#c04010)",
+          },
+
+          {
+            id: "dungeon",
+            label: "DUNGEON",
+            desc: "Masmorras sombrias",
+            cat: "shadow",
+            halWarm: false,
+            halStr: 0.12,
+            vigStr: 0.72,
+            grainStr: 0.09,
+            satAdj: -0.45,
+            expFactor: 0.76,
+            luts: mkL(
+              (x) => clamp(sCurve(x, 0.68) * 0.78 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.66) * 0.8 + 0.01, 0, 1),
+              (x) => clamp(sCurve(x, 0.64) * 0.88 + 0.02, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#000204,#040810,#0a1020,#121820,#202838)",
+          },
+
+          // ════ FADE ════════════════════════════════════════════════
+          {
+            id: "matte",
+            label: "MATTE",
+            desc: "Matt lifted",
+            cat: "fade",
+            halWarm: false,
+            halStr: 0.1,
+            vigStr: 0.25,
+            grainStr: 0.03,
+            satAdj: -0.1,
+            expFactor: 0.95,
+            luts: mkL(
+              (x) => clamp(x * 0.72 + 0.12, 0, 1),
+              (x) => clamp(x * 0.74 + 0.12, 0, 1),
+              (x) => clamp(x * 0.76 + 0.13, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#a0a0a0,#b0b0b0,#c0c0c0,#d0d0d0,#e0e0e0)",
+          },
+
+          {
+            id: "faded_pastel",
+            label: "PASTEL",
+            desc: "Pastel desbotado",
+            cat: "fade",
+            halWarm: true,
+            halStr: 0.08,
+            vigStr: 0.2,
+            grainStr: 0.025,
+            satAdj: -0.18,
+            expFactor: 1.02,
+            luts: mkL(
+              (x) => clamp(x * 0.65 + 0.2, 0, 1),
+              (x) => clamp(x * 0.67 + 0.19, 0, 1),
+              (x) => clamp(x * 0.7 + 0.2, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#d8d0c8,#e4dcd4,#eee8e0,#f4f0ea,#faf8f4)",
+          },
+
+          {
+            id: "mineral",
+            label: "MINERAL",
+            desc: "Tom mineral",
+            cat: "fade",
+            halWarm: false,
+            halStr: 0.12,
+            vigStr: 0.3,
+            grainStr: 0.04,
+            satAdj: -0.22,
+            expFactor: 0.96,
+            luts: mkL(
+              (x) => clamp(x * 0.76 + 0.09, 0, 1),
+              (x) => clamp(x * 0.78 + 0.09, 0, 1),
+              (x) => clamp(x * 0.82 + 0.1, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#8090a0,#a0b0c0,#b8c8d8,#ccd8e4,#dce8f0)",
+          },
+
+          {
+            id: "parchment",
+            label: "PERGA",
+            desc: "Pergaminho",
+            cat: "fade",
+            halWarm: true,
+            halStr: 0.08,
+            vigStr: 0.28,
+            grainStr: 0.055,
+            satAdj: -0.2,
+            expFactor: 0.97,
+            luts: mkL(
+              (x) => clamp(x * 0.74 + 0.14, 0, 1),
+              (x) => clamp(x * 0.7 + 0.13, 0, 1),
+              (x) => clamp(x * 0.6 + 0.12, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#c8b898,#d8c8a8,#e4d8b8,#eee4c8,#f4ecd8)",
+          },
+
+          {
+            id: "linen",
+            label: "LINEN",
+            desc: "Linho natural",
+            cat: "fade",
+            halWarm: true,
+            halStr: 0.06,
+            vigStr: 0.22,
+            grainStr: 0.045,
+            satAdj: -0.15,
+            expFactor: 1.0,
+            luts: mkL(
+              (x) => clamp(x * 0.7 + 0.17, 0, 1),
+              (x) => clamp(x * 0.68 + 0.16, 0, 1),
+              (x) => clamp(x * 0.62 + 0.15, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#c8c0b0,#d4ccbc,#ddd6c8,#e6e0d4,#f0ece4)",
+          },
+
+          {
+            id: "ghost",
+            label: "GHOST",
+            desc: "Fantasma",
+            cat: "fade",
+            halWarm: false,
+            halStr: 0.08,
+            vigStr: 0.15,
+            grainStr: 0.02,
+            satAdj: -0.45,
+            expFactor: 1.12,
+            luts: mkL(
+              (x) => clamp(x * 0.5 + 0.35, 0, 1),
+              (x) => clamp(x * 0.51 + 0.35, 0, 1),
+              (x) => clamp(x * 0.52 + 0.36, 0, 1),
+            ),
+            preview:
+              "linear-gradient(135deg,#d8d8dc,#e4e4e8,#eeeef0,#f6f6f8,#ffffff)",
+          },
+        ];
+
+        // Build registry
+        const FILTERS = {};
+        FILTERS_DEF.forEach((f) => (FILTERS[f.id] = f));
+
+        // Categories config
+        const CATEGORIES = [
+          { id: "all", label: "Todos", count: FILTERS_DEF.length },
+          { id: "warm", label: "Quentes" },
+          { id: "cool", label: "Frios" },
+          { id: "bw", label: "P&B" },
+          { id: "vivid", label: "Vívidos" },
+          { id: "vintage", label: "Vintage" },
+          { id: "cinema", label: "Cinema" },
+          { id: "expired", label: "Expirado" },
+          { id: "cross", label: "Cross" },
+          { id: "dream", label: "Sonho" },
+          { id: "japan", label: "Japão" },
+          { id: "shadow", label: "Sombra" },
+          { id: "fade", label: "Fade" },
+        ];
+
+        // Update badge count
+        filterCountBadge.textContent = `1 / ${FILTERS_DEF.length}`;
+
+        // ── BUILD CAT TABS ────────────────────────────────────────
+        CATEGORIES.forEach((c) => {
+          const t = document.createElement("button");
+          t.className = "cat-tab" + (c.id === "all" ? " active" : "");
+          t.dataset.cat = c.id;
+          const cnt =
+            c.id === "all"
+              ? FILTERS_DEF.length
+              : FILTERS_DEF.filter((f) => f.cat === c.id).length;
+          t.textContent = `${c.label} ${cnt}`;
+          t.addEventListener("click", () => selectCat(c.id));
+          catTabs.appendChild(t);
         });
+
+        function selectCat(cid) {
+          currentCat = cid;
+          document
+            .querySelectorAll(".cat-tab")
+            .forEach((t) =>
+              t.classList.toggle("active", t.dataset.cat === cid),
+            );
+          const filtered =
+            cid === "all"
+              ? FILTERS_DEF
+              : FILTERS_DEF.filter((f) => f.cat === cid);
+          const catMeta = document.getElementById("catMeta");
+          catMeta.textContent =
+            (cid === "all" ? "TODOS" : "CAT") + "·" + filtered.length;
+          renderFilterCards(filtered);
+        }
+
+        // ── BUILD FILTER CARDS ────────────────────────────────────
+        function renderFilterCards(list) {
+          filterScroll.innerHTML = "";
+          list.forEach((f) => {
+            const card = document.createElement("div");
+            card.className =
+              "filter-card" + (f.id === currentFilter ? " active" : "");
+            card.dataset.id = f.id;
+            card.innerHTML = `<div class="fc-preview" style="background:${f.preview}"></div><div class="fc-name">${f.label}</div><div class="fc-cat">${f.desc}</div><div class="fc-active-dot"></div>`;
+            card.addEventListener("click", () => selectFilter(f.id));
+            filterScroll.appendChild(card);
+          });
+          // Scroll to active
+          const active = filterScroll.querySelector(".active");
+          if (active)
+            active.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+              inline: "center",
+            });
+        }
+
+        renderFilterCards(FILTERS_DEF);
 
         function selectFilter(id) {
           currentFilter = id;
@@ -1304,13 +3441,66 @@
             .querySelectorAll(".filter-card")
             .forEach((c) => c.classList.toggle("active", c.dataset.id === id));
           cmpLblR.textContent = FILTERS[id].label;
+          frameFilter.textContent =
+            FILTERS[id].label + " · " + FILTERS[id].desc;
+          chipFilter.textContent = FILTERS[id].label;
           needLeaks = true;
-          updatePreview();
+          // Update count badge
+          const idx = FILTERS_DEF.findIndex((f) => f.id === id) + 1;
+          filterCountBadge.textContent = `${idx} / ${FILTERS_DEF.length}`;
+          debouncedUpdate();
         }
 
-        // ════════════════════════════════════════════════════════════════
-        //  IMAGE PROCESSING EFFECTS
-        // ════════════════════════════════════════════════════════════════
+        // ── INTENSITY SEGMENTS ────────────────────────────────────
+        const SEG_COUNT = 20;
+        const intSegs = $("intSegs");
+        for (let i = 0; i < SEG_COUNT; i++) {
+          const b = document.createElement("button");
+          b.className = "int-seg";
+          b.dataset.i = i;
+          b.addEventListener("click", () => {
+            const v = Math.round(((i + 1) / SEG_COUNT) * 100);
+            intSlider.value = v;
+            updateIntensity(v);
+          });
+          intSegs.appendChild(b);
+        }
+        function updateSegs(val) {
+          const filled = Math.round((val / 100) * SEG_COUNT);
+          intSegs
+            .querySelectorAll(".int-seg")
+            .forEach((s, i) => s.classList.toggle("filled", i < filled));
+        }
+        updateSegs(85);
+
+        function updateIntensity(v) {
+          intensity = v / 100;
+          intVal.textContent = v + "%";
+          chipInt.textContent = v + "%";
+          updateSegs(v);
+          // Update preset active
+          document.querySelectorAll(".preset-pill").forEach((p) => {
+            p.classList.toggle("active", parseInt(p.dataset.v) === v);
+          });
+          debouncedUpdate();
+        }
+
+        intSlider.addEventListener("input", () =>
+          updateIntensity(parseInt(intSlider.value)),
+        );
+
+        // Quick presets
+        document.querySelectorAll(".preset-pill").forEach((p) => {
+          p.addEventListener("click", () => {
+            const v = parseInt(p.dataset.v);
+            intSlider.value = v;
+            updateIntensity(v);
+          });
+        });
+
+        // ════════════════════════════════════════════════════════════
+        //  IMAGE EFFECTS ENGINE
+        // ════════════════════════════════════════════════════════════
 
         function boxBlur(imageData, r) {
           const w = imageData.width,
@@ -1422,9 +3612,9 @@
               d.data[i] * 0.299 + d.data[i + 1] * 0.587 + d.data[i + 2] * 0.114;
             if (lum > 168) {
               const f = (lum - 168) / 87;
-              hl[i] = d.data[i] * f * (warm ? 1.0 : 0.35);
+              hl[i] = d.data[i] * f * (warm ? 1 : 0.35);
               hl[i + 1] = d.data[i + 1] * f * (warm ? 0.5 : 0.65);
-              hl[i + 2] = d.data[i + 2] * f * (warm ? 0.18 : 1.0);
+              hl[i + 2] = d.data[i + 2] * f * (warm ? 0.18 : 1);
               hl[i + 3] = 255;
             }
           }
@@ -1525,7 +3715,7 @@
           c.height = h;
           const lc = c.getContext("2d"),
             p = prng(warm ? 271 : 314);
-          const leaks = [
+          [
             {
               x: p() * 0.25 * w,
               y: -h * 0.05,
@@ -1544,8 +3734,7 @@
               r: w * 0.5,
               col: warm ? "rgba(255,90,20,0.12)" : "rgba(60,150,220,0.10)",
             },
-          ];
-          leaks.forEach((lk) => {
+          ].forEach((lk) => {
             const a = parseFloat(lk.col.match(/[\d.]+\)$/)[0]),
               g = lc.createRadialGradient(
                 lk.x,
@@ -1573,12 +3762,12 @@
           const s = `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
           const fs = Math.max(13, Math.round(cv.width * 0.03));
           c.save();
-          c.font = `700 ${fs}px "SF Mono","Courier New",monospace`;
+          c.font = `700 ${fs}px "Space Mono","Courier New",monospace`;
           c.textAlign = "right";
           c.textBaseline = "bottom";
           const x = cv.width - Math.round(cv.width * 0.04),
             y = cv.height - Math.round(cv.height * 0.032);
-          c.shadowColor = "rgba(0,0,0,0.80)";
+          c.shadowColor = "rgba(0,0,0,.80)";
           c.shadowBlur = 5;
           c.shadowOffsetX = 1;
           c.shadowOffsetY = 1;
@@ -1586,38 +3775,48 @@
           c.fillText(s, x, y);
           c.shadowColor = "transparent";
           c.shadowBlur = 0;
-          c.strokeStyle = "rgba(0,0,0,0.35)";
+          c.strokeStyle = "rgba(0,0,0,.35)";
           c.lineWidth = 1.5;
           c.strokeText(s, x, y);
           c.restore();
         }
 
-        // ── CORE FILTER ───────────────────────────────────────────────────
+        // ── CORE FILTER ───────────────────────────────────────────
         function applyFilter(imageData, fid, inten) {
           const f = FILTERS[fid];
           const d = imageData.data;
           const orig = new Uint8ClampedArray(d);
-
-          // 1. LUTs por canal
+          // LUTs
           for (let i = 0; i < d.length; i += 4) {
             d[i] = f.luts.r[d[i]];
             d[i + 1] = f.luts.g[d[i + 1]];
             d[i + 2] = f.luts.b[d[i + 2]];
           }
-
-          // 2. B&W especial (HP5)
+          // B&W
           if (f.bw) {
+            const mx = f.bwMix || [0.299, 0.587, 0.114];
+            const tn = f.bwTone || { r: 1, g: 1, b: 1 };
             for (let i = 0; i < d.length; i += 4) {
               const lum = Math.round(
-                d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114,
+                clamp(
+                  d[i] * mx[0] + d[i + 1] * mx[1] + d[i + 2] * mx[2],
+                  0,
+                  255,
+                ),
               );
-              // Slight warm-sepia toning nas sombras (característica do HP5)
-              d[i] = clamp(lum + (lum < 100 ? 4 : lum < 160 ? 1 : 0), 0, 255);
-              d[i + 1] = clamp(lum, 0, 255);
-              d[i + 2] = clamp(lum - (lum < 140 ? 6 : 3), 0, 255);
+              d[i] = clamp(
+                Math.round(lum * tn.r + (lum < 100 ? 2 : 0)),
+                0,
+                255,
+              );
+              d[i + 1] = clamp(Math.round(lum * tn.g), 0, 255);
+              d[i + 2] = clamp(
+                Math.round(lum * tn.b - (lum < 140 ? 3 : 1)),
+                0,
+                255,
+              );
             }
           } else {
-            // 3. Saturação + hue shift
             const sa = f.satAdj;
             for (let i = 0; i < d.length; i += 4) {
               const h = rgb2hsl(d[i], d[i + 1], d[i + 2]);
@@ -1629,18 +3828,15 @@
               d[i + 2] = rgb.b;
             }
           }
-
-          // 4. Exposição
+          // Exposure
           const exp = f.expFactor;
-          if (exp !== 1) {
+          if (exp !== 1)
             for (let i = 0; i < d.length; i += 4) {
               d[i] = clamp(Math.round(d[i] * exp), 0, 255);
               d[i + 1] = clamp(Math.round(d[i + 1] * exp), 0, 255);
               d[i + 2] = clamp(Math.round(d[i + 2] * exp), 0, 255);
             }
-          }
-
-          // 5. Blend com original
+          // Blend
           if (inten < 1)
             for (let i = 0; i < d.length; i += 4) {
               d[i] = clamp(Math.round(lerp(orig[i], d[i], inten)), 0, 255);
@@ -1655,11 +3851,9 @@
                 255,
               );
             }
-
           return imageData;
         }
 
-        // ── FULL PIPELINE ─────────────────────────────────────────────────
         function processImage(imageData, fid, inten, fx) {
           const f = FILTERS[fid];
           const w = imageData.width,
@@ -1675,7 +3869,6 @@
           return work;
         }
 
-        // ── RENDER ────────────────────────────────────────────────────────
         function renderToCanvas(cv, c, proc, fx, fid) {
           const w = proc.width,
             h = proc.height;
@@ -1705,25 +3898,38 @@
           if (fx.timestamp) drawTimestamp(cv, c);
         }
 
-        // ── UPDATE ────────────────────────────────────────────────────────
+        // ── UPDATE ────────────────────────────────────────────────
+        let isProcessing = false;
         function updatePreview() {
-          if (!origData) return;
-          const w = origData.width,
-            h = origData.height;
-          procData = processImage(
-            new ImageData(new Uint8ClampedArray(origData.data), w, h),
-            currentFilter,
-            intensity,
-            FX,
-          );
-          if (!isComparing)
-            renderToCanvas(mainCanvas, ctx, procData, FX, currentFilter);
-          else drawComparison();
-          cmpLblR.textContent = FILTERS[currentFilter].label;
+          if (!origData || isProcessing) return;
+          isProcessing = true;
+          loadingOverlay.classList.add("active");
+          loadingText.textContent = "APLICANDO FILTRO";
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              try {
+                const w = origData.width,
+                  h = origData.height;
+                procData = processImage(
+                  new ImageData(new Uint8ClampedArray(origData.data), w, h),
+                  currentFilter,
+                  intensity,
+                  FX,
+                );
+                if (!isComparing)
+                  renderToCanvas(mainCanvas, ctx, procData, FX, currentFilter);
+                else drawComparison();
+                cmpLblR.textContent = FILTERS[currentFilter].label;
+              } finally {
+                isProcessing = false;
+                loadingOverlay.classList.remove("active");
+              }
+            }, 0);
+          });
         }
-        const debouncedUpdate = debounce(updatePreview, 30);
+        const debouncedUpdate = debounce(updatePreview, 60);
 
-        // ── COMPARISON ────────────────────────────────────────────────────
+        // ── COMPARISON ────────────────────────────────────────────
         function drawComparison() {
           if (!origData || !procData) return;
           const w = origData.width,
@@ -1765,10 +3971,10 @@
             drawTimestamp(tc, tcc);
             ctx.drawImage(tc, sx, 0, w - sx, h, sx, 0, w - sx, h);
           }
-          ctx.strokeStyle = "#fff";
-          ctx.lineWidth = 2;
-          ctx.shadowColor = "rgba(0,0,0,0.65)";
-          ctx.shadowBlur = 10;
+          ctx.strokeStyle = "rgba(255,255,255,.85)";
+          ctx.lineWidth = 1.5;
+          ctx.shadowColor = "rgba(0,0,0,.6)";
+          ctx.shadowBlur = 8;
           ctx.beginPath();
           ctx.moveTo(sx, 0);
           ctx.lineTo(sx, h);
@@ -1789,7 +3995,7 @@
           cmpHandle.style.top = "50%";
         }
 
-        // ── LOAD IMAGE ────────────────────────────────────────────────────
+        // ── LOAD IMAGE ────────────────────────────────────────────
         function loadImage(file) {
           if (
             !file ||
@@ -1798,26 +4004,41 @@
             return showToast("Formato não suportado 😕");
           if (file.size > 30 * 1024 * 1024)
             return showToast("Imagem muito grande (máx 30MB)");
+          loadingOverlay.classList.add("active");
+          loadingText.textContent = "CARREGANDO";
           const r = new FileReader();
           r.onload = (e) => {
             const img = new Image();
             img.onload = () => {
               origImg = img;
-              frameCnt.textContent = String(
+              frameNum.textContent = String(
                 Math.floor(Math.random() * 9000) + 1000,
               ).padStart(4, "0");
+              frameFilter.textContent =
+                FILTERS[currentFilter].label +
+                " · " +
+                FILTERS[currentFilter].desc;
+              chipFilter.textContent = FILTERS[currentFilter].label;
               prepareData(img);
               needDust = needLeaks = true;
+              const w = origData.width,
+                h = origData.height;
+              chipRes.textContent = `${w}×${h}`;
               updatePreview();
               enableBtns();
               previewSection.classList.add("has-image");
+              infoStrip.style.display = "flex";
               showToast("✨ Foto carregada!");
             };
-            img.onerror = () => showToast("Erro ao carregar");
+            img.onerror = () => {
+              loadingOverlay.classList.remove("active");
+              showToast("Erro ao carregar");
+            };
             img.src = e.target.result;
           };
           r.readAsDataURL(file);
         }
+
         function prepareData(img) {
           let w = img.naturalWidth,
             h = img.naturalHeight;
@@ -1834,57 +4055,61 @@
           mainCanvas.width = w;
           mainCanvas.height = h;
         }
+
         function enableBtns() {
           btnDl.disabled = btnCmp.disabled = btnCam.disabled = false;
         }
 
-        // ── DOWNLOAD ──────────────────────────────────────────────────────
+        // ── DOWNLOAD ──────────────────────────────────────────────
         function downloadImage() {
           if (!procData) return showToast("Carregue uma foto primeiro");
-          let ec;
-          if (origImg && origImg.naturalWidth <= 4000) {
-            const w = origImg.naturalWidth,
-              h = origImg.naturalHeight;
-            const tc = document.createElement("canvas");
-            tc.width = w;
-            tc.height = h;
-            tc.getContext("2d").drawImage(origImg, 0, 0, w, h);
-            const hd = tc.getContext("2d").getImageData(0, 0, w, h);
-            const hp = processImage(hd, currentFilter, intensity, FX);
-            ec = document.createElement("canvas");
-            ec.width = w;
-            ec.height = h;
-            renderToCanvas(ec, ec.getContext("2d"), hp, FX, currentFilter);
-          } else {
-            ec = document.createElement("canvas");
-            ec.width = procData.width;
-            ec.height = procData.height;
-            renderToCanvas(
-              ec,
-              ec.getContext("2d"),
-              procData,
-              FX,
-              currentFilter,
+          showToast("📥 Processando HD...");
+          setTimeout(() => {
+            let ec;
+            if (origImg && origImg.naturalWidth <= 4000) {
+              const w = origImg.naturalWidth,
+                h = origImg.naturalHeight;
+              const tc = document.createElement("canvas");
+              tc.width = w;
+              tc.height = h;
+              tc.getContext("2d").drawImage(origImg, 0, 0, w, h);
+              const hd = tc.getContext("2d").getImageData(0, 0, w, h);
+              const hp = processImage(hd, currentFilter, intensity, FX);
+              ec = document.createElement("canvas");
+              ec.width = w;
+              ec.height = h;
+              renderToCanvas(ec, ec.getContext("2d"), hp, FX, currentFilter);
+            } else {
+              ec = document.createElement("canvas");
+              ec.width = procData.width;
+              ec.height = procData.height;
+              renderToCanvas(
+                ec,
+                ec.getContext("2d"),
+                procData,
+                FX,
+                currentFilter,
+              );
+            }
+            ec.toBlob(
+              (blob) => {
+                const url = URL.createObjectURL(blob),
+                  a = document.createElement("a");
+                a.href = url;
+                a.download = `cassiacam_${FILTERS[currentFilter].label}_${Date.now()}.jpg`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast("🌸 Salvo com amor!");
+              },
+              "image/jpeg",
+              JPEG_Q,
             );
-          }
-          ec.toBlob(
-            (blob) => {
-              const url = URL.createObjectURL(blob),
-                a = document.createElement("a");
-              a.href = url;
-              a.download = `cassiacam_${FILTERS[currentFilter].label}_${Date.now()}.jpg`;
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-              URL.revokeObjectURL(url);
-              showToast("📥 Salvo com amor 🌸");
-            },
-            "image/jpeg",
-            JPEG_Q,
-          );
+          }, 50);
         }
 
-        // ── EVENTS ────────────────────────────────────────────────────────
+        // ── EVENTS ────────────────────────────────────────────────
         previewSection.addEventListener("click", (e) => {
           if (e.target === cmpHandle || e.target === cmpLine) return;
           if (!origData) fileInput.click();
@@ -1892,6 +4117,18 @@
         fileInput.addEventListener("change", (e) => {
           if (e.target.files[0]) loadImage(e.target.files[0]);
         });
+        $("uploadCamInline").addEventListener("click", (e) => {
+          e.stopPropagation();
+          const ci = document.createElement("input");
+          ci.type = "file";
+          ci.accept = "image/*";
+          ci.capture = "environment";
+          ci.onchange = (ev) => {
+            if (ev.target.files[0]) loadImage(ev.target.files[0]);
+          };
+          ci.click();
+        });
+
         previewSection.addEventListener("dragover", (e) => {
           e.preventDefault();
           previewSection.classList.add("drag-over");
@@ -1903,12 +4140,6 @@
           e.preventDefault();
           previewSection.classList.remove("drag-over");
           if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
-        });
-
-        intSlider.addEventListener("input", () => {
-          intensity = parseInt(intSlider.value) / 100;
-          intVal.textContent = Math.round(intensity * 100) + "%";
-          debouncedUpdate();
         });
 
         document.querySelectorAll(".fx-btn").forEach((btn) => {
@@ -1923,6 +4154,7 @@
         });
 
         btnDl.addEventListener("click", downloadImage);
+        btnUpload.addEventListener("click", () => fileInput.click());
         btnCam.addEventListener("click", () => {
           const ci = document.createElement("input");
           ci.type = "file";
@@ -2006,30 +4238,13 @@
           }
           if (e.key === "c" && !e.ctrlKey && !e.metaKey && origData)
             btnCmp.click();
-          const keys = {
-            1: "cpm35",
-            2: "grdr",
-            3: "lca",
-            4: "portra",
-            5: "ultra",
-            6: "superia",
-            7: "hp5",
-            8: "velvia",
-            9: "cine800",
-          };
-          if (keys[e.key] && origData) selectFilter(keys[e.key]);
         });
 
-        // ── INIT ──────────────────────────────────────────────────────────
+        // Init
         document
           .querySelectorAll(".fx-btn")
           .forEach((btn) => btn.classList.toggle("on", FX[btn.dataset.fx]));
-        intSlider.value = 85;
-        intVal.textContent = "85%";
-        console.log("🌸 Cassia Cam — Analog Film Lab");
-        console.log(
-          "   12 filtros: CPM35, GRD R, LC-A, PORTRA, ULTRA, SUPERIA, HP5, VELVIA, CINE800, GOLD200, POLAR, AGFA",
-        );
+        console.log("🌸 Cassia Cam v4 — 92 Filtros Analógicos");
       })();
     </script>
   </body>
