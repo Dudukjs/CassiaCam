@@ -1,1770 +1,1088 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover"
-    />
-    <meta name="theme-color" content="#0a0a0a" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Dazz复古 • CPM35 & GRD R</title>
     <style>
-      :root {
-        --bg: #0a0a0a;
-        --surface: #141414;
-        --surface2: #1a1a1a;
-        --border: #2a2a2a;
-        --text: #e0e0e0;
-        --text2: #999;
-        --accent: #d4a853;
-        --accent2: #c49b3f;
-        --warm: #e8b84b;
-        --cool: #7eb8c9;
-        --danger: #c44;
-        --radius: 16px;
-        --radius-sm: 10px;
-        --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        --font-mono: "SF Mono", "Courier New", "IBM Plex Mono", monospace;
-        --safe-bottom: env(safe-area-inset-bottom, 16px);
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        background: var(--bg);
-        color: var(--text);
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-        min-height: 100vh;
-        min-height: 100dvh;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        -webkit-tap-highlight-color: transparent;
-        -webkit-font-smoothing: antialiased;
-        user-select: none;
-        -webkit-user-select: none;
-        overflow-x: hidden;
-      }
-
-      ::-webkit-scrollbar {
-        width: 4px;
-        height: 4px;
-      }
-      ::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #333;
-        border-radius: 10px;
-      }
-
-      .app-container {
-        width: 100%;
-        max-width: 520px;
-        padding: 12px 16px calc(var(--safe-bottom) + 20px);
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-
-      .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 4px 0;
-        gap: 12px;
-      }
-      .logo-area {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .logo-icon {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        background: linear-gradient(135deg, #1a1a1a, #222);
-        border: 1.5px solid #333;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        position: relative;
-        overflow: hidden;
-      }
-      .logo-icon::after {
-        content: "";
-        position: absolute;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background: var(--accent);
-        opacity: 0.5;
-        top: 5px;
-        right: 5px;
-        filter: blur(3px);
-      }
-      .logo-text {
-        font-weight: 700;
-        font-size: 1.1rem;
-        letter-spacing: -0.02em;
-        color: #fff;
-      }
-      .logo-sub {
-        font-size: 0.7rem;
-        color: var(--text2);
-        letter-spacing: 0.05em;
-        font-weight: 400;
-      }
-      .badge {
-        background: var(--surface2);
-        border: 1px solid #333;
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 0.7rem;
-        letter-spacing: 0.04em;
-        color: var(--accent);
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-      .badge-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--accent);
-        animation: pulse-dot 2s infinite;
-      }
-      @keyframes pulse-dot {
-        0%,
-        100% {
-          opacity: 1;
+        :root {
+            --bg: #0a0a0a;
+            --surface: #141414;
+            --surface2: #1a1a1a;
+            --border: #2a2a2a;
+            --text: #e0e0e0;
+            --text2: #999;
+            --accent: #d4a853;
+            --accent2: #c49b3f;
+            --warm: #e8b84b;
+            --cool: #7eb8c9;
+            --danger: #c44;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-mono: 'SF Mono', 'Courier New', 'IBM Plex Mono', monospace;
+            --safe-bottom: env(safe-area-inset-bottom, 16px);
         }
-        50% {
-          opacity: 0.3;
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            user-select: none;
+            -webkit-user-select: none;
+            overflow-x: hidden;
         }
-      }
 
-      .preview-section {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 4/3;
-        background: var(--surface);
-        border-radius: var(--radius);
-        overflow: hidden;
-        border: 2px dashed #2a2a2a;
-        transition: all var(--transition);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 280px;
-      }
-      .preview-section.has-image {
-        border: 2px solid #333;
-        cursor: default;
-        aspect-ratio: auto;
-        min-height: auto;
-      }
-      .preview-section.drag-over {
-        border-color: var(--accent);
-        background: #1a1a12;
-        box-shadow: inset 0 0 60px rgba(212, 168, 83, 0.08);
-      }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
 
-      .upload-placeholder {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        padding: 30px;
-        text-align: center;
-        transition: opacity 0.3s;
-      }
-      .has-image .upload-placeholder {
-        display: none;
-      }
-      .upload-icon {
-        font-size: 48px;
-        opacity: 0.6;
-        transition: transform 0.3s;
-      }
-      .preview-section:hover .upload-icon {
-        transform: translateY(-4px);
-      }
-      .upload-text {
-        color: var(--text2);
-        font-size: 0.9rem;
-        font-weight: 500;
-        letter-spacing: 0.02em;
-      }
-      .upload-subtext {
-        color: #555;
-        font-size: 0.75rem;
-      }
-
-      .canvas-wrapper {
-        position: relative;
-        width: 100%;
-        display: none;
-        border-radius: var(--radius);
-        overflow: hidden;
-        line-height: 0;
-      }
-      .has-image .canvas-wrapper {
-        display: block;
-      }
-      .canvas-wrapper canvas {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: var(--radius);
-      }
-
-      .compare-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        display: none;
-        z-index: 5;
-      }
-      .compare-overlay.active {
-        display: block;
-      }
-      .compare-line {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background: #fff;
-        box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-        pointer-events: auto;
-        cursor: ew-resize;
-        z-index: 6;
-      }
-      .compare-handle {
-        position: absolute;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: #fff;
-        border: 3px solid #222;
-        pointer-events: auto;
-        cursor: ew-resize;
-        z-index: 7;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        color: #222;
-      }
-      .compare-label-left,
-      .compare-label-right {
-        position: absolute;
-        bottom: 12px;
-        font-size: 0.7rem;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        padding: 5px 10px;
-        border-radius: 6px;
-        pointer-events: none;
-        z-index: 6;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
-      }
-      .compare-label-left {
-        left: 12px;
-        color: #fff;
-        background: rgba(0, 0, 0, 0.5);
-      }
-      .compare-label-right {
-        right: 12px;
-        color: #fff;
-        background: rgba(0, 0, 0, 0.5);
-      }
-
-      .section-title {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--text2);
-        font-weight: 600;
-        margin-bottom: 2px;
-      }
-      .filter-cards {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-      .filter-card {
-        flex: 1;
-        min-width: 100px;
-        background: var(--surface);
-        border: 2px solid transparent;
-        border-radius: var(--radius-sm);
-        padding: 12px;
-        cursor: pointer;
-        transition: all var(--transition);
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-      .filter-card:hover {
-        border-color: #444;
-        background: #1a1a1a;
-      }
-      .filter-card.active {
-        border-color: var(--accent);
-        background: #1a1812;
-        box-shadow: 0 0 20px rgba(212, 168, 83, 0.1);
-      }
-      .filter-card-preview {
-        width: 100%;
-        height: 50px;
-        border-radius: 6px;
-        margin-bottom: 8px;
-        position: relative;
-        overflow: hidden;
-      }
-      .filter-card-preview.cpm35 {
-        background: linear-gradient(
-          135deg,
-          #5c2e00,
-          #a85a00,
-          #d4890a,
-          #f0b840,
-          #7a3c00
-        );
-      }
-      .filter-card-preview.grdr {
-        background: linear-gradient(
-          135deg,
-          #0a0e14,
-          #1a2d3f,
-          #1e4a5c,
-          #2e6878,
-          #0d1820
-        );
-      }
-      .filter-card-name {
-        font-weight: 700;
-        font-size: 0.9rem;
-        letter-spacing: 0.02em;
-      }
-      .filter-card-desc {
-        font-size: 0.65rem;
-        color: var(--text2);
-        margin-top: 2px;
-        letter-spacing: 0.03em;
-      }
-      .filter-card .active-dot {
-        display: none;
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--accent);
-        margin: 6px auto 0;
-      }
-      .filter-card.active .active-dot {
-        display: block;
-        animation: pulse-dot 2s infinite;
-      }
-
-      .slider-group {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-      .slider-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .slider-label {
-        font-size: 0.75rem;
-        color: var(--text2);
-        font-weight: 500;
-        letter-spacing: 0.03em;
-      }
-      .slider-value {
-        font-size: 0.75rem;
-        color: var(--accent);
-        font-weight: 600;
-        font-family: var(--font-mono);
-      }
-      input[type="range"] {
-        -webkit-appearance: none;
-        width: 100%;
-        height: 6px;
-        border-radius: 3px;
-        background: #2a2a2a;
-        outline: none;
-        cursor: pointer;
-      }
-      input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: #fff;
-        border: 2px solid #444;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-        transition: all 0.2s;
-      }
-      input[type="range"]::-webkit-slider-thumb:active {
-        transform: scale(1.1);
-        border-color: var(--accent);
-        box-shadow: 0 0 20px rgba(212, 168, 83, 0.4);
-      }
-
-      .effects-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-      }
-      @media (min-width: 420px) {
-        .effects-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
-      .effect-toggle {
-        background: var(--surface);
-        border: 1.5px solid #2a2a2a;
-        border-radius: var(--radius-sm);
-        padding: 10px 6px;
-        cursor: pointer;
-        transition: all var(--transition);
-        text-align: center;
-        font-size: 0.7rem;
-        color: var(--text2);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-        letter-spacing: 0.02em;
-      }
-      .effect-toggle:hover {
-        border-color: #444;
-        background: #1a1a1a;
-      }
-      .effect-toggle.on {
-        border-color: var(--accent);
-        background: #1a1812;
-        color: var(--accent);
-      }
-      .effect-icon {
-        font-size: 1.3rem;
-        transition: transform 0.3s;
-      }
-      .effect-toggle.on .effect-icon {
-        transform: scale(1.1);
-      }
-
-      .actions-row {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-      .btn {
-        flex: 1;
-        min-width: 80px;
-        padding: 13px 16px;
-        border-radius: var(--radius-sm);
-        font-weight: 600;
-        font-size: 0.85rem;
-        letter-spacing: 0.03em;
-        cursor: pointer;
-        transition: all var(--transition);
-        border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 7px;
-        white-space: nowrap;
-      }
-      .btn-primary {
-        background: var(--accent);
-        color: #0a0a0a;
-        box-shadow: 0 4px 16px rgba(212, 168, 83, 0.25);
-      }
-      .btn-primary:hover {
-        background: var(--accent2);
-        box-shadow: 0 6px 24px rgba(212, 168, 83, 0.35);
-        transform: translateY(-1px);
-      }
-      .btn-primary:active {
-        transform: scale(0.97);
-      }
-      .btn-secondary {
-        background: var(--surface2);
-        color: #ccc;
-        border: 1.5px solid #333;
-      }
-      .btn-secondary:hover {
-        background: #222;
-        border-color: #555;
-      }
-      .btn-outline {
-        background: transparent;
-        color: var(--text);
-        border: 1.5px solid #444;
-      }
-      .btn-outline:hover {
-        border-color: #888;
-        background: #111;
-      }
-      .btn-compare {
-        background: #1a1a1a;
-        color: #ccc;
-        border: 1.5px solid #444;
-        font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.06em;
-      }
-      .btn-compare.active-compare {
-        border-color: #fff;
-        color: #fff;
-        background: #222;
-        animation: subtle-glow 2s infinite;
-      }
-      @keyframes subtle-glow {
-        0%,
-        100% {
-          box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
-        }
-        50% {
-          box-shadow: 0 0 18px rgba(255, 255, 255, 0.15);
-        }
-      }
-      .btn:disabled {
-        opacity: 0.35;
-        pointer-events: none;
-        cursor: not-allowed;
-      }
-
-      #fileInput {
-        display: none;
-      }
-
-      .toast {
-        position: fixed;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%) translateY(100px);
-        background: #1a1a1a;
-        color: #e0e0e0;
-        padding: 10px 20px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 500;
-        letter-spacing: 0.03em;
-        z-index: 100;
-        border: 1px solid #333;
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        pointer-events: none;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-      }
-      .toast.show {
-        transform: translateX(-50%) translateY(0);
-      }
-
-      .frame-counter {
-        position: absolute;
-        top: 12px;
-        right: 14px;
-        font-family: var(--font-mono);
-        font-size: 0.65rem;
-        color: rgba(255, 255, 255, 0.7);
-        letter-spacing: 0.06em;
-        z-index: 4;
-        pointer-events: none;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
-        display: none;
-      }
-      .has-image .frame-counter {
-        display: block;
-      }
-
-      @media (max-width: 360px) {
         .app-container {
-          padding: 8px 10px calc(var(--safe-bottom) + 12px);
-          gap: 10px;
+            width: 100%;
+            max-width: 520px;
+            padding: 12px 16px calc(var(--safe-bottom) + 20px);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 0;
+            gap: 12px;
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon {
+            width: 38px; height: 38px; border-radius: 10px;
+            background: linear-gradient(135deg, #1a1a1a, #222);
+            border: 1.5px solid #333;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; position: relative; overflow: hidden;
+        }
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            width: 14px; height: 14px; border-radius: 50%;
+            background: var(--accent); opacity: 0.5;
+            top: 5px; right: 5px; filter: blur(3px);
+        }
+        .logo-text { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; color: #fff; }
+        .logo-sub { font-size: 0.7rem; color: var(--text2); letter-spacing: 0.05em; font-weight: 400; }
+        .badge {
+            background: var(--surface2); border: 1px solid #333;
+            padding: 6px 12px; border-radius: 20px;
+            font-size: 0.7rem; letter-spacing: 0.04em;
+            color: var(--accent); font-weight: 500;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .badge-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--accent); animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .preview-section {
+            position: relative;
+            width: 100%; aspect-ratio: 4/3;
+            background: var(--surface);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 2px dashed #2a2a2a;
+            transition: all var(--transition);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 280px;
+        }
+        .preview-section.has-image {
+            border: 2px solid #333;
+            cursor: default;
+            aspect-ratio: auto;
+            min-height: auto;
+        }
+        .preview-section.drag-over {
+            border-color: var(--accent);
+            background: #1a1a12;
+            box-shadow: inset 0 0 60px rgba(212, 168, 83, 0.08);
+        }
+
+        .upload-placeholder {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 10px; padding: 30px; text-align: center; transition: opacity 0.3s;
+        }
+        .has-image .upload-placeholder { display: none; }
+        .upload-icon { font-size: 48px; opacity: 0.6; transition: transform 0.3s; }
+        .preview-section:hover .upload-icon { transform: translateY(-4px); }
+        .upload-text { color: var(--text2); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em; }
+        .upload-subtext { color: #555; font-size: 0.75rem; }
+
+        .canvas-wrapper {
+            position: relative; width: 100%;
+            display: none; border-radius: var(--radius);
+            overflow: hidden; line-height: 0;
+        }
+        .has-image .canvas-wrapper { display: block; }
+        .canvas-wrapper canvas { width: 100%; height: auto; display: block; border-radius: var(--radius); }
+
+        .compare-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; display: none; z-index: 5;
+        }
+        .compare-overlay.active { display: block; }
+        .compare-line {
+            position: absolute; top: 0; bottom: 0; width: 2px;
+            background: #fff; box-shadow: 0 0 12px rgba(0,0,0,0.6);
+            pointer-events: auto; cursor: ew-resize; z-index: 6;
+        }
+        .compare-handle {
+            position: absolute; top: 50%;
+            transform: translate(-50%, -50%);
+            width: 36px; height: 36px; border-radius: 50%;
+            background: #fff; border: 3px solid #222;
+            pointer-events: auto; cursor: ew-resize; z-index: 7;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; color: #222;
+        }
+        .compare-label-left, .compare-label-right {
+            position: absolute; bottom: 12px;
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em;
+            padding: 5px 10px; border-radius: 6px;
+            pointer-events: none; z-index: 6;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+        }
+        .compare-label-left { left: 12px; color: #fff; background: rgba(0,0,0,0.5); }
+        .compare-label-right { right: 12px; color: #fff; background: rgba(0,0,0,0.5); }
+
+        .section-title {
+            font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 0.08em; color: var(--text2);
+            font-weight: 600; margin-bottom: 2px;
+        }
+        .filter-cards { display: flex; gap: 10px; flex-wrap: wrap; }
         .filter-card {
-          padding: 8px;
+            flex: 1; min-width: 100px;
+            background: var(--surface); border: 2px solid transparent;
+            border-radius: var(--radius-sm); padding: 12px;
+            cursor: pointer; transition: all var(--transition);
+            text-align: center; position: relative; overflow: hidden;
         }
-        .btn {
-          padding: 10px 12px;
-          font-size: 0.78rem;
+        .filter-card:hover { border-color: #444; background: #1a1a1a; }
+        .filter-card.active {
+            border-color: var(--accent); background: #1a1812;
+            box-shadow: 0 0 20px rgba(212, 168, 83, 0.1);
         }
-        .effects-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 6px;
+        .filter-card-preview {
+            width: 100%; height: 50px; border-radius: 6px;
+            margin-bottom: 8px; position: relative; overflow: hidden;
         }
+        .filter-card-preview.cpm35 {
+            background: linear-gradient(135deg, #5c2e00, #a85a00, #d4890a, #f0b840, #7a3c00);
+        }
+        .filter-card-preview.grdr {
+            background: linear-gradient(135deg, #0a0e14, #1a2d3f, #1e4a5c, #2e6878, #0d1820);
+        }
+        .filter-card-name { font-weight: 700; font-size: 0.9rem; letter-spacing: 0.02em; }
+        .filter-card-desc { font-size: 0.65rem; color: var(--text2); margin-top: 2px; letter-spacing: 0.03em; }
+        .filter-card .active-dot {
+            display: none; width: 7px; height: 7px; border-radius: 50%;
+            background: var(--accent); margin: 6px auto 0;
+        }
+        .filter-card.active .active-dot { display: block; animation: pulse-dot 2s infinite; }
+
+        .slider-group { display: flex; flex-direction: column; gap: 6px; }
+        .slider-header { display: flex; justify-content: space-between; align-items: center; }
+        .slider-label { font-size: 0.75rem; color: var(--text2); font-weight: 500; letter-spacing: 0.03em; }
+        .slider-value { font-size: 0.75rem; color: var(--accent); font-weight: 600; font-family: var(--font-mono); }
+        input[type="range"] {
+            -webkit-appearance: none; width: 100%; height: 6px;
+            border-radius: 3px; background: #2a2a2a; outline: none; cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 28px; height: 28px;
+            border-radius: 50%; background: #fff; border: 2px solid #444;
+            cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4); transition: all 0.2s;
+        }
+        input[type="range"]::-webkit-slider-thumb:active {
+            transform: scale(1.1); border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(212,168,83,0.4);
+        }
+
+        .effects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        @media (min-width: 420px) { .effects-grid { grid-template-columns: repeat(4, 1fr); } }
         .effect-toggle {
-          padding: 8px 4px;
-          font-size: 0.65rem;
+            background: var(--surface); border: 1.5px solid #2a2a2a;
+            border-radius: var(--radius-sm); padding: 10px 6px;
+            cursor: pointer; transition: all var(--transition);
+            text-align: center; font-size: 0.7rem; color: var(--text2);
+            display: flex; flex-direction: column; align-items: center;
+            gap: 5px; letter-spacing: 0.02em;
         }
-      }
+        .effect-toggle:hover { border-color: #444; background: #1a1a1a; }
+        .effect-toggle.on { border-color: var(--accent); background: #1a1812; color: var(--accent); }
+        .effect-icon { font-size: 1.3rem; transition: transform 0.3s; }
+        .effect-toggle.on .effect-icon { transform: scale(1.1); }
+
+        .actions-row { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn {
+            flex: 1; min-width: 80px; padding: 13px 16px;
+            border-radius: var(--radius-sm); font-weight: 600;
+            font-size: 0.85rem; letter-spacing: 0.03em;
+            cursor: pointer; transition: all var(--transition);
+            border: none; display: flex; align-items: center;
+            justify-content: center; gap: 7px; white-space: nowrap;
+        }
+        .btn-primary {
+            background: var(--accent); color: #0a0a0a;
+            box-shadow: 0 4px 16px rgba(212,168,83,0.25);
+        }
+        .btn-primary:hover {
+            background: var(--accent2);
+            box-shadow: 0 6px 24px rgba(212,168,83,0.35);
+            transform: translateY(-1px);
+        }
+        .btn-primary:active { transform: scale(0.97); }
+        .btn-secondary { background: var(--surface2); color: #ccc; border: 1.5px solid #333; }
+        .btn-secondary:hover { background: #222; border-color: #555; }
+        .btn-outline { background: transparent; color: var(--text); border: 1.5px solid #444; }
+        .btn-outline:hover { border-color: #888; background: #111; }
+        .btn-compare {
+            background: #1a1a1a; color: #ccc; border: 1.5px solid #444;
+            font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em;
+        }
+        .btn-compare.active-compare {
+            border-color: #fff; color: #fff; background: #222;
+            animation: subtle-glow 2s infinite;
+        }
+        @keyframes subtle-glow {
+            0%, 100% { box-shadow: 0 0 8px rgba(255,255,255,0.05); }
+            50% { box-shadow: 0 0 18px rgba(255,255,255,0.15); }
+        }
+        .btn:disabled { opacity: 0.35; pointer-events: none; cursor: not-allowed; }
+
+        #fileInput { display: none; }
+
+        .toast {
+            position: fixed; bottom: 30px; left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1a1a1a; color: #e0e0e0;
+            padding: 10px 20px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: 500; letter-spacing: 0.03em;
+            z-index: 100; border: 1px solid #333;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none; box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        .frame-counter {
+            position: absolute; top: 12px; right: 14px;
+            font-family: var(--font-mono); font-size: 0.65rem;
+            color: rgba(255,255,255,0.7); letter-spacing: 0.06em;
+            z-index: 4; pointer-events: none;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.7); display: none;
+        }
+        .has-image .frame-counter { display: block; }
+
+        @media (max-width: 360px) {
+            .app-container { padding: 8px 10px calc(var(--safe-bottom) + 12px); gap: 10px; }
+            .filter-card { padding: 8px; }
+            .btn { padding: 10px 12px; font-size: 0.78rem; }
+            .effects-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+            .effect-toggle { padding: 8px 4px; font-size: 0.65rem; }
+        }
     </style>
-  </head>
-  <body>
-    <div class="app-container">
-      <header class="header">
+</head>
+<body>
+<div class="app-container">
+    <header class="header">
         <div class="logo-area">
-          <div class="logo-icon">📸</div>
-          <div>
-            <div class="logo-text">Dazz复古</div>
-            <div class="logo-sub">ANALOG LAB</div>
-          </div>
+            <div class="logo-icon">📸</div>
+            <div>
+                <div class="logo-text">Dazz复古</div>
+                <div class="logo-sub">ANALOG LAB</div>
+            </div>
         </div>
         <div class="badge"><span class="badge-dot"></span> CCD SIM</div>
-      </header>
+    </header>
 
-      <section class="preview-section" id="previewSection">
+    <section class="preview-section" id="previewSection">
         <div class="upload-placeholder" id="uploadPlaceholder">
-          <span class="upload-icon">📷</span>
-          <span class="upload-text">Arraste uma foto ou toque aqui</span>
-          <span class="upload-subtext">JPG • PNG • HEIC • até 20MB</span>
+            <span class="upload-icon">📷</span>
+            <span class="upload-text">Arraste uma foto ou toque aqui</span>
+            <span class="upload-subtext">JPG • PNG • HEIC • até 20MB</span>
         </div>
         <div class="canvas-wrapper" id="canvasWrapper">
-          <canvas id="mainCanvas"></canvas>
-          <div class="frame-counter" id="frameCounter">0001</div>
+            <canvas id="mainCanvas"></canvas>
+            <div class="frame-counter" id="frameCounter">0001</div>
         </div>
         <div class="compare-overlay" id="compareOverlay">
-          <div class="compare-line" id="compareLine"></div>
-          <div class="compare-handle" id="compareHandle">⟷</div>
-          <span class="compare-label-left">ORIGINAL</span>
-          <span class="compare-label-right" id="compareLabelRight">CPM35</span>
+            <div class="compare-line" id="compareLine"></div>
+            <div class="compare-handle" id="compareHandle">⟷</div>
+            <span class="compare-label-left">ORIGINAL</span>
+            <span class="compare-label-right" id="compareLabelRight">CPM35</span>
         </div>
-        <input type="file" id="fileInput" accept="image/*" />
-      </section>
+        <input type="file" id="fileInput" accept="image/*">
+    </section>
 
-      <div>
+    <div>
         <div class="section-title">🎞️ Filtro</div>
         <div class="filter-cards">
-          <div class="filter-card active" data-filter="cpm35" id="cardCPM35">
-            <div class="filter-card-preview cpm35"></div>
-            <div class="filter-card-name">CPM35</div>
-            <div class="filter-card-desc">Warm • CCD Flash</div>
-            <div class="active-dot"></div>
-          </div>
-          <div class="filter-card" data-filter="grdr" id="cardGRDR">
-            <div class="filter-card-preview grdr"></div>
-            <div class="filter-card-name">GRD R</div>
-            <div class="filter-card-desc">Cool • Cinematic</div>
-            <div class="active-dot"></div>
-          </div>
+            <div class="filter-card active" data-filter="cpm35" id="cardCPM35">
+                <div class="filter-card-preview cpm35"></div>
+                <div class="filter-card-name">CPM35</div>
+                <div class="filter-card-desc">Warm • CCD Flash</div>
+                <div class="active-dot"></div>
+            </div>
+            <div class="filter-card" data-filter="grdr" id="cardGRDR">
+                <div class="filter-card-preview grdr"></div>
+                <div class="filter-card-name">GRD R</div>
+                <div class="filter-card-desc">Cool • Cinematic</div>
+                <div class="active-dot"></div>
+            </div>
         </div>
-      </div>
-
-      <div class="slider-group">
-        <div class="slider-header">
-          <span class="slider-label">⚡ Intensidade</span>
-          <span class="slider-value" id="intensityValue">85%</span>
-        </div>
-        <input
-          type="range"
-          id="intensitySlider"
-          min="0"
-          max="100"
-          value="85"
-          step="1"
-        />
-      </div>
-
-      <div>
-        <div class="section-title">✨ Efeitos Extras</div>
-        <div class="effects-grid">
-          <button class="effect-toggle on" data-effect="grain" id="toggleGrain">
-            <span class="effect-icon">🔘</span> Grão
-          </button>
-          <button
-            class="effect-toggle on"
-            data-effect="vignette"
-            id="toggleVignette"
-          >
-            <span class="effect-icon">🌑</span> Vinheta
-          </button>
-          <button
-            class="effect-toggle"
-            data-effect="chromatic"
-            id="toggleChromatic"
-          >
-            <span class="effect-icon">🌈</span> RGB Split
-          </button>
-          <button
-            class="effect-toggle on"
-            data-effect="halation"
-            id="toggleHalation"
-          >
-            <span class="effect-icon">💫</span> Halation
-          </button>
-          <button
-            class="effect-toggle"
-            data-effect="lightleaks"
-            id="toggleLightleaks"
-          >
-            <span class="effect-icon">💡</span> Light Leaks
-          </button>
-          <button class="effect-toggle" data-effect="dust" id="toggleDust">
-            <span class="effect-icon">💨</span> Dust
-          </button>
-          <button
-            class="effect-toggle on"
-            data-effect="timestamp"
-            id="toggleTimestamp"
-          >
-            <span class="effect-icon">🕐</span> Timestamp
-          </button>
-          <button class="effect-toggle" data-effect="bloom" id="toggleBloom">
-            <span class="effect-icon">✨</span> Bloom
-          </button>
-        </div>
-      </div>
-
-      <div class="actions-row">
-        <button class="btn btn-compare" id="btnCompare" disabled>
-          ⇆ COMPARAR
-        </button>
-        <button class="btn btn-outline" id="btnCamera" disabled>
-          📸 Câmera
-        </button>
-        <button class="btn btn-primary" id="btnDownload" disabled>
-          ⬇︎ BAIXAR
-        </button>
-      </div>
     </div>
 
-    <div class="toast" id="toast"></div>
+    <div class="slider-group">
+        <div class="slider-header">
+            <span class="slider-label">⚡ Intensidade</span>
+            <span class="slider-value" id="intensityValue">85%</span>
+        </div>
+        <input type="range" id="intensitySlider" min="0" max="100" value="85" step="1">
+    </div>
 
-    <script>
-      (function () {
-        // ─── DOM ───────────────────────────────────────────────────────────────────
-        const previewSection = document.getElementById("previewSection");
-        const canvasWrapper = document.getElementById("canvasWrapper");
-        const mainCanvas = document.getElementById("mainCanvas");
-        const ctx = mainCanvas.getContext("2d", { willReadFrequently: true });
-        const fileInput = document.getElementById("fileInput");
-        const intensitySlider = document.getElementById("intensitySlider");
-        const intensityValue = document.getElementById("intensityValue");
-        const btnDownload = document.getElementById("btnDownload");
-        const btnCompare = document.getElementById("btnCompare");
-        const btnCamera = document.getElementById("btnCamera");
-        const compareOverlay = document.getElementById("compareOverlay");
-        const compareLine = document.getElementById("compareLine");
-        const compareHandle = document.getElementById("compareHandle");
-        const compareLabelRight = document.getElementById("compareLabelRight");
-        const frameCounter = document.getElementById("frameCounter");
-        const toast = document.getElementById("toast");
-        const cardCPM35 = document.getElementById("cardCPM35");
-        const cardGRDR = document.getElementById("cardGRDR");
+    <div>
+        <div class="section-title">✨ Efeitos Extras</div>
+        <div class="effects-grid">
+            <button class="effect-toggle on"  data-effect="grain"      id="toggleGrain">     <span class="effect-icon">🔘</span> Grão</button>
+            <button class="effect-toggle on"  data-effect="vignette"   id="toggleVignette">  <span class="effect-icon">🌑</span> Vinheta</button>
+            <button class="effect-toggle"     data-effect="chromatic"  id="toggleChromatic"> <span class="effect-icon">🌈</span> RGB Split</button>
+            <button class="effect-toggle on"  data-effect="halation"   id="toggleHalation">  <span class="effect-icon">💫</span> Halation</button>
+            <button class="effect-toggle"     data-effect="lightleaks" id="toggleLightleaks"><span class="effect-icon">💡</span> Light Leaks</button>
+            <button class="effect-toggle"     data-effect="dust"       id="toggleDust">      <span class="effect-icon">💨</span> Dust</button>
+            <button class="effect-toggle on"  data-effect="timestamp"  id="toggleTimestamp"> <span class="effect-icon">🕐</span> Timestamp</button>
+            <button class="effect-toggle"     data-effect="bloom"      id="toggleBloom">     <span class="effect-icon">✨</span> Bloom</button>
+        </div>
+    </div>
 
-        // ─── STATE ─────────────────────────────────────────────────────────────────
-        let originalImage = null;
-        let originalImageData = null;
-        let processedImageData = null;
-        let currentFilter = "cpm35";
-        let intensity = 0.85;
-        let isComparing = false;
-        let comparePosition = 0.5;
-        let dustCanvas = null;
-        let lightLeaksCanvas = null;
-        let needsDustRegen = true;
-        let needsLeaksRegen = true;
+    <div class="actions-row">
+        <button class="btn btn-compare" id="btnCompare" disabled>⇆ COMPARAR</button>
+        <button class="btn btn-outline"  id="btnCamera"  disabled>📸 Câmera</button>
+        <button class="btn btn-primary"  id="btnDownload" disabled>⬇︎ BAIXAR</button>
+    </div>
+</div>
 
-        // Halation ativada por padrão — assinatura visual de ambos os filtros Dazz
-        const effectStates = {
-          grain: true,
-          vignette: true,
-          chromatic: false,
-          halation: true,
-          lightleaks: false,
-          dust: false,
-          timestamp: true,
-          bloom: false,
-        };
+<div class="toast" id="toast"></div>
 
-        const MAX_W = 1400,
-          MAX_H = 1400;
-        const JPEG_QUALITY = 0.84;
+<script>
+(function () {
+    // ─── DOM ───────────────────────────────────────────────────────────────────
+    const previewSection   = document.getElementById('previewSection');
+    const canvasWrapper    = document.getElementById('canvasWrapper');
+    const mainCanvas       = document.getElementById('mainCanvas');
+    const ctx              = mainCanvas.getContext('2d', { willReadFrequently: true });
+    const fileInput        = document.getElementById('fileInput');
+    const intensitySlider  = document.getElementById('intensitySlider');
+    const intensityValue   = document.getElementById('intensityValue');
+    const btnDownload      = document.getElementById('btnDownload');
+    const btnCompare       = document.getElementById('btnCompare');
+    const btnCamera        = document.getElementById('btnCamera');
+    const compareOverlay   = document.getElementById('compareOverlay');
+    const compareLine      = document.getElementById('compareLine');
+    const compareHandle    = document.getElementById('compareHandle');
+    const compareLabelRight= document.getElementById('compareLabelRight');
+    const frameCounter     = document.getElementById('frameCounter');
+    const toast            = document.getElementById('toast');
+    const cardCPM35        = document.getElementById('cardCPM35');
+    const cardGRDR         = document.getElementById('cardGRDR');
 
-        // ─── UTILS ─────────────────────────────────────────────────────────────────
-        function debounce(fn, ms) {
-          let t;
-          return (...a) => {
-            clearTimeout(t);
-            t = setTimeout(() => fn(...a), ms);
-          };
-        }
-        function showToast(msg) {
-          toast.textContent = msg;
-          toast.classList.add("show");
-          clearTimeout(toast._t);
-          toast._t = setTimeout(() => toast.classList.remove("show"), 2000);
-        }
-        function clamp(v, mn, mx) {
-          return Math.max(mn, Math.min(mx, v));
-        }
-        function lerp(a, b, t) {
-          return a + (b - a) * t;
-        }
+    // ─── STATE ─────────────────────────────────────────────────────────────────
+    let originalImage       = null;
+    let originalImageData   = null;
+    let processedImageData  = null;
+    let currentFilter       = 'cpm35';
+    let intensity           = 0.85;
+    let isComparing         = false;
+    let comparePosition     = 0.5;
+    let dustCanvas          = null;
+    let lightLeaksCanvas    = null;
+    let needsDustRegen      = true;
+    let needsLeaksRegen     = true;
 
-        function createPRNG(seed) {
-          let s = seed || 42;
-          return () => {
-            s = (s * 16807) % 2147483647;
-            return (s - 1) / 2147483646;
-          };
-        }
+    // Halation ativada por padrão — assinatura visual de ambos os filtros Dazz
+    const effectStates = {
+        grain:      true,
+        vignette:   true,
+        chromatic:  false,
+        halation:   true,
+        lightleaks: false,
+        dust:       false,
+        timestamp:  true,
+        bloom:      false,
+    };
 
-        // ─── LUT BUILDER ───────────────────────────────────────────────────────────
-        function createLUT(fn) {
-          const lut = new Uint8Array(256);
-          for (let i = 0; i < 256; i++)
-            lut[i] = clamp(Math.round(fn(i / 255) * 255), 0, 255);
-          return lut;
-        }
+    const MAX_W = 1400, MAX_H = 1400;
+    const JPEG_QUALITY = 0.84;
 
-        function sCurve(x, s = 0.5) {
-          if (x <= 0) return 0;
-          if (x >= 1) return 1;
-          const k = s * 0.8 + 0.1;
-          return x < 0.5
-            ? Math.pow(2 * x, 1 + k) / 2
-            : 1 - Math.pow(2 * (1 - x), 1 + k) / 2;
-        }
+    // ─── UTILS ─────────────────────────────────────────────────────────────────
+    function debounce(fn, ms) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
+    function showToast(msg) {
+        toast.textContent = msg; toast.classList.add('show');
+        clearTimeout(toast._t); toast._t = setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+    function clamp(v, mn, mx) { return Math.max(mn, Math.min(mx, v)); }
+    function lerp(a, b, t)    { return a + (b - a) * t; }
 
-        // ─── CPM35 LUTs — "CCD Flash Warm" ─────────────────────────────────────────
-        // Objetivo: cast laranja forte, highlights dourados, sombras quentes, azuis muito cortados.
-        // Referência visual: tons de âmbar/laranja saturados, pretos suaves com véu quente.
-        function buildCPM35LUTs() {
-          const redLUT = createLUT((x) => {
-            let y = sCurve(x, 0.35);
-            y = y * 1.26 + 0.06; // boost laranja muito forte
-            if (y > 0.55) y = lerp(y, Math.min(y * 1.1, 1), (y - 0.55) / 0.45); // highlights ainda mais dourados
-            if (y < 0.15) y = y * 1.1 + 0.03; // sombras com véu quente
+    function createPRNG(seed) {
+        let s = seed || 42;
+        return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+    }
+
+    // ─── LUT BUILDER ───────────────────────────────────────────────────────────
+    function createLUT(fn) {
+        const lut = new Uint8Array(256);
+        for (let i = 0; i < 256; i++) lut[i] = clamp(Math.round(fn(i / 255) * 255), 0, 255);
+        return lut;
+    }
+
+    function sCurve(x, s = 0.5) {
+        if (x <= 0) return 0; if (x >= 1) return 1;
+        const k = s * 0.8 + 0.1;
+        return x < 0.5 ? Math.pow(2 * x, 1 + k) / 2 : 1 - Math.pow(2 * (1 - x), 1 + k) / 2;
+    }
+
+    // ─── CPM35 LUTs — "CCD Warm • Sépia Âmbar" ────────────────────────────────
+    // Referência real (foto da namorada):
+    //   • Brancos viram CREME QUENTE (não laranja vivo)
+    //   • Sombras MARROM-ESCURO profundo, pretos densos
+    //   • Vermelhos → bordô/vinho; amarelos → dourado quente
+    //   • Contraste alto, sem matte — é denso, não desbotado
+    //   • Cast geral: sépia-âmbar, como filme Kodak Ultramax velho
+    function buildCPM35LUTs() {
+        const redLUT = createLUT(x => {
+            let y = sCurve(x, 0.42);                              // contraste moderado-alto
+            y = y * 1.14 + 0.03;                                  // boost quente suave nos mids
+            // highlights: creme quente, não laranja vivo
+            if (y > 0.70) y = lerp(y, Math.min(y * 1.05, 1), (y - 0.70) / 0.30);
+            // sombras: marrom-avermelhado (não preto puro)
+            if (y < 0.12) y = y * 0.85 + 0.015;
             return clamp(y, 0, 1);
-          });
-          const greenLUT = createLUT((x) => {
-            let y = sCurve(x, 0.28);
-            y = y * 1.06 + 0.02; // suporte ao âmbar nos mids
-            if (y < 0.25) y = lerp(y, y * 0.92, (0.25 - y) / 0.25); // sombras: menos verde (mais laranja)
+        });
+        const greenLUT = createLUT(x => {
+            let y = sCurve(x, 0.38);
+            y = y * 0.90 - 0.01;                                  // reduz verde nos mids → afasta do amarelo
+            // sombras: leve verde-oliva (filme analógico)
+            if (y < 0.20) y = lerp(y, y * 1.08, (0.20 - y) / 0.20);
+            // highlights: pouco verde → creme, não amarelo puro
+            if (y > 0.65) y = lerp(y, y * 0.94, (y - 0.65) / 0.35);
             return clamp(y, 0, 1);
-          });
-          const blueLUT = createLUT((x) => {
-            let y = sCurve(x, 0.22);
-            y = y * 0.52 - 0.04; // corte pesado de azul
-            if (y < 0.2) y = y * 0.7; // sombras quase sem azul
+        });
+        const blueLUT = createLUT(x => {
+            let y = sCurve(x, 0.30);
+            y = y * 0.58 - 0.03;                                  // corte forte de azul (sépia)
+            // sombras com muito pouco azul → marrom quente profundo
+            if (y < 0.18) y = y * 0.72;
+            // highlights: um toque de azul para evitar amarelo puro nos brancos
+            if (y > 0.70) y = lerp(y, y * 1.08, (y - 0.70) / 0.30);
             return clamp(y, 0, 1);
-          });
-          return { red: redLUT, green: greenLUT, blue: blueLUT };
-        }
+        });
+        return { red: redLUT, green: greenLUT, blue: blueLUT };
+    }
 
-        // ─── GRD R LUTs — "Ricoh GR Digital • Cinematic Cool" ──────────────────────
-        // Objetivo: pretos profundos, teal/azul nas sombras, leve quente nos highlights,
-        // contraste alto, tom geral dessaturado e frio como um sensor GR Digital real.
-        function buildGRDRLUTs() {
-          const redLUT = createLUT((x) => {
-            let y = sCurve(x, 0.55); // contraste alto
-            y = y * 0.8 + 0.02; // corte forte de vermelho
-            if (y < 0.18) y = y * 0.68; // pretos muito profundos
+    // ─── GRD R LUTs — "Ricoh GR Digital • Cinematic Cool" ──────────────────────
+    // Objetivo: pretos profundos, teal/azul nas sombras, leve quente nos highlights,
+    // contraste alto, tom geral dessaturado e frio como um sensor GR Digital real.
+    function buildGRDRLUTs() {
+        const redLUT = createLUT(x => {
+            let y = sCurve(x, 0.55);                              // contraste alto
+            y = y * 0.80 + 0.02;                                  // corte forte de vermelho
+            if (y < 0.18) y = y * 0.68;                           // pretos muito profundos
             if (y > 0.78) y = lerp(y, Math.min(y * 1.06, 1), (y - 0.78) / 0.22); // highlights: leve quente (split tone)
             return clamp(y, 0, 1);
-          });
-          const greenLUT = createLUT((x) => {
-            let y = sCurve(x, 0.5);
+        });
+        const greenLUT = createLUT(x => {
+            let y = sCurve(x, 0.50);
             y = y * 0.88 + 0.02;
             if (y < 0.28) y = lerp(y, y * 1.18, (0.28 - y) / 0.28); // sombras com teal
             if (y > 0.75) y = lerp(y, y * 1.03, (y - 0.75) / 0.25); // highlights levemente quentes
             return clamp(y, 0, 1);
-          });
-          const blueLUT = createLUT((x) => {
+        });
+        const blueLUT = createLUT(x => {
             let y = sCurve(x, 0.45);
-            y = y * 1.2 + 0.06; // boost de azul forte
+            y = y * 1.20 + 0.06;                                  // boost de azul forte
             if (y < 0.32) y = lerp(y, y * 1.28, (0.32 - y) / 0.32); // sombras muito azuladas
-            if (y > 0.8) y = lerp(y, y * 0.88, (y - 0.8) / 0.2); // highlights: menos azul (evita ciano nos brancos)
+            if (y > 0.80) y = lerp(y, y * 0.88, (y - 0.80) / 0.20); // highlights: menos azul (evita ciano nos brancos)
             return clamp(y, 0, 1);
-          });
-          return { red: redLUT, green: greenLUT, blue: blueLUT };
-        }
+        });
+        return { red: redLUT, green: greenLUT, blue: blueLUT };
+    }
 
-        const cpm35LUTs = buildCPM35LUTs();
-        const grdrLUTs = buildGRDRLUTs();
+    const cpm35LUTs = buildCPM35LUTs();
+    const grdrLUTs  = buildGRDRLUTs();
 
-        // ─── RGB ↔ HSL ─────────────────────────────────────────────────────────────
-        function rgbToHsl(r, g, b) {
-          r /= 255;
-          g /= 255;
-          b /= 255;
-          const max = Math.max(r, g, b),
-            min = Math.min(r, g, b);
-          let h,
-            s,
-            l = (max + min) / 2;
-          if (max === min) {
-            h = s = 0;
-          } else {
+    // ─── RGB ↔ HSL ─────────────────────────────────────────────────────────────
+    function rgbToHsl(r, g, b) {
+        r /= 255; g /= 255; b /= 255;
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
+        let h, s, l = (max + min) / 2;
+        if (max === min) { h = s = 0; } else {
             const d = max - min;
             s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
             switch (max) {
-              case r:
-                h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
-                break;
-              case g:
-                h = ((b - r) / d + 2) / 6;
-                break;
-              case b:
-                h = ((r - g) / d + 4) / 6;
-                break;
+                case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                case g: h = ((b - r) / d + 2) / 6; break;
+                case b: h = ((r - g) / d + 4) / 6; break;
             }
-          }
-          return { h, s, l };
         }
-        function hslToRgb(h, s, l) {
-          let r, g, b;
-          if (s === 0) {
-            r = g = b = l;
-          } else {
-            const q = l < 0.5 ? l * (1 + s) : l + s - l * s,
-              p = 2 * l - q;
+        return { h, s, l };
+    }
+    function hslToRgb(h, s, l) {
+        let r, g, b;
+        if (s === 0) { r = g = b = l; } else {
+            const q = l < 0.5 ? l * (1 + s) : l + s - l * s, p = 2 * l - q;
             const hue = (p, q, t) => {
-              if (t < 0) t += 1;
-              if (t > 1) t -= 1;
-              if (t < 1 / 6) return p + (q - p) * 6 * t;
-              if (t < 1 / 2) return q;
-              if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-              return p;
+                if (t < 0) t += 1; if (t > 1) t -= 1;
+                if (t < 1/6) return p + (q - p) * 6 * t;
+                if (t < 1/2) return q;
+                if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
             };
-            r = hue(p, q, h + 1 / 3);
-            g = hue(p, q, h);
-            b = hue(p, q, h - 1 / 3);
-          }
-          return {
-            r: Math.round(r * 255),
-            g: Math.round(g * 255),
-            b: Math.round(b * 255),
-          };
+            r = hue(p, q, h + 1/3); g = hue(p, q, h); b = hue(p, q, h - 1/3);
         }
+        return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
+    }
 
-        // ─── BOX BLUR ──────────────────────────────────────────────────────────────
-        function boxBlur(imageData, radius) {
-          const w = imageData.width,
-            h = imageData.height;
-          const src = new Uint8ClampedArray(imageData.data);
-          const dst = new Uint8ClampedArray(src.length);
-          for (let y = 0; y < h; y++) {
+    // ─── BOX BLUR ──────────────────────────────────────────────────────────────
+    function boxBlur(imageData, radius) {
+        const w = imageData.width, h = imageData.height;
+        const src = new Uint8ClampedArray(imageData.data);
+        const dst = new Uint8ClampedArray(src.length);
+        for (let y = 0; y < h; y++) {
             for (let x = 0; x < w; x++) {
-              let r = 0,
-                g = 0,
-                b = 0,
-                n = 0;
-              for (let dx = -radius; dx <= radius; dx++) {
-                const sx = clamp(x + dx, 0, w - 1),
-                  i = (y * w + sx) * 4;
-                r += src[i];
-                g += src[i + 1];
-                b += src[i + 2];
-                n++;
-              }
-              const i = (y * w + x) * 4;
-              dst[i] = r / n;
-              dst[i + 1] = g / n;
-              dst[i + 2] = b / n;
-              dst[i + 3] = src[i + 3];
+                let r=0,g=0,b=0,n=0;
+                for (let dx = -radius; dx <= radius; dx++) {
+                    const sx = clamp(x+dx,0,w-1), i=(y*w+sx)*4;
+                    r+=src[i]; g+=src[i+1]; b+=src[i+2]; n++;
+                }
+                const i=(y*w+x)*4; dst[i]=r/n; dst[i+1]=g/n; dst[i+2]=b/n; dst[i+3]=src[i+3];
             }
-          }
-          const s2 = new Uint8ClampedArray(dst);
-          for (let y = 0; y < h; y++) {
-            for (let x = 0; x < w; x++) {
-              let r = 0,
-                g = 0,
-                b = 0,
-                n = 0;
-              for (let dy = -radius; dy <= radius; dy++) {
-                const sy = clamp(y + dy, 0, h - 1),
-                  i = (sy * w + x) * 4;
-                r += s2[i];
-                g += s2[i + 1];
-                b += s2[i + 2];
-                n++;
-              }
-              const i = (y * w + x) * 4;
-              dst[i] = r / n;
-              dst[i + 1] = g / n;
-              dst[i + 2] = b / n;
-              dst[i + 3] = s2[i + 3];
-            }
-          }
-          return new ImageData(dst, w, h);
         }
+        const s2 = new Uint8ClampedArray(dst);
+        for (let y = 0; y < h; y++) {
+            for (let x = 0; x < w; x++) {
+                let r=0,g=0,b=0,n=0;
+                for (let dy = -radius; dy <= radius; dy++) {
+                    const sy = clamp(y+dy,0,h-1), i=(sy*w+x)*4;
+                    r+=s2[i]; g+=s2[i+1]; b+=s2[i+2]; n++;
+                }
+                const i=(y*w+x)*4; dst[i]=r/n; dst[i+1]=g/n; dst[i+2]=b/n; dst[i+3]=s2[i+3];
+            }
+        }
+        return new ImageData(dst, w, h);
+    }
 
-        // ─── GRAIN ─────────────────────────────────────────────────────────────────
-        function applyGrain(imageData, strength, seed) {
-          const d = imageData.data,
-            prng = createPRNG(seed);
-          for (let i = 0; i < d.length; i += 4) {
+    // ─── GRAIN ─────────────────────────────────────────────────────────────────
+    function applyGrain(imageData, strength, seed) {
+        const d = imageData.data, prng = createPRNG(seed);
+        for (let i = 0; i < d.length; i += 4) {
             const n = (prng() - 0.5) * strength * 255;
-            d[i] = clamp(d[i] + n, 0, 255);
-            d[i + 1] = clamp(d[i + 1] + n * 0.88, 0, 255);
-            d[i + 2] = clamp(d[i + 2] + n * 0.82, 0, 255);
+            d[i]   = clamp(d[i]   + n,        0, 255);
+            d[i+1] = clamp(d[i+1] + n * 0.88, 0, 255);
+            d[i+2] = clamp(d[i+2] + n * 0.82, 0, 255);
             const cn = (prng() - 0.5) * strength * 90;
-            d[i + 1] = clamp(d[i + 1] + cn, 0, 255);
-          }
-          return imageData;
+            d[i+1] = clamp(d[i+1] + cn, 0, 255);
         }
+        return imageData;
+    }
 
-        // ─── VINHETA ───────────────────────────────────────────────────────────────
-        function applyVignette(imageData, strength) {
-          const w = imageData.width,
-            h = imageData.height,
-            d = imageData.data;
-          const cx = w / 2,
-            cy = h / 2,
-            md = Math.sqrt(cx * cx + cy * cy);
-          for (let y = 0; y < h; y++) {
+    // ─── VINHETA ───────────────────────────────────────────────────────────────
+    function applyVignette(imageData, strength) {
+        const w = imageData.width, h = imageData.height, d = imageData.data;
+        const cx = w/2, cy = h/2, md = Math.sqrt(cx*cx+cy*cy);
+        for (let y = 0; y < h; y++) {
             for (let x = 0; x < w; x++) {
-              const dx = (x - cx) / md,
-                dy = (y - cy) / md;
-              const dist = Math.sqrt(dx * dx + dy * dy);
-              const v =
-                1 - strength * Math.pow(clamp((dist - 0.3) / 0.7, 0, 1), 1.6);
-              const i = (y * w + x) * 4;
-              d[i] = clamp(Math.round(d[i] * v), 0, 255);
-              d[i + 1] = clamp(Math.round(d[i + 1] * v), 0, 255);
-              d[i + 2] = clamp(Math.round(d[i + 2] * v), 0, 255);
+                const dx=(x-cx)/md, dy=(y-cy)/md;
+                const dist = Math.sqrt(dx*dx+dy*dy);
+                const v = 1 - strength * Math.pow(clamp((dist-0.30)/0.70, 0, 1), 1.6);
+                const i=(y*w+x)*4;
+                d[i]   = clamp(Math.round(d[i]   * v), 0, 255);
+                d[i+1] = clamp(Math.round(d[i+1] * v), 0, 255);
+                d[i+2] = clamp(Math.round(d[i+2] * v), 0, 255);
             }
-          }
-          return imageData;
         }
+        return imageData;
+    }
 
-        // ─── ABERRAÇÃO CROMÁTICA ───────────────────────────────────────────────────
-        function applyChromaticAberration(imageData, shift) {
-          const w = imageData.width,
-            h = imageData.height;
-          const src = new Uint8ClampedArray(imageData.data),
-            dst = new Uint8ClampedArray(src.length);
-          for (let y = 0; y < h; y++) {
+    // ─── ABERRAÇÃO CROMÁTICA ───────────────────────────────────────────────────
+    function applyChromaticAberration(imageData, shift) {
+        const w = imageData.width, h = imageData.height;
+        const src = new Uint8ClampedArray(imageData.data), dst = new Uint8ClampedArray(src.length);
+        for (let y = 0; y < h; y++) {
             for (let x = 0; x < w; x++) {
-              const i = (y * w + x) * 4;
-              const ri = (y * w + clamp(x - Math.round(shift), 0, w - 1)) * 4;
-              const bi = (y * w + clamp(x + Math.round(shift), 0, w - 1)) * 4;
-              dst[i] = src[ri];
-              dst[i + 1] = src[i + 1];
-              dst[i + 2] = src[bi + 2];
-              dst[i + 3] = src[i + 3];
+                const i  = (y*w+x)*4;
+                const ri = (y*w+clamp(x-Math.round(shift),0,w-1))*4;
+                const bi = (y*w+clamp(x+Math.round(shift),0,w-1))*4;
+                dst[i]=src[ri]; dst[i+1]=src[i+1]; dst[i+2]=src[bi+2]; dst[i+3]=src[i+3];
             }
-          }
-          return new ImageData(dst, w, h);
         }
+        return new ImageData(dst, w, h);
+    }
 
-        // ─── HALATION ──────────────────────────────────────────────────────────────
-        // CPM35: glow laranja/âmbar (r,g,b = 1, 0.55, 0.25)
-        // GRD R: glow azul/ciano frio  (r,g,b = 0.35, 0.65, 1)
-        function applyHalation(imageData, strength, filterType) {
-          const w = imageData.width,
-            h = imageData.height,
-            d = imageData.data;
-          const hl = new Uint8ClampedArray(d.length);
-          const warm = filterType === "cpm35";
-          for (let i = 0; i < d.length; i += 4) {
-            const lum = d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114;
+    // ─── HALATION ──────────────────────────────────────────────────────────────
+    // CPM35: glow laranja/âmbar (r,g,b = 1, 0.55, 0.25)
+    // GRD R: glow azul/ciano frio  (r,g,b = 0.35, 0.65, 1)
+    function applyHalation(imageData, strength, filterType) {
+        const w = imageData.width, h = imageData.height, d = imageData.data;
+        const hl = new Uint8ClampedArray(d.length);
+        const warm = filterType === 'cpm35';
+        for (let i = 0; i < d.length; i += 4) {
+            const lum = d[i]*0.299 + d[i+1]*0.587 + d[i+2]*0.114;
             if (lum > 170) {
-              const f = (lum - 170) / 85;
-              hl[i] = d[i] * f * (warm ? 1.0 : 0.35);
-              hl[i + 1] = d[i + 1] * f * (warm ? 0.55 : 0.65);
-              hl[i + 2] = d[i + 2] * f * (warm ? 0.2 : 1.0);
-              hl[i + 3] = 255;
+                const f = (lum - 170) / 85;
+                hl[i]   = d[i]   * f * (warm ? 1.0  : 0.35);
+                hl[i+1] = d[i+1] * f * (warm ? 0.55 : 0.65);
+                hl[i+2] = d[i+2] * f * (warm ? 0.20 : 1.0);
+                hl[i+3] = 255;
             }
-          }
-          const blurred = boxBlur(new ImageData(hl, w, h), 10);
-          for (let i = 0; i < d.length; i += 4) {
-            const ba = (blurred.data[i + 3] / 255) * strength;
-            if (ba > 0.001) {
-              d[i] = clamp(
-                Math.round(d[i] + blurred.data[i] * ba * (1 - d[i] / 255)),
-                0,
-                255,
-              );
-              d[i + 1] = clamp(
-                Math.round(
-                  d[i + 1] + blurred.data[i + 1] * ba * (1 - d[i + 1] / 255),
-                ),
-                0,
-                255,
-              );
-              d[i + 2] = clamp(
-                Math.round(
-                  d[i + 2] + blurred.data[i + 2] * ba * (1 - d[i + 2] / 255),
-                ),
-                0,
-                255,
-              );
-            }
-          }
-          return imageData;
         }
+        const blurred = boxBlur(new ImageData(hl, w, h), 10);
+        for (let i = 0; i < d.length; i += 4) {
+            const ba = blurred.data[i+3] / 255 * strength;
+            if (ba > 0.001) {
+                d[i]   = clamp(Math.round(d[i]   + blurred.data[i]   * ba * (1 - d[i]   / 255)), 0, 255);
+                d[i+1] = clamp(Math.round(d[i+1] + blurred.data[i+1] * ba * (1 - d[i+1] / 255)), 0, 255);
+                d[i+2] = clamp(Math.round(d[i+2] + blurred.data[i+2] * ba * (1 - d[i+2] / 255)), 0, 255);
+            }
+        }
+        return imageData;
+    }
 
-        // ─── BLOOM ─────────────────────────────────────────────────────────────────
-        function applyBloom(imageData, strength) {
-          const w = imageData.width,
-            h = imageData.height,
-            d = imageData.data;
-          const hl = new Uint8ClampedArray(d.length);
-          for (let i = 0; i < d.length; i += 4) {
-            const lum = d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114;
+    // ─── BLOOM ─────────────────────────────────────────────────────────────────
+    function applyBloom(imageData, strength) {
+        const w = imageData.width, h = imageData.height, d = imageData.data;
+        const hl = new Uint8ClampedArray(d.length);
+        for (let i = 0; i < d.length; i += 4) {
+            const lum = d[i]*0.299 + d[i+1]*0.587 + d[i+2]*0.114;
             if (lum > 155) {
-              const f = (lum - 155) / 100;
-              hl[i] = d[i] * f;
-              hl[i + 1] = d[i + 1] * f;
-              hl[i + 2] = d[i + 2] * f;
-              hl[i + 3] = 255;
+                const f = (lum - 155) / 100;
+                hl[i]=d[i]*f; hl[i+1]=d[i+1]*f; hl[i+2]=d[i+2]*f; hl[i+3]=255;
             }
-          }
-          const blurred = boxBlur(new ImageData(hl, w, h), 14);
-          for (let i = 0; i < d.length; i += 4) {
-            const ba = (blurred.data[i + 3] / 255) * strength;
+        }
+        const blurred = boxBlur(new ImageData(hl, w, h), 14);
+        for (let i = 0; i < d.length; i += 4) {
+            const ba = blurred.data[i+3] / 255 * strength;
             if (ba > 0.001) {
-              d[i] = clamp(Math.round(d[i] + blurred.data[i] * ba), 0, 255);
-              d[i + 1] = clamp(
-                Math.round(d[i + 1] + blurred.data[i + 1] * ba),
-                0,
-                255,
-              );
-              d[i + 2] = clamp(
-                Math.round(d[i + 2] + blurred.data[i + 2] * ba),
-                0,
-                255,
-              );
+                d[i]   = clamp(Math.round(d[i]   + blurred.data[i]   * ba), 0, 255);
+                d[i+1] = clamp(Math.round(d[i+1] + blurred.data[i+1] * ba), 0, 255);
+                d[i+2] = clamp(Math.round(d[i+2] + blurred.data[i+2] * ba), 0, 255);
             }
-          }
-          return imageData;
         }
+        return imageData;
+    }
 
-        // ─── DUST ──────────────────────────────────────────────────────────────────
-        function generateDustCanvas(w, h) {
-          const c = document.createElement("canvas");
-          c.width = w;
-          c.height = h;
-          const dc = c.getContext("2d");
-          const prng = createPRNG(137);
-          const n = Math.floor((w * h) / 7000);
-          for (let i = 0; i < n; i++) {
-            const x = prng() * w,
-              y = prng() * h,
-              s = prng() * 2.5 + 0.3,
-              a = prng() * 0.07;
-            dc.fillStyle = `rgba(180,160,140,${a})`;
+    // ─── DUST ──────────────────────────────────────────────────────────────────
+    function generateDustCanvas(w, h) {
+        const c = document.createElement('canvas'); c.width=w; c.height=h;
+        const dc = c.getContext('2d'); const prng = createPRNG(137);
+        const n = Math.floor((w*h)/7000);
+        for (let i=0;i<n;i++){
+            const x=prng()*w,y=prng()*h,s=prng()*2.5+0.3,a=prng()*0.07;
+            dc.fillStyle=`rgba(180,160,140,${a})`;
             dc.beginPath();
-            prng() < 0.5
-              ? dc.arc(x, y, s, 0, Math.PI * 2)
-              : dc.ellipse(x, y, s, s * 0.4, prng() * Math.PI, 0, Math.PI * 2);
+            prng()<0.5 ? dc.arc(x,y,s,0,Math.PI*2) : dc.ellipse(x,y,s,s*0.4,prng()*Math.PI,0,Math.PI*2);
             dc.fill();
-          }
-          return c;
         }
+        return c;
+    }
 
-        // ─── LIGHT LEAKS ───────────────────────────────────────────────────────────
-        function generateLightLeaksCanvas(w, h, warm) {
-          const c = document.createElement("canvas");
-          c.width = w;
-          c.height = h;
-          const lc = c.getContext("2d");
-          const prng = createPRNG(warm ? 271 : 314);
-          const leaks = [
-            {
-              x: prng() * 0.25 * w,
-              y: -h * 0.05,
-              r: w * 0.6,
-              color: warm ? "rgba(255,130,30,0.20)" : "rgba(80,170,230,0.16)",
-            },
-            {
-              x: w * 0.85,
-              y: prng() * 0.4 * h,
-              r: w * 0.45,
-              color: warm ? "rgba(255,190,50,0.14)" : "rgba(120,190,240,0.12)",
-            },
-            {
-              x: w * 0.1,
-              y: h * 0.9,
-              r: w * 0.5,
-              color: warm ? "rgba(255,90,20,0.12)" : "rgba(60,150,220,0.10)",
-            },
-          ];
-          leaks.forEach((lk) => {
-            const g = lc.createRadialGradient(
-              lk.x,
-              lk.y,
-              lk.r * 0.1,
-              lk.x,
-              lk.y,
-              lk.r,
-            );
+    // ─── LIGHT LEAKS ───────────────────────────────────────────────────────────
+    function generateLightLeaksCanvas(w, h, warm) {
+        const c = document.createElement('canvas'); c.width=w; c.height=h;
+        const lc = c.getContext('2d'); const prng = createPRNG(warm?271:314);
+        const leaks = [
+            { x: prng()*0.25*w, y: -h*0.05, r: w*0.6, color: warm?'rgba(255,130,30,0.20)':'rgba(80,170,230,0.16)' },
+            { x: w*0.85, y: prng()*0.4*h,   r: w*0.45, color: warm?'rgba(255,190,50,0.14)':'rgba(120,190,240,0.12)' },
+            { x: w*0.1,  y: h*0.9,           r: w*0.5,  color: warm?'rgba(255,90,20,0.12)' :'rgba(60,150,220,0.10)' },
+        ];
+        leaks.forEach(lk => {
+            const g = lc.createRadialGradient(lk.x,lk.y,lk.r*0.1,lk.x,lk.y,lk.r);
             const alpha = parseFloat(lk.color.match(/[\d.]+\)$/)[0]);
             g.addColorStop(0, lk.color);
-            g.addColorStop(
-              0.5,
-              lk.color.replace(/[\d.]+\)$/, (alpha * 0.4).toFixed(2) + ")"),
-            );
-            g.addColorStop(1, "rgba(0,0,0,0)");
-            lc.fillStyle = g;
-            lc.fillRect(0, 0, w, h);
-          });
-          return c;
+            g.addColorStop(0.5, lk.color.replace(/[\d.]+\)$/, (alpha*0.4).toFixed(2)+')'));
+            g.addColorStop(1, 'rgba(0,0,0,0)');
+            lc.fillStyle=g; lc.fillRect(0,0,w,h);
+        });
+        return c;
+    }
+
+    // ─── TIMESTAMP ─────────────────────────────────────────────────────────────
+    function drawTimestamp(canvas, c) {
+        const now = new Date();
+        const pad = n => String(n).padStart(2,'0');
+        const str = `${now.getFullYear()}.${pad(now.getMonth()+1)}.${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+        const fs = Math.max(14, Math.round(canvas.width * 0.032));
+        c.save();
+        c.font = `600 ${fs}px "SF Mono","Courier New","IBM Plex Mono",monospace`;
+        c.textAlign='right'; c.textBaseline='bottom';
+        const x = canvas.width  - Math.round(canvas.width  * 0.04);
+        const y = canvas.height - Math.round(canvas.height * 0.035);
+        c.shadowColor='rgba(0,0,0,0.75)'; c.shadowBlur=5; c.shadowOffsetX=1; c.shadowOffsetY=1;
+        c.fillStyle='#f5c842'; c.fillText(str, x, y);
+        c.shadowColor='transparent'; c.shadowBlur=0;
+        c.strokeStyle='rgba(0,0,0,0.35)'; c.lineWidth=1.5; c.strokeText(str, x, y);
+        c.restore();
+    }
+
+    // ─── CORE FILTER APPLICATION ────────────────────────────────────────────────
+    function applyFilter(imageData, filterType, inten) {
+        const d = imageData.data;
+        const luts = filterType === 'cpm35' ? cpm35LUTs : grdrLUTs;
+        const orig = new Uint8ClampedArray(d);
+
+        // 1. LUTs de cor (curvas por canal)
+        for (let i = 0; i < d.length; i += 4) {
+            d[i]   = luts.red[d[i]];
+            d[i+1] = luts.green[d[i+1]];
+            d[i+2] = luts.blue[d[i+2]];
         }
 
-        // ─── TIMESTAMP ─────────────────────────────────────────────────────────────
-        function drawTimestamp(canvas, c) {
-          const now = new Date();
-          const pad = (n) => String(n).padStart(2, "0");
-          const str = `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
-          const fs = Math.max(14, Math.round(canvas.width * 0.032));
-          c.save();
-          c.font = `600 ${fs}px "SF Mono","Courier New","IBM Plex Mono",monospace`;
-          c.textAlign = "right";
-          c.textBaseline = "bottom";
-          const x = canvas.width - Math.round(canvas.width * 0.04);
-          const y = canvas.height - Math.round(canvas.height * 0.035);
-          c.shadowColor = "rgba(0,0,0,0.75)";
-          c.shadowBlur = 5;
-          c.shadowOffsetX = 1;
-          c.shadowOffsetY = 1;
-          c.fillStyle = "#f5c842";
-          c.fillText(str, x, y);
-          c.shadowColor = "transparent";
-          c.shadowBlur = 0;
-          c.strokeStyle = "rgba(0,0,0,0.35)";
-          c.lineWidth = 1.5;
-          c.strokeText(str, x, y);
-          c.restore();
-        }
-
-        // ─── CORE FILTER APPLICATION ────────────────────────────────────────────────
-        function applyFilter(imageData, filterType, inten) {
-          const d = imageData.data;
-          const luts = filterType === "cpm35" ? cpm35LUTs : grdrLUTs;
-          const orig = new Uint8ClampedArray(d);
-
-          // 1. LUTs de cor (curvas por canal)
-          for (let i = 0; i < d.length; i += 4) {
-            d[i] = luts.red[d[i]];
-            d[i + 1] = luts.green[d[i + 1]];
-            d[i + 2] = luts.blue[d[i + 2]];
-          }
-
-          // 2. Saturação: CPM35 levemente mais saturado (laranja vivo), GRD R bem dessaturado
-          const satAdj = filterType === "cpm35" ? -0.1 : -0.22;
-          for (let i = 0; i < d.length; i += 4) {
-            const hsl = rgbToHsl(d[i], d[i + 1], d[i + 2]);
+        // 2. Saturação
+        //    CPM35: leve redução — cores ricas mas não saturadas demais (bordô, dourado natural)
+        //    GRD R: redução forte → dessaturado cinematográfico
+        const satAdj = filterType === 'cpm35' ? -0.08 : -0.22;
+        for (let i = 0; i < d.length; i += 4) {
+            const hsl = rgbToHsl(d[i], d[i+1], d[i+2]);
+            // CPM35: puxa yellows levemente para âmbar-laranja (evita tom esverdeado)
+            if (filterType === 'cpm35' && hsl.h > 0.08 && hsl.h < 0.20) {
+                hsl.h = hsl.h - 0.018;
+            }
             hsl.s = clamp(hsl.s + satAdj, 0, 1);
             const rgb = hslToRgb(hsl.h, hsl.s, hsl.l);
-            d[i] = rgb.r;
-            d[i + 1] = rgb.g;
-            d[i + 2] = rgb.b;
-          }
+            d[i]=rgb.r; d[i+1]=rgb.g; d[i+2]=rgb.b;
+        }
 
-          // 3. Exposição — CPM35 um pouco subexposto (âmbar mais denso),
-          //    GRD R mais escuro (pretos densos, cinematográfico)
-          const expFactor = filterType === "cpm35" ? 0.87 : 0.85;
-          for (let i = 0; i < d.length; i += 4) {
-            d[i] = clamp(Math.round(d[i] * expFactor), 0, 255);
-            d[i + 1] = clamp(Math.round(d[i + 1] * expFactor), 0, 255);
-            d[i + 2] = clamp(Math.round(d[i + 2] * expFactor), 0, 255);
-          }
+        // 3. Exposição
+        //    CPM35: subexposto — foto densa, escura, contrastada (não clara!)
+        //    GRD R: ainda mais escuro, cinematográfico
+        const expFactor = filterType === 'cpm35' ? 0.83 : 0.85;
+        for (let i = 0; i < d.length; i += 4) {
+            d[i]   = clamp(Math.round(d[i]   * expFactor), 0, 255);
+            d[i+1] = clamp(Math.round(d[i+1] * expFactor), 0, 255);
+            d[i+2] = clamp(Math.round(d[i+2] * expFactor), 0, 255);
+        }
 
-          // 4. Blend com original conforme intensidade
-          if (inten < 1) {
+        // 4. Blend com original conforme intensidade
+        if (inten < 1) {
             for (let i = 0; i < d.length; i += 4) {
-              d[i] = clamp(Math.round(lerp(orig[i], d[i], inten)), 0, 255);
-              d[i + 1] = clamp(
-                Math.round(lerp(orig[i + 1], d[i + 1], inten)),
-                0,
-                255,
-              );
-              d[i + 2] = clamp(
-                Math.round(lerp(orig[i + 2], d[i + 2], inten)),
-                0,
-                255,
-              );
+                d[i]   = clamp(Math.round(lerp(orig[i],   d[i],   inten)), 0, 255);
+                d[i+1] = clamp(Math.round(lerp(orig[i+1], d[i+1], inten)), 0, 255);
+                d[i+2] = clamp(Math.round(lerp(orig[i+2], d[i+2], inten)), 0, 255);
             }
-          }
-          return imageData;
         }
+        return imageData;
+    }
 
-        // ─── PIPELINE COMPLETO ─────────────────────────────────────────────────────
-        function processImage(imageData, filterType, inten, effects) {
-          const w = imageData.width,
-            h = imageData.height;
-          let work = new ImageData(new Uint8ClampedArray(imageData.data), w, h);
+    // ─── PIPELINE COMPLETO ─────────────────────────────────────────────────────
+    function processImage(imageData, filterType, inten, effects) {
+        const w = imageData.width, h = imageData.height;
+        let work = new ImageData(new Uint8ClampedArray(imageData.data), w, h);
 
-          work = applyFilter(work, filterType, inten);
+        work = applyFilter(work, filterType, inten);
 
-          if (effects.chromatic) work = applyChromaticAberration(work, 1.8);
+        if (effects.chromatic) work = applyChromaticAberration(work, 1.8);
 
-          // Halation: CPM35 bem mais forte (assinatura visual do CCD flash)
-          if (effects.halation) {
-            const halStr = filterType === "cpm35" ? 0.5 : 0.3;
+        // Halation: CPM35 = glow âmbar suave (não laranja explosivo); GRD R = glow frio
+        if (effects.halation) {
+            const halStr = filterType === 'cpm35' ? 0.32 : 0.30;
             work = applyHalation(work, halStr, filterType);
-          }
-
-          if (effects.bloom) work = applyBloom(work, 0.22);
-
-          if (effects.grain) {
-            // CPM35: grão mais grosso e quente; GRD R: grão fino e neutro
-            const grainStr = filterType === "cpm35" ? 0.085 : 0.06;
-            work = applyGrain(work, grainStr, Date.now() % 10000);
-          }
-
-          if (effects.vignette) {
-            // CPM35 vinheta bem fechada; GRD R também forte mas um pouco mais aberta
-            const vigStr = filterType === "cpm35" ? 0.58 : 0.52;
-            work = applyVignette(work, vigStr);
-          }
-
-          return work;
         }
 
-        // ─── RENDER ────────────────────────────────────────────────────────────────
-        function renderToCanvas(canvas, c, processed, effects, filterType) {
-          const w = processed.width,
-            h = processed.height;
-          canvas.width = w;
-          canvas.height = h;
-          c.putImageData(processed, 0, 0);
+        if (effects.bloom) work = applyBloom(work, 0.22);
 
-          if (effects.dust) {
-            if (needsDustRegen || !dustCanvas || dustCanvas.width !== w) {
-              dustCanvas = generateDustCanvas(w, h);
-              needsDustRegen = false;
+        if (effects.grain) {
+            // CPM35: grão visível e quente, característico de CCD antigo
+            // GRD R: grão fino e neutro
+            const grainStr = filterType === 'cpm35' ? 0.075 : 0.060;
+            work = applyGrain(work, grainStr, Date.now() % 10000);
+        }
+
+        if (effects.vignette) {
+            // CPM35: vinheta forte mas não esmagada — fecha bem as bordas
+            // GRD R: vinheta cinematográfica igualmente densa
+            const vigStr = filterType === 'cpm35' ? 0.55 : 0.52;
+            work = applyVignette(work, vigStr);
+        }
+
+        return work;
+    }
+
+    // ─── RENDER ────────────────────────────────────────────────────────────────
+    function renderToCanvas(canvas, c, processed, effects, filterType) {
+        const w = processed.width, h = processed.height;
+        canvas.width = w; canvas.height = h;
+        c.putImageData(processed, 0, 0);
+
+        if (effects.dust) {
+            if (needsDustRegen || !dustCanvas || dustCanvas.width!==w) {
+                dustCanvas = generateDustCanvas(w, h); needsDustRegen = false;
             }
             c.globalAlpha = 0.65;
             c.drawImage(dustCanvas, 0, 0, w, h);
             c.globalAlpha = 1;
-          }
+        }
 
-          if (effects.lightleaks) {
-            if (
-              needsLeaksRegen ||
-              !lightLeaksCanvas ||
-              lightLeaksCanvas.width !== w
-            ) {
-              lightLeaksCanvas = generateLightLeaksCanvas(
-                w,
-                h,
-                filterType === "cpm35",
-              );
-              needsLeaksRegen = false;
+        if (effects.lightleaks) {
+            if (needsLeaksRegen || !lightLeaksCanvas || lightLeaksCanvas.width!==w) {
+                lightLeaksCanvas = generateLightLeaksCanvas(w, h, filterType==='cpm35');
+                needsLeaksRegen = false;
             }
-            c.globalCompositeOperation = "screen";
+            c.globalCompositeOperation = 'screen';
             c.globalAlpha = 0.72;
             c.drawImage(lightLeaksCanvas, 0, 0, w, h);
-            c.globalCompositeOperation = "source-over";
+            c.globalCompositeOperation = 'source-over';
             c.globalAlpha = 1;
-          }
-
-          if (effects.timestamp) drawTimestamp(canvas, c);
         }
 
-        // ─── UPDATE PREVIEW ────────────────────────────────────────────────────────
-        function updatePreview() {
-          if (!originalImageData) return;
-          const w = originalImageData.width,
-            h = originalImageData.height;
-          processedImageData = processImage(
+        if (effects.timestamp) drawTimestamp(canvas, c);
+    }
+
+    // ─── UPDATE PREVIEW ────────────────────────────────────────────────────────
+    function updatePreview() {
+        if (!originalImageData) return;
+        const w = originalImageData.width, h = originalImageData.height;
+        processedImageData = processImage(
             new ImageData(new Uint8ClampedArray(originalImageData.data), w, h),
-            currentFilter,
-            intensity,
-            effectStates,
-          );
-          if (!isComparing)
-            renderToCanvas(
-              mainCanvas,
-              ctx,
-              processedImageData,
-              effectStates,
-              currentFilter,
-            );
-          else drawComparison();
-          compareLabelRight.textContent = currentFilter.toUpperCase();
-        }
-        const debouncedUpdate = debounce(updatePreview, 30);
+            currentFilter, intensity, effectStates
+        );
+        if (!isComparing) renderToCanvas(mainCanvas, ctx, processedImageData, effectStates, currentFilter);
+        else drawComparison();
+        compareLabelRight.textContent = currentFilter.toUpperCase();
+    }
+    const debouncedUpdate = debounce(updatePreview, 30);
 
-        // ─── COMPARAÇÃO ────────────────────────────────────────────────────────────
-        function drawComparison() {
-          if (!originalImageData || !processedImageData) return;
-          const w = originalImageData.width,
-            h = originalImageData.height;
-          mainCanvas.width = w;
-          mainCanvas.height = h;
-          const splitX = Math.round(w * comparePosition);
-          const combined = new ImageData(w, h);
-          for (let y = 0; y < h; y++) {
+    // ─── COMPARAÇÃO ────────────────────────────────────────────────────────────
+    function drawComparison() {
+        if (!originalImageData || !processedImageData) return;
+        const w = originalImageData.width, h = originalImageData.height;
+        mainCanvas.width = w; mainCanvas.height = h;
+        const splitX = Math.round(w * comparePosition);
+        const combined = new ImageData(w, h);
+        for (let y = 0; y < h; y++) {
             for (let x = 0; x < w; x++) {
-              const i = (y * w + x) * 4;
-              const src =
-                x < splitX ? originalImageData.data : processedImageData.data;
-              combined.data[i] = src[i];
-              combined.data[i + 1] = src[i + 1];
-              combined.data[i + 2] = src[i + 2];
-              combined.data[i + 3] = src[i + 3];
+                const i = (y*w+x)*4;
+                const src = x < splitX ? originalImageData.data : processedImageData.data;
+                combined.data[i]=src[i]; combined.data[i+1]=src[i+1];
+                combined.data[i+2]=src[i+2]; combined.data[i+3]=src[i+3];
             }
-          }
-          ctx.putImageData(combined, 0, 0);
-          if (effectStates.dust && dustCanvas) {
-            ctx.save();
-            ctx.globalAlpha = 0.65;
-            ctx.drawImage(
-              dustCanvas,
-              splitX,
-              0,
-              w - splitX,
-              h,
-              splitX,
-              0,
-              w - splitX,
-              h,
-            );
+        }
+        ctx.putImageData(combined, 0, 0);
+        if (effectStates.dust && dustCanvas) {
+            ctx.save(); ctx.globalAlpha=0.65;
+            ctx.drawImage(dustCanvas, splitX, 0, w-splitX, h, splitX, 0, w-splitX, h);
             ctx.restore();
-          }
-          if (effectStates.lightleaks && lightLeaksCanvas) {
-            ctx.save();
-            ctx.globalCompositeOperation = "screen";
-            ctx.globalAlpha = 0.72;
-            ctx.drawImage(
-              lightLeaksCanvas,
-              splitX,
-              0,
-              w - splitX,
-              h,
-              splitX,
-              0,
-              w - splitX,
-              h,
-            );
-            ctx.globalCompositeOperation = "source-over";
-            ctx.restore();
-          }
-          if (effectStates.timestamp) {
-            const tmp = document.createElement("canvas");
-            tmp.width = w;
-            tmp.height = h;
-            const tc = tmp.getContext("2d");
-            tc.putImageData(processedImageData, 0, 0);
+        }
+        if (effectStates.lightleaks && lightLeaksCanvas) {
+            ctx.save(); ctx.globalCompositeOperation='screen'; ctx.globalAlpha=0.72;
+            ctx.drawImage(lightLeaksCanvas, splitX, 0, w-splitX, h, splitX, 0, w-splitX, h);
+            ctx.globalCompositeOperation='source-over'; ctx.restore();
+        }
+        if (effectStates.timestamp) {
+            const tmp = document.createElement('canvas'); tmp.width=w; tmp.height=h;
+            const tc = tmp.getContext('2d'); tc.putImageData(processedImageData, 0, 0);
             drawTimestamp(tmp, tc);
-            ctx.drawImage(
-              tmp,
-              splitX,
-              0,
-              w - splitX,
-              h,
-              splitX,
-              0,
-              w - splitX,
-              h,
-            );
-          }
-          ctx.strokeStyle = "#ffffff";
-          ctx.lineWidth = 2;
-          ctx.shadowColor = "rgba(0,0,0,0.6)";
-          ctx.shadowBlur = 8;
-          ctx.beginPath();
-          ctx.moveTo(splitX, 0);
-          ctx.lineTo(splitX, h);
-          ctx.stroke();
-          ctx.shadowColor = "transparent";
-          ctx.shadowBlur = 0;
+            ctx.drawImage(tmp, splitX, 0, w-splitX, h, splitX, 0, w-splitX, h);
         }
+        ctx.strokeStyle='#ffffff'; ctx.lineWidth=2;
+        ctx.shadowColor='rgba(0,0,0,0.6)'; ctx.shadowBlur=8;
+        ctx.beginPath(); ctx.moveTo(splitX,0); ctx.lineTo(splitX,h); ctx.stroke();
+        ctx.shadowColor='transparent'; ctx.shadowBlur=0;
+    }
 
-        function updateCompareLineUI() {
-          if (!isComparing || !originalImageData) return;
-          const cr = mainCanvas.getBoundingClientRect(),
-            wr = canvasWrapper.getBoundingClientRect();
-          const sx = cr.left - wr.left + cr.width * comparePosition;
-          compareLine.style.left = sx + "px";
-          compareLine.style.top = "0";
-          compareLine.style.bottom = "0";
-          compareHandle.style.left = sx + "px";
-          compareHandle.style.top = "50%";
-        }
+    function updateCompareLineUI() {
+        if (!isComparing || !originalImageData) return;
+        const cr = mainCanvas.getBoundingClientRect(), wr = canvasWrapper.getBoundingClientRect();
+        const sx = (cr.left - wr.left) + cr.width * comparePosition;
+        compareLine.style.left  = sx + 'px'; compareLine.style.top = '0'; compareLine.style.bottom = '0';
+        compareHandle.style.left = sx + 'px'; compareHandle.style.top = '50%';
+    }
 
-        // ─── IMAGE LOADING ─────────────────────────────────────────────────────────
-        function loadImage(file) {
-          if (
-            !file ||
-            !file.type.match(/image\/(jpeg|png|webp|heic|heif|bmp|tiff)/i)
-          )
-            return showToast("Formato não suportado 😕");
-          if (file.size > 30 * 1024 * 1024)
-            return showToast("Imagem muito grande (máx 30MB)");
-          const reader = new FileReader();
-          reader.onload = (e) => {
+    // ─── IMAGE LOADING ─────────────────────────────────────────────────────────
+    function loadImage(file) {
+        if (!file || !file.type.match(/image\/(jpeg|png|webp|heic|heif|bmp|tiff)/i))
+            return showToast('Formato não suportado 😕');
+        if (file.size > 30*1024*1024) return showToast('Imagem muito grande (máx 30MB)');
+        const reader = new FileReader();
+        reader.onload = e => {
             const img = new Image();
             img.onload = () => {
-              originalImage = img;
-              frameCounter.textContent = String(
-                Math.floor(Math.random() * 9000) + 1000,
-              ).padStart(4, "0");
-              prepareImageData(img);
-              needsDustRegen = needsLeaksRegen = true;
-              updatePreview();
-              enableButtons();
-              previewSection.classList.add("has-image");
-              showToast("✨ Foto carregada!");
+                originalImage = img;
+                frameCounter.textContent = String(Math.floor(Math.random()*9000)+1000).padStart(4,'0');
+                prepareImageData(img);
+                needsDustRegen = needsLeaksRegen = true;
+                updatePreview();
+                enableButtons();
+                previewSection.classList.add('has-image');
+                showToast('✨ Foto carregada!');
             };
-            img.onerror = () => showToast("Erro ao carregar imagem");
+            img.onerror = () => showToast('Erro ao carregar imagem');
             img.src = e.target.result;
-          };
-          reader.readAsDataURL(file);
-        }
+        };
+        reader.readAsDataURL(file);
+    }
 
-        function prepareImageData(img) {
-          let w = img.naturalWidth,
-            h = img.naturalHeight;
-          if (w > MAX_W || h > MAX_H) {
-            const r = Math.min(MAX_W / w, MAX_H / h);
-            w = Math.round(w * r);
-            h = Math.round(h * r);
-          }
-          const tmp = document.createElement("canvas");
-          tmp.width = w;
-          tmp.height = h;
-          tmp.getContext("2d").drawImage(img, 0, 0, w, h);
-          originalImageData = tmp.getContext("2d").getImageData(0, 0, w, h);
-          mainCanvas.width = w;
-          mainCanvas.height = h;
+    function prepareImageData(img) {
+        let w = img.naturalWidth, h = img.naturalHeight;
+        if (w > MAX_W || h > MAX_H) {
+            const r = Math.min(MAX_W/w, MAX_H/h); w=Math.round(w*r); h=Math.round(h*r);
         }
+        const tmp = document.createElement('canvas'); tmp.width=w; tmp.height=h;
+        tmp.getContext('2d').drawImage(img, 0, 0, w, h);
+        originalImageData = tmp.getContext('2d').getImageData(0, 0, w, h);
+        mainCanvas.width=w; mainCanvas.height=h;
+    }
 
-        function enableButtons() {
-          btnDownload.disabled =
-            btnCompare.disabled =
-            btnCamera.disabled =
-              false;
-        }
+    function enableButtons() {
+        btnDownload.disabled = btnCompare.disabled = btnCamera.disabled = false;
+    }
 
-        // ─── DOWNLOAD ──────────────────────────────────────────────────────────────
-        function downloadImage() {
-          if (!processedImageData)
-            return showToast("Carregue uma foto primeiro");
-          let ec;
-          if (originalImage && originalImage.naturalWidth <= 3500) {
-            const w = originalImage.naturalWidth,
-              h = originalImage.naturalHeight;
-            const tc = document.createElement("canvas");
-            tc.width = w;
-            tc.height = h;
-            tc.getContext("2d").drawImage(originalImage, 0, 0, w, h);
-            const hd = tc.getContext("2d").getImageData(0, 0, w, h);
+    // ─── DOWNLOAD ──────────────────────────────────────────────────────────────
+    function downloadImage() {
+        if (!processedImageData) return showToast('Carregue uma foto primeiro');
+        let ec;
+        if (originalImage && originalImage.naturalWidth <= 3500) {
+            const w=originalImage.naturalWidth, h=originalImage.naturalHeight;
+            const tc=document.createElement('canvas'); tc.width=w; tc.height=h;
+            tc.getContext('2d').drawImage(originalImage, 0, 0, w, h);
+            const hd = tc.getContext('2d').getImageData(0,0,w,h);
             const hp = processImage(hd, currentFilter, intensity, effectStates);
-            ec = document.createElement("canvas");
-            ec.width = w;
-            ec.height = h;
-            renderToCanvas(
-              ec,
-              ec.getContext("2d"),
-              hp,
-              effectStates,
-              currentFilter,
-            );
-          } else {
-            ec = document.createElement("canvas");
-            ec.width = processedImageData.width;
-            ec.height = processedImageData.height;
-            renderToCanvas(
-              ec,
-              ec.getContext("2d"),
-              processedImageData,
-              effectStates,
-              currentFilter,
-            );
-          }
-          ec.toBlob(
-            (blob) => {
-              const url = URL.createObjectURL(blob),
-                a = document.createElement("a");
-              a.href = url;
-              a.download = `dazz_${currentFilter.toUpperCase()}_${Date.now()}.jpg`;
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-              URL.revokeObjectURL(url);
-              showToast("📥 Download concluído!");
-            },
-            "image/jpeg",
-            JPEG_QUALITY,
-          );
+            ec = document.createElement('canvas'); ec.width=w; ec.height=h;
+            renderToCanvas(ec, ec.getContext('2d'), hp, effectStates, currentFilter);
+        } else {
+            ec = document.createElement('canvas');
+            ec.width=processedImageData.width; ec.height=processedImageData.height;
+            renderToCanvas(ec, ec.getContext('2d'), processedImageData, effectStates, currentFilter);
         }
+        ec.toBlob(blob => {
+            const url=URL.createObjectURL(blob), a=document.createElement('a');
+            a.href=url; a.download=`dazz_${currentFilter.toUpperCase()}_${Date.now()}.jpg`;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            URL.revokeObjectURL(url); showToast('📥 Download concluído!');
+        }, 'image/jpeg', JPEG_QUALITY);
+    }
 
-        // ─── CÂMERA ────────────────────────────────────────────────────────────────
-        function openCamera() {
-          const ci = document.createElement("input");
-          ci.type = "file";
-          ci.accept = "image/*";
-          ci.capture = "environment";
-          ci.onchange = (e) => {
-            if (e.target.files[0]) loadImage(e.target.files[0]);
-          };
-          ci.click();
-        }
+    // ─── CÂMERA ────────────────────────────────────────────────────────────────
+    function openCamera() {
+        const ci = document.createElement('input');
+        ci.type='file'; ci.accept='image/*'; ci.capture='environment';
+        ci.onchange = e => { if (e.target.files[0]) loadImage(e.target.files[0]); };
+        ci.click();
+    }
 
-        // ─── EVENTS ────────────────────────────────────────────────────────────────
-        previewSection.addEventListener("click", (e) => {
-          if (e.target === compareHandle || e.target === compareLine) return;
-          if (!originalImageData) fileInput.click();
-        });
-        fileInput.addEventListener("change", (e) => {
-          if (e.target.files[0]) loadImage(e.target.files[0]);
-        });
+    // ─── EVENTS ────────────────────────────────────────────────────────────────
+    previewSection.addEventListener('click', e => {
+        if (e.target===compareHandle || e.target===compareLine) return;
+        if (!originalImageData) fileInput.click();
+    });
+    fileInput.addEventListener('change', e => { if (e.target.files[0]) loadImage(e.target.files[0]); });
 
-        previewSection.addEventListener("dragover", (e) => {
-          e.preventDefault();
-          previewSection.classList.add("drag-over");
-        });
-        previewSection.addEventListener("dragleave", () =>
-          previewSection.classList.remove("drag-over"),
-        );
-        previewSection.addEventListener("drop", (e) => {
-          e.preventDefault();
-          previewSection.classList.remove("drag-over");
-          if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
-        });
+    previewSection.addEventListener('dragover', e => { e.preventDefault(); previewSection.classList.add('drag-over'); });
+    previewSection.addEventListener('dragleave', () => previewSection.classList.remove('drag-over'));
+    previewSection.addEventListener('drop', e => {
+        e.preventDefault(); previewSection.classList.remove('drag-over');
+        if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
+    });
 
-        cardCPM35.addEventListener("click", () => {
-          currentFilter = "cpm35";
-          cardCPM35.classList.add("active");
-          cardGRDR.classList.remove("active");
-          needsLeaksRegen = true;
-          updatePreview();
-        });
-        cardGRDR.addEventListener("click", () => {
-          currentFilter = "grdr";
-          cardGRDR.classList.add("active");
-          cardCPM35.classList.remove("active");
-          needsLeaksRegen = true;
-          updatePreview();
-        });
+    cardCPM35.addEventListener('click', () => {
+        currentFilter='cpm35'; cardCPM35.classList.add('active'); cardGRDR.classList.remove('active');
+        needsLeaksRegen=true; updatePreview();
+    });
+    cardGRDR.addEventListener('click', () => {
+        currentFilter='grdr'; cardGRDR.classList.add('active'); cardCPM35.classList.remove('active');
+        needsLeaksRegen=true; updatePreview();
+    });
 
-        intensitySlider.addEventListener("input", () => {
-          intensity = parseInt(intensitySlider.value) / 100;
-          intensityValue.textContent = Math.round(intensity * 100) + "%";
-          debouncedUpdate();
-        });
+    intensitySlider.addEventListener('input', () => {
+        intensity = parseInt(intensitySlider.value)/100;
+        intensityValue.textContent = Math.round(intensity*100)+'%';
+        debouncedUpdate();
+    });
 
-        document.querySelectorAll(".effect-toggle").forEach((btn) => {
-          btn.addEventListener("click", () => {
+    document.querySelectorAll('.effect-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
             const ef = btn.dataset.effect;
             effectStates[ef] = !effectStates[ef];
-            btn.classList.toggle("on", effectStates[ef]);
-            if (ef === "dust") needsDustRegen = true;
-            if (ef === "lightleaks") needsLeaksRegen = true;
+            btn.classList.toggle('on', effectStates[ef]);
+            if (ef==='dust') needsDustRegen=true;
+            if (ef==='lightleaks') needsLeaksRegen=true;
             updatePreview();
-          });
         });
+    });
 
-        btnDownload.addEventListener("click", downloadImage);
-        btnCamera.addEventListener("click", openCamera);
+    btnDownload.addEventListener('click', downloadImage);
+    btnCamera.addEventListener('click', openCamera);
 
-        btnCompare.addEventListener("click", () => {
-          if (!originalImageData) return;
-          isComparing = !isComparing;
-          if (isComparing) {
-            btnCompare.classList.add("active-compare");
-            btnCompare.textContent = "⇆ COMPARANDO";
-            compareOverlay.classList.add("active");
-            comparePosition = 0.5;
-            drawComparison();
-            updateCompareLineUI();
-          } else {
-            btnCompare.classList.remove("active-compare");
-            btnCompare.textContent = "⇆ COMPARAR";
-            compareOverlay.classList.remove("active");
-            updatePreview();
-          }
-        });
-
-        function getCP(e) {
-          const cr = mainCanvas.getBoundingClientRect();
-          return clamp(
-            ((e.touches ? e.touches[0].clientX : e.clientX) - cr.left) /
-              cr.width,
-            0.05,
-            0.95,
-          );
+    btnCompare.addEventListener('click', () => {
+        if (!originalImageData) return;
+        isComparing = !isComparing;
+        if (isComparing) {
+            btnCompare.classList.add('active-compare'); btnCompare.textContent='⇆ COMPARANDO';
+            compareOverlay.classList.add('active'); comparePosition=0.5;
+            drawComparison(); updateCompareLineUI();
+        } else {
+            btnCompare.classList.remove('active-compare'); btnCompare.textContent='⇆ COMPARAR';
+            compareOverlay.classList.remove('active'); updatePreview();
         }
-        function addDragHandlers(el) {
-          el.addEventListener("mousedown", (e) => {
-            if (!isComparing) return;
-            e.preventDefault();
-            const mv = (ev) => {
-              comparePosition = getCP(ev);
-              drawComparison();
-              updateCompareLineUI();
-            };
-            const up = () => {
-              document.removeEventListener("mousemove", mv);
-              document.removeEventListener("mouseup", up);
-            };
-            document.addEventListener("mousemove", mv);
-            document.addEventListener("mouseup", up);
-          });
-          el.addEventListener("touchstart", (e) => {
-            if (!isComparing) return;
-            e.preventDefault();
-            const mv = (ev) => {
-              comparePosition = getCP(ev);
-              drawComparison();
-              updateCompareLineUI();
-            };
-            const up = () => {
-              document.removeEventListener("touchmove", mv);
-              document.removeEventListener("touchend", up);
-            };
-            document.addEventListener("touchmove", mv, { passive: false });
-            document.addEventListener("touchend", up);
-          });
-        }
-        addDragHandlers(compareHandle);
-        addDragHandlers(compareLine);
-        window.addEventListener("resize", () => {
-          if (isComparing) updateCompareLineUI();
-        });
+    });
 
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "d" && (e.ctrlKey || e.metaKey) && originalImageData) {
-            e.preventDefault();
-            downloadImage();
-          }
-          if (e.key === "c" && !e.ctrlKey && !e.metaKey && originalImageData)
-            btnCompare.click();
-          if (e.key === "1" && originalImageData) cardCPM35.click();
-          if (e.key === "2" && originalImageData) cardGRDR.click();
+    function getCP(e) {
+        const cr = mainCanvas.getBoundingClientRect();
+        return clamp(((e.touches?e.touches[0].clientX:e.clientX)-cr.left)/cr.width, 0.05, 0.95);
+    }
+    function addDragHandlers(el) {
+        el.addEventListener('mousedown', e => {
+            if (!isComparing) return; e.preventDefault();
+            const mv = ev => { comparePosition=getCP(ev); drawComparison(); updateCompareLineUI(); };
+            const up = () => { document.removeEventListener('mousemove',mv); document.removeEventListener('mouseup',up); };
+            document.addEventListener('mousemove',mv); document.addEventListener('mouseup',up);
         });
+        el.addEventListener('touchstart', e => {
+            if (!isComparing) return; e.preventDefault();
+            const mv = ev => { comparePosition=getCP(ev); drawComparison(); updateCompareLineUI(); };
+            const up = () => { document.removeEventListener('touchmove',mv); document.removeEventListener('touchend',up); };
+            document.addEventListener('touchmove',mv,{passive:false}); document.addEventListener('touchend',up);
+        });
+    }
+    addDragHandlers(compareHandle); addDragHandlers(compareLine);
+    window.addEventListener('resize', () => { if (isComparing) updateCompareLineUI(); });
 
-        // ─── INIT ──────────────────────────────────────────────────────────────────
-        document.querySelectorAll(".effect-toggle").forEach((btn) => {
-          btn.classList.toggle("on", effectStates[btn.dataset.effect]);
-        });
-        intensitySlider.value = Math.round(intensity * 100);
-        intensityValue.textContent = Math.round(intensity * 100) + "%";
-        console.log("📸 Dazz复古 • Analog Filter Engine pronto");
-        console.log("   [1] CPM35  [2] GRD R  [C] Comparar  [Ctrl+D] Download");
-      })();
-    </script>
-  </body>
+    document.addEventListener('keydown', e => {
+        if (e.key==='d'&&(e.ctrlKey||e.metaKey)&&originalImageData){e.preventDefault();downloadImage();}
+        if (e.key==='c'&&!e.ctrlKey&&!e.metaKey&&originalImageData) btnCompare.click();
+        if (e.key==='1'&&originalImageData) cardCPM35.click();
+        if (e.key==='2'&&originalImageData) cardGRDR.click();
+    });
+
+    // ─── INIT ──────────────────────────────────────────────────────────────────
+    document.querySelectorAll('.effect-toggle').forEach(btn => {
+        btn.classList.toggle('on', effectStates[btn.dataset.effect]);
+    });
+    intensitySlider.value = Math.round(intensity*100);
+    intensityValue.textContent = Math.round(intensity*100)+'%';
+    console.log('📸 Dazz复古 • Analog Filter Engine pronto');
+    console.log('   [1] CPM35  [2] GRD R  [C] Comparar  [Ctrl+D] Download');
+})();
+</script>
+</body>
 </html>

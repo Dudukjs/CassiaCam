@@ -852,28 +852,39 @@
             : 1 - Math.pow(2 * (1 - x), 1 + k) / 2;
         }
 
-        // ─── CPM35 LUTs — "CCD Flash Warm" ─────────────────────────────────────────
-        // Objetivo: cast laranja forte, highlights dourados, sombras quentes, azuis muito cortados.
-        // Referência visual: tons de âmbar/laranja saturados, pretos suaves com véu quente.
+        // ─── CPM35 LUTs — "CCD Warm • Sépia Âmbar" ────────────────────────────────
+        // Referência real (foto da namorada):
+        //   • Brancos viram CREME QUENTE (não laranja vivo)
+        //   • Sombras MARROM-ESCURO profundo, pretos densos
+        //   • Vermelhos → bordô/vinho; amarelos → dourado quente
+        //   • Contraste alto, sem matte — é denso, não desbotado
+        //   • Cast geral: sépia-âmbar, como filme Kodak Ultramax velho
         function buildCPM35LUTs() {
           const redLUT = createLUT((x) => {
-            let y = sCurve(x, 0.35);
-            y = y * 1.26 + 0.06; // boost laranja muito forte
-            if (y > 0.55) y = lerp(y, Math.min(y * 1.1, 1), (y - 0.55) / 0.45); // highlights ainda mais dourados
-            if (y < 0.15) y = y * 1.1 + 0.03; // sombras com véu quente
+            let y = sCurve(x, 0.42); // contraste moderado-alto
+            y = y * 1.14 + 0.03; // boost quente suave nos mids
+            // highlights: creme quente, não laranja vivo
+            if (y > 0.7) y = lerp(y, Math.min(y * 1.05, 1), (y - 0.7) / 0.3);
+            // sombras: marrom-avermelhado (não preto puro)
+            if (y < 0.12) y = y * 0.85 + 0.015;
             return clamp(y, 0, 1);
           });
           const greenLUT = createLUT((x) => {
-            let y = sCurve(x, 0.28);
-            y = y * 0.84 - 0.01; // corta verde nos mids/highlights
-            if (y < 0.2) y = y * 1.05 + 0.02; // sombras: véu oliva (característico do CCD)
-            if (y > 0.55) y = lerp(y, y * 0.9, (y - 0.55) / 0.45); // highlights ainda menos verdes
+            let y = sCurve(x, 0.38);
+            y = y * 0.9 - 0.01; // reduz verde nos mids → afasta do amarelo
+            // sombras: leve verde-oliva (filme analógico)
+            if (y < 0.2) y = lerp(y, y * 1.08, (0.2 - y) / 0.2);
+            // highlights: pouco verde → creme, não amarelo puro
+            if (y > 0.65) y = lerp(y, y * 0.94, (y - 0.65) / 0.35);
             return clamp(y, 0, 1);
           });
           const blueLUT = createLUT((x) => {
-            let y = sCurve(x, 0.22);
-            y = y * 0.52 - 0.04; // corte pesado de azul
-            if (y < 0.2) y = y * 0.7; // sombras quase sem azul
+            let y = sCurve(x, 0.3);
+            y = y * 0.58 - 0.03; // corte forte de azul (sépia)
+            // sombras com muito pouco azul → marrom quente profundo
+            if (y < 0.18) y = y * 0.72;
+            // highlights: um toque de azul para evitar amarelo puro nos brancos
+            if (y > 0.7) y = lerp(y, y * 1.08, (y - 0.7) / 0.3);
             return clamp(y, 0, 1);
           });
           return { red: redLUT, green: greenLUT, blue: blueLUT };
@@ -1270,10 +1281,16 @@
             d[i + 2] = luts.blue[d[i + 2]];
           }
 
-          // 2. Saturação: CPM35 levemente mais saturado (laranja vivo), GRD R bem dessaturado
-          const satAdj = filterType === "cpm35" ? -0.1 : -0.22;
+          // 2. Saturação
+          //    CPM35: leve redução — cores ricas mas não saturadas demais (bordô, dourado natural)
+          //    GRD R: redução forte → dessaturado cinematográfico
+          const satAdj = filterType === "cpm35" ? -0.08 : -0.22;
           for (let i = 0; i < d.length; i += 4) {
             const hsl = rgbToHsl(d[i], d[i + 1], d[i + 2]);
+            // CPM35: puxa yellows levemente para âmbar-laranja (evita tom esverdeado)
+            if (filterType === "cpm35" && hsl.h > 0.08 && hsl.h < 0.2) {
+              hsl.h = hsl.h - 0.018;
+            }
             hsl.s = clamp(hsl.s + satAdj, 0, 1);
             const rgb = hslToRgb(hsl.h, hsl.s, hsl.l);
             d[i] = rgb.r;
@@ -1281,9 +1298,10 @@
             d[i + 2] = rgb.b;
           }
 
-          // 3. Exposição — CPM35 um pouco subexposto (âmbar mais denso),
-          //    GRD R mais escuro (pretos densos, cinematográfico)
-          const expFactor = filterType === "cpm35" ? 0.87 : 0.85;
+          // 3. Exposição
+          //    CPM35: subexposto — foto densa, escura, contrastada (não clara!)
+          //    GRD R: ainda mais escuro, cinematográfico
+          const expFactor = filterType === "cpm35" ? 0.83 : 0.85;
           for (let i = 0; i < d.length; i += 4) {
             d[i] = clamp(Math.round(d[i] * expFactor), 0, 255);
             d[i + 1] = clamp(Math.round(d[i + 1] * expFactor), 0, 255);
@@ -1319,23 +1337,25 @@
 
           if (effects.chromatic) work = applyChromaticAberration(work, 1.8);
 
-          // Halation: CPM35 bem mais forte (assinatura visual do CCD flash)
+          // Halation: CPM35 = glow âmbar suave (não laranja explosivo); GRD R = glow frio
           if (effects.halation) {
-            const halStr = filterType === "cpm35" ? 0.5 : 0.3;
+            const halStr = filterType === "cpm35" ? 0.32 : 0.3;
             work = applyHalation(work, halStr, filterType);
           }
 
           if (effects.bloom) work = applyBloom(work, 0.22);
 
           if (effects.grain) {
-            // CPM35: grão mais grosso e quente; GRD R: grão fino e neutro
-            const grainStr = filterType === "cpm35" ? 0.085 : 0.06;
+            // CPM35: grão visível e quente, característico de CCD antigo
+            // GRD R: grão fino e neutro
+            const grainStr = filterType === "cpm35" ? 0.075 : 0.06;
             work = applyGrain(work, grainStr, Date.now() % 10000);
           }
 
           if (effects.vignette) {
-            // CPM35 vinheta bem fechada; GRD R também forte mas um pouco mais aberta
-            const vigStr = filterType === "cpm35" ? 0.58 : 0.52;
+            // CPM35: vinheta forte mas não esmagada — fecha bem as bordas
+            // GRD R: vinheta cinematográfica igualmente densa
+            const vigStr = filterType === "cpm35" ? 0.55 : 0.52;
             work = applyVignette(work, vigStr);
           }
 
