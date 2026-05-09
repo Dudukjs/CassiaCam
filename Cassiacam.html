@@ -865,9 +865,8 @@
           });
           const greenLUT = createLUT((x) => {
             let y = sCurve(x, 0.28);
-            y = y * 0.84 - 0.01; // corta verde nos mids/highlights
-            if (y < 0.2) y = y * 1.05 + 0.02; // sombras: véu oliva (característico do CCD)
-            if (y > 0.55) y = lerp(y, y * 0.9, (y - 0.55) / 0.45); // highlights ainda menos verdes
+            y = y * 1.06 + 0.02; // suporte ao âmbar nos mids
+            if (y < 0.25) y = lerp(y, y * 0.92, (0.25 - y) / 0.25); // sombras: menos verde (mais laranja)
             return clamp(y, 0, 1);
           });
           const blueLUT = createLUT((x) => {
